@@ -5,7 +5,7 @@
  * Time: 11:35
  */
 use App\Libs\AppHelpers;
-$title = 'Regisster';
+$title = 'Register';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
 

@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Login | {{ config('app.name', 'Laravel') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Polda Riau Satu Data: SDM dan Perencanaan" name="description" />
-    <meta content="Pizaini and team" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="{{config('app.name_long')}}" name="description" />
+    <meta content="{{config('app.author')}}" name="author" />
+    <meta name="keywords" content="{{config('app.keywords')}}">
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
     <!-- App css -->
