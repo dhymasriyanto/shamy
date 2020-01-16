@@ -26,9 +26,9 @@
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div class="text-center">
                         <a class="nav-link" href="{{ route('auth.login.form') }}">
-                            <span><img src="{{asset('images/logo.png') }}" alt="Logo" height="54"></span>
+                            <span><img src="{{asset('images/logo.png') }}" alt="Logo" height="64"></span>
                         </a>
-                        {{config('app.name')}}
+                        <p class="text-muted mt-2 mb-4">{{config('app.name')}}</p>
                     </div>
                     <div class="card">
                         <div class="card-body p-4">
@@ -74,7 +74,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    2018 - 2019 &copy; Shamy v{{env('APP_VERSION')}} by <a href="https://www.digistlab.com" target="_blank">Digistlab</a>
+                    2018 - 2019 &copy; Shamy v{{config('app.version')}} by <a href="https://www.digistlab.com" target="_blank">Digistlab</a>
                 </div>
                 <div class="col-md-6">
                     <div class="text-md-right footer-links d-none d-sm-block">
