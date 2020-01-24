@@ -63,7 +63,7 @@ class LoginController extends Controller
             //redirect
             return redirect('/');
         }catch (\Exception  $exception) {
-            //die($exception->getMessage());
+//            die($exception->getMessage());
         }
         return redirect(route('auth.login'))->with(['auth.error' => 'Autentikasi gagal.']);
     }
