@@ -13,6 +13,18 @@
                 <i class="mdi mdi-view-dashboard"></i>
                 <span> Dashboard </span>
             </a>
+            <a href="{{route('datadosen')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Dosen </span>
+            </a>
+            <a href="{{route('datamahasiswa')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Mahasiswa </span>
+            </a>
+            <a href="{{route('datapegawai')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Pegawai </span>
+            </a>
         </li>
     </ul>
 </div>

@@ -21,6 +21,22 @@ use Laravel\Socialite\Facades\Socialite;
  */
 Route::get('/', 'HomeController@index')->name('home');
 
+/**
+ * Data Dosen controller
+ */
+Route::get('/datadosen', 'DosenController@index')->name('datadosen');
+Route::get('/datadosen/hapus/{id}', 'DosenController@hapus');
+
+/**
+ * Data Pegawai controller
+ */
+Route::get('/datapegawai', 'PegawaiController@index')->name('datapegawai');
+Route::get('/datapegawai/hapus/{id}', 'PegawaiController@hapus');
+
+
+Route::get('/datamahasiswa', 'MahasiswaController@index')->name('datamahasiswa');
+
+
 
 // Authentication Routes...
 Route::prefix('auth')->name('auth.')->group(function (){

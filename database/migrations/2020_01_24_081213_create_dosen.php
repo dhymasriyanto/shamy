@@ -17,8 +17,8 @@ class CreateDosen extends Migration
             $table->bigIncrements('id');
             $table->char('nama', '30');
             $table->timestamps();
-            $table->char('create_by');
-            $table->char('update_by');
+            $table->char('create_by')->nullable();
+            $table->char('update_by')->nullable();
         });
     }
 

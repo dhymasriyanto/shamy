@@ -21,8 +21,13 @@ class Controller extends BaseController
      * @param null $view
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     protected function renderPage(Request $request, $view = null, $data = []){
         $layout = $request->ajax() ? 'ajax': 'app';
         return view($view, $data, ['appLayout' => 'layouts.'.$layout]);
+    }
+    protected function renderPageData(Request $request, $view = null, $balik , $data = []){
+        $layout = $request->ajax() ? 'ajax': 'app';
+        return view($view, $data, ['appLayout' => 'layouts.'.$layout, 'datanya'=>$balik]);
     }
 }
