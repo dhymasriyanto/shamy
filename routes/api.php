@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+/**
+ * URL: v1/auth/...
+ * Middleware: guest
+ */
+Route::prefix('v1')->name('v1.auth.')->group(function (){
+    Route::get('/auth/login', 'Api\v1\ApiAuth@login')->name('login');
+    Route::post('/auth/login', 'Api\v1\ApiAuth@login')->name('login');
 });
+
+
+/**
+ * URL: v1/user/...
+ * Middleware: auth:api
+ */
+Route::prefix('v1')->middleware('auth:api')->name('v1.user.')->group(function (){
+    Route::get('/user/get', 'Api\v1\ApiUser@get')->name('get');
+});
+
