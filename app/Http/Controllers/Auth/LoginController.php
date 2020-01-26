@@ -59,10 +59,8 @@ class LoginController extends Controller
                     'photo' => $userAccount['photo'],
                 ]
             );
-            //login
+            //login and redirect
             Auth::login($user);
-            //redirect
-            return redirect('/');
         }catch (\Exception  $exception) {
 //            die($exception->getMessage());
         }

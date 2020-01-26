@@ -19,8 +19,7 @@ use Illuminate\Support\Facades\Route;
  * Middleware: guest
  */
 Route::prefix('v1')->name('v1.auth.')->group(function (){
-    Route::get('/auth/login', 'Api\v1\ApiAuth@login')->name('login');
-    Route::post('/auth/login', 'Api\v1\ApiAuth@login')->name('login');
+    Route::post('/auth/login', 'v1\ApiAuth@login')->name('login');
 });
 
 
@@ -29,6 +28,6 @@ Route::prefix('v1')->name('v1.auth.')->group(function (){
  * Middleware: auth:api
  */
 Route::prefix('v1')->middleware('auth:api')->name('v1.user.')->group(function (){
-    Route::get('/user/get', 'Api\v1\ApiUser@get')->name('get');
+    Route::get('/user/get', 'v1\ApiUser@get')->name('get');
 });
 
