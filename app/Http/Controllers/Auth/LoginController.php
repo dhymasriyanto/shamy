@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -63,7 +64,7 @@ class LoginController extends Controller
             //redirect
             return redirect('/');
         }catch (\Exception  $exception) {
-            die($exception->getMessage());
+//            die($exception->getMessage());
         }
         return redirect(route('auth.login'))->with(['auth.error' => 'Autentikasi gagal.']);
     }
