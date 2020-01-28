@@ -16,7 +16,12 @@
     <link href="{{ asset('adminto/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('adminto/css/app.min.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<body class="drop-menu-dark">
+<body class="authentication-bg">
+<div id="preloader">
+    <div id="status">
+        <div class="spinner">Loading...</div>
+    </div>
+</div>
     <div class="home-btn d-none d-sm-block">
         <a href="{{ route('home') }}" title="Home"><i class="fas fa-home h2 text-dark"></i></a>
     </div>

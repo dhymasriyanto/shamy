@@ -105,20 +105,9 @@
                     <span class="pro-user-name ml-1">{{Auth::user()->name}} <i class="mdi mdi-chevron-down"></i></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="{{route('account.profil.show')}}" class="dropdown-item notify-item">
                         <i class="fe-user"></i>
-                        <span>My Account</span>
-                    </a>
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-settings"></i>
-                        <span>Settings</span>
-                    </a>
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-lock"></i>
-                        <span>Lock Screen</span>
+                        <span>Profil</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <!-- item-->
@@ -126,7 +115,6 @@
                         <i class="fe-log-out"></i>
                         <span>Logout</span>
                     </a>
-                </div>
             </li>
             <li class="dropdown notification-list">
                 <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">

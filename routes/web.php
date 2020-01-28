@@ -42,14 +42,13 @@ Route::prefix('auth')->name('auth.')->group(function (){
     Route::get('/login/callback', 'Auth\LoginController@callback')->name('login.callback');
 });
 
-// Password Reset Routes...
-//Route::prefix('password')->name('password.')->group(function (){
-//    Route::get('reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('request');
-//    Route::post('email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('email');
-//    Route::get('reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('reset');
-//    Route::post('reset', 'Auth\ResetPasswordController@reset')->name('update');
-//});
-
+/**
+ * Account
+ */
+Route::prefix('account')->name('account.')->group(function (){
+    Route::get('/profil', 'AccountController@profil')->name('profil.show');
+    Route::get('/oauth/personal-access-token', 'AccountController@oauthPersonalToken')->name('oauth.token');
+});
 
 // Email Verification Routes...
 //Route::prefix('email')->name('email.')->group(function (){
