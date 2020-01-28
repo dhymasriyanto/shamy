@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeyToJurusan extends Migration
+class AddForeignKeyToKelas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddForeignKeyToJurusan extends Migration
      */
     public function up()
     {
-        Schema::table('jurusan', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_fakultas');
-            $table->foreign('id_fakultas')->references('id')->on('fakultas');
+        Schema::table('kelas', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_jurusan');
+            $table->foreign('id_jurusan')->references('id')->on('jurusan');
         });
     }
 
@@ -26,8 +26,8 @@ class AddForeignKeyToJurusan extends Migration
      */
     public function down()
     {
-        Schema::table('jurusan', function (Blueprint $table) {
-            $table->dropForeign('id_fakultas');
+        Schema::table('kelas', function (Blueprint $table) {
+            $table->foreign('jurusan');
         });
     }
 }

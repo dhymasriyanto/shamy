@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTahunAjaransTable extends Migration
+class CreateTahunAjaranTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,9 +16,10 @@ class CreateTahunAjaransTable extends Migration
         Schema::create('tahun_ajaran', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('tahun_ajaran',15)->comment('Tahun ajaran');
-            $table->timestamps();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->integer('created_by')->default(0);
+            $table->timestamp('updated_at')->useCurrent();
+            $table->integer('updated_by')->default(0);
         });
     }
 
