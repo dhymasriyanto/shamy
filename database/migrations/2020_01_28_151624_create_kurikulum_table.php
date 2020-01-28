@@ -18,6 +18,8 @@ class CreateKurikulumsTable extends Migration
             $table->string('nama', 20)->comment('Nama kurikulum');
             $table->json('mata_kuliah')->comment('Data nama mata kuliah');
             $table->timestamps();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
         });
     }
 
