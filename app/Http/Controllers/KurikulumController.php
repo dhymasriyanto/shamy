@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Kelass;
+use App\Kurikulum;
 use Illuminate\Http\Request;
 
-class KelassController extends Controller
+class KurikulumController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class KelassController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Kelass  $kelass
+     * @param  \App\Kurikulum  $kurikulum
      * @return \Illuminate\Http\Response
      */
-    public function show(Kelass $kelass)
+    public function show(Kurikulum $kurikulum)
     {
         //
     }
@@ -52,10 +52,10 @@ class KelassController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Kelass  $kelass
+     * @param  \App\Kurikulum  $kurikulum
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kelass $kelass)
+    public function edit(Kurikulum $kurikulum)
     {
         //
     }
@@ -64,10 +64,10 @@ class KelassController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Kelass  $kelass
+     * @param  \App\Kurikulum  $kurikulum
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kelass $kelass)
+    public function update(Request $request, Kurikulum $kurikulum)
     {
         //
     }
@@ -75,10 +75,10 @@ class KelassController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Kelass  $kelass
+     * @param  \App\Kurikulum  $kurikulum
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kelass $kelass)
+    public function destroy(Kurikulum $kurikulum)
     {
         //
     }
