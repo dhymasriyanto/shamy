@@ -31,6 +31,6 @@ class CreateMataKuliahsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mata_kuliahs');
+        Schema::dropIfExists('mata_kuliah');
     }
 }

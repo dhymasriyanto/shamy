@@ -31,6 +31,6 @@ class CreateJurusansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jurusans');
+        Schema::dropIfExists('jurusan');
     }
 }
