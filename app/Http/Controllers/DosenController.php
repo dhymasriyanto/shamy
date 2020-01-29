@@ -12,9 +12,15 @@ class DosenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $dosens = Dosen::all();
+        $data = [
+            'dosens' => $dosens
+        ];
+
+        return $this->renderPage($request, 'dosen.index', $data);
     }
 
     /**

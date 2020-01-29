@@ -20,7 +20,7 @@ use Laravel\Socialite\Facades\Socialite;
  * Home controller
  */
 Route::get('/', 'HomeController@index')->name('home');
-
+Route::get('dosen','DosenController@index')->name('dosen');
 
 // Authentication Routes...
 Route::prefix('auth')->name('auth.')->group(function (){

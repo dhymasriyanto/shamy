@@ -1,6 +1,6 @@
 <?php
 use App\Libs\AppHelpers;
-$title = 'Akademik';
+$title = 'Data Dosen';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
 

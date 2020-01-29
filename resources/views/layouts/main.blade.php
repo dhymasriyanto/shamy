@@ -36,7 +36,7 @@
 @include('partials.footer_large')
 <!-- Vendor js -->
 <script src="{{asset('adminto/js/vendor.min.js')}}"></script>
-{{--    <!-- App js -->--}}
+    <!-- App js -->
 <script src="{{asset('adminto/js/app.min.js')}}"></script>
 </body>
 </html>

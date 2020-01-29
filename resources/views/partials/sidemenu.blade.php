@@ -13,6 +13,14 @@
                 <i class="mdi mdi-view-dashboard"></i>
                 <span> Dashboard </span>
             </a>
+
+        </li>
+        <li>
+            <a href="{{route('dosen')}}">
+                <i class="mdi mdi-view-dashboard"></i>
+                <span> Dosen </span>
+            </a>
+
         </li>
     </ul>
 </div>
