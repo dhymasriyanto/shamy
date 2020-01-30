@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Dosen;
+use Illuminate\Support\Facades\Redirect;
 
 class DosenController extends Controller
 {
@@ -21,10 +22,10 @@ class DosenController extends Controller
     public function index(Request $request)
     {
         $ayam = Dosen::all();
-//        $this->reply['data'] = ['ayam' => $ayam];
-//        $this->reply['status'] = true;
-//        return response($this->reply, 200);
-        return $this->renderPageData($request, 'data.datadosen', $ayam);
+        $data = [
+            'terserah'=>$ayam
+        ];
+        return $this->renderPage($request, 'dosen.index', $data);
     }
 
     public function hapus($id){

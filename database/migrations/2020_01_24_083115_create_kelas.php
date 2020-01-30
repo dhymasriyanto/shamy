@@ -15,14 +15,14 @@ class CreateKelas extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('jurusan_id','2');
-            $table->char('semester','2');
-            $table->char('tahunAjaran','15');
-            $table->char('nama', '30');
-            $table->json('mahasiswa');
-            $table->timestamps();
-            $table->char('create_by');
-            $table->char('update_by');
+            $table->string('semester',2)->comment('Semester')->nullable();
+            $table->string('tahun_ajaran',15)->comment('Tahun ajaran')->nullable();
+            $table->string('nama', 30)->comment('Nama kelas')->nullable();
+            $table->json('mahasiswa')->comment('Data id mahasiswa');
+            $table->timestamp('created_at')->useCurrent();
+            $table->integer('created_by')->default(0);
+            $table->timestamp('updated_at')->useCurrent();
+            $table->integer('updated_by')->default(0);
         });
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pegawai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PegawaiController extends Controller
 {
@@ -21,10 +22,13 @@ class PegawaiController extends Controller
     public function index(Request $request)
     {
         $ayam = Pegawai::all();
+        $data = [
+          'terserah'=>$ayam
+        ];
 //        $this->reply['data'] = ['ayam' => $ayam];
 //        $this->reply['status'] = true;
 //        return response($this->reply, 200);
-        return $this->renderPageData($request, 'data.datapegawai', $ayam);
+        return $this->renderPage($request, 'pegawai.index', $data);
     }
 
     public function hapus($id){

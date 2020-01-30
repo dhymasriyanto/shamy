@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
@@ -25,9 +24,5 @@ class Controller extends BaseController
     protected function renderPage(Request $request, $view = null, $data = []){
         $layout = $request->ajax() ? 'ajax': 'app';
         return view($view, $data, ['appLayout' => 'layouts.'.$layout]);
-    }
-    protected function renderPageData(Request $request, $view = null, $balik , $data = []){
-        $layout = $request->ajax() ? 'ajax': 'app';
-        return view($view, $data, ['appLayout' => 'layouts.'.$layout, 'datanya'=>$balik]);
     }
 }

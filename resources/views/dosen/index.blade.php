@@ -1,6 +1,6 @@
 <?php
 use App\Libs\AppHelpers;
-$title = 'Data Pegawai';
+$title = 'Data Dosen';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
 
@@ -39,7 +39,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($datanya as $x)
+                                            @foreach($terserah as $x)
                                                 <tr>
                                                     <td>{{ $x->id }}</td>
                                                     <td>{{ $x->nama }}</td>

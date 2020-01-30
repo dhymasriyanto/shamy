@@ -15,10 +15,11 @@ class CreateTahunAjaran extends Migration
     {
         Schema::create('tahun_ajaran', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('tahunAjaran','15');
-            $table->timestamps();
-            $table->char('create_by');
-            $table->char('update_by');
+            $table->string('tahun_ajaran',15)->comment('Tahun ajaran');
+            $table->timestamp('created_at')->useCurrent();
+            $table->integer('created_by')->default(0);
+            $table->timestamp('updated_at')->useCurrent();
+            $table->integer('updated_by')->default(0);
         });
     }
 

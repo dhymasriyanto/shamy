@@ -15,10 +15,12 @@ class CreateDosen extends Migration
     {
         Schema::create('dosen', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('nama', '30');
-            $table->timestamps();
-            $table->char('create_by')->nullable();
-            $table->char('update_by')->nullable();
+            $table->string('nama', 255)->comment('Nama dosen')->nullable();
+            $table->string('nomor_induk', 255)->comment('Nomor induk dosen')->unique()->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->integer('created_by')->default(0);
+            $table->timestamp('updated_at')->useCurrent();
+            $table->integer('updated_by')->default(0);
         });
     }
 

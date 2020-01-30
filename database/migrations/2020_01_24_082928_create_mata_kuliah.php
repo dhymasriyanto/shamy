@@ -15,13 +15,13 @@ class CreateMataKuliah extends Migration
     {
         Schema::create('mata_kuliah', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('jurusan_id','2');
-            $table->char('kode','10');
-            $table->char('singkatan','10');
-            $table->char('nama', '30');
-            $table->timestamps();
-            $table->char('create_by');
-            $table->char('update_by');
+            $table->string('kode',255)->comment('Kode mata kuliah')->nullable()->unique();
+            $table->string('singkatan',255)->comment('Singkatan mata kuliah')->nullable();
+            $table->string('nama', 255)->comment('Nama mata kuliah')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->integer('created_by')->default(0);
+            $table->timestamp('updated_at')->useCurrent();
+            $table->integer('updated_by')->default(0);
         });
     }
 

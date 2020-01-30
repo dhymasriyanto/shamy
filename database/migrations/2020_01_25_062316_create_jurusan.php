@@ -15,13 +15,13 @@ class CreateJurusan extends Migration
     {
         Schema::create('jurusan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('nama','20');
-            $table->char('kode','10');
-            $table->char('singkatan','10');
-            $table->char('fakultas_id','2');
-            $table->timestamps();
-            $table->char('create_by');
-            $table->char('update_by');
+            $table->string('nama',255)->comment('Nama jurusan')->nullable();
+            $table->string('kode',255)->comment('Kode jurusan')->nullable()->unique();
+            $table->string('singkatan',255)->comment('Singkatan jurusan')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->integer('created_by')->default(0);
+            $table->timestamp('updated_at')->useCurrent();
+            $table->integer('updated_by')->default(0);
         });
     }
 

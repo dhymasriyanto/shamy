@@ -15,11 +15,12 @@ class CreateFakultas extends Migration
     {
         Schema::create('fakultas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('nama', '30');
-            $table->char('singkatan','10');
-            $table->timestamps();
-            $table->char('create_by');
-            $table->char('update_by');
+            $table->string('nama', 255)->comment('Nama fakultas')->nullable();
+            $table->string('singkatan',255)->comment('Singkatan fakultas')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->integer('created_by')->default(0);
+            $table->timestamp('updated_at')->useCurrent();
+            $table->integer('updated_by')->default(0);
         });
     }
 

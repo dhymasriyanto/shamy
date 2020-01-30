@@ -15,14 +15,10 @@ class CreateMengajar extends Migration
     {
         Schema::create('mengajar', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('jurusan_id','2');
-            $table->char('kelas_id','2');
-            $table->char('dosen_id','2');
-            $table->char('mata_kuliah_id','2');
-            $table->char('tahun_jaran_id','2');
-            $table->timestamps();
-            $table->char('create_by');
-            $table->char('update_by');
+            $table->timestamp('created_at')->useCurrent();
+            $table->integer('created_by')->default(0);
+            $table->timestamp('updated_at')->useCurrent();
+            $table->integer('updated_by')->default(0);
         });
     }
 

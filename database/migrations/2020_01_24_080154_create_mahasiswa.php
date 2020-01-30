@@ -15,13 +15,13 @@ class CreateMahasiswa extends Migration
     {
         Schema::create('mahasiswa', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('nim', 20);
-            $table->char('nama', 30);
-            $table->char('kurikulum_id', 2);
-            $table->json('statusAktif');
-            $table->timestamps();
-            $table->char('create_by');
-            $table->char('update_by');
+            $table->string('nomor_induk', 255)->comment('Nomor induk mahasiswa')->nullable()->unique();
+            $table->string('nama', 255)->comment('Nama mahasiswa')->nullable();
+            $table->json('status_aktif')->comment('Status aktif/tidak aktif mahasiswa berdasarkan pembayaran melalui sistem pembayaran terpisah')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->integer('created_by')->default(0);
+            $table->timestamp('updated_at')->useCurrent();
+            $table->integer('updated_by')->default(0);
         });
     }
 
