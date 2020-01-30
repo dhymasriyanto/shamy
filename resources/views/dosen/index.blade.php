@@ -35,6 +35,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nama</th>
+                                                <th>NIP</th>
                                                 <th>Opsi</th>
                                             </tr>
                                             </thead>
