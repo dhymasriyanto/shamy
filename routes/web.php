@@ -11,10 +11,7 @@
 |
 */
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
-use Laravel\Socialite\Facades\Socialite;
 
 /**
  * Home controller
@@ -57,8 +54,31 @@ Route::get('/datatahunajaran/hapus/{id}', 'TahunAjaranController@hapus');
 Route::get('/datajurusan', 'JurusanController@index')->name('datajurusan');
 Route::get('/datajurusan/hapus/{id}', 'JurusanController@hapus');
 
+/**
+ * Data Kelas controller
+ */
+Route::get('/datakelas', 'KelasController@index')->name('datakelas');
+Route::get('/datakelas/hapus/{id}', 'KelasController@hapus');
 
+/**
+ * Data Mahasiswa controller
+ */
 Route::get('/datamahasiswa', 'MahasiswaController@index')->name('datamahasiswa');
+Route::get('/datamahasiswa/hapus/{id}', 'MahasiswaController@hapus');
+
+/**
+ * Data MataKuliah controller
+ */
+Route::get('/datamatakuliah', 'MataKuliahController@index')->name('datamatakuliah');
+Route::get('/datamatakuliah/hapus/{id}', 'MataKuliahController@hapus');
+
+/**
+ * Data Mengajar controller
+ */
+Route::get('/datamengajar', 'MengajarController@index')->name('datamengajar');
+Route::get('/datamengajar/hapus/{id}', 'MengajarController@hapus');
+
+
 
 
 

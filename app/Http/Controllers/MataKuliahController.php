@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mahasiswa;
+use App\MataKuliah;
 use Illuminate\Support\Facades\Redirect;
 
-class MahasiswaController extends Controller
+class MataKuliahController extends Controller
 {
     //
     public function index(Request $request)
     {
-        $ayam = Mahasiswa::all();
+        $ayam = MataKuliah::all();
         $data = [
             'terserah'=>$ayam
         ];
-        return $this->renderPage($request, 'mahasiswa.index', $data);
+        return $this->renderPage($request, 'matakuliah.index', $data);
     }
 
     public function hapus($id){
-        $ayam = Mahasiswa::find($id);
+        $ayam = MataKuliah::find($id);
         $ayam->delete();
         return Redirect::back();
     }

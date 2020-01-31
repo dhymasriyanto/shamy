@@ -41,6 +41,18 @@
                 <i class="mdi mdi-account"></i>
                 <span> Data Jurusan </span>
             </a>
+            <a href="{{route('datakelas')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Kelas </span>
+            </a>
+            <a href="{{route('datamatakuliah')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Mata Kuliah </span>
+            </a>
+            <a href="{{route('datamengajar')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Mengajar </span>
+            </a>
         </li>
     </ul>
 </div>
