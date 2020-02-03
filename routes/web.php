@@ -22,7 +22,7 @@ Route::get('/', 'HomeController@index')->name('home');
  * Data Dosen controller
  */
 Route::get('/dosen', 'DosenController@index')->name('dosen');
-Route::get('/dosen/hapus/{id}', 'DosenController@hapus');
+Route::delete('/dosen/{dosen}', 'DosenController@destroy');
 
 /**
  * Data Pegawai controller

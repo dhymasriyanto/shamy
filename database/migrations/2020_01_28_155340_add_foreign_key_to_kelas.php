@@ -15,7 +15,7 @@ class AddForeignKeyToKelas extends Migration
     {
         Schema::table('kelas', function (Blueprint $table) {
             $table->unsignedBigInteger('id_jurusan');
-            $table->foreign('id_jurusan')->references('id')->on('jurusan');
+            $table->foreign('id_jurusan')->references('id')->on('jurusan')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

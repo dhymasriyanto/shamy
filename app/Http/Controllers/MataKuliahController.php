@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\MataKuliah;
 use Illuminate\Http\Request;
 
 class MataKuliahController extends Controller
@@ -41,10 +40,10 @@ class MataKuliahController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\MataKuliah  $mataKuliah
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(MataKuliah $mataKuliah)
+    public function show($id)
     {
         //
     }
@@ -52,10 +51,10 @@ class MataKuliahController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\MataKuliah  $mataKuliah
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(MataKuliah $mataKuliah)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +63,10 @@ class MataKuliahController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\MataKuliah  $mataKuliah
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MataKuliah $mataKuliah)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +74,10 @@ class MataKuliahController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\MataKuliah  $mataKuliah
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MataKuliah $mataKuliah)
+    public function destroy($id)
     {
         //
     }

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mengajar extends Model
 {
-    //
     protected $table = 'mengajar';
 
     public function getJurusan()
@@ -14,7 +13,8 @@ class Mengajar extends Model
         return $this->belongsTo('App\Jurusan', 'id_jurusan');
     }
 
-    public function getKelas(){
+    public function getKelas()
+    {
         return $this->belongsTo('App\Kelas', 'id_kelas');
     }
 

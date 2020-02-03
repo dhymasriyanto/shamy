@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jurusan extends Model
 {
-    //
     protected $table = 'jurusan';
 
-
-    public function getFakultas(){
+    public function getFakultas()
+    {
         return $this->belongsTo('App\Fakultas', 'id_fakultas');
     }
 
@@ -19,7 +18,8 @@ class Jurusan extends Model
         return $this->hasMany('App\Kelas');
     }
 
-    public function getKurikulum(){
+    public function getKurikulum()
+    {
         return $this->hasMany('App\Kurikulum');
     }
 

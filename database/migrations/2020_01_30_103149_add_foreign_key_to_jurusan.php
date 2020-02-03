@@ -15,7 +15,7 @@ class AddForeignKeyToJurusan extends Migration
     {
         Schema::table('jurusan', function (Blueprint $table) {
             $table->unsignedBigInteger('id_fakultas');
-            $table->foreign('id_fakultas')->references('id')->on('fakultas');
+            $table->foreign('id_fakultas')->references('id')->on('fakultas')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
