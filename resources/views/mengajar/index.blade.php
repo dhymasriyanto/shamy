@@ -28,10 +28,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
+                                        <a href="/mengajar/tambah/" class="btn btn-dark waves-effect"> <i class="fa fa-plus mr-1"></i>Tambah</a><br><br>
                                         <table id="example" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>No</th>
                                                 <th>Jurusan</th>
                                                 <th>Kelas</th>
                                                 <th>Dosen</th>
@@ -43,14 +44,14 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <tbody>
                                             @foreach($terserah as $x)
                                                 <tr>
-                                                    <td>{{ $x->id }}</td>
+                                                    <td>{{$loop->iteration}}</td>
                                                     <td>{{ $x->id_jurusan }}</td>
                                                     <td>{{ $x->id_kelas }}</td>
                                                     <td>{{ $x->id_dosen }}</td>
                                                     <td>{{ $x->id_mata_kuliah }}</td>
                                                     <td>{{ $x->id_tahun_ajaran }}</td>
-                                                    <td><a href="/datamengajar/edit/{{ $x->id }}" class="btn btn-info">Edit</a>
-                                                        <a href="/datamengajar/hapus/{{ $x->id }}" class="btn btn-danger">Hapus</a></td>
+                                                    <td><a href="/mengajar/edit/{{ $x->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
+                                                        <a href="/mengajar/hapus/{{ $x->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
