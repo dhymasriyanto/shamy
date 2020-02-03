@@ -25,10 +25,10 @@ Route::resources([
     'jurusan' => 'JurusanController',
     'kelas' => 'KelasController',
     'kurikulum' => 'KurikulumController',
-    'matakuliah' => 'MataKuliahController',
+    'mata-kuliah' => 'MataKuliahController',
     'mengajar' => 'MengajarController',
     'pegawai' => 'PegawaiController',
-    'tahunajaran' => 'TahunAjaranController'
+    'tahun-ajaran' => 'TahunAjaranController'
 ]);
 
 // Authentication Routes...

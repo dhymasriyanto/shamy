@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Fakultas;
 use Illuminate\Http\Request;
 
 class FakultasController extends Controller
@@ -11,9 +12,14 @@ class FakultasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $fakultas = Fakultas::all();
+        $data = [
+            'data' => $fakultas
+        ];
+
+        return $this->renderPage($request, 'fakultas.index', $data);
     }
 
     /**

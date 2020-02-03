@@ -38,12 +38,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($terserah as $x)
+                                            @foreach($data as $tahunAjaran)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $x->tahun_ajaran }}</td>
-                                                    <td><a href="/tahunajaran/edit/{{ $x->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <a href="/tahunajaran/hapus/{{ $x->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
+                                                    <td>{{ $tahunAjaran->tahun_ajaran }}</td>
+                                                    <td><a href="/tahunajaran/edit/{{ $tahunAjaran->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
+                                                        <a href="/tahunajaran/hapus/{{ $tahunAjaran->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

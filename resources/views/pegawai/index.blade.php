@@ -38,12 +38,16 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($terserah as $x)
+                                            @foreach($data as $pegawai)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $x->nama }}</td>
-                                                    <td><a href="/pegawai/edit/{{ $x->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <a href="/pegawai/hapus/{{ $x->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
+                                                    <td>{{ $pegawai->nama }}</td>
+                                                    <td><a href="/pegawai/edit/{{ $pegawai->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
+                                                        <form action="/dosen/{{$pegawai->id}}" method="post" class="d-inline">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button class="btn btn-danger">Hapus</button>
+                                                        </form>
                                                 </tr>
                                             @endforeach
                                             </tbody>

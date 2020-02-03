@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TahunAjaran;
 use Illuminate\Http\Request;
 
 class TahunAjaranController extends Controller
@@ -11,9 +12,15 @@ class TahunAjaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $tahunAjaran = TahunAjaran::all();
+
+        $data = [
+            'data' => $tahunAjaran
+        ];
+
+        return $this->renderPage($request, 'tahun-ajaran.index', $data);
     }
 
     /**

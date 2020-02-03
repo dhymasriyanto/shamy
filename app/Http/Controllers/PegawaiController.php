@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pegawai;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
@@ -11,9 +12,14 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $pegawai = Pegawai::all();
+        $data = [
+            'data' => $pegawai
+        ];
+
+        return $this->renderPage($request,'pegawai.index', $data);
     }
 
     /**

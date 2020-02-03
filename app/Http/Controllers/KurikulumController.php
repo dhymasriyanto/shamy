@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Kurikulum;
 use Illuminate\Http\Request;
 
 class KurikulumController extends Controller
@@ -11,9 +12,14 @@ class KurikulumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $kurikulum = Kurikulum::all();
+        $data = [
+            'data' => $kurikulum
+        ];
+
+        return $this->renderPage($request, ' kurikulum.index', $data);
     }
 
     /**

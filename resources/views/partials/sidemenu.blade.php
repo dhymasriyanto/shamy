@@ -33,7 +33,7 @@
                 <i class="mdi mdi-book-outline"></i>
                 <span> Data Kurikulum </span>
             </a>
-            <a href="{{route('tahunajaran.index')}}">
+            <a href="{{route('tahun-ajaran.index')}}">
                 <i class="mdi mdi-timetable"></i>
                 <span> Data Tahun Ajaran </span>
             </a>
@@ -45,7 +45,7 @@
                 <i class="mdi mdi-table-column"></i>
                 <span> Data Kelas </span>
             </a>
-            <a href="{{route('matakuliah.index')}}">
+            <a href="{{route('mata-kuliah.index')}}">
                 <i class="mdi mdi-book"></i>
                 <span> Data Mata Kuliah </span>
             </a>
