@@ -18,72 +18,21 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get('/', 'HomeController@index')->name('home');
 
-/**
- * Data Dosen controller
- */
-Route::get('/dosen', 'DosenController@index')->name('dosen');
-Route::delete('/dosen/{dosen}', 'DosenController@destroy');
-
-/**
- * Data Pegawai controller
- */
-Route::get('/pegawai', 'PegawaiController@index')->name('pegawai');
-Route::get('/pegawai/hapus/{id}', 'PegawaiController@hapus');
-
-/**
- * Data Fakultas controller
- */
-Route::get('/fakultas', 'FakultasController@index')->name('fakultas');
-Route::get('/fakultas/hapus/{id}', 'FakultasController@hapus');
-
-/**
- * Data Kurikulum controller
- */
-Route::get('/kurikulum', 'KurikulumController@index')->name('kurikulum');
-Route::get('/kurikulum/hapus/{id}', 'KurikulumController@hapus');
-
-/**
- * Data TahunAjaran controller
- */
-Route::get('/tahunajaran', 'TahunAjaranController@index')->name('tahunajaran');
-Route::get('/tahunajaran/hapus/{id}', 'TahunAjaranController@hapus');
-
-/**
- * Data Jurusan controller
- */
-Route::get('/jurusan', 'JurusanController@index')->name('jurusan');
-Route::get('/jurusan/hapus/{id}', 'JurusanController@hapus');
-
-/**
- * Data Kelas controller
- */
-Route::get('/kelas', 'KelasController@index')->name('kelas');
-Route::get('/kelas/hapus/{id}', 'KelasController@hapus');
-
-/**
- * Data Mahasiswa controller
- */
-Route::get('/mahasiswa', 'MahasiswaController@index')->name('mahasiswa');
-Route::get('/mahasiswa/hapus/{id}', 'MahasiswaController@hapus');
-
-/**
- * Data MataKuliah controller
- */
-Route::get('/matakuliah', 'MataKuliahController@index')->name('matakuliah');
-Route::get('/matakuliah/hapus/{id}', 'MataKuliahController@hapus');
-
-/**
- * Data Mengajar controller
- */
-Route::get('/mengajar', 'MengajarController@index')->name('mengajar');
-Route::get('/mengajar/hapus/{id}', 'MengajarController@hapus');
-
-
-
-
+Route::resources([
+    'dosen' => 'DosenController',
+    'mahasiswa'  => 'MahasiswaController',
+    'fakultas' => 'FakultasController',
+    'jurusan' => 'JurusanController',
+    'kelas' => 'KelasController',
+    'kurikulum' => 'KurikulumController',
+    'matakuliah' => 'MataKuliahController',
+    'mengajar' => 'MengajarController',
+    'pegawai' => 'PegawaiController',
+    'tahunajaran' => 'TahunAjaranController'
+]);
 
 // Authentication Routes...
-Route::prefix('auth')->name('auth.')->group(function (){
+Route::prefix('auth')->name('auth.')->group(function () {
     Route::get('/', 'Auth\LoginController@showIndexForm')->name('index');
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login.form');
     Route::post('login', 'Auth\LoginController@login')->name('login');
