@@ -13,4 +13,9 @@ class Kelas extends Model
     public function getJurusan(){
         return $this->belongsTo('App\Jurusan', 'id_jurusan');
     }
+
+    public function getMengajar()
+    {
+        return $this->hasMany('App\Mengajar');
+    }
 }

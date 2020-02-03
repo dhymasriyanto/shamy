@@ -16,6 +16,20 @@ class Jurusan extends Model
 
     public function getKelas()
     {
-        return $this->hasOne('App\Kelas');
+        return $this->hasMany('App\Kelas');
+    }
+
+    public function getKurikulum(){
+        return $this->hasMany('App\Kurikulum');
+    }
+
+    public function getMataKuliah()
+    {
+        return $this->hasMany('App\MataKuliah');
+    }
+
+    public function getMengajar()
+    {
+        return $this->hasMany('App\Mengajar');
     }
 }

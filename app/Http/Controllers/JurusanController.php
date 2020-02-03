@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Fakultas;
 use App\Jurusan;
 use App\Kelas;
+use App\Kurikulum;
+use App\MataKuliah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -22,6 +24,12 @@ class JurusanController extends Controller
         $fakultas = Fakultas::find(1);
         $jurusanPadaFakultas = $fakultas->getJurusan->find(2);
         echo $jurusanPadaFakultas->nama;
+
+        $kurikulum = Kurikulum::find(1);
+        echo $kurikulum->getJurusan->nama;
+
+        $mataKuliah = MataKuliah::find(2);
+        echo $mataKuliah->getJurusan->nama;
 
         dd();
     }
