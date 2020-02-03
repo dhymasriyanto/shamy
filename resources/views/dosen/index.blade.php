@@ -28,10 +28,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
+                                        <a href="/dosen/tambah/" class="btn btn-dark waves-effect"> <i class="fa fa-plus mr-1"></i>Tambah</a><br><br>
                                         <table id="example" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>No</th>
                                                 <th>Nama</th>
                                                 <th>NIP</th>
                                                 <th>Opsi</th>
@@ -40,11 +41,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <tbody>
                                             @foreach($terserah as $x)
                                                 <tr>
-                                                    <td>{{ $x->id }}</td>
+                                                    <td>{{$loop->iteration}}</td>
                                                     <td>{{ $x->nama }}</td>
                                                     <td>NIP</td>
-                                                    <td><a href="/datadosen/edit/{{ $x->id }}" class="btn btn-info">Edit</a>
-                                                        <a href="/datadosen/hapus/{{ $x->id }}" class="btn btn-danger">Hapus</a></td>
+                                                    <td><a href="/dosen/edit/{{ $x->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
+                                                        <a href="/dosen/hapus/{{ $x->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
