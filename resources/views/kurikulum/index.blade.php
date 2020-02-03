@@ -28,8 +28,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
-                                        hmm
-
                                         <table id="example" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>

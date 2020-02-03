@@ -19,7 +19,8 @@ class DosenSeeder extends Seeder
 
             // insert data ke table pegawai menggunakan Faker
             DB::table('dosen')->insert([
-                'nama' => $faker->name
+                'nama' => $faker->name,
+                'nomor_induk' => $faker->bankAccountNumber
             ]);
 
         }

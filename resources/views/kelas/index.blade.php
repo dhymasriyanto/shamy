@@ -1,6 +1,6 @@
 <?php
 use App\Libs\AppHelpers;
-$title = 'Data Dosen';
+$title = 'Data Kelas';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
 
@@ -32,8 +32,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <thead>
                                             <tr>
                                                 <th>ID</th>
+                                                <th>Semester</th>
+                                                <th>Tahun Ajaran</th>
                                                 <th>Nama</th>
-                                                <th>NIP</th>
+                                                <th>Mahasiswa</th>
+                                                <th>Jurusan</th>
                                                 <th>Opsi</th>
                                             </tr>
                                             </thead>
@@ -41,10 +44,13 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             @foreach($terserah as $x)
                                                 <tr>
                                                     <td>{{ $x->id }}</td>
+                                                    <td>{{ $x->semester }}</td>
+                                                    <td>{{ $x->tahun_ajaran }}</td>
                                                     <td>{{ $x->nama }}</td>
-                                                    <td>NIP</td>
-                                                    <td><a href="/datadosen/edit/{{ $x->id }}" class="btn btn-info">Edit</a>
-                                                        <a href="/datadosen/hapus/{{ $x->id }}" class="btn btn-danger">Hapus</a></td>
+                                                    <td>{{ $x->mahasiswa }}</td>
+                                                    <td>{{ $x->id_jurusan }}</td>
+                                                    <td><a href="/datakelas/edit/{{ $x->id }}" class="btn btn-info">Edit</a>
+                                                        <a href="/datakelas/hapus/{{ $x->id }}" class="btn btn-danger">Hapus</a></td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

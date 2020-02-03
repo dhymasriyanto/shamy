@@ -1,6 +1,6 @@
 <?php
 use App\Libs\AppHelpers;
-$title = 'Data Dosen';
+$title = 'Data Mahasiswa';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
 
@@ -32,8 +32,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <thead>
                                             <tr>
                                                 <th>ID</th>
+                                                <th>Nomor Induk</th>
                                                 <th>Nama</th>
-                                                <th>NIP</th>
+                                                <th>Status Aktif</th>
                                                 <th>Opsi</th>
                                             </tr>
                                             </thead>
@@ -41,10 +42,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             @foreach($terserah as $x)
                                                 <tr>
                                                     <td>{{ $x->id }}</td>
+                                                    <td>{{ $x->nomor_induk }}</td>
                                                     <td>{{ $x->nama }}</td>
-                                                    <td>NIP</td>
-                                                    <td><a href="/datadosen/edit/{{ $x->id }}" class="btn btn-info">Edit</a>
-                                                        <a href="/datadosen/hapus/{{ $x->id }}" class="btn btn-danger">Hapus</a></td>
+                                                    <td>{{ $x->status_aktif }}</td>
+                                                    <td><a href="/datamahasiswa/edit/{{ $x->id }}" class="btn btn-info">Edit</a>
+                                                        <a href="/datamahasiswa/hapus/{{ $x->id }}" class="btn btn-danger">Hapus</a></td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

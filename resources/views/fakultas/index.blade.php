@@ -28,8 +28,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
-                                        hmm
-
                                         <table id="example" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
@@ -45,8 +43,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <td>{{ $x->id }}</td>
                                                     <td>{{ $x->nama }}</td>
                                                     <td>{{ $x->singkatan }}</td>
-                                                    <td><a href="/pegawai/edit/{{ $x->id }}" class="btn btn-info">Edit</a>
-                                                        <a href="/pegawai/hapus/{{ $x->id }}" class="btn btn-danger">Hapus</a></td>
+                                                    <td><a href="/datafakultas/edit/{{ $x->id }}" class="btn btn-info">Edit</a>
+                                                        <a href="/datafakultas/hapus/{{ $x->id }}" class="btn btn-danger">Hapus</a></td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

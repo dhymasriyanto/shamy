@@ -11,10 +11,7 @@
 |
 */
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
-use Laravel\Socialite\Facades\Socialite;
 
 /**
  * Home controller
@@ -24,41 +21,64 @@ Route::get('/', 'HomeController@index')->name('home');
 /**
  * Data Dosen controller
  */
-Route::get('/datadosen', 'DosenController@index')->name('datadosen');
-Route::get('/datadosen/hapus/{id}', 'DosenController@hapus');
+Route::get('/dosen', 'DosenController@index')->name('dosen');
+Route::get('/dosen/hapus/{id}', 'DosenController@hapus');
 
 /**
  * Data Pegawai controller
  */
-Route::get('/datapegawai', 'PegawaiController@index')->name('datapegawai');
-Route::get('/datapegawai/hapus/{id}', 'PegawaiController@hapus');
+Route::get('/pegawai', 'PegawaiController@index')->name('pegawai');
+Route::get('/pegawai/hapus/{id}', 'PegawaiController@hapus');
 
 /**
  * Data Fakultas controller
  */
-Route::get('/datafakultas', 'FakultasController@index')->name('datafakultas');
-Route::get('/datafakultas/hapus/{id}', 'FakultasController@hapus');
+Route::get('/fakultas', 'FakultasController@index')->name('fakultas');
+Route::get('/fakultas/hapus/{id}', 'FakultasController@hapus');
 
 /**
  * Data Kurikulum controller
  */
-Route::get('/datakurikulum', 'KurikulumController@index')->name('datakurikulum');
-Route::get('/datakurikulum/hapus/{id}', 'KurikulumController@hapus');
+Route::get('/kurikulum', 'KurikulumController@index')->name('kurikulum');
+Route::get('/kurikulum/hapus/{id}', 'KurikulumController@hapus');
 
 /**
  * Data TahunAjaran controller
  */
-Route::get('/datatahunajaran', 'TahunAjaranController@index')->name('datatahunajaran');
-Route::get('/datatahunajaran/hapus/{id}', 'TahunAjaranController@hapus');
+Route::get('/tahunajaran', 'TahunAjaranController@index')->name('tahunajaran');
+Route::get('/tahunajaran/hapus/{id}', 'TahunAjaranController@hapus');
 
 /**
  * Data Jurusan controller
  */
-Route::get('/datajurusan', 'JurusanController@index')->name('datajurusan');
-Route::get('/datajurusan/hapus/{id}', 'JurusanController@hapus');
+Route::get('/jurusan', 'JurusanController@index')->name('jurusan');
+Route::get('/jurusan/hapus/{id}', 'JurusanController@hapus');
+
+/**
+ * Data Kelas controller
+ */
+Route::get('/kelas', 'KelasController@index')->name('kelas');
+Route::get('/kelas/hapus/{id}', 'KelasController@hapus');
+
+/**
+ * Data Mahasiswa controller
+ */
+Route::get('/mahasiswa', 'MahasiswaController@index')->name('mahasiswa');
+Route::get('/mahasiswa/hapus/{id}', 'MahasiswaController@hapus');
+
+/**
+ * Data MataKuliah controller
+ */
+Route::get('/matakuliah', 'MataKuliahController@index')->name('matakuliah');
+Route::get('/matakuliah/hapus/{id}', 'MataKuliahController@hapus');
+
+/**
+ * Data Mengajar controller
+ */
+Route::get('/mengajar', 'MengajarController@index')->name('mengajar');
+Route::get('/mengajar/hapus/{id}', 'MengajarController@hapus');
 
 
-Route::get('/datamahasiswa', 'MahasiswaController@index')->name('datamahasiswa');
 
 
 

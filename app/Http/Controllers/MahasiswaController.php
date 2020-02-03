@@ -4,22 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mahasiswa;
+use Illuminate\Support\Facades\Redirect;
 
 class MahasiswaController extends Controller
 {
     //
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index(Request $request)
     {
-        return $this->renderPage($request, 'data.datamahasiswa');
+        $ayam = Mahasiswa::all();
+        $data = [
+            'terserah'=>$ayam
+        ];
+        return $this->renderPage($request, 'mahasiswa.index', $data);
+    }
+
+    public function hapus($id){
+        $ayam = Mahasiswa::find($id);
+        $ayam->delete();
+        return Redirect::back();
     }
 }
