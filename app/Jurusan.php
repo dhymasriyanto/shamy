@@ -13,4 +13,9 @@ class Jurusan extends Model
     public function getFakultas(){
         return $this->belongsTo('App\Fakultas', 'id_fakultas');
     }
+
+    public function getKelas()
+    {
+        return $this->hasOne('App\Kelas');
+    }
 }
