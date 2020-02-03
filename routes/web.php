@@ -20,7 +20,47 @@ use Laravel\Socialite\Facades\Socialite;
  * Home controller
  */
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('dosen','DosenController@index')->name('dosen');
+
+/**
+ * Data Dosen controller
+ */
+Route::get('/datadosen', 'DosenController@index')->name('datadosen');
+Route::get('/datadosen/hapus/{id}', 'DosenController@hapus');
+
+/**
+ * Data Pegawai controller
+ */
+Route::get('/datapegawai', 'PegawaiController@index')->name('datapegawai');
+Route::get('/datapegawai/hapus/{id}', 'PegawaiController@hapus');
+
+/**
+ * Data Fakultas controller
+ */
+Route::get('/datafakultas', 'FakultasController@index')->name('datafakultas');
+Route::get('/datafakultas/hapus/{id}', 'FakultasController@hapus');
+
+/**
+ * Data Kurikulum controller
+ */
+Route::get('/datakurikulum', 'KurikulumController@index')->name('datakurikulum');
+Route::get('/datakurikulum/hapus/{id}', 'KurikulumController@hapus');
+
+/**
+ * Data TahunAjaran controller
+ */
+Route::get('/datatahunajaran', 'TahunAjaranController@index')->name('datatahunajaran');
+Route::get('/datatahunajaran/hapus/{id}', 'TahunAjaranController@hapus');
+
+/**
+ * Data Jurusan controller
+ */
+Route::get('/datajurusan', 'JurusanController@index')->name('datajurusan');
+Route::get('/datajurusan/hapus/{id}', 'JurusanController@hapus');
+
+
+Route::get('/datamahasiswa', 'MahasiswaController@index')->name('datamahasiswa');
+
+
 
 // Authentication Routes...
 Route::prefix('auth')->name('auth.')->group(function (){
@@ -42,13 +82,14 @@ Route::prefix('auth')->name('auth.')->group(function (){
     Route::get('/login/callback', 'Auth\LoginController@callback')->name('login.callback');
 });
 
-/**
- * Account
- */
-Route::prefix('account')->name('account.')->group(function (){
-    Route::get('/profil', 'AccountController@profil')->name('profil.show');
-    Route::get('/oauth/personal-access-token', 'AccountController@oauthPersonalToken')->name('oauth.token');
-});
+// Password Reset Routes...
+//Route::prefix('password')->name('password.')->group(function (){
+//    Route::get('reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('request');
+//    Route::post('email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('email');
+//    Route::get('reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('reset');
+//    Route::post('reset', 'Auth\ResetPasswordController@reset')->name('update');
+//});
+
 
 // Email Verification Routes...
 //Route::prefix('email')->name('email.')->group(function (){

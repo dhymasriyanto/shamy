@@ -13,14 +13,34 @@
                 <i class="mdi mdi-view-dashboard"></i>
                 <span> Dashboard </span>
             </a>
-
-        </li>
-        <li>
-            <a href="{{route('dosen')}}">
-                <i class="mdi mdi-view-dashboard"></i>
-                <span> Dosen </span>
+            <a href="{{route('datadosen')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Dosen </span>
             </a>
-
+            <a href="{{route('datamahasiswa')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Mahasiswa </span>
+            </a>
+            <a href="{{route('datapegawai')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Pegawai </span>
+            </a>
+            <a href="{{route('datafakultas')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Fakultas </span>
+            </a>
+            <a href="{{route('datakurikulum')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Kurikulum </span>
+            </a>
+            <a href="{{route('datatahunajaran')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Tahun Ajaran </span>
+            </a>
+            <a href="{{route('datajurusan')}}">
+                <i class="mdi mdi-account"></i>
+                <span> Data Jurusan </span>
+            </a>
         </li>
     </ul>
 </div>

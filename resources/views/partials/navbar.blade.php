@@ -7,7 +7,7 @@
                 <span class="pro-user-name ml-1">{{Auth::user()->name}} <i class="mdi mdi-chevron-down"></i></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                <a href="{{route('account.profil.show')}}" class="dropdown-item notify-item">
+                <a href="" class="dropdown-item notify-item">
                     <i class="fe-user"></i>
                     <span>Profil</span>
                 </a>

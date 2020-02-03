@@ -1,6 +1,6 @@
 <?php
 use App\Libs\AppHelpers;
-$title = 'Data Dosen';
+$title = 'Data Mahasiswa';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
 
@@ -29,27 +29,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                 <div class="row">
                                     <div class="col-12">
                                         hmm
-
-                                        <table id="example" class="table table-bordered table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nama</th>
-                                                <th>NIP</th>
-                                                <th>Opsi</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($terserah as $x)
-                                                <tr>
-                                                    <td>{{ $x->id }}</td>
-                                                    <td>{{ $x->nama }}</td>
-                                                    <td><a href="/datadosen/edit/{{ $x->id }}" class="btn btn-info">Edit</a>
-                                                        <a href="/datadosen/hapus/{{ $x->id }}" class="btn btn-danger">Hapus</a></td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
                                     </div>
 
                                 </div>

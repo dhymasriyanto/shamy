@@ -15,9 +15,9 @@ class DosenController extends Controller
     public function index(Request $request)
     {
         //
-        $dosens = Dosen::all();
+        $dosen = Dosen::all();
         $data = [
-            'dosens' => $dosens
+            'terserah' => $dosen
         ];
 
         return $this->renderPage($request, 'dosen.index', $data);

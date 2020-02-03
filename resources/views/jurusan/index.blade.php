@@ -1,6 +1,6 @@
 <?php
 use App\Libs\AppHelpers;
-$title = 'Data Dosen';
+$title = 'Data Jurusan';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
 
@@ -35,7 +35,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nama</th>
-                                                <th>NIP</th>
+                                                <th>Kode</th>
+                                                <th>Fakultas</th>
+                                                <th>Singkatan</th>
                                                 <th>Opsi</th>
                                             </tr>
                                             </thead>
@@ -44,8 +46,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <tr>
                                                     <td>{{ $x->id }}</td>
                                                     <td>{{ $x->nama }}</td>
-                                                    <td><a href="/datadosen/edit/{{ $x->id }}" class="btn btn-info">Edit</a>
-                                                        <a href="/datadosen/hapus/{{ $x->id }}" class="btn btn-danger">Hapus</a></td>
+                                                    <td>{{ $x->kode }}</td>
+                                                    <td>{{ $x->id_fakultas }}</td>
+                                                    <td>{{ $x->singkatan }}</td>
+                                                    <td><a href="/datajurusan/edit/{{ $x->id }}" class="btn btn-info">Edit</a>
+                                                        <a href="/datajurusan/hapus/{{ $x->id }}" class="btn btn-danger">Hapus</a></td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

@@ -7,4 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Jurusan extends Model
 {
     //
+    protected $table = 'jurusan';
+
+
+    public function getFakultas(){
+        return $this->belongsTo('App\Fakultas', 'id_fakultas');
+    }
 }
