@@ -86,8 +86,11 @@ class ApiAuth extends ApiApp
                 'photo' => $responseUser['photo'],
             ]
         );
-        //login
-        Auth::login($user);
+        /**
+         * Create personal access token in this API
+         */
+        $token = $user->createToken('Token Name');
+        //send response
         $this->reply['status'] = true;
         $this->reply['data'] =$responseBody;
         return response($this->reply);
