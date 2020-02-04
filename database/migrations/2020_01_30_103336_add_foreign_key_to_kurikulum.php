@@ -16,7 +16,7 @@ class AddForeignKeyToKurikulum extends Migration
         Schema::table('kurikulum', function (Blueprint $table) {
             //
             $table->unsignedBigInteger('id_jurusan');
-            $table->foreign('id_jurusan')->references('id')->on('jurusan');
+            $table->foreign('id_jurusan')->references('id')->on('jurusan')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

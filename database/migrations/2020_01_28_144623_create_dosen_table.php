@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMengajar extends Migration
+class CreateDosenTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateMengajar extends Migration
      */
     public function up()
     {
-        Schema::create('mengajar', function (Blueprint $table) {
+        Schema::create('dosen', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nama', 255)->comment('Nama dosen')->nullable();
+            $table->string('nomor_induk', 255)->comment('Nomor induk dosen')->unique()->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->integer('created_by')->default(0);
             $table->timestamp('updated_at')->useCurrent();
@@ -29,6 +31,6 @@ class CreateMengajar extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mengajar');
+        Schema::dropIfExists('dosen');
     }
 }

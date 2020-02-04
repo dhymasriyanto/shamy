@@ -21,17 +21,14 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                     <div class="row">
                         <div class="col-12">
                             <div class="card-box">
-                                <h4 class="m-t-0 header-title">Selamat Datang di Website Akademik</h4>
+                                <h4 class="m-t-0 header-title">Title</h4>
                                 <p class="text-muted mb-4 font-14">
-                                    STAI TEMBILAHAN
+                                    Sub title
                                 </p>
 
                                 <div class="row">
                                     <div class="col-12">
-                                        TODO:<br>
-                                        -relasi antar table<br>
-                                        -crud untuk edit<br>
-                                        -crud untuk tambah data<br>
+                                        Content
                                     </div>
 
                                 </div>

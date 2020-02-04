@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\TokenInfo;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -58,10 +60,21 @@ class LoginController extends Controller
                     'photo' => $userAccount['photo'],
                 ]
             );
-            //login
+            //Save user information
+            $accessTokenBody = $oauthUser->accessTokenResponseBody;
+            $token = new TokenInfo();
+            $token->user_id = $user->id;
+            $token->token_type = $accessTokenBody['token_type'];
+            $token->expires_in = $accessTokenBody['expires_in'];
+            $token->access_token = $accessTokenBody['access_token'];
+            $token->refresh_token = $accessTokenBody['refresh_token'];
+            $token->user_agent = $request->userAgent();
+            $token->ip = $request->ip();
+            if(!$token->save()){
+                die('Error on save');
+            }
+            //login and redirect
             Auth::login($user);
-            //redirect
-            return redirect('/');
         }catch (\Exception  $exception) {
 //            die($exception->getMessage());
         }

@@ -13,43 +13,43 @@
                 <i class="mdi mdi-view-dashboard"></i>
                 <span> Dashboard </span>
             </a>
-            <a href="{{route('dosen')}}">
+            <a href="{{route('dosen.index')}}">
                 <i class="mdi mdi-account-box-outline"></i>
                 <span> Data Dosen </span>
             </a>
-            <a href="{{route('mahasiswa')}}">
+            <a href="{{route('mahasiswa.index')}}">
                 <i class="mdi mdi-account-group"></i>
                 <span> Data Mahasiswa </span>
             </a>
-            <a href="{{route('pegawai')}}">
+            <a href="{{route('pegawai.index')}}">
                 <i class="mdi mdi-account-supervisor-circle"></i>
                 <span> Data Pegawai </span>
             </a>
-            <a href="{{route('fakultas')}}">
+            <a href="{{route('fakultas.index')}}">
                 <i class="mdi mdi-office-building"></i>
                 <span> Data Fakultas </span>
             </a>
-            <a href="{{route('kurikulum')}}">
+            <a href="{{route('kurikulum.index')}}">
                 <i class="mdi mdi-book-outline"></i>
                 <span> Data Kurikulum </span>
             </a>
-            <a href="{{route('tahunajaran')}}">
+            <a href="{{route('tahun-ajaran.index')}}">
                 <i class="mdi mdi-timetable"></i>
                 <span> Data Tahun Ajaran </span>
             </a>
-            <a href="{{route('jurusan')}}">
+            <a href="{{route('jurusan.index')}}">
                 <i class="mdi mdi-account-check-outline"></i>
                 <span> Data Jurusan </span>
             </a>
-            <a href="{{route('kelas')}}">
+            <a href="{{route('kelas.index')}}">
                 <i class="mdi mdi-table-column"></i>
                 <span> Data Kelas </span>
             </a>
-            <a href="{{route('matakuliah')}}">
+            <a href="{{route('mata-kuliah.index')}}">
                 <i class="mdi mdi-book"></i>
                 <span> Data Mata Kuliah </span>
             </a>
-            <a href="{{route('mengajar')}}">
+            <a href="{{route('mengajar.index')}}">
                 <i class="mdi mdi-clipboard-account"></i>
                 <span> Data Mengajar </span>
             </a>

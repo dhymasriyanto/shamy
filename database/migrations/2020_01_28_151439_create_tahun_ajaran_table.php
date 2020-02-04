@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJurusan extends Migration
+class CreateTahunAjaranTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateJurusan extends Migration
      */
     public function up()
     {
-        Schema::create('jurusan', function (Blueprint $table) {
+        Schema::create('tahun_ajaran', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama',255)->comment('Nama jurusan')->nullable();
-            $table->string('kode',255)->comment('Kode jurusan')->nullable()->unique();
-            $table->string('singkatan',255)->comment('Singkatan jurusan')->nullable();
+            $table->string('tahun_ajaran',15)->comment('Tahun ajaran');
             $table->timestamp('created_at')->useCurrent();
             $table->integer('created_by')->default(0);
             $table->timestamp('updated_at')->useCurrent();
@@ -32,6 +30,6 @@ class CreateJurusan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jurusan');
+        Schema::dropIfExists('tahun_ajaran');
     }
 }

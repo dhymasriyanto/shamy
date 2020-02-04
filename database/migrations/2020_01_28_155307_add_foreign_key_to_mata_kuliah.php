@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeyToKelas extends Migration
+class AddForeignKeyToMataKuliah extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddForeignKeyToKelas extends Migration
      */
     public function up()
     {
-        Schema::table('kelas', function (Blueprint $table) {
+        Schema::table('mata_kuliah', function (Blueprint $table) {
             $table->unsignedBigInteger('id_jurusan');
-            $table->foreign('id_jurusan')->references('id')->on('jurusan');
+            $table->foreign('id_jurusan')->references('id')->on('jurusan')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -26,8 +26,8 @@ class AddForeignKeyToKelas extends Migration
      */
     public function down()
     {
-        Schema::table('kelas', function (Blueprint $table) {
-            $table->foreign('jurusan');
+        Schema::table('mata_kuliah', function (Blueprint $table) {
+            $table->foreign('id_jurusan');
         });
     }
 }

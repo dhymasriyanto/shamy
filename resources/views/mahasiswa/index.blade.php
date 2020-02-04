@@ -40,14 +40,14 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($terserah as $x)
+                                            @foreach($data as $mahasiswa)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $x->nomor_induk }}</td>
-                                                    <td>{{ $x->nama }}</td>
-                                                    <td>{{ $x->status_aktif }}</td>
-                                                    <td><a href="/mahasiswa/edit/{{ $x->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <a href="/mahasiswa/hapus/{{ $x->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
+                                                    <td>{{ $mahasiswa->nomor_induk }}</td>
+                                                    <td>{{ $mahasiswa->nama }}</td>
+                                                    <td>{{ $mahasiswa->status_aktif }}</td>
+                                                    <td><a href="/mahasiswa/edit/{{ $mahasiswa->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
+                                                        <a href="/mahasiswa/hapus/{{ $mahasiswa->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

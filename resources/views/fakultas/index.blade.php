@@ -39,14 +39,17 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($terserah as $x)
+                                            @foreach($data as $fakultas)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $x->nama }}</td>
-                                                    <td>{{ $x->singkatan }}</td>
-                                                    <td><a href="/fakultas/edit/{{ $x->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <a href="/fakultas/hapus/{{ $x->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
-                                                </tr>
+                                                    <td>{{ $fakultas->nama }}</td>
+                                                    <td>{{ $fakultas->singkatan }}</td>
+                                                    <td><a href="/fakultas/edit/{{ $fakultas->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
+                                                        <form action="/dosen/{{$fakultas->id}}" method="post" class="d-inline">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button class="btn btn-danger">Hapus</button>
+                                                        </form>                                                </tr>
                                             @endforeach
                                             </tbody>
                                         </table>
