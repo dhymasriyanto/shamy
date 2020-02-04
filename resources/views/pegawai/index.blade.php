@@ -1,5 +1,7 @@
 <?php
+
 use App\Libs\AppHelpers;
+
 $title = 'Data Pegawai';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
@@ -15,7 +17,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 @section('main_content')
     <div class="main_content_app d-none">
         <!-- main app -->
-        <div id="app" >
+        <div id="app">
             <div class="wrapper">
                 <div class="container-fluid">
                     <div class="row">
@@ -28,7 +30,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <a href="/pegawai/tambah/" class="btn btn-dark waves-effect"> <i class="fa fa-plus mr-1"></i>Tambah</a><br><br>
+                                        <a href="/pegawai/tambah/" class="btn btn-dark waves-effect"> <i
+                                                class="fa fa-plus mr-1"></i>Tambah</a><br><br>
                                         <table id="example" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
@@ -38,18 +41,20 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($data as $pegawai)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $pegawai->nama }}</td>
-                                                    <td><a href="/pegawai/edit/{{ $pegawai->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <form action="/dosen/{{$pegawai->id}}" method="post" class="d-inline">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class="btn btn-danger">Hapus</button>
-                                                        </form>
-                                                </tr>
-                                            @endforeach
+                                            {{--@foreach($data as $pegawai)--}}
+                                            <tr v-for="pegawai in datapegawai">
+                                                <td>@{{  pegawai.id }}</td>
+                                                <td>@{{  pegawai.nama }}</td>
+                                                <td><button class="btn btn-danger waves-effect" @click="hapus(pegawai.id)">Hapus
+                                                    </button></td>
+
+                                                {{--<form action="/pegawai/{{$pegawai->id}}" method="post" class="d-inline">--}}
+                                                {{--@method('delete')--}}
+                                                {{--@csrf--}}
+                                                {{--<button class="btn btn-danger">Hapus</button>--}}
+                                                {{--</form>--}}
+                                            </tr>
+                                            {{--@endforeach--}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -65,6 +70,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         </div>
         {{--Templates--}}
         {{--Define your javascript below--}}
-        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>
+        {{--<script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
+        <script type="text/javascript" src="{{asset('js/pegawai/index.js')}}"></script>
     </div>
 @endsection

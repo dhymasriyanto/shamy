@@ -47,7 +47,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <td>{{ $mahasiswa->nama }}</td>
                                                     <td>{{ $mahasiswa->status_aktif }}</td>
                                                     <td><a href="/mahasiswa/edit/{{ $mahasiswa->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <a href="/mahasiswa/hapus/{{ $mahasiswa->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
+                                                        <form action="/mahasiswa/{{$mahasiswa->id}}" method="post" class="d-inline">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button class="btn btn-danger">Hapus</button>
+                                                        </form>
                                                 </tr>
                                             @endforeach
                                             </tbody>

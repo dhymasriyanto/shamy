@@ -110,9 +110,10 @@ class DosenController extends Controller
      * @param  \App\Dosen $dosen
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Dosen $dosen)
+    public function destroy($id)
     {
-        Dosen::destroy($dosen->id);
+        Dosen::destroy($id);
+
         return Redirect::back();
     }
 }

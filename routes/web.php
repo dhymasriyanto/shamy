@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/pegawai/all', 'PegawaiController@all')->name('pegawai.all');
+
+
 Route::resources([
     'dosen' => 'DosenController',
     'mahasiswa'  => 'MahasiswaController',

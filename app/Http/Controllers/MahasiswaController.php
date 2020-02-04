@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class MahasiswaController extends Controller
 {
@@ -85,6 +86,8 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Mahasiswa::destroy($id);
+
+        return Redirect::back();
     }
 }
