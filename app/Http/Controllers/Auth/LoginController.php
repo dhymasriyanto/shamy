@@ -48,7 +48,8 @@ class LoginController extends Controller
     }
 
     public function callback(Request $request){
-        $driver = 'digist_id';
+        $driver = 'DIGIST_ID';
+        $message = '';
         try {
             $oauthUser = Socialite::driver('laravelpassport')->user();
             $userAccount = $oauthUser->user;
@@ -71,14 +72,14 @@ class LoginController extends Controller
             $token->user_agent = $request->userAgent();
             $token->ip = $request->ip();
             if(!$token->save()){
-                die('Error on save');
+                $message = 'Cannot save data. Please contact your administrator';
             }
             //login and redirect
             Auth::login($user);
         }catch (\Exception  $exception) {
-//            die($exception->getMessage());
+            $message = $exception->getMessage();
         }
-        return redirect(route('auth.login'))->with(['auth.error' => 'Autentikasi gagal.']);
+        return redirect(route('auth.login'))->with(['auth.error' => 'Autentikasi gagal. '.$message]);
     }
 
 

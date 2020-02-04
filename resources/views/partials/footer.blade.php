@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                2018 - 2019 &copy; Shamy v{{config('app.version')}} by <a href="https://www.digistlab.com" target="_blank">Digistlab</a>
+                2019 - <?=date('Y')?> &copy; Shamy v{{config('app.version')}} by <a href="https://www.digistlab.com" target="_blank">Digistlab</a>
             </div>
             <div class="col-md-6">
                 <div class="text-md-right footer-links d-none d-sm-block">
