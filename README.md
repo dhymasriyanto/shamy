@@ -17,6 +17,20 @@
 * Buat branch dengan nama masing-masing
 * Bekerja pada branch masing-masing sehingga tidak mengganggu branch master
 
+##Integrasi dengan AULIA-ID Online
+Autentikasi aplikasi menggunakan single Identity pada Service AuliaID yang telah dipublish (online). Untuk menggunakan service tersebut:
+* Login pada web `https://connect.stai-tbh.ac.id` menggunakan akun yang telah didaftarkan
+* Buatlah OAuth Client dan tentukan Nama dan Redirect URL. Lalu AuliaID akan menampilkan ClineID, Secret dan RedirectURL
+* Pada file ENV, update nilai LARAVELPASSPORT_KEY dengan ClientID , LARAVELPASSPORT_SECRET dengan nilai Secret, LARAVELPASSPORT_REDIRECT_URI  dengan URL callback pada aplikasi local dan LARAVELPASSPORT_HOST diisi dengan URL identity provider
+
+## Permasalahan SSL Sertifikat
+Karena aplikasi identity provider menggunakan live server yang telah online, maka SSL sertifikat akan diperiksa oleh sistem. Jika tidak valid akan muncul error saat request CURL ke server. Untuk itu:
+* Download file PEM pada `https://curl.haxx.se/ca/cacert.pem` dan simpan di direktori yang diinginkan
+* Buka file konfigurasi `php.ini`
+* Cari baris `;curl.cainfo =` dan hilangkan comment dengan menghapus tanda titik koma di depan, sehingga menjadi `curl.cainfo = `
+* Lengkapi baris tersebut menjadi `curl.cainfo = "path\to\cacert.pem"` (sesuaikan direktori file PEM)
+* Restart web server
+
 ## Aturan penulisan
 1. Nama controller di menggunakan CamelCase dan inherit terhadap class `Controller`. Contoh: IndexController, KaryawanController
 2. Nama action pada controller menggunakan camelCase. Contoh: index, save, update. Jika lebih dari satu kata: indexKaryawan, updateMahasiswa

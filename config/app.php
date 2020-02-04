@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------
@@ -126,6 +126,16 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+
+    /**
+     * Laravel passport socialite
+     */
+    'laravelpassport_host' => env('LARAVELPASSPORT_HOST'),
+    'laravelpassport_key' => env('LARAVELPASSPORT_KEY'),
+    'laravelpassport_secret' => env('LARAVELPASSPORT_SECRET'),
+    'laravelpassport_redirect_url' => env('LARAVELPASSPORT_REDIRECT_URI'),
+    'laravelpassport_password_key' => env('LARAVELPASSPORT_PASSWORD_KEY'),
+    'laravelpassport_password_secret' => env('LARAVELPASSPORT_PASSWORD_SECRET'),
 
     /*
     |--------------------------------------------------------------------------

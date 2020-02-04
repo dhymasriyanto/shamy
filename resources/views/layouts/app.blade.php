@@ -26,9 +26,15 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-vue.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/placeholder-loading.min.css')}}">
     <!-- JS-->
-    <script type="text/javascript" src="{{asset('js/vue.js')}}"></script>
+    @if(\Illuminate\Support\Facades\App::environment('production'))
+        <script type="text/javascript" src="{{asset('js/vue.min.js')}}"></script>
+    @else
+        <script type="text/javascript" src="{{asset('js/vue.js')}}"></script>
+    @endif
+    <script type="text/javascript" src="{{asset('js/manifest.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/vendor.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/bootstrap-vue.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/pjax.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/app-custom.js')}}"></script>
 {{--    <script type="text/javascript" src="../../js/app.js"></script>--}}
@@ -106,20 +112,9 @@
                     <span class="pro-user-name ml-1">{{Auth::user()->name}} <i class="mdi mdi-chevron-down"></i></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="{{route('account.profil.show')}}" class="dropdown-item notify-item">
                         <i class="fe-user"></i>
-                        <span>My Account</span>
-                    </a>
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-settings"></i>
-                        <span>Settings</span>
-                    </a>
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-lock"></i>
-                        <span>Lock Screen</span>
+                        <span>Profil</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <!-- item-->
