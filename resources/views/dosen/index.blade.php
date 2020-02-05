@@ -39,15 +39,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($terserah as $x)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $x->nama }}</td>
-                                                    <td>NIP</td>
-                                                    <td><a href="/dosen/edit/{{ $x->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <a href="/dosen/hapus/{{ $x->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
-                                                </tr>
-                                            @endforeach
+                                            <tr v-for="dosen in datadosen">
+                                                <td>@{{  dosen.id }}</td>
+                                                <td>@{{  dosen.nama }}</td>
+                                                <td><button class="btn btn-danger waves-effect" @click="hapus(dosen.id)">Hapus
+                                                    </button></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -63,6 +60,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         </div>
         {{--Templates--}}
         {{--Define your javascript below--}}
-        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>
+{{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
+        <script type="text/javascript" src="{{asset('js/dosen/index.js')}}"></script>
+
     </div>
 @endsection

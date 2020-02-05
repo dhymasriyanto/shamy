@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jurusan;
 use Illuminate\Http\Request;
 
 class JurusanController extends Controller
@@ -11,9 +12,21 @@ class JurusanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $jurusan = Jurusan::all();
+        $data = [
+            'data' => $jurusan
+        ];
+
+        return $this->renderPage($request, 'jurusan.index', $data);
+    }
+
+    public function all()
+    {
+        $jurusan = Jurusan::all();
+
+        return response($jurusan);
     }
 
     /**
@@ -29,7 +42,7 @@ class JurusanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -40,7 +53,7 @@ class JurusanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -51,7 +64,7 @@ class JurusanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -62,8 +75,8 @@ class JurusanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -74,11 +87,14 @@ class JurusanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        Jurusan::destroy($id);
+        $data = [];
+
+        return response('sukses');
     }
 }

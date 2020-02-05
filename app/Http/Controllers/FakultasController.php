@@ -22,6 +22,13 @@ class FakultasController extends Controller
         return $this->renderPage($request, 'fakultas.index', $data);
     }
 
+    public function all()
+    {
+        $fakultas = Fakultas::all();
+
+        return response($fakultas);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +42,7 @@ class FakultasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,7 +53,7 @@ class FakultasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -57,7 +64,7 @@ class FakultasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -68,8 +75,8 @@ class FakultasController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -80,11 +87,14 @@ class FakultasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        Fakultas::destroy($id);
+        $data = [];
+
+        return response('sukses');
     }
 }

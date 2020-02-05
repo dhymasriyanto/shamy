@@ -40,16 +40,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($terserah as $x)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $x->kode }}</td>
-                                                    <td>{{ $x->nama }}</td>
-                                                    <td>{{ $x->singkatan }}</td>
-                                                    <td><a href="/matakuliah/edit/{{ $x->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <a href="/matakuliah/hapus/{{ $x->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
-                                                </tr>
-                                            @endforeach
+                                            <tr v-for="matakuliah in datamatakuliah">
+                                                <td>@{{  matakuliah.id }}</td>
+                                                <td>@{{  matakuliah.nama }}</td>
+                                                <td><button class="btn btn-danger waves-effect" @click="hapus(matakuliah.id)">Hapus
+                                                    </button></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -65,6 +61,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         </div>
         {{--Templates--}}
         {{--Define your javascript below--}}
-        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>
+{{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
+        <script type="text/javascript" src="{{asset('js/mata-kuliah/index.js')}}"></script>
     </div>
 @endsection

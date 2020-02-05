@@ -18,6 +18,18 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/dosen/all', 'DosenController@all')->name('dosen.all');
+Route::get('/fakultas/all', 'FakultasController@all')->name('fakultas.all');
+Route::get('/jurusan/all', 'JurusanController@all')->name('jurusan.all');
+Route::get('/kelas/all', 'KelasController@all')->name('kelas.all');
+Route::get('/kurikulum/all', 'KurikulumController@all')->name('kurikulum.all');
+Route::get('/mahasiswa/all', 'MahasiswaController@all')->name('mahasiswa.all');
+Route::get('/mata-kuliah/all', 'MataKuliahController@all')->name('mata-kuliah.all');
+Route::get('/mengajar/all', 'MengajarController@all')->name('mengajar.all');
+Route::get('/pegawai/all', 'PegawaiController@all')->name('pegawai.all');
+Route::get('/tahun-ajaran/all', 'TahunAjaranController@all')->name('tahun-ajaran.all');
+
+
 Route::resources([
     'dosen' => 'DosenController',
     'mahasiswa'  => 'MahasiswaController',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class MahasiswaController extends Controller
 {
@@ -22,6 +23,13 @@ class MahasiswaController extends Controller
         return $this->renderPage($request, 'mahasiswa.index', $data);
     }
 
+    public function all()
+    {
+        $mahasiswa = Mahasiswa::all();
+
+        return response($mahasiswa);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +43,7 @@ class MahasiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,7 +54,7 @@ class MahasiswaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -57,7 +65,7 @@ class MahasiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -68,8 +76,8 @@ class MahasiswaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -80,11 +88,14 @@ class MahasiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        Mahasiswa::destroy($id);
+        $data = [];
+
+        return response('sukses');
     }
 }
