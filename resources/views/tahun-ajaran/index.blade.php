@@ -38,14 +38,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($data as $tahunAjaran)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $tahunAjaran->tahun_ajaran }}</td>
-                                                    <td><a href="/tahun-ajaran/edit/{{ $tahunAjaran->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <a href="/tahun-ajaran/hapus/{{ $tahunAjaran->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
-                                                </tr>
-                                            @endforeach
+                                            <tr v-for="tahunajaran in datatahunajaran">
+                                                <td>@{{  tahunajaran.id }}</td>
+                                                <td>@{{  tahunajaran.nama }}</td>
+                                                <td><button class="btn btn-danger waves-effect" @click="hapus(tahunajaran.id)">Hapus
+                                                    </button></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -61,6 +59,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         </div>
         {{--Templates--}}
         {{--Define your javascript below--}}
-        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>
+{{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
+        <script type="text/javascript" src="{{asset('js/tahun-ajaran/index.js')}}"></script>
     </div>
 @endsection

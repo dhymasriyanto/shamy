@@ -42,18 +42,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($terserah as $x)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $x->id_jurusan }}</td>
-                                                    <td>{{ $x->id_kelas }}</td>
-                                                    <td>{{ $x->id_dosen }}</td>
-                                                    <td>{{ $x->id_mata_kuliah }}</td>
-                                                    <td>{{ $x->id_tahun_ajaran }}</td>
-                                                    <td><a href="/mengajar/edit/{{ $x->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <a href="/mengajar/hapus/{{ $x->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
-                                                </tr>
-                                            @endforeach
+                                            <tr v-for="mengajar in datamengajar">
+                                                <td>@{{  mengajar.id }}</td>
+                                                <td>@{{  mengajar.nama }}</td>
+                                                <td><button class="btn btn-danger waves-effect" @click="hapus(mengajar.id)">Hapus
+                                                    </button></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -69,6 +63,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         </div>
         {{--Templates--}}
         {{--Define your javascript below--}}
-        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>
+{{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
+        <script type="text/javascript" src="{{asset('js/mengajar/index.js')}}"></script>
     </div>
 @endsection

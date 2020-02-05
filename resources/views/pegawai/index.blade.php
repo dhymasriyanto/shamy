@@ -41,20 +41,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {{--@foreach($data as $pegawai)--}}
                                             <tr v-for="pegawai in datapegawai">
                                                 <td>@{{  pegawai.id }}</td>
                                                 <td>@{{  pegawai.nama }}</td>
                                                 <td><button class="btn btn-danger waves-effect" @click="hapus(pegawai.id)">Hapus
                                                     </button></td>
-
-                                                {{--<form action="/pegawai/{{$pegawai->id}}" method="post" class="d-inline">--}}
-                                                {{--@method('delete')--}}
-                                                {{--@csrf--}}
-                                                {{--<button class="btn btn-danger">Hapus</button>--}}
-                                                {{--</form>--}}
                                             </tr>
-                                            {{--@endforeach--}}
                                             </tbody>
                                         </table>
                                     </div>

@@ -18,7 +18,16 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/dosen/all', 'DosenController@all')->name('dosen.all');
+Route::get('/fakultas/all', 'FakultasController@all')->name('fakultas.all');
+Route::get('/jurusan/all', 'JurusanController@all')->name('jurusan.all');
+Route::get('/kelas/all', 'KelasController@all')->name('kelas.all');
+Route::get('/kurikulum/all', 'KurikulumController@all')->name('kurikulum.all');
+Route::get('/mahasiswa/all', 'MahasiswaController@all')->name('mahasiswa.all');
+Route::get('/mata-kuliah/all', 'MataKuliahController@all')->name('mata-kuliah.all');
+Route::get('/mengajar/all', 'MengajarController@all')->name('mengajar.all');
 Route::get('/pegawai/all', 'PegawaiController@all')->name('pegawai.all');
+Route::get('/tahun-ajaran/all', 'TahunAjaranController@all')->name('tahun-ajaran.all');
 
 
 Route::resources([
@@ -54,14 +63,13 @@ Route::prefix('auth')->name('auth.')->group(function () {
     Route::get('/login/callback', 'Auth\LoginController@callback')->name('login.callback');
 });
 
-// Password Reset Routes...
-//Route::prefix('password')->name('password.')->group(function (){
-//    Route::get('reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('request');
-//    Route::post('email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('email');
-//    Route::get('reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('reset');
-//    Route::post('reset', 'Auth\ResetPasswordController@reset')->name('update');
-//});
-
+/**
+ * Account
+ */
+Route::prefix('account')->name('account.')->group(function (){
+    Route::get('/profil', 'AccountController@profil')->name('profil.show');
+    Route::get('/oauth/personal-access-token', 'AccountController@oauthPersonalToken')->name('oauth.token');
+});
 
 // Email Verification Routes...
 //Route::prefix('email')->name('email.')->group(function (){

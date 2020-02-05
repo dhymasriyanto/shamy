@@ -42,18 +42,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($terserah as $x)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $x->semester }}</td>
-                                                    <td>{{ $x->tahun_ajaran }}</td>
-                                                    <td>{{ $x->nama }}</td>
-                                                    <td>{{ $x->mahasiswa }}</td>
-                                                    <td>{{ $x->id_jurusan }}</td>
-                                                    <td><a href="/kelas/edit/{{ $x->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <a href="/kelas/hapus/{{ $x->id }}" class="btn btn-danger waves-effect"> <i class="fa fa-trash-alt mr-1"></i>Hapus</a></td>
-                                                </tr>
-                                            @endforeach
+                                            <tr v-for="kelas in datakelas">
+                                                <td>@{{  kelas.id }}</td>
+                                                <td>@{{  kelas.nama }}</td>
+                                                <td><button class="btn btn-danger waves-effect" @click="hapus(kelas.id)">Hapus
+                                                    </button></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -69,6 +63,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         </div>
         {{--Templates--}}
         {{--Define your javascript below--}}
-        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>
+{{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
+        <script type="text/javascript" src="{{asset('js/kelas/index.js')}}"></script>
     </div>
 @endsection

@@ -14,13 +14,19 @@ class TahunAjaranController extends Controller
      */
     public function index(Request $request)
     {
-        $tahunAjaran = TahunAjaran::all();
-
+        $tahunajaran = TahunAjaran::all();
         $data = [
-            'data' => $tahunAjaran
+            'data' => $tahunajaran
         ];
 
         return $this->renderPage($request, 'tahun-ajaran.index', $data);
+    }
+
+    public function all()
+    {
+        $tahunajaran = TahunAjaran::all();
+
+        return response($tahunajaran);
     }
 
     /**
@@ -36,7 +42,7 @@ class TahunAjaranController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,7 +53,7 @@ class TahunAjaranController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -58,7 +64,7 @@ class TahunAjaranController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -69,8 +75,8 @@ class TahunAjaranController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -81,11 +87,14 @@ class TahunAjaranController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        TahunAjaran::destroy($id);
+        $data = [];
+
+        return response('sukses');
     }
 }

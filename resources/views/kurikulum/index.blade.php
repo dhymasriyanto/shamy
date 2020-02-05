@@ -40,19 +40,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($data as $kurikulum)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $kurikulum->nama }}</td>
-                                                    <td></td>
-                                                    <td>{{$kurikulum->getJurusan->nama}}</td>
-                                                    <td><a href="/kurikulum/edit/{{ $kurikulum->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <form action="/dosen/{{$kurikulum->id}}" method="post" class="d-inline">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class="btn btn-danger">Hapus</button>
-                                                        </form>                                                </tr>
-                                            @endforeach
+                                            <tr v-for="kurikulum in datakurikulum">
+                                                <td>@{{  kurikulum.id }}</td>
+                                                <td>@{{  kurikulum.nama }}</td>
+                                                <td><button class="btn btn-danger waves-effect" @click="hapus(kurikulum.id)">Hapus
+                                                    </button></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -68,6 +61,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         </div>
         {{--Templates--}}
         {{--Define your javascript below--}}
-        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>
+{{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
+        <script type="text/javascript" src="{{asset('js/kurikulum/index.js')}}"></script>
     </div>
 @endsection

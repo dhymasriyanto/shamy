@@ -19,7 +19,14 @@ class KurikulumController extends Controller
             'data' => $kurikulum
         ];
 
-        return $this->renderPage($request, ' kurikulum.index', $data);
+        return $this->renderPage($request, 'kurikulum.index', $data);
+    }
+
+    public function all()
+    {
+        $kurikulum = Kurikulum::all();
+
+        return response($kurikulum);
     }
 
     /**
@@ -35,7 +42,7 @@ class KurikulumController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,7 +53,7 @@ class KurikulumController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -57,7 +64,7 @@ class KurikulumController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -68,8 +75,8 @@ class KurikulumController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -80,11 +87,14 @@ class KurikulumController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        Kurikulum::destroy($id);
+        $data = [];
+
+        return response('sukses');
     }
 }

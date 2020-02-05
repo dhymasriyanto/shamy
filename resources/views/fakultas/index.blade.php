@@ -39,18 +39,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($data as $fakultas)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{ $fakultas->nama }}</td>
-                                                    <td>{{ $fakultas->singkatan }}</td>
-                                                    <td><a href="/fakultas/edit/{{ $fakultas->id }}" class="btn btn-secondary waves-effect"> <i class="fa fa-edit mr-1"></i>Edit</a>
-                                                        <form action="/fakultas/{{$fakultas->id}}" method="post" class="d-inline">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class="btn btn-danger">Hapus</button>
-                                                        </form>                                                </tr>
-                                            @endforeach
+                                            <tr v-for="fakultas in datafakultas">
+                                                <td>@{{  fakultas.id }}</td>
+                                                <td>@{{  fakultas.nama }}</td>
+                                                <td><button class="btn btn-danger waves-effect" @click="hapus(fakultas.id)">Hapus
+                                                    </button></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -66,6 +60,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         </div>
         {{--Templates--}}
         {{--Define your javascript below--}}
-        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>
+{{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
+        <script type="text/javascript" src="{{asset('js/fakultas/index.js')}}"></script>
     </div>
 @endsection
