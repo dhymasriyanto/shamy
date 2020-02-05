@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mengajar;
 use Illuminate\Http\Request;
 
 class MengajarController extends Controller
