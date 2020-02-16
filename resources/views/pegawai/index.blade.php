@@ -30,8 +30,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <a href="/pegawai/tambah/" class="btn btn-dark waves-effect"> <i
-                                                class="fa fa-plus mr-1"></i>Tambah</a><br><br>
+                                        <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#myModal"> <i
+                                                class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
                                         <table id="example" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
@@ -53,7 +53,24 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 </div>
                                 <!-- end row -->
-
+                                <!-- sample modal content -->
+                                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myModalLabel">Modal Heading</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h1>test modal</h1>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
                             </div> <!-- end card-box -->
                         </div><!-- end col -->
                     </div>
