@@ -18,11 +18,10 @@ class DosenController extends Controller
         $data = [
             'data' => $dosen
         ];
-
         return $this->renderPage($request, 'dosen.index', $data);
     }
 
-    public function all()
+    public function getData()
     {
         $dosen = Dosen::all();
         return response($dosen);
