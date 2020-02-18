@@ -63,10 +63,22 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </div>
                                             <div class="modal-body">
                                                 <h1>test modal</h1>
+                                                <form role="form">
+                                                    <!-- Name -->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Name</label>
+                                                        <div class="col-md-9">
+                                                            <input name="nama" type="text" class="form-control" v-model="formData.nama">
+                                                            <span class="form-text text-muted">
+                                                                Something your users will recognize and trust.
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal">Cancel</button>
+                                                <button type="button" @click="create()" class="btn btn-success waves-effect waves-light">Save changes</button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
