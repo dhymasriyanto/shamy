@@ -27,6 +27,7 @@ Route::get('/mahasiswa/all', 'MahasiswaController@all')->name('mahasiswa.all');
 Route::get('/mata-kuliah/all', 'MataKuliahController@all')->name('mata-kuliah.all');
 Route::get('/mengajar/all', 'MengajarController@all')->name('mengajar.all');
 Route::get('/pegawai/all', 'PegawaiController@all')->name('pegawai.all');
+Route::post('/pegawai/create', 'PegawaiController@create')->name('pegawai.create');
 Route::get('/tahun-ajaran/all', 'TahunAjaranController@all')->name('tahun-ajaran.all');
 
 
