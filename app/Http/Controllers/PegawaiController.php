@@ -35,9 +35,8 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return $request;
     }
 
     /**
@@ -48,8 +47,13 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Pegawai::create([
+            'nama' => $request->nama
+        ]);
+//        return redirect('pegawai/all');
+        return response($request);
     }
+
 
     /**
      * Display the specified resource.

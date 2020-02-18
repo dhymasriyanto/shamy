@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::put('/pegawai/store', 'PegawaiController@store')->name('pegawai.store');
 Route::get('/dosen/all', 'DosenController@all')->name('dosen.all');
 Route::get('/fakultas/all', 'FakultasController@all')->name('fakultas.all');
 Route::get('/jurusan/all', 'JurusanController@all')->name('jurusan.all');
@@ -27,7 +28,6 @@ Route::get('/mahasiswa/all', 'MahasiswaController@all')->name('mahasiswa.all');
 Route::get('/mata-kuliah/all', 'MataKuliahController@all')->name('mata-kuliah.all');
 Route::get('/mengajar/all', 'MengajarController@all')->name('mengajar.all');
 Route::get('/pegawai/all', 'PegawaiController@all')->name('pegawai.all');
-Route::post('/pegawai/create', 'PegawaiController@create')->name('pegawai.create');
 Route::get('/tahun-ajaran/all', 'TahunAjaranController@all')->name('tahun-ajaran.all');
 
 
@@ -40,7 +40,7 @@ Route::resources([
     'kurikulum' => 'KurikulumController',
     'mata-kuliah' => 'MataKuliahController',
     'mengajar' => 'MengajarController',
-    'pegawai' => 'PegawaiController',
+//    'pegawai' => 'PegawaiController',
     'tahun-ajaran' => 'TahunAjaranController'
 ]);
 

@@ -5,10 +5,8 @@ function initVue() {
     var vm = new Vue({
         el: '#app',
         data: {
-            datapegawai : [],
-            formData: {
-                nama:''
-            }
+            datapegawai :[],
+            nama : ''
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -17,23 +15,6 @@ function initVue() {
             this.all();
         },
         methods: {
-            create: function () {
-                const formData = new FormData();
-                formData.set('nama', 'nama');
-                axios.post('/pegawai/create',{nama : 'nama'})
-                    .then(function (response) {
-                        // handle success
-                        // vm.all();
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        // handle error
-                        console.log(error);
-                    })
-                    .then(function () {
-                        // always executed
-                    });
-            },
             hapus: function (id) {
                 axios.delete('/pegawai/' + id)
                     .then(function (response) {
@@ -63,7 +44,28 @@ function initVue() {
                     .then(function () {
                         // always executed
                     });
-            }
+            },
+            store: function() {
+                axios.post('/pegawai/store', {
+                    nama: vm.nama,
+                    _method : 'put'
+                })
+                    .then(function (response) {
+                        // handle success
+                        // vm.all();
+                        // vm.nama = this.nama
+                        // nama = vm.nama;
+
+                        console.log(response.data);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
         },
         components: {}
     });

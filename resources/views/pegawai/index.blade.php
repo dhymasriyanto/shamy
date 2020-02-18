@@ -30,8 +30,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#myModal"> <i
-                                                class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
+                                        <button class="btn btn-dark waves-effect" data-toggle="modal"
+                                                data-target="#myModal"><i
+                                                class="fa fa-plus mr-1"></i>Tambah
+                                        </button>
+                                        <br><br>
                                         <table id="example" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
@@ -42,10 +45,13 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </thead>
                                             <tbody>
                                             <tr v-for="pegawai in datapegawai">
-                                                <td>@{{  pegawai.id }}</td>
-                                                <td>@{{  pegawai.nama }}</td>
-                                                <td><button class="btn btn-danger waves-effect" @click="hapus(pegawai.id)">Hapus
-                                                    </button></td>
+                                                <td>@{{ pegawai.id }}</td>
+                                                <td>@{{ pegawai.nama }}</td>
+                                                <td>
+                                                    <button class="btn btn-danger waves-effect"
+                                                            @click="hapus(pegawai.id)">Hapus
+                                                    </button>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -54,32 +60,41 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                 </div>
                                 <!-- end row -->
                                 <!-- sample modal content -->
-                                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h4 class="modal-title" id="myModalLabel">Modal Heading</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">×
+                                                </button>
                                             </div>
-                                            <div class="modal-body">
-                                                <h1>test modal</h1>
-                                                <form role="form">
+                                            <form role="form" method="POST">
+                                                <div class="modal-body">
+                                                    <h1>test modal</h1>
                                                     <!-- Name -->
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Name</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" type="text" class="form-control" v-model="formData.nama">
+                                                            <input name="nama" type="text" class="form-control" v-model="nama">
                                                             <span class="form-text text-muted">
                                                                 Something your users will recognize and trust.
                                                             </span>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal">Cancel</button>
-                                                <button type="button" @click="create()" class="btn btn-success waves-effect waves-light">Save changes</button>
-                                            </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button"
+                                                            class="btn btn-danger waves-effect waves-light"
+                                                            data-dismiss="modal">Cancel
+                                                    </button>
+                                                    <button type="button" @click="store()"
+                                                            class="btn btn-success waves-effect waves-light">Save
+                                                        changes
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
