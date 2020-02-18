@@ -44,6 +44,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <tr v-for="jurusan in datajurusan">
                                                 <td>@{{  jurusan.id }}</td>
                                                 <td>@{{  jurusan.nama }}</td>
+                                                <td>@{{  jurusan.kode }}</td>
+                                                <td>@{{  jurusan.id_fakultas }}</td>
+                                                <td>@{{  jurusan.singkatan }}</td>
                                                 <td><button class="btn btn-danger waves-effect" @click="hapus(jurusan.id)">Hapus
                                                     </button></td>
                                             </tr>
