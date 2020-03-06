@@ -6,9 +6,7 @@ function initVue() {
         el: '#app',
         data: {
             datapegawai : [],
-            formData: {
-                nama:''
-            }
+            nama : ''
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -18,12 +16,11 @@ function initVue() {
         },
         methods: {
             create: function () {
-                const formData = new FormData();
-                formData.set('nama', 'nama');
-                axios.post('/pegawai/create',{nama : 'nama'})
+                // console.log(this.nama)
+                axios.post('/pegawai/create',{nama : this.nama})
                     .then(function (response) {
                         // handle success
-                        // vm.all();
+                        vm.all();
                         console.log(response);
                     })
                     .catch(function (error) {

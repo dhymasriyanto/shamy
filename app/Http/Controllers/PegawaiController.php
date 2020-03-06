@@ -37,7 +37,11 @@ class PegawaiController extends Controller
      */
     public function create(Request $request)
     {
-        return $request;
+        Pegawai::create([
+            'nama' => $request->nama
+            ]
+        );
+        echo $request->nama;
     }
 
     /**

@@ -68,7 +68,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Name</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" type="text" class="form-control" v-model="formData.nama">
+                                                            <input name="nama" type="text" class="form-control" v-model="nama">
                                                             <span class="form-text text-muted">
                                                                 Something your users will recognize and trust.
                                                             </span>
