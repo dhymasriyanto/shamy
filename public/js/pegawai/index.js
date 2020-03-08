@@ -24,7 +24,8 @@ function initVue() {
                         // handle success
                         vm.all();
                         console.log(response);
-                        $('#myModal').modal('hide');
+                        vm.nama = "";
+                        $('#modaltambah').modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
@@ -42,7 +43,9 @@ function initVue() {
                         // handle success
                         vm.all();
                         console.log(response);
-                        $('#myModal2').modal('hide');
+                        vm.editid = "";
+                        vm.editnama = "";
+                        $('#modaledit').modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
@@ -53,12 +56,15 @@ function initVue() {
                         // always executed
                     });
             },
-            hapus: function (id) {
-                axios.delete('/pegawai/' + id)
+            hapus: function () {
+                axios.delete('/pegawai/' + this.editid)
                     .then(function (response) {
                         // handle success
                         vm.all();
                         console.log(response);
+                        vm.editid = "";
+                        vm.editnama = "";
+                        $("#modalhapus").modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
@@ -99,10 +105,25 @@ function initVue() {
                     .then(function () {
                         // always executed
                     });
-
-                // console.log(id)
-                // // this.editnama = datapegawai.nama;
-                $("#myModal2").modal('show');
+                $("#modaledit").modal('show');
+            },
+            hapusdata: function (id) {
+                axios.get("/pegawai/get/"+id)
+                    .then(function (response) {
+                        // handle success
+                        // this.editnama = response.data;
+                        vm.editnama = response.data;
+                        vm.editid = id;
+                        console.log(response.data);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+                $("#modalhapus").modal('show');
             }
         },
         components: {}
