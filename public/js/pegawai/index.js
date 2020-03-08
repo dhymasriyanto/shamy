@@ -6,7 +6,9 @@ function initVue() {
         el: '#app',
         data: {
             datapegawai : [],
-            nama : ''
+            nama : '',
+            editnama : '',
+            editid : ''
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -22,9 +24,29 @@ function initVue() {
                         // handle success
                         vm.all();
                         console.log(response);
+                        $('#myModal').modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
+                        $("#pesan").text("Ada kesalahan");
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
+            update: function () {
+                // console.log(this.nama)
+                axios.post('/pegawai/update/'+this.editid,{nama : this.editnama})
+                    .then(function (response) {
+                        // handle success
+                        vm.all();
+                        console.log(response);
+                        $('#myModal2').modal('hide');
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        $("#pesan").text("Ada kesalahan");
                         console.log(error);
                     })
                     .then(function () {
@@ -60,6 +82,27 @@ function initVue() {
                     .then(function () {
                         // always executed
                     });
+            },
+            edit: function (id) {
+                axios.get("/pegawai/get/"+id)
+                    .then(function (response) {
+                        // handle success
+                        // this.editnama = response.data;
+                        vm.editnama = response.data;
+                        vm.editid = id;
+                        console.log(response.data);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+
+                // console.log(id)
+                // // this.editnama = datapegawai.nama;
+                $("#myModal2").modal('show');
             }
         },
         components: {}

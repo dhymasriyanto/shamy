@@ -28,6 +28,8 @@ Route::get('/mata-kuliah/all', 'MataKuliahController@all')->name('mata-kuliah.al
 Route::get('/mengajar/all', 'MengajarController@all')->name('mengajar.all');
 Route::get('/pegawai/all', 'PegawaiController@all')->name('pegawai.all');
 Route::post('/pegawai/create', 'PegawaiController@create')->name('pegawai.create');
+Route::post('/pegawai/update/{id}', 'PegawaiController@update')->name('pegawai.update');
+Route::get('/pegawai/get/{id}', 'PegawaiController@edit')->name('pegawai.edit');
 Route::get('/tahun-ajaran/all', 'TahunAjaranController@all')->name('tahun-ajaran.all');
 
 

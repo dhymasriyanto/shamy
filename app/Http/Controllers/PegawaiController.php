@@ -74,7 +74,9 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pegawai = Pegawai::where('id',$id)->value('nama');
+
+        return response($pegawai);
     }
 
     /**
@@ -87,6 +89,9 @@ class PegawaiController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $pegawai = Pegawai::find($id);
+        $pegawai->nama = $request->nama;
+        $pegawai->save();
     }
 
     /**
