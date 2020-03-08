@@ -33,9 +33,15 @@ class DosenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        Dosen::create([
+                'nama' => $request->nama,
+                'nomor_induk' => $request->nomor_induk
+            ]
+        );
+        echo $request->nama;
     }
 
     /**
@@ -69,6 +75,9 @@ class DosenController extends Controller
     public function edit($id)
     {
         //
+        $dosen = Dosen::where('id',$id)->get();
+
+        return response($dosen);
     }
 
     /**
@@ -81,6 +90,10 @@ class DosenController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $dosen = Dosen::find($id);
+        $dosen->nama = $request->nama;
+        $dosen->nomor_induk = $request->nomor_induk;
+        $dosen->save();
     }
 
     /**

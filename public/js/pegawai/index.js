@@ -94,7 +94,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         // this.editnama = response.data;
-                        vm.editnama = response.data;
+                        vm.editnama = response.data[0]['nama'];
                         vm.editid = id;
                         console.log(response.data);
                     })
@@ -112,7 +112,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         // this.editnama = response.data;
-                        vm.editnama = response.data;
+                        vm.editnama = response.data[0]['nama'];
                         vm.editid = id;
                         console.log(response.data);
                     })

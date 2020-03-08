@@ -5,7 +5,12 @@ function initVue() {
     var vm = new Vue({
         el: '#app',
         data: {
-            datafakultas : []
+            datafakultas : [],
+            nama : '',
+            singkatan : '',
+            editnama : '',
+            editsingkatan : '',
+            editid : ''
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -14,12 +19,56 @@ function initVue() {
             this.all();
         },
         methods: {
-            hapus: function (id) {
-                axios.delete('/fakultas/' + id)
+            create: function () {
+                // console.log(this.nama)
+                axios.post('/fakultas/create',{nama : this.nama, singkatan : this.singkatan})
                     .then(function (response) {
                         // handle success
                         vm.all();
                         console.log(response);
+                        vm.nama = "";
+                        vm.singkatan = "";
+                        $('#modaltambah').modal('hide');
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        $("#pesan").text("Ada kesalahan");
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
+            update: function () {
+                // console.log(this.nama)
+                axios.post('/fakultas/update/'+this.editid,{nama : this.editnama, singkatan : this.editsingkatan})
+                    .then(function (response) {
+                        // handle success
+                        vm.all();
+                        console.log(response);
+                        vm.editid = "";
+                        vm.editnama = "";
+                        vm.editsingkatan = "";
+                        $('#modaledit').modal('hide');
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        $("#pesan").text("Ada kesalahan");
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
+            hapus: function () {
+                axios.delete('/fakultas/' + this.editid)
+                    .then(function (response) {
+                        // handle success
+                        vm.all();
+                        console.log(response);
+                        vm.editid = "";
+                        vm.editnama = "";
+                        $("#modalhapus").modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
@@ -43,6 +92,43 @@ function initVue() {
                     .then(function () {
                         // always executed
                     });
+            },
+            edit: function (id) {
+                axios.get("/fakultas/get/"+id)
+                    .then(function (response) {
+                        // handle success
+                        vm.editnama = response.data[0]['nama'];
+                        vm.editsingkatan = response.data[0]['singkatan'];
+                        vm.editid = id;
+                        console.log(response.data[0]['nama']);
+                        console.log(response.data[0]['singkatan']);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+                $("#modaledit").modal('show');
+            },
+            hapusdata: function (id) {
+                axios.get("/fakultas/get/"+id)
+                    .then(function (response) {
+                        // handle success
+                        // this.editnama = response.data;
+                        vm.editnama = response.data[0]['nama'];
+                        vm.editid = id;
+                        console.log(response.data);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+                $("#modalhapus").modal('show');
             }
         },
         components: {}

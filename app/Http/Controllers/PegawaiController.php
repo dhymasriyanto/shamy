@@ -74,7 +74,7 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        $pegawai = Pegawai::where('id',$id)->value('nama');
+        $pegawai = Pegawai::where('id',$id)->get();
 
         return response($pegawai);
     }

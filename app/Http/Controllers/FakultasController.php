@@ -34,9 +34,15 @@ class FakultasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        Fakultas::create([
+                'nama' => $request->nama,
+                'singkatan' => $request->singkatan
+            ]
+        );
+        echo $request->nama;
     }
 
     /**
@@ -70,6 +76,9 @@ class FakultasController extends Controller
     public function edit($id)
     {
         //
+        $fakultas = Fakultas::where('id',$id)->get();
+
+        return response($fakultas);
     }
 
     /**
@@ -82,6 +91,10 @@ class FakultasController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $fakultas = Fakultas::find($id);
+        $fakultas->nama = $request->nama;
+        $fakultas->singkatan = $request->singkatan;
+        $fakultas->save();
     }
 
     /**
