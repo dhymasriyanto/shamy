@@ -84,6 +84,10 @@ function initVue() {
                         // handle success
                         vm.datadosen = response.data;
                         console.log(response);
+                        // const ayam = response.data;
+                        // ayam.forEach(function(element) {
+                        //     console.log(element);
+                        // });
                     })
                     .catch(function (error) {
                         // handle error

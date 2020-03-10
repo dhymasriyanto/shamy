@@ -36,13 +36,17 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <th>Kode</th>
                                                 <th>Nama</th>
                                                 <th>Singkatan</th>
+                                                <th>Jurusan</th>
                                                 <th>Opsi</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr v-for="matakuliah in datamatakuliah">
                                                 <td>@{{  matakuliah.id }}</td>
+                                                <td>@{{  matakuliah.kode }}</td>
                                                 <td>@{{  matakuliah.nama }}</td>
+                                                <td>@{{  matakuliah.singkatan }}</td>
+                                                <td>@{{  matakuliah.id_jurusan }}</td>
                                                 <td><button class="btn btn-danger waves-effect" @click="hapus(matakuliah.id)">Hapus
                                                     </button></td>
                                             </tr>

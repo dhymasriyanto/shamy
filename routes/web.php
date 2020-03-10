@@ -30,10 +30,21 @@ Route::post('/fakultas/create', 'FakultasController@create')->name('fakultas.cre
 Route::post('/fakultas/update/{id}', 'FakultasController@update')->name('fakultas.update');
 Route::get('/fakultas/get/{id}', 'FakultasController@edit')->name('fakultas.edit');
 
+//Jurusan Controller
 Route::get('/jurusan/all', 'JurusanController@all')->name('jurusan.all');
+Route::post('/jurusan/create', 'JurusanController@create')->name('jurusan.create');
+Route::post('/jurusan/update/{id}', 'JurusanController@update')->name('jurusan.update');
+Route::get('/jurusan/get/{id}', 'JurusanController@edit')->name('jurusan.edit');
+
 Route::get('/kelas/all', 'KelasController@all')->name('kelas.all');
 Route::get('/kurikulum/all', 'KurikulumController@all')->name('kurikulum.all');
+
+//Mahasiswa Controller
 Route::get('/mahasiswa/all', 'MahasiswaController@all')->name('mahasiswa.all');
+Route::post('/mahasiswa/create', 'MahasiswaController@create')->name('mahasiswa.create');
+Route::post('/mahasiswa/update/{id}', 'MahasiswaController@update')->name('mahasiswa.update');
+Route::get('/mahasiswa/get/{id}', 'MahasiswaController@edit')->name('mahasiswa.edit');
+
 Route::get('/mata-kuliah/all', 'MataKuliahController@all')->name('mata-kuliah.all');
 Route::get('/mengajar/all', 'MengajarController@all')->name('mengajar.all');
 
@@ -43,7 +54,11 @@ Route::post('/pegawai/create', 'PegawaiController@create')->name('pegawai.create
 Route::post('/pegawai/update/{id}', 'PegawaiController@update')->name('pegawai.update');
 Route::get('/pegawai/get/{id}', 'PegawaiController@edit')->name('pegawai.edit');
 
-Route::get('/tahun-ajaran/all', 'TahunAjaranController@all')->name('tahun-ajaran.all');
+//Tahun Ajaran Controller
+Route::get('/tahun-ajaran/all', 'TahunAjaranController@all')->name('tahun-tahun-ajaran.all');
+Route::post('/tahun-ajaran/create', 'TahunAjaranController@create')->name('tahun-ajaran.create');
+Route::post('/tahun-ajaran/update/{id}', 'TahunAjaranController@update')->name('tahun-ajaran.update');
+Route::get('/tahun-ajaran/get/{id}', 'TahunAjaranController@edit')->name('tahun-ajaran.edit');
 
 
 Route::resources([

@@ -35,9 +35,15 @@ class MahasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        Mahasiswa::create([
+                'nama' => $request->nama,
+                'nomor_induk' => $request->nomor_induk
+            ]
+        );
+        echo $request->nama;
     }
 
     /**
@@ -71,6 +77,9 @@ class MahasiswaController extends Controller
     public function edit($id)
     {
         //
+        $mahasiswa = Mahasiswa::where('id',$id)->get();
+
+        return response($mahasiswa);
     }
 
     /**
@@ -83,6 +92,10 @@ class MahasiswaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa->nama = $request->nama;
+        $mahasiswa->nomor_induk = $request->nomor_induk;
+        $mahasiswa->save();
     }
 
     /**
