@@ -99,6 +99,7 @@ class JurusanController extends Controller
         $jurusan->nama = $request->nama;
         $jurusan->kode = $request->kode;
         $jurusan->singkatan = $request->singkatan;
+        $jurusan->id_fakultas = $request->id_fakultas;
         $jurusan->updated_by = Auth::id();
         $jurusan->save();
     }
