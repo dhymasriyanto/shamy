@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\MataKuliah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MataKuliahController extends Controller
 {
@@ -41,7 +42,8 @@ class MataKuliahController extends Controller
                 'nama' => $request->nama,
                 'kode' => $request->kode,
                 'singkatan' => $request->singkatan,
-                'id_jurusan' => $request->id_jurusan
+                'id_jurusan' => $request->id_jurusan,
+                'created_by' => Auth::id()
             ]
         );
         echo $request->nama;
@@ -98,6 +100,7 @@ class MataKuliahController extends Controller
         $matakuliah->kode = $request->kode;
         $matakuliah->singkatan = $request->singkatan;
         $matakuliah->id_jurusan = $request->id_jurusan;
+        $matakuliah->updated_by = Auth::id();
         $matakuliah->save();
     }
 

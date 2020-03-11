@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Fakultas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FakultasController extends Controller
 {
@@ -39,7 +40,8 @@ class FakultasController extends Controller
         //
         Fakultas::create([
                 'nama' => $request->nama,
-                'singkatan' => $request->singkatan
+                'singkatan' => $request->singkatan,
+                'created_by' => Auth::id()
             ]
         );
         echo $request->nama;
@@ -94,6 +96,7 @@ class FakultasController extends Controller
         $fakultas = Fakultas::find($id);
         $fakultas->nama = $request->nama;
         $fakultas->singkatan = $request->singkatan;
+        $fakultas->updated_by = Auth::id();
         $fakultas->save();
     }
 

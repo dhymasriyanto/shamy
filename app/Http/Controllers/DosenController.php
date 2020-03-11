@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dosen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DosenController extends Controller
 {
@@ -38,7 +39,8 @@ class DosenController extends Controller
         //
         Dosen::create([
                 'nama' => $request->nama,
-                'nomor_induk' => $request->nomor_induk
+                'nomor_induk' => $request->nomor_induk,
+                'created_by' => Auth::id()
             ]
         );
         echo $request->nama;
@@ -93,6 +95,7 @@ class DosenController extends Controller
         $dosen = Dosen::find($id);
         $dosen->nama = $request->nama;
         $dosen->nomor_induk = $request->nomor_induk;
+        $dosen->updated_by = Auth::id();
         $dosen->save();
     }
 

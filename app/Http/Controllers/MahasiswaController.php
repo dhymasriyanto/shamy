@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class MahasiswaController extends Controller
@@ -40,7 +41,8 @@ class MahasiswaController extends Controller
         //
         Mahasiswa::create([
                 'nama' => $request->nama,
-                'nomor_induk' => $request->nomor_induk
+                'nomor_induk' => $request->nomor_induk,
+                'created_by' => Auth::id()
             ]
         );
         echo $request->nama;
@@ -95,6 +97,7 @@ class MahasiswaController extends Controller
         $mahasiswa = Mahasiswa::find($id);
         $mahasiswa->nama = $request->nama;
         $mahasiswa->nomor_induk = $request->nomor_induk;
+        $mahasiswa->updated_by = Auth::id();
         $mahasiswa->save();
     }
 
