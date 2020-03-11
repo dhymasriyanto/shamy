@@ -24,7 +24,7 @@ class MataKuliahController extends Controller
 
     public function all()
     {
-        $matakuliah = MataKuliah::all();
+        $matakuliah = MataKuliah::with('getJurusan')->get();
 
         return response($matakuliah);
     }
@@ -34,9 +34,17 @@ class MataKuliahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        MataKuliah::create([
+                'nama' => $request->nama,
+                'kode' => $request->kode,
+                'singkatan' => $request->singkatan,
+                'id_jurusan' => $request->id_jurusan
+            ]
+        );
+        echo $request->nama;
     }
 
     /**
@@ -70,6 +78,9 @@ class MataKuliahController extends Controller
     public function edit($id)
     {
         //
+        $matakuliah = MataKuliah::where('id',$id)->get();
+
+        return response($matakuliah);
     }
 
     /**
@@ -82,6 +93,12 @@ class MataKuliahController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $matakuliah = MataKuliah::find($id);
+        $matakuliah->nama = $request->nama;
+        $matakuliah->kode = $request->kode;
+        $matakuliah->singkatan = $request->singkatan;
+        $matakuliah->id_jurusan = $request->id_jurusan;
+        $matakuliah->save();
     }
 
     /**

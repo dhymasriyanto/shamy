@@ -24,7 +24,7 @@ class JurusanController extends Controller
 
     public function all()
     {
-        $jurusan = Jurusan::all();
+        $jurusan = Jurusan::with('getFakultas')->get();
 
         return response($jurusan);
     }

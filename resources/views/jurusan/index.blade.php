@@ -48,7 +48,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <td>@{{  jurusan.id }}</td>
                                                 <td>@{{  jurusan.nama }}</td>
                                                 <td>@{{  jurusan.kode }}</td>
-                                                <td>@{{  jurusan.id_fakultas }}</td>
+                                                <td>@{{  jurusan.get_fakultas.nama }}</td>
                                                 <td>@{{  jurusan.singkatan }}</td>
                                                 <td><button type="button" @click="edit(jurusan.id)" class="btn btn-success waves-effect waves-light"><i
                                                             class="fa fa-edit mr-1" ></i>Edit</button>

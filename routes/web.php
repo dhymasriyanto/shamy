@@ -45,7 +45,12 @@ Route::post('/mahasiswa/create', 'MahasiswaController@create')->name('mahasiswa.
 Route::post('/mahasiswa/update/{id}', 'MahasiswaController@update')->name('mahasiswa.update');
 Route::get('/mahasiswa/get/{id}', 'MahasiswaController@edit')->name('mahasiswa.edit');
 
+//Mata Kuliah Controller
 Route::get('/mata-kuliah/all', 'MataKuliahController@all')->name('mata-kuliah.all');
+Route::post('/mata-kuliah/create', 'MataKuliahController@create')->name('mata-kuliah.create');
+Route::post('/mata-kuliah/update/{id}', 'MataKuliahController@update')->name('mata-kuliah.update');
+Route::get('/mata-kuliah/get/{id}', 'MataKuliahController@edit')->name('mata-kuliah.edit');
+
 Route::get('/mengajar/all', 'MengajarController@all')->name('mengajar.all');
 
 //Pegawai Controller
