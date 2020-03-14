@@ -18,17 +18,52 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::put('/pegawai/store', 'PegawaiController@store')->name('pegawai.store');
+//Dosen Controller
 Route::get('/dosen/all', 'DosenController@all')->name('dosen.all');
+Route::post('/dosen/create', 'DosenController@create')->name('dosen.create');
+Route::post('/dosen/update/{id}', 'DosenController@update')->name('dosen.update');
+Route::get('/dosen/get/{id}', 'DosenController@edit')->name('dosen.edit');
+
+//Fakultas Controller
 Route::get('/fakultas/all', 'FakultasController@all')->name('fakultas.all');
+Route::post('/fakultas/create', 'FakultasController@create')->name('fakultas.create');
+Route::post('/fakultas/update/{id}', 'FakultasController@update')->name('fakultas.update');
+Route::get('/fakultas/get/{id}', 'FakultasController@edit')->name('fakultas.edit');
+
+//Jurusan Controller
 Route::get('/jurusan/all', 'JurusanController@all')->name('jurusan.all');
+Route::post('/jurusan/create', 'JurusanController@create')->name('jurusan.create');
+Route::post('/jurusan/update/{id}', 'JurusanController@update')->name('jurusan.update');
+Route::get('/jurusan/get/{id}', 'JurusanController@edit')->name('jurusan.edit');
+
 Route::get('/kelas/all', 'KelasController@all')->name('kelas.all');
 Route::get('/kurikulum/all', 'KurikulumController@all')->name('kurikulum.all');
+
+//Mahasiswa Controller
 Route::get('/mahasiswa/all', 'MahasiswaController@all')->name('mahasiswa.all');
+Route::post('/mahasiswa/create', 'MahasiswaController@create')->name('mahasiswa.create');
+Route::post('/mahasiswa/update/{id}', 'MahasiswaController@update')->name('mahasiswa.update');
+Route::get('/mahasiswa/get/{id}', 'MahasiswaController@edit')->name('mahasiswa.edit');
+
+//Mata Kuliah Controller
 Route::get('/mata-kuliah/all', 'MataKuliahController@all')->name('mata-kuliah.all');
+Route::post('/mata-kuliah/create', 'MataKuliahController@create')->name('mata-kuliah.create');
+Route::post('/mata-kuliah/update/{id}', 'MataKuliahController@update')->name('mata-kuliah.update');
+Route::get('/mata-kuliah/get/{id}', 'MataKuliahController@edit')->name('mata-kuliah.edit');
+
 Route::get('/mengajar/all', 'MengajarController@all')->name('mengajar.all');
+
+//Pegawai Controller
 Route::get('/pegawai/all', 'PegawaiController@all')->name('pegawai.all');
-Route::get('/tahun-ajaran/all', 'TahunAjaranController@all')->name('tahun-ajaran.all');
+Route::post('/pegawai/create', 'PegawaiController@create')->name('pegawai.create');
+Route::post('/pegawai/update/{id}', 'PegawaiController@update')->name('pegawai.update');
+Route::get('/pegawai/get/{id}', 'PegawaiController@edit')->name('pegawai.edit');
+
+//Tahun Ajaran Controller
+Route::get('/tahun-ajaran/all', 'TahunAjaranController@all')->name('tahun-tahun-ajaran.all');
+Route::post('/tahun-ajaran/create', 'TahunAjaranController@create')->name('tahun-ajaran.create');
+Route::post('/tahun-ajaran/update/{id}', 'TahunAjaranController@update')->name('tahun-ajaran.update');
+Route::get('/tahun-ajaran/get/{id}', 'TahunAjaranController@edit')->name('tahun-ajaran.edit');
 
 
 Route::resources([
@@ -40,7 +75,7 @@ Route::resources([
     'kurikulum' => 'KurikulumController',
     'mata-kuliah' => 'MataKuliahController',
     'mengajar' => 'MengajarController',
-//    'pegawai' => 'PegawaiController',
+    'pegawai' => 'PegawaiController',
     'tahun-ajaran' => 'TahunAjaranController'
 ]);
 

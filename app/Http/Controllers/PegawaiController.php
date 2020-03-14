@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pegawai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class PegawaiController extends Controller
@@ -35,8 +36,14 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        Pegawai::create([
+            'nama' => $request->nama,
+                'created_by' => Auth::id()
+            ]
+        );
+        echo $request->nama;
     }
 
     /**
@@ -47,13 +54,8 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        Pegawai::create([
-            'nama' => $request->nama
-        ]);
-//        return redirect('pegawai/all');
-        return response($request);
+        //
     }
-
 
     /**
      * Display the specified resource.
@@ -74,7 +76,9 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pegawai = Pegawai::where('id',$id)->get();
+
+        return response($pegawai);
     }
 
     /**
@@ -87,6 +91,10 @@ class PegawaiController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $pegawai = Pegawai::find($id);
+        $pegawai->nama = $request->nama;
+        $pegawai->updated_by = Auth::id();
+        $pegawai->save();
     }
 
     /**

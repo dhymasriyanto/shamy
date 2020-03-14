@@ -13,6 +13,11 @@ class Kelas extends Model
         return $this->belongsTo('App\Jurusan', 'id_jurusan');
     }
 
+    public function getTahunAjaran()
+    {
+        return $this->belongsTo('App\TahunAjaran', 'id_tahun_ajaran');
+    }
+
     public function getMengajar()
     {
         return $this->hasMany('App\Mengajar');

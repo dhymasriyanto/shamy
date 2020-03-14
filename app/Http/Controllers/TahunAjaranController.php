@@ -34,9 +34,14 @@ class TahunAjaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        TahunAjaran::create([
+                'tahun_ajaran' => $request->tahun_ajaran
+            ]
+        );
+        echo $request->nama;
     }
 
     /**
@@ -70,6 +75,9 @@ class TahunAjaranController extends Controller
     public function edit($id)
     {
         //
+        $tahun_ajaran = TahunAjaran::where('id',$id)->get();
+
+        return response($tahun_ajaran);
     }
 
     /**
@@ -82,6 +90,9 @@ class TahunAjaranController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $tahun_ajaran = TahunAjaran::find($id);
+        $tahun_ajaran->tahun_ajaran = $request->tahun_ajaran;
+        $tahun_ajaran->save();
     }
 
     /**
