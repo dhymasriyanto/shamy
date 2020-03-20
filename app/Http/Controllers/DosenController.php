@@ -25,7 +25,7 @@ class DosenController extends Controller
 
     public function all()
     {
-        $dosen = Dosen::all();
+        $dosen = Dosen::with('getJurusan')->get();;
         return response($dosen);
     }
 
@@ -40,6 +40,11 @@ class DosenController extends Controller
         Dosen::create([
                 'nama' => $request->nama,
                 'nomor_induk' => $request->nomor_induk,
+                'id_jurusan' => $request->id_jurusan,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'agama' => $request->agama,
                 'created_by' => Auth::id()
             ]
         );
@@ -95,6 +100,11 @@ class DosenController extends Controller
         $dosen = Dosen::find($id);
         $dosen->nama = $request->nama;
         $dosen->nomor_induk = $request->nomor_induk;
+        $dosen->jenis_kelamin = $request->jenis_kelamin;
+        $dosen->tempat_lahir = $request->tempat_lahir;
+        $dosen->tanggal_lahir = $request->tanggal_lahir;
+        $dosen->agama = $request->agama;
+        $dosen->id_jurusan = $request->id_jurusan;
         $dosen->updated_by = Auth::id();
         $dosen->save();
     }

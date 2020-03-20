@@ -36,6 +36,10 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <th>No</th>
                                                 <th>Nama</th>
                                                 <th>NIP</th>
+                                                <th>Jurusan</th>
+                                                <th>Jenis Kelamin</th>
+                                                <th>Tempat, Tanggal Lahir</th>
+                                                <th>Agama</th>
                                                 <th>Opsi</th>
                                             </tr>
                                             </thead>
@@ -44,6 +48,10 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <td>@{{  dosen.id }}</td>
                                                 <td>@{{  dosen.nama }}</td>
                                                 <td>@{{  dosen.nomor_induk }}</td>
+                                                <td>@{{  dosen.get_jurusan.nama }}</td>
+                                                <td>@{{  dosen.jenis_kelamin }}</td>
+                                                <td>@{{  dosen.tempat_lahir }}, @{{  dosen.tanggal_lahir }}</td>
+                                                <td>@{{  dosen.agama }}</td>
                                                 <td><button type="button" @click="edit(dosen.id)" class="btn btn-success waves-effect waves-light"><i
                                                             class="fa fa-edit mr-1" ></i>Edit</button>
                                                     <button class="btn btn-danger waves-effect" @click="hapusdata(dosen.id)"><i
@@ -76,7 +84,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
                                 <div id="modaltambah" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h4 class="modal-title" id="myModalLabel">Tambah {{$title}}</h4>
@@ -107,6 +115,80 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             </span>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Jurusan</label>
+                                                        <div class="col-md-9">
+                                                            <select class="form-control" v-model="id_jurusan">
+                                                                <option disabled value="">Pilih</option>
+                                                                <option v-for="jurusan in datajurusan" v-bind:value="jurusan.id">
+                                                                    @{{ jurusan.nama }}
+                                                                </option>
+                                                            </select>
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Jenis Kelamin</label>
+                                                        <div class="col-md-9">
+                                                            <select class="form-control" v-model="jenis_kelamin">
+                                                                <option disabled value="">Pilih</option>
+                                                                <option value="Laki-laki">Laki-laki</option>
+                                                                <option value="Perempuan">Perempuan</option>
+
+                                                            </select>
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Tempat Lahir</label>
+                                                        <div class="col-md-9">
+                                                            <input name="nama" id="nama" type="text" class="form-control" v-model="tempat_lahir">
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Tanggal Lahir</label>
+                                                        <div class="col-md-9">
+                                                            <input name="nama" id="nama" type="date" class="form-control" v-model="tanggal_lahir">
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Agama</label>
+                                                        <div class="col-md-9">
+                                                            <select class="form-control" v-model="agama">
+                                                                <option disabled value="">Pilih</option>
+                                                                <option value="Islam">Islam</option>
+                                                                <option value="Kristen Protestan">Kristen Protestan</option>
+                                                                <option value="Katolik">Katolik</option>
+                                                                <option value="Hindu">Hindu</option>
+                                                                <option value="Buddha">Buddha</option>
+                                                                <option value="Kong Hu Cu">Kong Hu Cu</option>
+
+                                                            </select>
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
@@ -117,7 +199,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
                                 <div id="modaledit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h4 class="modal-title" id="myModalLabel">Edit</h4>
@@ -148,6 +230,81 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             </span>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Jurusan</label>
+                                                        <div class="col-md-9">
+                                                            <select class="form-control" v-model="editid_jurusan">
+                                                                <option disabled value="">Pilih</option>
+                                                                <option v-for="jurusan in datajurusan" v-bind:value="jurusan.id">
+                                                                    @{{ jurusan.nama }}
+                                                                </option>
+                                                            </select>
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Jenis Kelamin</label>
+                                                        <div class="col-md-9">
+                                                            <select class="form-control" v-model="editjenis_kelamin">
+                                                                <option disabled value="">Pilih</option>
+                                                                <option value="Laki-laki">Laki-laki</option>
+                                                                <option value="Perempuan">Perempuan</option>
+
+                                                            </select>
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Tempat Lahir</label>
+                                                        <div class="col-md-9">
+                                                            <input name="nama" id="nama" type="text" class="form-control" v-model="edittempat_lahir">
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Tanggal Lahir</label>
+                                                        <div class="col-md-9">
+                                                            <input name="nama" id="nama" type="date" class="form-control" v-model="edittanggal_lahir">
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Agama</label>
+                                                        <div class="col-md-9">
+                                                            <select class="form-control" v-model="editagama">
+                                                                <option disabled value="">Pilih</option>
+                                                                <option value="Islam">Islam</option>
+                                                                <option value="Kristen Protestan">Kristen Protestan</option>
+                                                                <option value="Katolik">Katolik</option>
+                                                                <option value="Hindu">Hindu</option>
+                                                                <option value="Buddha">Buddha</option>
+                                                                <option value="Kong Hu Cu">Kong Hu Cu</option>
+
+                                                            </select>
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
