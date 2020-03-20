@@ -92,7 +92,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datajurusan = response.data;
-                        vm.allDosen();
+                        vm.allFakultas();
                         console.log(response);
                         // const ayam = response.data;
                         // ayam.forEach(function(element) {
@@ -107,7 +107,7 @@ function initVue() {
                         // always executed
                     });
             },
-            allDosen: function () {
+            allFakultas: function () {
                 axios.get('/fakultas/all')
                     .then(function (response) {
                         // handle success
