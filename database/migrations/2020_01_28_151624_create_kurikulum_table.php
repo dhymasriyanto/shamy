@@ -16,7 +16,6 @@ class CreateKurikulumTable extends Migration
         Schema::create('kurikulum', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama', 20)->comment('Nama kurikulum');
-            $table->json('mata_kuliah')->comment('Data nama mata kuliah');
             $table->timestamp('created_at')->useCurrent();
             $table->integer('created_by')->default(0);
             $table->timestamp('updated_at')->useCurrent();

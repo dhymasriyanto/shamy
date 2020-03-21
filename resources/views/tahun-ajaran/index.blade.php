@@ -39,8 +39,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="tahunajaran in datatahunajaran">
-                                                <td>@{{  tahunajaran.id }}</td>
+                                            <tr v-for="(tahunajaran,no) in datatahunajaran">
+                                                <td>@{{  no+1 }}</td>
                                                 <td>@{{  tahunajaran.tahun_ajaran }}</td>
                                                 <td><button type="button" @click="edit(tahunajaran.id)" class="btn btn-success waves-effect waves-light"><i
                                                             class="fa fa-edit mr-1" ></i>Edit</button>

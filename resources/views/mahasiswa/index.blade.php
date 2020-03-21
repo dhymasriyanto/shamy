@@ -46,8 +46,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="mahasiswa in datamahasiswa">
-                                                <td>@{{  mahasiswa.id }}</td>
+                                            <tr v-for="(mahasiswa,no) in datamahasiswa">
+                                                <td>@{{  no+1 }}</td>
                                                 <td>@{{  mahasiswa.nama }}</td>
                                                 <td>@{{  mahasiswa.nomor_induk }}</td>
                                                 <td>@{{  mahasiswa.get_jurusan.nama }}</td>

@@ -11,24 +11,24 @@ class AddForeignKeyToKurikulum extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::table('kurikulum', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('id_jurusan');
-            $table->foreign('id_jurusan')->references('id')->on('jurusan')->onDelete('cascade')->onUpdate('cascade');
-        });
-    }
+//    public function up()
+//    {
+//        Schema::table('kurikulum', function (Blueprint $table) {
+//            //
+//            $table->unsignedBigInteger('id_jurusan');
+//            $table->foreign('id_jurusan')->references('id')->on('jurusan')->onDelete('cascade')->onUpdate('cascade');
+//        });
+//    }
 
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::table('kurikulum', function (Blueprint $table) {
-            $table->foreign('id_jurusan');
-        });
-    }
+//    public function down()
+//    {
+//        Schema::table('kurikulum', function (Blueprint $table) {
+//            $table->foreign('id_jurusan');
+//        });
+//    }
 }

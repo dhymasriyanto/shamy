@@ -41,8 +41,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="pegawai in datapegawai">
-                                                <td>@{{  pegawai.id }}</td>
+                                            <tr v-for="(pegawai,no) in datapegawai">
+                                                <td>@{{  no+1 }}</td>
                                                 <td>@{{  pegawai.nama }}</td>
                                                 <td><button type="button" @click="edit(pegawai.id)" class="btn btn-success waves-effect waves-light"><i
                                                             class="fa fa-edit mr-1" ></i>Edit</button>
