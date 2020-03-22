@@ -305,7 +305,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </div>
                                                     </div>
                                                 </form>
-                                                </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal">Batal</button>
