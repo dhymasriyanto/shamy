@@ -86,7 +86,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Tahun Ajaran</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" id="nama" type="text" class="form-control" v-model="tahun_ajaran">
+                                                            <input name="nama"  type="text" class="form-control" v-model="tahun_ajaran">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">

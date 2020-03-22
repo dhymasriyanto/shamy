@@ -96,7 +96,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Nama</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" id="nama" type="text" class="form-control" v-model="nama">
+                                                            <input name="nama"  type="text" class="form-control" v-model="nama">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">
@@ -107,7 +107,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">NIP</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" id="nama" type="text" class="form-control" v-model="nip">
+                                                            <input name="nama"  type="text" class="form-control" v-model="nip">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">
@@ -150,7 +150,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Tempat Lahir</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" id="nama" type="text" class="form-control" v-model="tempat_lahir">
+                                                            <input name="nama"  type="text" class="form-control" v-model="tempat_lahir">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">
@@ -161,7 +161,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Tanggal Lahir</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" id="nama" type="date" class="form-control" v-model="tanggal_lahir">
+                                                            <input name="nama"  type="date" class="form-control" v-model="tanggal_lahir">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">
@@ -211,7 +211,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Nama</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" id="editnama" type="text" class="form-control" v-model="editnama">
+                                                            <input name="nama"  type="text" class="form-control" v-model="editnama">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">
@@ -222,7 +222,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">NIP</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" id="editnama" type="text" class="form-control" v-model="editnip">
+                                                            <input name="nama"  type="text" class="form-control" v-model="editnip">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">
@@ -265,7 +265,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Tempat Lahir</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" id="nama" type="text" class="form-control" v-model="edittempat_lahir">
+                                                            <input name="nama"  type="text" class="form-control" v-model="edittempat_lahir">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">
@@ -276,7 +276,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Tanggal Lahir</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" id="nama" type="date" class="form-control" v-model="edittanggal_lahir">
+                                                            <input name="nama"  type="date" class="form-control" v-model="edittanggal_lahir">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">
