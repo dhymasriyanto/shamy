@@ -30,7 +30,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        console.log(response);
+                        // console.log(response);
                         vm.nama = "";
                         vm.kode = "";
                         vm.singkatan = "";
@@ -52,7 +52,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        console.log(response);
+                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         vm.editkode = "";
@@ -74,7 +74,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        console.log(response);
+                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         $("#modalhapus").modal('hide');
@@ -93,7 +93,7 @@ function initVue() {
                         // handle success
                         vm.datajurusan = response.data;
                         vm.allFakultas();
-                        console.log(response);
+                        // console.log(response);
                         // const ayam = response.data;
                         // ayam.forEach(function(element) {
                         //     console.log(element);
@@ -112,7 +112,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datafakultas = response.data;
-                        console.log(response);
+                        // console.log(response);
                         // const ayam = response.data;
                         // ayam.forEach(function(element) {
                         //     console.log(element);
@@ -135,7 +135,7 @@ function initVue() {
                         vm.editsingkatan = response.data[0]['singkatan'];
                         vm.editid_fakultas = response.data[0]['id_fakultas'];
                         vm.editid = id;
-                        console.log(response.data[0]['nama']);
+                        // console.log(response.data[0]['nama']);
                     })
                     .catch(function (error) {
                         // handle error
@@ -153,7 +153,7 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.editnama = response.data[0]['nama'];
                         vm.editid = id;
-                        console.log(response.data);
+                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error

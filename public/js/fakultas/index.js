@@ -25,7 +25,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        console.log(response);
+                        // console.log(response);
                         vm.nama = "";
                         vm.singkatan = "";
                         $('#modaltambah').modal('hide');
@@ -45,7 +45,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        console.log(response);
+                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         vm.editsingkatan = "";
@@ -65,7 +65,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        console.log(response);
+                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         $("#modalhapus").modal('hide');
@@ -83,7 +83,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datafakultas = response.data;
-                        console.log(response);
+                        // console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
@@ -100,8 +100,8 @@ function initVue() {
                         vm.editnama = response.data[0]['nama'];
                         vm.editsingkatan = response.data[0]['singkatan'];
                         vm.editid = id;
-                        console.log(response.data[0]['nama']);
-                        console.log(response.data[0]['singkatan']);
+                        // console.log(response.data[0]['nama']);
+                        // console.log(response.data[0]['singkatan']);
                     })
                     .catch(function (error) {
                         // handle error
@@ -119,7 +119,7 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.editnama = response.data[0]['nama'];
                         vm.editid = id;
-                        console.log(response.data);
+                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error

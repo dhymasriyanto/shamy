@@ -16,6 +16,9 @@ class AddForeignKeyToMataKuliah extends Migration
         Schema::table('mata_kuliah', function (Blueprint $table) {
             $table->unsignedBigInteger('id_jurusan');
             $table->foreign('id_jurusan')->references('id')->on('jurusan')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->unsignedBigInteger('id_kurikulum');
+            $table->foreign('id_kurikulum')->references('id')->on('kurikulum')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -28,6 +31,7 @@ class AddForeignKeyToMataKuliah extends Migration
     {
         Schema::table('mata_kuliah', function (Blueprint $table) {
             $table->foreign('id_jurusan');
+            $table->foreign('id_kurikulum');
         });
     }
 }

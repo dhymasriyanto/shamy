@@ -14,6 +14,11 @@ class MataKuliah extends Model
         return $this->belongsTo('App\Jurusan', 'id_jurusan');
     }
 
+    public function getKurikulum()
+    {
+        return $this->belongsTo('App\Kurikulum', 'id_kurikulum');
+    }
+
     public function getMengajar()
     {
         return $this->hasMany('App\Mengajar');

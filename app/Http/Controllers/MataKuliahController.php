@@ -13,6 +13,11 @@ class MataKuliahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         $matakuliah = MataKuliah::all();
@@ -25,7 +30,7 @@ class MataKuliahController extends Controller
 
     public function all()
     {
-        $matakuliah = MataKuliah::with('getJurusan')->get();
+        $matakuliah = MataKuliah::with('getJurusan','getKurikulum')->get();
 
         return response($matakuliah);
     }
@@ -43,6 +48,7 @@ class MataKuliahController extends Controller
                 'kode' => $request->kode,
                 'singkatan' => $request->singkatan,
                 'id_jurusan' => $request->id_jurusan,
+                'id_kurikulum' => $request->id_kurikulum,
                 'created_by' => Auth::id()
             ]
         );
@@ -100,6 +106,7 @@ class MataKuliahController extends Controller
         $matakuliah->kode = $request->kode;
         $matakuliah->singkatan = $request->singkatan;
         $matakuliah->id_jurusan = $request->id_jurusan;
+        $matakuliah->id_kurikulum = $request->id_kurikulum;
         $matakuliah->updated_by = Auth::id();
         $matakuliah->save();
     }
