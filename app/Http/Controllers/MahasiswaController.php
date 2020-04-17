@@ -14,6 +14,11 @@ class MahasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         $mahasiswa = Mahasiswa::all();
@@ -26,7 +31,7 @@ class MahasiswaController extends Controller
 
     public function all()
     {
-        $mahasiswa = Mahasiswa::all();
+        $mahasiswa = Mahasiswa::with('getJurusan')->get();;
 
         return response($mahasiswa);
     }
@@ -42,6 +47,12 @@ class MahasiswaController extends Controller
         Mahasiswa::create([
                 'nama' => $request->nama,
                 'nomor_induk' => $request->nomor_induk,
+                'id_jurusan' => $request->id_jurusan,
+                'jenis_pendaftaran' => $request->jenis_pendaftaran,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'agama' => $request->agama,
                 'created_by' => Auth::id()
             ]
         );
@@ -97,6 +108,12 @@ class MahasiswaController extends Controller
         $mahasiswa = Mahasiswa::find($id);
         $mahasiswa->nama = $request->nama;
         $mahasiswa->nomor_induk = $request->nomor_induk;
+        $mahasiswa->jenis_pendaftaran = $request->jenis_pendaftaran;
+        $mahasiswa->jenis_kelamin = $request->jenis_kelamin;
+        $mahasiswa->tempat_lahir = $request->tempat_lahir;
+        $mahasiswa->tanggal_lahir = $request->tanggal_lahir;
+        $mahasiswa->agama = $request->agama;
+        $mahasiswa->id_jurusan = $request->id_jurusan;
         $mahasiswa->updated_by = Auth::id();
         $mahasiswa->save();
     }

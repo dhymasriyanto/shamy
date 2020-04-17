@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Kurikulum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KurikulumController extends Controller
 {
@@ -12,6 +13,11 @@ class KurikulumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         $kurikulum = Kurikulum::all();
@@ -34,9 +40,14 @@ class KurikulumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        Kurikulum::create([
+                'nama' => $request->nama,
+                'created_by' => Auth::id()
+            ]
+        );
+        echo $request->nama;
     }
 
     /**
@@ -69,7 +80,9 @@ class KurikulumController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kurikulum = Kurikulum::where('id',$id)->get();
+
+        return response($kurikulum);
     }
 
     /**
@@ -82,6 +95,10 @@ class KurikulumController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $kurikulum = Kurikulum::find($id);
+        $kurikulum->nama = $request->nama;
+        $kurikulum->updated_by = Auth::id();
+        $kurikulum->save();
     }
 
     /**

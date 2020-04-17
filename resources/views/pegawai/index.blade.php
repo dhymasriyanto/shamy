@@ -41,8 +41,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="pegawai in datapegawai">
-                                                <td>@{{  pegawai.id }}</td>
+                                            <tr v-for="(pegawai,no) in datapegawai">
+                                                <td>@{{  no+1 }}</td>
                                                 <td>@{{  pegawai.nama }}</td>
                                                 <td><button type="button" @click="edit(pegawai.id)" class="btn btn-success waves-effect waves-light"><i
                                                             class="fa fa-edit mr-1" ></i>Edit</button>
@@ -58,7 +58,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                 </div>
                                 <!-- end row -->
                                 <!-- sample modal content -->
-                                <div id="modalhapus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div v-on:keyup.enter="hapus" id="modalhapus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -75,7 +75,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
-                                <div id="modaltambah" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div v-on:keyup.enter="create" id="modaltambah" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -88,7 +88,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Nama</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" id="nama" type="text" class="form-control" v-model="nama">
+                                                            <input name="nama"  type="text" class="form-control" v-model="nama">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">
@@ -105,7 +105,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
-                                <div id="modaledit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div v-on:keyup.enter="update" id="modaledit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -118,7 +118,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Nama</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" id="editnama" type="text" class="form-control" v-model="editnama">
+                                                            <input name="nama"  type="text" class="form-control" v-model="editnama">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">

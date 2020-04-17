@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeyToMataKuliah extends Migration
+class AddForeignKeyToMahasiswa extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class AddForeignKeyToMataKuliah extends Migration
      */
     public function up()
     {
-        Schema::table('mata_kuliah', function (Blueprint $table) {
+        Schema::table('mahasiswa', function (Blueprint $table) {
             $table->unsignedBigInteger('id_jurusan');
             $table->foreign('id_jurusan')->references('id')->on('jurusan')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->unsignedBigInteger('id_kurikulum');
-            $table->foreign('id_kurikulum')->references('id')->on('kurikulum')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -29,9 +26,8 @@ class AddForeignKeyToMataKuliah extends Migration
      */
     public function down()
     {
-        Schema::table('mata_kuliah', function (Blueprint $table) {
-            $table->foreign('id_jurusan');
-            $table->foreign('id_kurikulum');
+        Schema::table('mahasiswa', function (Blueprint $table) {
+            $table->dropForeign('id_jurusan');
         });
     }
 }

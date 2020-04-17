@@ -23,7 +23,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        console.log(response);
+                        // console.log(response);
                         vm.tahun_ajaran = "";
                         $('#modaltambah').modal('hide');
                     })
@@ -42,7 +42,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        console.log(response);
+                        // console.log(response);
                         vm.editid = "";
                         vm.edittahun_ajaran = "";
                         $('#modaledit').modal('hide');
@@ -61,7 +61,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        console.log(response);
+                        // console.log(response);
                         vm.editid = "";
                         vm.edittahun_ajaran = "";
                         $("#modalhapus").modal('hide');
@@ -79,7 +79,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datatahunajaran = response.data;
-                        console.log(response);
+                        // console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
@@ -96,7 +96,7 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.edittahun_ajaran = response.data[0]['tahun_ajaran'];
                         vm.editid = id;
-                        console.log(response.data);
+                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error
@@ -114,7 +114,7 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.edittahun_ajaran = response.data[0]['tahun_ajaran'];
                         vm.editid = id;
-                        console.log(response.data);
+                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error

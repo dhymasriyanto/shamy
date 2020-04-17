@@ -29,9 +29,13 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                 <div class="row">
                                     <div class="col-12">
                                         TODO:<br>
-                                        -relasi antar table<br>
-                                        -crud untuk edit<br>
-                                        -crud untuk tambah data<br>
+                                        Mengolah data JSON,<br>
+                                        Fitur lanjutan yang dibutuhkan,<br>
+                                        Isi dashboard,<br>
+                                        Foto,<br>
+                                        Status aktif,<br>
+                                        API,<br>
+                                        JQuery Validate
                                     </div>
 
                                 </div>

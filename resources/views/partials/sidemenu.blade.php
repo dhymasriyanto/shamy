@@ -5,53 +5,6 @@
  * Time: 13:53
  */
 ?>
-<div class="user-box text-center">
-    <img src="" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-lg">
-    <div class="dropdown">
-        <a href="#" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown">Nowak Helme</a>
-        <div class="dropdown-menu user-pro-dropdown">
-
-            <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                <i class="fe-user mr-1"></i>
-                <span>My Account</span>
-            </a>
-
-            <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                <i class="fe-settings mr-1"></i>
-                <span>Settings</span>
-            </a>
-
-            <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                <i class="fe-lock mr-1"></i>
-                <span>Lock Screen</span>
-            </a>
-
-            <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                <i class="fe-log-out mr-1"></i>
-                <span>Logout</span>
-            </a>
-
-        </div>
-    </div>
-    <p class="text-muted">Admin Head</p>
-    <ul class="list-inline">
-        <li class="list-inline-item">
-            <a href="#" class="text-muted">
-                <i class="mdi mdi-settings"></i>
-            </a>
-        </li>
-
-        <li class="list-inline-item">
-            <a href="#" class="text-custom">
-                <i class="mdi mdi-power"></i>
-            </a>
-        </li>
-    </ul>
-</div>
 <div id="sidebar-menu">
     <ul class="metismenu" id="side-menu">
         <li class="menu-title">Data</li>
