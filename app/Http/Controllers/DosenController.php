@@ -24,10 +24,11 @@ class DosenController extends Controller
         $data = [
             'data' => $dosen
         ];
+
         return $this->renderPage($request, 'dosen.index', $data);
     }
 
-    public function getData()
+    public function all()
     {
         $dosen = Dosen::with('getJurusan')->get();;
         return response($dosen);

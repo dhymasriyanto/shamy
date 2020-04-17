@@ -37,6 +37,7 @@
     <script type="text/javascript" src="{{asset('js/bootstrap-vue.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/pjax.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/app-custom.js')}}"></script>
+{{--    <script type="text/javascript" src="../../js/app.js"></script>--}}
 </head>
 <body class="topbar-dark">
 <div id="preloader">
@@ -111,10 +112,10 @@
                     <span class="pro-user-name ml-1">{{Auth::user()->name}} <i class="mdi mdi-chevron-down"></i></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                    {{--<a href="{{route('account.profil.show')}}" class="dropdown-item notify-item">--}}
-                        {{--<i class="fe-user"></i>--}}
-                        {{--<span>Profil</span>--}}
-                    {{--</a>--}}
+                    <a href="{{route('account.profil.show')}}" class="dropdown-item notify-item">
+                        <i class="fe-user"></i>
+                        <span>Profil</span>
+                    </a>
                     <div class="dropdown-divider"></div>
                     <!-- item-->
                     <a href="{{route('auth.logout')}}" class="dropdown-item notify-item">
