@@ -40,7 +40,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <th>Nama</th>
                                                 <th>Jurusan</th>
                                                 <th>Tahun Ajaran</th>
-                                                <th>Mahasiswa</th>
+{{--                                                <th>Mahasiswa</th>--}}
                                                 <th>Opsi</th>
                                             </tr>
                                             </thead>
@@ -51,17 +51,17 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <td>@{{ kelas.nama }}</td>
                                                 <td>@{{ kelas.get_jurusan.nama }}</td>
                                                 <td>@{{ kelas.get_tahun_ajaran.tahun_ajaran }}</td>
-                                                <td><span v-for="mahasiswa in datamahasiswa">
-                                                        <span v-for="n in kelas.mahasiswa.length">
-                                                            <p v-if="kelas.mahasiswa[n-1] == mahasiswa.id">
-                                                                @{{ (n)+ ". " + mahasiswa.nama }}
-                                                            </p>
-                                                        </span>
-                                                    </span>
-                                                </td>
+{{--                                                <td><span v-for="mahasiswa in datamahasiswa">--}}
+{{--                                                        <span v-for="n in kelas.mahasiswa.length">--}}
+{{--                                                            <p v-if="kelas.mahasiswa[n-1] == mahasiswa.id">--}}
+{{--                                                                @{{ (n)+ ". " + mahasiswa.nama }}--}}
+{{--                                                            </p>--}}
+{{--                                                        </span>--}}
+{{--                                                    </span>--}}
+{{--                                                </td>--}}
                                                 <td>
-                                                    <button class="btn btn-danger waves-effect"
-                                                            @click="hapus(kelas.id)">Hapus
+                                                    <button class="btn btn-info waves-effect"
+                                                            @click="lihatRincian(kelas.id)">Rincian
                                                     </button>
                                                 </td>
                                             </tr>
@@ -72,7 +72,71 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                 </div>
                                 <!-- end row -->
 
+                                <div v-on:keyup.enter="lihatRincian" id="modalRincian" class="modal fade" tabindex="-1"
+                                     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myModalLabel">Rincian {{$title}}</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">×
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form role="form" v-for="kelas in rinciankelas">
+                                                    <!-- Name -->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Nama Kelas</label>
+                                                        <div class="col-md-9">
+                                                            <label class="col-md-3 col-form-label">@{{ kelas.nama
+                                                                }} </label>
 
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Semester</label>
+                                                        <div class="col-md-9">
+                                                            <label class="col-md-3 col-form-label">@{{ kelas.semester
+                                                                }} </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Jurusan</label>
+                                                        <div class="col-md-9">
+                                                            <label class="col-md-3 col-form-label">@{{
+                                                                kelas.get_jurusan.nama }} </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Tahun Ajaran</label>
+                                                        <div class="col-md-9">
+                                                            <label class="col-md-3 col-form-label">@{{
+                                                                kelas.get_tahun_ajaran.tahun_ajaran }} </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Peserta Didik</label>
+                                                        <div class="col-md-9">
+                                                                <span v-for="mahasiswa in allrinciankelas">
+
+                                                        <span v-for="n in kelas.mahasiswa.length">
+                                                            <p v-if="kelas.mahasiswa[n-1] == mahasiswa.id">
+                                                                @{{ (n)+ ". " + mahasiswa.nama }}
+                                                            </p>
+                                                        </span>
+
+                                                                </span>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
 
                             </div> <!-- end card-box -->
                         </div><!-- end col -->

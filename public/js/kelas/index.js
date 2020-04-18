@@ -6,8 +6,9 @@ function initVue() {
         el: '#app',
         data: {
             datakelas: [],
-            datamahasiswa: [],
-
+            // datamahasiswa: [],
+            rinciankelas:[],
+            allrinciankelas:[]
 
         },
         mounted: function () {
@@ -33,7 +34,7 @@ function initVue() {
                     });
             },
             all: function () {
-                axios.get('/kelas/all')
+                axios.get('/kelas/all/')
                     .then(function (response) {
                         // handle success
                         vm.datakelas = response.data;
@@ -49,10 +50,21 @@ function initVue() {
                         // always executed
                     });
             },
-            allMahasiswa: function () {
-                axios.get('/kelas/allmahasiswa ')
+            // allMahasiswa: function () {
+            //     axios.get('/kelas/allmahasiswa')
+            //         .then(function (response) {
+            //             vm.datamahasiswa = response.data;
+            //         }).catch(function (error) {
+            //         console.log(error);
+            //     }).then(function () {
+            //
+            //     });
+            //
+            // },
+            allRincianKelas: function (id) {
+                axios.get('/kelas/allrinciankelas/'+id)
                     .then(function (response) {
-                        vm.datamahasiswa = response.data;
+                        vm.allrinciankelas = response.data;
                     }).catch(function (error) {
                     console.log(error);
                 }).then(function () {
@@ -60,6 +72,23 @@ function initVue() {
                 });
 
             },
+            lihatRincian: function (id) {
+                axios.get('/kelas/'+ id )
+                    .then(function (response) {
+                        // vm.id = response.data[0]['id'];
+                        vm.rinciankelas = response.data;
+                        vm.allRincianKelas(id);
+
+                        $("#modalRincian").modal('show');
+
+                    }).catch(function (error) {
+
+                }).then(function () {
+
+
+                });
+
+            }
         },
         components: {}
     });
