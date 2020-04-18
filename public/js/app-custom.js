@@ -6,12 +6,6 @@ document.addEventListener('pjax:send', function(){
 
 });
 
-// document.addEventListener('pjax:end', function () {
-//
-//     $(this).addClass("active");
-//
-// });
-
 document.addEventListener('pjax:error', function(event, xhr, textStatus, errorThrown, options){
     pjax.reload();
 });

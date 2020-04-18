@@ -5,7 +5,10 @@ function initVue() {
     var vm = new Vue({
         el: '#app',
         data: {
-            datakelas : []
+            datakelas: [],
+            datamahasiswa: [],
+
+
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -34,7 +37,9 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datakelas = response.data;
-                        console.log(response);
+
+                        vm.allMahasiswa();
+                        // console.log(vm.allJurusan());
                     })
                     .catch(function (error) {
                         // handle error
@@ -43,7 +48,18 @@ function initVue() {
                     .then(function () {
                         // always executed
                     });
-            }
+            },
+            allMahasiswa: function () {
+                axios.get('/kelas/allmahasiswa ')
+                    .then(function (response) {
+                        vm.datamahasiswa = response.data;
+                    }).catch(function (error) {
+                    console.log(error);
+                }).then(function () {
+
+                });
+
+            },
         },
         components: {}
     });

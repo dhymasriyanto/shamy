@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kelas;
+use App\Mahasiswa;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -12,10 +13,10 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
     public function index(Request $request)
     {
@@ -29,9 +30,23 @@ class KelasController extends Controller
 
     public function all()
     {
-        $kelas = Kelas::all();
-
+        $kelas = Kelas::with(['getJurusan', 'getTahunAjaran'])->get();
         return response($kelas);
+    }
+
+    public function allmahasiswa()
+    {
+        $ids = Kelas::all('mahasiswa');
+
+        $j = 0;
+        foreach ($ids as $id) {
+            for ($i = 0; $i < count($id->mahasiswa); $i++) {
+                $mahasiswa[$j] = Mahasiswa::where('id', $id->mahasiswa[$i])->first();
+                $j++;
+            }
+        }
+
+        return response($mahasiswa);
     }
 
     /**
@@ -47,7 +62,7 @@ class KelasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -58,7 +73,7 @@ class KelasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -69,7 +84,7 @@ class KelasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +95,8 @@ class KelasController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -92,7 +107,7 @@ class KelasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, Request $request)

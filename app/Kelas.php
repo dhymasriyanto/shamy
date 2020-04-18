@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Kelas extends Model
 {
     protected $table = 'kelas';
+    protected $guarded = ['id'];
+    protected $casts = [
+        'mahasiswa' => 'json'
+    ];
 
     public function getJurusan()
     {
@@ -21,5 +25,10 @@ class Kelas extends Model
     public function getMengajar()
     {
         return $this->hasMany('App\Mengajar');
+    }
+
+    public function getMahasiswa()
+    {
+        return $this->belongsToMany('App\Mahasiswa', 'mahasiswa');
     }
 }

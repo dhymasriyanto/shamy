@@ -25,7 +25,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('adminto/css/app.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-vue.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/placeholder-loading.min.css')}}">
-    <!-- JS-->
+
+   <!-- JS-->
     @if(\Illuminate\Support\Facades\App::environment('production'))
         <script type="text/javascript" src="{{asset('js/vue.min.js')}}"></script>
     @else

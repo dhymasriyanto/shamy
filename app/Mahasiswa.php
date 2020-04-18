@@ -13,4 +13,9 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo('App\Jurusan', 'id_jurusan');
     }
+
+    public function getKelas()
+    {
+        return $this->belongsToMany('App\Kelas','kelas');
+    }
 }

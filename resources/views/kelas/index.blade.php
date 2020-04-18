@@ -1,5 +1,7 @@
 <?php
+
 use App\Libs\AppHelpers;
+
 $title = 'Data Kelas';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
@@ -15,7 +17,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 @section('main_content')
     <div class="main_content_app d-none">
         <!-- main app -->
-        <div id="app" >
+        <div id="app">
             <div class="wrapper">
                 <div class="container-fluid">
                     <div class="row">
@@ -28,25 +30,40 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <a href="/kelas/tambah/" class="btn btn-dark waves-effect"> <i class="fa fa-plus mr-1"></i>Tambah</a><br><br>
+                                        <a href="/kelas/tambah/" class="btn btn-dark waves-effect"> <i
+                                                class="fa fa-plus mr-1"></i>Tambah</a><br><br>
                                         <table id="example" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Semester</th>
-                                                <th>Tahun Ajaran</th>
                                                 <th>Nama</th>
-                                                <th>Mahasiswa</th>
                                                 <th>Jurusan</th>
+                                                <th>Tahun Ajaran</th>
+                                                <th>Mahasiswa</th>
                                                 <th>Opsi</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr v-for="kelas in datakelas">
-                                                <td>@{{  kelas.id }}</td>
-                                                <td>@{{  kelas.nama }}</td>
-                                                <td><button class="btn btn-danger waves-effect" @click="hapus(kelas.id)">Hapus
-                                                    </button></td>
+                                                <td>@{{ kelas.id }}</td>
+                                                <td>@{{ kelas.semester }}</td>
+                                                <td>@{{ kelas.nama }}</td>
+                                                <td>@{{ kelas.get_jurusan.nama }}</td>
+                                                <td>@{{ kelas.get_tahun_ajaran.tahun_ajaran }}</td>
+                                                <td><span v-for="mahasiswa in datamahasiswa">
+                                                        <span v-for="n in kelas.mahasiswa.length">
+                                                            <p v-if="kelas.mahasiswa[n-1] == mahasiswa.id">
+                                                                @{{ (n)+ ". " + mahasiswa.nama }}
+                                                            </p>
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-danger waves-effect"
+                                                            @click="hapus(kelas.id)">Hapus
+                                                    </button>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -54,6 +71,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 </div>
                                 <!-- end row -->
+
+
 
                             </div> <!-- end card-box -->
                         </div><!-- end col -->
@@ -63,7 +82,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         </div>
         {{--Templates--}}
         {{--Define your javascript below--}}
-{{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
+        {{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
         <script type="text/javascript" src="{{asset('js/kelas/index.js')}}"></script>
     </div>
 @endsection
