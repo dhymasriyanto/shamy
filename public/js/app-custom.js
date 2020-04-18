@@ -2,7 +2,16 @@ var pjax;
 document.addEventListener('pjax:send', function(){
     $('.main_content_app').addClass('d-none');
     $('.app-placeholder').removeClass('d-none');
+    $('a').removeClass("active");
+
 });
+
+// document.addEventListener('pjax:end', function () {
+//
+//     $(this).addClass("active");
+//
+// });
+
 document.addEventListener('pjax:error', function(event, xhr, textStatus, errorThrown, options){
     pjax.reload();
 });
