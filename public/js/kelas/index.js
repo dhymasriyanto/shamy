@@ -7,8 +7,17 @@ function initVue() {
         data: {
             datakelas: [],
             // datamahasiswa: [],
-            rinciankelas:[],
-            allrinciankelas:[]
+            rinciankelas: [],
+            allrinciankelas: [],
+            datajurusan: [],
+            datatahunajaran: [],
+            nama: '',
+            id: '',
+            semester: '',
+            id_tahun_ajaran: '',
+            id_jurusan: '',
+            mahasiswa: []
+
 
         },
         mounted: function () {
@@ -17,13 +26,105 @@ function initVue() {
             }
             this.all();
         },
+
         methods: {
-            hapus: function (id) {
-                axios.delete('/kelas/' + id)
+            create: function () {
+                // console.log(this.nama)
+                axios.post('/kelas', {
+                    nama: this.nama,
+                    semester: this.semester,
+                    id_jurusan: this.id_jurusan,
+                    id_tahun_ajaran: this.id_tahun_ajaran,
+                    mahasiswa: this.mahasiswa
+                    // _method: 'put'
+                })
+                    .then(function (response) {
+                        // handle success
+                        console.log(response);
+                        vm.nama = "";
+                        vm.semester = "";
+                        vm.id_tahun_ajaran = "";
+                        vm.id_jurusan = "";
+                        vm.all();
+
+                        $('#modaltambah').modal('hide');
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        $("#pesan").text("Ada kesalahan");
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
+            edit: function (id) {
+                // console.log(this.nama)
+                axios.get('/kelas/' + id)
+                    .then(function (response) {
+                        // handle success
+                        // console.log(response);
+                        vm.nama = response.data[0]['nama'];
+                        vm.semester = response.data[0]['semester'];
+                        vm.id_tahun_ajaran = response.data[0]['id_tahun_ajaran'];
+                        vm.id_jurusan = response.data[0]['id_jurusan'];
+                        vm.mahasiswa = response.data[0]['mahasiswa'];
+                        vm.id = id;
+
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        $("#pesan").text("Ada kesalahan");
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+                $("#modaledit").modal('show');
+            },
+            update: function () {
+                // console.log(this.nama)
+                axios.put('/kelas/' + this.id, {
+                    nama: this.nama,
+                    semester: this.semester,
+                    id_jurusan: this.id_jurusan,
+                    id_tahun_ajaran: this.id_tahun_ajaran,
+                    mahasiswa: this.mahasiswa
+                    // _method: 'put'
+                })
+                    .then(function (response) {
+                        // handle success
+                        // console.log(response);
+
+                        $('#modaledit').modal('hide');
+                        vm.all();
+                        vm.nama = "";
+                        vm.semester = "";
+                        vm.id_tahun_ajaran = "";
+                        vm.id_jurusan = "";
+                        vm.id = "";
+                        vm.mahasiswa = [];
+
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        $("#pesan").text("Ada kesalahan");
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
+            hapus: function () {
+                axios.delete('/kelas/' + this.id)
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        console.log(response);
+                        vm.nama = '';
+                        vm.id = '';
+                        $("#modalhapus").modal('hide');
+
+                        // console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
@@ -38,8 +139,10 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datakelas = response.data;
+                        vm.allJurusan();
+                        vm.allTahunAjaran();
 
-                        vm.allMahasiswa();
+                        // vm.allMahasiswa();
                         // console.log(vm.allJurusan());
                     })
                     .catch(function (error) {
@@ -62,9 +165,17 @@ function initVue() {
             //
             // },
             allRincianKelas: function (id) {
-                axios.get('/kelas/allrinciankelas/'+id)
+                axios.get('/kelas/allrinciankelas/' + id)
                     .then(function (response) {
+                        // console.log(response.data);
+                        // if (response.data != null) {
                         vm.allrinciankelas = response.data;
+                        // console.log(vm.allrinciankelas);
+
+                        // } else {
+                        //     vm.allrinciankelas = [];
+                        // }
+
                     }).catch(function (error) {
                     console.log(error);
                 }).then(function () {
@@ -73,11 +184,16 @@ function initVue() {
 
             },
             lihatRincian: function (id) {
-                axios.get('/kelas/'+ id )
+                axios.get('/kelas/' + id)
                     .then(function (response) {
                         // vm.id = response.data[0]['id'];
+
                         vm.rinciankelas = response.data;
-                        vm.allRincianKelas(id);
+                        console.log(vm.rinciankelas[0]['mahasiswa'].length);
+                        if (vm.rinciankelas[0]['mahasiswa'].length != 0) {
+
+                            vm.allRincianKelas(id);
+                        }
 
                         $("#modalRincian").modal('show');
 
@@ -88,7 +204,88 @@ function initVue() {
 
                 });
 
-            }
+            },
+            allJurusan: function () {
+                axios.get('/jurusan/all')
+                    .then(function (response) {
+                        // handle success
+                        vm.datajurusan = response.data;
+                        // console.log(response);
+                        // const ayam = response.data;
+                        // ayam.forEach(function(element) {
+                        //     console.log(element);
+                        // });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
+            allTahunAjaran: function () {
+                axios.get('/tahun-ajaran/all')
+                    .then(function (response) {
+                        // handle success
+                        vm.datatahunajaran = response.data;
+                        // console.log(response);
+                        // const ayam = response.data;
+                        // ayam.forEach(function(element) {
+                        //     console.log(element);
+                        // });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
+            hapusdata: function (id) {
+                axios.get("/kelas/" + id)
+                    .then(function (response) {
+                        // handle success
+                        // this.editnama = response.data;
+                        vm.nama = response.data[0]['nama'];
+                        vm.id = id;
+                        // console.log(response.data);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+                $("#modalhapus").modal('show');
+            },
+            hapusmahasiswa: function (kelasid, mahasiswaid) {
+                axios.delete("/kelas/hapusmahasiswa",{
+                    data :{
+                        id: kelasid,
+                        mahasiswaid : mahasiswaid
+                    }
+                })
+                    .then(function (response) {
+                        // handle success
+                        // this.editnama = response.data;
+                        vm.all();
+
+                            vm.lihatRincian(kelasid);
+
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
+
         },
         components: {}
     });

@@ -34,29 +34,30 @@ class KelasController extends Controller
         return response($kelas);
     }
 
-    public function allmahasiswa()
-    {
-        $ids = Kelas::all('mahasiswa');
-
-        $j = 0;
-        foreach ($ids as $id) {
-            for ($i = 0; $i < count($id->mahasiswa); $i++) {
-                $mahasiswa[$j] = Mahasiswa::where('id', $id->mahasiswa[$i])->first();
-                $j++;
-            }
-        }
-
-        return response($mahasiswa);
-    }
+//    public function allmahasiswa()
+//    {
+//        $ids = Kelas::all('mahasiswa');
+//
+//        $j = 0;
+//        foreach ($ids as $id) {
+//            for ($i = 0; $i < count($id->mahasiswa); $i++) {
+//                $mahasiswa[$j] = Mahasiswa::where('id', $id->mahasiswa[$i])->first();
+//                $j++;
+//            }
+//        }
+//
+//        return response($mahasiswa);
+//    }
 
     public function allrinciankelas($id)
     {
-        $ids = [Kelas::with(['getJurusan', 'getTahunAjaran'])->get()->find($id)];
 
+        $ids = [Kelas::with(['getJurusan', 'getTahunAjaran'])->get()->find($id)];
+        $mahasiswa = [null];
         $j = 0;
         foreach ($ids as $id) {
             for ($i = 0; $i < count($id->mahasiswa); $i++) {
-                $mahasiswa[$j] = Mahasiswa::where('id', $id->mahasiswa[$i])->first();
+                $mahasiswa[$j] = Mahasiswa::where('id', $id->mahasiswa[$i])->with('getJurusan')->first();
                 $j++;
             }
         }
@@ -69,9 +70,9 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
     }
 
     /**
@@ -82,7 +83,16 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Kelas::create([
+            'nama' => $request->nama,
+            'semester' => $request->semester,
+            'id_jurusan' => $request->id_jurusan,
+            'id_tahun_ajaran' => $request->id_tahun_ajaran,
+            'mahasiswa' => $request->mahasiswa
+        ]);
+
+        return response($request);
     }
 
     /**
@@ -119,7 +129,15 @@ class KelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Kelas::where('id', $id)->update([
+            'nama' => $request->nama,
+            'semester' => $request->semester,
+            'id_jurusan' => $request->id_jurusan,
+            'id_tahun_ajaran' => $request->id_tahun_ajaran,
+            'mahasiswa' => $request->mahasiswa
+        ]);
+
+//        return response($request);
     }
 
     /**
@@ -134,5 +152,34 @@ class KelasController extends Controller
         $data = [];
 
         return response('sukses');
+    }
+
+    public function hapusmahasiswa(Request $request)
+    {
+        $kelas = [Kelas::with(['getJurusan', 'getTahunAjaran'])->get()->find($request->id)];
+
+//        $mahasiswa = Kelas::where
+        $mahasiswa = [null];
+        $kk = [];
+        $j = 0;
+        foreach ($kelas as $id) {
+            for ($i = 0; $i < count($id->mahasiswa); $i++) {
+                $mahasiswa[$j] = Mahasiswa::where('id', $id->mahasiswa[$i])->with('getJurusan')->first();
+                $j++;
+            }
+        }
+        foreach ($mahasiswa as $k) {
+            if ($k['id'] != $request->mahasiswaid) {
+                $kk [] = $k['id'];
+            }
+        }
+
+//        $data = json_encode($kk);
+
+        $coba = Kelas::where('id',$request->id)->update([
+            'mahasiswa' => $kk
+        ]);
+
+        return response($coba);
     }
 }

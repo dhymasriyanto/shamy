@@ -36,10 +36,11 @@ Route::post('/jurusan/create', 'JurusanController@create')->name('jurusan.create
 Route::post('/jurusan/update/{id}', 'JurusanController@update')->name('jurusan.update');
 Route::get('/jurusan/get/{id}', 'JurusanController@edit')->name('jurusan.edit');
 
+//Route::put('/kelas/store', 'KelasController@store')->name('kelas.store');
 Route::get('/kelas/all', 'KelasController@all')->name('kelas.all');
 Route::get('/kelas/allmahasiswa', 'KelasController@allmahasiswa')->name('kelas.allmahasiswa');
 Route::get('/kelas/allrinciankelas/{id}', 'KelasController@allrinciankelas')->name('kelas.allrinciankelas');
-
+Route::delete('/kelas/hapusmahasiswa', 'KelasController@hapusmahasiswa')->name('kelas.hapusmahasiswa');
 
 Route::get('/kurikulum/all', 'KurikulumController@all')->name('kurikulum.all');
 Route::post('/kurikulum/create', 'KurikulumController@create')->name('kurikulum.create');
