@@ -23,7 +23,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                     <div class="row">
                         <div class="col-12">
                             <div class="card-box">
-                                <h4 class="m-t-0 header-title">Title</h4>
+                                <h4 class="m-t-0 header-title">Data Kelas</h4>
                                 <p class="text-muted mb-4 font-14">
                                     Sub title
                                 </p>
@@ -48,8 +48,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="kelas in datakelas">
-                                                <td>@{{ kelas.id }}</td>
+                                            <tr v-for="(kelas,n) in datakelas">
+                                                <td>@{{ (n+1) }}</td>
                                                 <td>@{{ kelas.semester }}</td>
                                                 <td>@{{ kelas.nama }}</td>
                                                 <td>@{{ kelas.get_jurusan.nama }}</td>
@@ -125,15 +125,14 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Nama Kelas</label>
                                                         <div class="col-md-9">
-                                                            <label class="col-md-3 col-form-label">@{{ kelas.nama
-                                                                }} </label>
+                                                            <label class="col-form-label">: @{{ kelas.nama }} </label>
 
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Semester</label>
                                                         <div class="col-md-9">
-                                                            <label class="col-md-3 col-form-label">@{{ kelas.semester
+                                                            <label class=" col-form-label">: @{{ kelas.semester
                                                                 }} </label>
 
                                                         </div>
@@ -141,7 +140,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Jurusan</label>
                                                         <div class="col-md-9">
-                                                            <label class="col-md-3 col-form-label">@{{
+                                                            <label class="col-form-label">: @{{
                                                                 kelas.get_jurusan.nama }} </label>
 
                                                         </div>
@@ -149,14 +148,14 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Tahun Ajaran</label>
                                                         <div class="col-md-9">
-                                                            <label class="col-md-3 col-form-label">@{{
+                                                            <label class=" col-form-label">: @{{
                                                                 kelas.get_tahun_ajaran.tahun_ajaran }} </label>
 
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>Peserta Didik</label>
-                                                        <div>
+                                                        <label class="col-md-3 col-form-label row">Peserta Didik</label>
+                                                        <div >
                                                             <div
                                                                 v-if="!kelas.mahasiswa.length">Belum ada peserta didik
                                                             </div>
@@ -176,13 +175,13 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                     <tbody>
 
 
-                                                                    <tr v-for="mahasiswa in allrinciankelas">
+                                                                    <tr v-for="(mahasiswa, n) in allrinciankelas">
                                                                         <td>
 {{--                                                                            <div v-for="n in kelas.mahasiswa.length">--}}
 {{--                                                                                <div--}}
 {{--                                                                                    v-if="kelas.mahasiswa[n-1] == mahasiswa.id">--}}
 
-                                                                                    @{{ mahasiswa.id }}
+                                                                                    @{{ (n+1) }}
 
 
 {{--                                                                                </div>--}}
@@ -201,10 +200,18 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                                                         </td>
                                                                         <td>
+{{--                                                                            <button class="btn btn-danger waves-effect"--}}
+{{--                                                                                    @click="hapusmahasiswa(kelas.id, mahasiswa.id)"><i--}}
+{{--                                                                                    class="fa fa-trash mr-1"></i>Hapus--}}
+{{--                                                                            </button>--}}
                                                                             <button class="btn btn-danger waves-effect"
-                                                                                    @click="hapusmahasiswa(kelas.id, mahasiswa.id)"><i
+                                                                                    @click="hapusmodal(kelas.id, mahasiswa.id)"><i
                                                                                     class="fa fa-trash mr-1"></i>Hapus
                                                                             </button>
+
+{{--                                                                            <button class="btn btn-danger waves-effect" data-toggle="modal" data-target="#hapusmodal"><i--}}
+{{--                                                                                    class="fa fa-trash mr-1"></i>Hapus--}}
+{{--                                                                            </button>--}}
                                                                         </td>
                                                                     </tr>
                                                                     </tbody>
@@ -222,6 +229,32 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
+
+                                <div v-on:keyup.enter="hapus" id="hapusmodal" class="modal fade" tabindex="-1"
+                                     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myModalLabel">Konfirmasi</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">×
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4>Yakin ingin menghapus @{{ nama }} ? </h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success waves-effect waves-light"
+                                                        data-dismiss="modal">Tidak
+                                                </button>
+                                                <button type="button" @click="hapusmahasiswa()"
+                                                        class="btn btn-danger waves-effect waves-light">Ya
+                                                </button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
                                 <div v-on:keyup.enter="create" id="modaltambah" class="modal fade" tabindex="-1"
                                      role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">

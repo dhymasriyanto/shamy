@@ -58,7 +58,7 @@
             </a>
             <a href="{{route('mengajar.index')}}">
                 <i class="mdi mdi-clipboard-account"></i>
-                <span> Data Mengajar (Jadwal)</span>
+                <span>Jadwal</span>
             </a>
             <a href="{{route('mengajar.index')}}">
                 <i class="mdi mdi-clipboard-account"></i>

@@ -1,6 +1,6 @@
 <?php
 use App\Libs\AppHelpers;
-$title = 'Data Mengajar';
+$title = 'Jadwal';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
 

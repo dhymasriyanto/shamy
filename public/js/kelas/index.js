@@ -16,7 +16,9 @@ function initVue() {
             semester: '',
             id_tahun_ajaran: '',
             id_jurusan: '',
-            mahasiswa: []
+            mahasiswa: [],
+            kelasid: "",
+            mahasiswaid:""
 
 
         },
@@ -25,9 +27,18 @@ function initVue() {
                 pjax.refresh();
             }
             this.all();
+            this.modalLoad();
+
         },
 
         methods: {
+            modalLoad: function () {
+                $(document).ready(function () {
+                    $('#hapusmodal').on('hidden.bs.modal', function () {
+                        $('#modalRincian').css('z-index', 1041);
+                    });
+                });
+            },
             create: function () {
                 // console.log(this.nama)
                 axios.post('/kelas', {
@@ -261,11 +272,35 @@ function initVue() {
                     });
                 $("#modalhapus").modal('show');
             },
-            hapusmahasiswa: function (kelasid, mahasiswaid) {
-                axios.delete("/kelas/hapusmahasiswa",{
-                    data :{
-                        id: kelasid,
-                        mahasiswaid : mahasiswaid
+            hapusmodal: function (kelasid, mahasiswaid) {
+                $("#hapusmodal").modal('show');
+                $("#modalRincian").css('z-index', 1039);
+                axios.get("/mahasiswa/get/" + mahasiswaid)
+                    .then(function (response) {
+                        // handle success
+                        // this.editnama = response.data;
+                        vm.nama = response.data[0]['nama'];
+                        vm.id = kelasid;
+                        vm.mahasiswaid = mahasiswaid;
+
+                        // console.log(response.data);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+
+
+
+            },
+            hapusmahasiswa: function () {
+                axios.delete("/kelas/hapusmahasiswa", {
+                    data: {
+                        id: this.id,
+                        mahasiswaid: this.mahasiswaid
                     }
                 })
                     .then(function (response) {
@@ -273,7 +308,9 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.all();
 
-                            vm.lihatRincian(kelasid);
+                        vm.lihatRincian(vm.id);
+                        vm.mahasiswaid = "";
+                        vm.id = "";
 
                         console.log(response);
                     })
@@ -284,6 +321,8 @@ function initVue() {
                     .then(function () {
                         // always executed
                     });
+                $("#hapusmodal").modal('hide');
+
             },
 
         },
