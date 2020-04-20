@@ -329,7 +329,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Mahasiswa</label>
+{{--                                                        <label class="col-md-3 col-form-label">Mahasiswa</label>--}}
                                                         <div class="col-md-9">
                                                             <input hidden name="mahasiswa" type="text"
                                                                    class="form-control"
@@ -424,7 +424,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Mahasiswa</label>
+{{--                                                        <label class="col-md-3 col-form-label">Mahasiswa</label>--}}
                                                         <div class="col-md-9">
                                                             <input hidden name="mahasiswa" type="text"
                                                                    class="form-control"

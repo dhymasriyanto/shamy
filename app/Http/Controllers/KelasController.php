@@ -92,7 +92,7 @@ class KelasController extends Controller
             'mahasiswa' => $request->mahasiswa
         ]);
 
-        return response($request);
+        return response(['type'=>'success','message'=>'Berhasil menyimpan data']);
     }
 
     /**
@@ -136,6 +136,7 @@ class KelasController extends Controller
             'id_tahun_ajaran' => $request->id_tahun_ajaran,
             'mahasiswa' => $request->mahasiswa
         ]);
+        return response(['type'=>'success','message'=>'Berhasil menyimpan data']);
 
 //        return response($request);
     }
@@ -149,9 +150,8 @@ class KelasController extends Controller
     public function destroy($id, Request $request)
     {
         Kelas::destroy($id);
-        $data = [];
 
-        return response('sukses');
+        return response(['type'=>'success','message'=>'Berhasil menghapus data']);
     }
 
     public function hapusmahasiswa(Request $request)
@@ -176,10 +176,10 @@ class KelasController extends Controller
 
 //        $data = json_encode($kk);
 
-        $coba = Kelas::where('id',$request->id)->update([
+        Kelas::where('id',$request->id)->update([
             'mahasiswa' => $kk
         ]);
+        return response(['type'=>'success','message'=>'Berhasil mengeluarkan mahasiswa dari kelas']);
 
-        return response($coba);
     }
 }

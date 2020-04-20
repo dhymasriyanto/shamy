@@ -26,6 +26,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-vue.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/placeholder-loading.min.css')}}">
 
+{{--    toast--}}
+    <link href="{{asset('adminto/libs/toastr/toastr.min.css')}}" rel="stylesheet" type="text/css" />
+
    <!-- JS-->
     @if(\Illuminate\Support\Facades\App::environment('production'))
         <script type="text/javascript" src="{{asset('js/vue.min.js')}}"></script>
@@ -177,6 +180,13 @@
 @include('partials.rightsidebar')
 <!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
+
+{{--toast--}}
+<!-- Toastr js -->
+<script src="{{asset('adminto/libs/toastr/toastr.min.js')}}"></script>
+
+<script src="{{asset('adminto/js/pages/toastr.init.js')}}"></script>
+
 <script type="text/javascript" src="{{asset('adminto/js/vendor.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('adminto/js/app.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/vee-validate/id.js')}}"></script>

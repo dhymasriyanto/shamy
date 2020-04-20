@@ -18,7 +18,7 @@ function initVue() {
             id_jurusan: '',
             mahasiswa: [],
             kelasid: "",
-            mahasiswaid:""
+            mahasiswaid: ""
 
 
         },
@@ -32,6 +32,15 @@ function initVue() {
         },
 
         methods: {
+            flash: function (type, message) {
+                if (type == "success") {
+                    toastr.success(message);
+                }else if (type == "error") {
+                    toastr.error(message);
+                } else {
+                    toastr.error("Ada kesalahan!")
+                }
+            },
             modalLoad: function () {
                 $(document).ready(function () {
                     $('#hapusmodal').on('hidden.bs.modal', function () {
@@ -59,6 +68,8 @@ function initVue() {
                         vm.all();
 
                         $('#modaltambah').modal('hide');
+                        vm.flash(response.data.type,response.data.message);
+
                     })
                     .catch(function (error) {
                         // handle error
@@ -109,6 +120,8 @@ function initVue() {
 
                         $('#modaledit').modal('hide');
                         vm.all();
+                        vm.flash(response.data.type,response.data.message);
+
                         vm.nama = "";
                         vm.semester = "";
                         vm.id_tahun_ajaran = "";
@@ -134,6 +147,10 @@ function initVue() {
                         vm.nama = '';
                         vm.id = '';
                         $("#modalhapus").modal('hide');
+                        console.log(response.data.type, response.data.message);
+                        vm.flash(response.data.type,response.data.message);
+
+
 
                         // console.log(response);
                     })
@@ -294,7 +311,6 @@ function initVue() {
                     });
 
 
-
             },
             hapusmahasiswa: function () {
                 axios.delete("/kelas/hapusmahasiswa", {
@@ -309,8 +325,10 @@ function initVue() {
                         vm.all();
 
                         vm.lihatRincian(vm.id);
+                        vm.nama = "";
                         vm.mahasiswaid = "";
                         vm.id = "";
+                        vm.flash(response.data.type,response.data.message);
 
                         console.log(response);
                     })
