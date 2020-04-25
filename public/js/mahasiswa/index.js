@@ -23,7 +23,9 @@ function initVue() {
             edittempat_lahir : '',
             edittanggal_lahir : '',
             editagama : '',
-            editid : ''
+            editid : '',
+            search :'',
+            search2 :''
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -48,11 +50,19 @@ function initVue() {
                         vm.tanggal_lahir = "";
                         vm.agama = "";
                         $('#modaltambah').modal('hide');
+                        toastr.options = {
+                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["success"]("Data berhasil di tambah", "Sukses")
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
+                        // $("#pesan").text("Ada kesalahan");
+                        toastr.options = {
+                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["error"]("Terjadi Kesalahan", "Error")
+                        // console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -75,11 +85,17 @@ function initVue() {
                         vm.edittanggal_lahir = "";
                         vm.editagama = "";
                         $('#modaledit').modal('hide');
+                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["success"]("Data berhasil di edit", "Sukses")
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
+                        // $("#pesan").text("Ada kesalahan");
+                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["error"]("Terjadi Kesalahan", "Error")
+                        // console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -94,10 +110,16 @@ function initVue() {
                         vm.editid = "";
                         vm.editnama = "";
                         $("#modalhapus").modal('hide');
+                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["success"]("Data berhasil di hapus", "Sukses")
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
+                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["error"]("Terjadi Kesalahan", "Error")
+                        // console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -184,6 +206,13 @@ function initVue() {
                         // always executed
                     });
                 $("#modalhapus").modal('show');
+            }
+        },
+        computed: {
+            filteredItems() {
+                return this.datamahasiswa.filter(mahasiswa => {
+                    return (mahasiswa.get_jurusan.nama.toLowerCase().indexOf(this.search.toLowerCase()) > -1 && mahasiswa.nama.toLowerCase().indexOf(this.search2.toLowerCase()) > -1)
+                })
             }
         },
         components: {}

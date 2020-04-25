@@ -13,6 +13,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 @endsection
 
 @section('main_content')
+    <link href="{{asset('adminto/libs/toastr/toastr.min.css')}}" rel="stylesheet" type="text/css" />
     <div class="main_content_app d-none">
         <!-- main app -->
         <div id="app">
@@ -30,6 +31,21 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                     <div class="col-12">
                                         <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
                                                 class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
+                                        <div class="form-row">
+                                            <div class="col-3">
+                                                <h5>Jurusan</h5>
+                                                <select class="form-control" v-model="search">
+                                                    <option value="">Semua</option>
+                                                    <option v-for="jurusan in datajurusan" v-bind:value="jurusan.nama">
+                                                        @{{ jurusan.nama }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-3">
+                                                <h5>Nama</h5>
+                                                <input class="form-control" v-model="search2"><br><br>
+                                            </div>
+                                        </div>
                                         <table id="example" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
@@ -46,7 +62,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="(mahasiswa,no) in datamahasiswa">
+                                            <tr v-for="(mahasiswa,no) in filteredItems">
                                                 <td>@{{  no+1 }}</td>
                                                 <td>@{{  mahasiswa.nama }}</td>
                                                 <td>@{{  mahasiswa.nomor_induk }}</td>
@@ -358,6 +374,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         {{--Templates--}}
         {{--Define your javascript below--}}
 {{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
+        <script src="{{asset('adminto/libs/toastr/toastr.min.js')}}"></script>
+        <script src="{{asset('adminto/js/pages/toastr.init.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/mahasiswa/index.js')}}"></script>
     </div>
 @endsection
