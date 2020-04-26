@@ -117,8 +117,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <label class="col-md-3 col-form-label">Nama</label>
                                                         <div class="col-md-9">
                                                             <input name="nama"  type="text" class="form-control" v-model="nama">
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -128,8 +126,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <label class="col-md-3 col-form-label">NIM</label>
                                                         <div class="col-md-9">
                                                             <input name="nama"  type="text" class="form-control" v-model="nim">
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -144,8 +140,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                     @{{ jurusan.nama }}
                                                                 </option>
                                                             </select>
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -160,8 +154,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 <option value="Pindahan">Pindahan</option>
 
                                                             </select>
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -176,8 +168,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 <option value="Perempuan">Perempuan</option>
 
                                                             </select>
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -187,8 +177,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <label class="col-md-3 col-form-label">Tempat Lahir</label>
                                                         <div class="col-md-9">
                                                             <input name="nama"  type="text" class="form-control" v-model="tempat_lahir">
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -198,8 +186,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <label class="col-md-3 col-form-label">Tanggal Lahir</label>
                                                         <div class="col-md-9">
                                                             <input name="nama"  type="date" class="form-control" v-model="tanggal_lahir">
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -218,8 +204,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 <option value="Kong Hu Cu">Kong Hu Cu</option>
 
                                                             </select>
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -248,8 +232,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <label class="col-md-3 col-form-label">Nama</label>
                                                         <div class="col-md-9">
                                                             <input name="nama"  type="text" class="form-control" v-model="editnama">
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -259,8 +241,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <label class="col-md-3 col-form-label">NIM</label>
                                                         <div class="col-md-9">
                                                             <input name="nama"  type="text" class="form-control" v-model="editnim">
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -275,8 +255,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                     @{{ jurusan.nama }}
                                                                 </option>
                                                             </select>
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -291,8 +269,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 <option value="Pindahan">Pindahan</option>
 
                                                             </select>
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -307,8 +283,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 <option value="Perempuan">Perempuan</option>
 
                                                             </select>
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -318,8 +292,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <label class="col-md-3 col-form-label">Tempat Lahir</label>
                                                         <div class="col-md-9">
                                                             <input name="nama"  type="text" class="form-control" v-model="edittempat_lahir">
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -329,8 +301,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <label class="col-md-3 col-form-label">Tanggal Lahir</label>
                                                         <div class="col-md-9">
                                                             <input name="nama"  type="date" class="form-control" v-model="edittanggal_lahir">
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
@@ -349,8 +319,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 <option value="Kong Hu Cu">Kong Hu Cu</option>
 
                                                             </select>
-                                                            <span id="pesan" class="form-text text-muted">
-                                                            </span>
                                                             <span style="color: red" class="form-text text-muted">
                                                                 **keterangan
                                                             </span>
