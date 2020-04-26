@@ -18,6 +18,8 @@ class CreateMataKuliahTable extends Migration
             $table->string('kode',255)->comment('Kode mata kuliah')->nullable()->unique();
             $table->string('singkatan',255)->comment('Singkatan mata kuliah')->nullable();
             $table->string('nama', 255)->comment('Nama mata kuliah')->nullable();
+            $table->double('bobot')->comment('Bobot(sks) mata kuliah')->nullable();
+            $table->string('jenis', 255)->comment('Jenis mata kuliah')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->integer('created_by')->default(0);
             $table->timestamp('updated_at')->useCurrent();

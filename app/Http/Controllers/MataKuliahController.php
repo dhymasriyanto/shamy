@@ -47,6 +47,8 @@ class MataKuliahController extends Controller
                 'nama' => $request->nama,
                 'kode' => $request->kode,
                 'singkatan' => $request->singkatan,
+                'bobot' => $request->bobot,
+                'jenis' => $request->jenis,
                 'id_jurusan' => $request->id_jurusan,
                 'id_kurikulum' => $request->id_kurikulum,
                 'created_by' => Auth::id()
@@ -107,6 +109,8 @@ class MataKuliahController extends Controller
         $matakuliah->singkatan = $request->singkatan;
         $matakuliah->id_jurusan = $request->id_jurusan;
         $matakuliah->id_kurikulum = $request->id_kurikulum;
+        $matakuliah->bobot = $request->bobot;
+        $matakuliah->jenis = $request->jenis;
         $matakuliah->updated_by = Auth::id();
         $matakuliah->save();
     }

@@ -30,25 +30,63 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                     <div class="col-12">
                                         <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
                                                 class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
+                                        <div class="form-row">
+                                            <div class="col-3">
+                                                <h5>Jurusan</h5>
+                                                <select class="form-control" v-model="search">
+                                                    <option value="">Semua</option>
+                                                    <option v-for="jurusan in datajurusan" v-bind:value="jurusan.nama">
+                                                        @{{ jurusan.nama }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-3">
+                                                <h5>Nama</h5>
+                                                <input class="form-control" v-model="search2">
+                                            </div>
+                                            <div class="col-3">
+                                                <h5>Bobot</h5>
+                                                <select class="form-control" v-model="search3">
+                                                    <option selected value="">Pilih</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-3">
+                                                <h5>Jenis</h5>
+                                                <select class="form-control" v-model="search4">
+                                                    <option selected value="">Pilih</option>
+                                                    <option value="Wajib Program Studi">Wajib Program Studi</option>
+                                                    <option value="Pilihan">Pilihan</option>
+                                                    <option value="Tugas akhir/Skripsi/Tesis/Disertasi">Tugas akhir/Skripsi/Tesis/Disertasi</option>
+                                                </select><br><br>
+                                            </div>
+                                        </div>
                                         <table id="example" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
                                                 <th>Kode</th>
+                                                <th>Nama</th>
                                                 <th>Singkatan</th>
                                                 <th>Kurikulum</th>
+                                                <th>Bobot</th>
+                                                <th>Jenis</th>
                                                 <th>Jurusan</th>
                                                 <th>Opsi</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="(matakuliah,no) in datamatakuliah">
+                                            <tr v-for="(matakuliah,no) in filteredItems">
                                                 <td>@{{  no+1 }}</td>
-                                                <td>@{{  matakuliah.nama }}</td>
                                                 <td>@{{  matakuliah.kode }}</td>
+                                                <td>@{{  matakuliah.nama }}</td>
                                                 <td>@{{  matakuliah.singkatan }}</td>
                                                 <td>@{{  matakuliah.get_kurikulum.nama }}</td>
+                                                <td>@{{  matakuliah.bobot }}</td>
+                                                <td>@{{  matakuliah.jenis }}</td>
                                                 <td>@{{  matakuliah.get_jurusan.nama }}</td>
                                                 <td><button type="button" @click="edit(matakuliah.id)" class="btn btn-success waves-effect waves-light"><i
                                                             class="fa fa-edit mr-1" ></i>Edit</button>
@@ -141,6 +179,40 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Bobot (SKS)</label>
+                                                        <div class="col-md-9">
+                                                            <select class="form-control" v-model="bobot">
+                                                                <option disabled selected value="">Pilih</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+
+                                                            </select>
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Jenis</label>
+                                                        <div class="col-md-9">
+                                                            <select class="form-control" v-model="jenis">
+                                                                <option disabled selected value="">Pilih</option>
+                                                                <option value="Wajib Program Studi">Wajib Program Studi</option>
+                                                                <option value="Pilihan">Pilihan</option>
+                                                                <option value="Tugas akhir/Skripsi/Tesis/Disertasi">Tugas akhir/Skripsi/Tesis/Disertasi</option>
+                                                            </select>
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Jurusan</label>
                                                         <div class="col-md-9">
                                                             <select class="form-control" v-model="id_jurusan">
@@ -216,6 +288,40 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 <option v-for="kurikulum in datakurikulum" v-bind:value="kurikulum.id">
                                                                     @{{ kurikulum.nama }}
                                                                 </option>
+                                                            </select>
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Bobot (SKS)</label>
+                                                        <div class="col-md-9">
+                                                            <select class="form-control" v-model="editbobot">
+                                                                <option disabled selected value="">Pilih</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+
+                                                            </select>
+                                                            <span id="pesan" class="form-text text-muted">
+                                                            </span>
+                                                            <span style="color: red" class="form-text text-muted">
+                                                                **keterangan
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Jenis</label>
+                                                        <div class="col-md-9">
+                                                            <select class="form-control" v-model="editjenis">
+                                                                <option disabled selected value="">Pilih</option>
+                                                                <option value="Wajib Program Studi">Wajib Program Studi</option>
+                                                                <option value="Pilihan">Pilihan</option>
+                                                                <option value="Tugas akhir/Skripsi/Tesis/Disertasi">Tugas akhir/Skripsi/Tesis/Disertasi</option>
                                                             </select>
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
