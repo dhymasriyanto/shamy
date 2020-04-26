@@ -129,7 +129,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Jurusan</label>
+                                                        <label class="col-md-3 col-form-label">Program Studi</label>
                                                         <div class="col-md-9">
                                                             <select class="form-control" v-model="id_jurusan">
                                                                 <option disabled value="">Pilih</option>
@@ -230,7 +230,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Jurusan</label>
+                                                        <label class="col-md-3 col-form-label">Program Studi</label>
                                                         <div class="col-md-9">
                                                             <select class="form-control" v-model="editid_jurusan">
                                                                 <option disabled value="">Pilih</option>

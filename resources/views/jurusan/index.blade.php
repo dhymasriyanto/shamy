@@ -1,6 +1,6 @@
 <?php
 use App\Libs\AppHelpers;
-$title = 'Data Jurusan';
+$title = 'Data Program Studi';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
 
@@ -21,7 +21,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                     <div class="row">
                         <div class="col-12">
                             <div class="card-box">
-                                <h4 class="m-t-0 header-title">Data Jurusan</h4>
+                                <h4 class="m-t-0 header-title">Data Program Studi</h4>
                                 <p class="text-muted mb-4 font-14">
                                     Sub title
                                 </p>
@@ -34,7 +34,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>ID</th>
                                                 <th>Nama</th>
                                                 <th>Kode</th>
                                                 <th>Fakultas</th>
@@ -45,7 +44,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <tbody>
                                             <tr v-for="(jurusan,no) in datajurusan">
                                                 <td>@{{  no+1 }}</td>
-                                                <td>@{{  jurusan.id }}</td>
                                                 <td>@{{  jurusan.nama }}</td>
                                                 <td>@{{  jurusan.kode }}</td>
                                                 <td>@{{  jurusan.get_fakultas.nama }}</td>

@@ -42,7 +42,7 @@
             </a>
             <a href="{{route('jurusan.index')}}">
                 <i class="mdi mdi-account-check-outline"></i>
-                <span> Data Jurusan </span>
+                <span> Data Program Studi </span>
             </a>
             <a href="{{route('mata-kuliah.index')}}">
                 <i class="mdi mdi-book"></i>

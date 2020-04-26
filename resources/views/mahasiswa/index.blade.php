@@ -33,7 +33,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
                                         <div class="form-row">
                                             <div class="col-3">
-                                                <h5>Jurusan</h5>
+                                                <h5>Program Studi</h5>
                                                 <select class="form-control" v-model="search">
                                                     <option value="">Semua</option>
                                                     <option v-for="jurusan in datajurusan" v-bind:value="jurusan.nama">
@@ -52,7 +52,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <th>No</th>
                                                 <th>Nama</th>
                                                 <th>NIM</th>
-                                                <th>Jurusan</th>
+                                                <th>Program Studi</th>
                                                 <th>Status Aktif</th>
                                                 <th>Jenis Pendaftaran</th>
                                                 <th>Jenis Kelamin</th>
@@ -132,7 +132,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Jurusan</label>
+                                                        <label class="col-md-3 col-form-label">Program Studi</label>
                                                         <div class="col-md-9">
                                                             <select class="form-control" v-model="id_jurusan">
                                                                 <option disabled value="">Pilih</option>
@@ -247,7 +247,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Jurusan</label>
+                                                        <label class="col-md-3 col-form-label">Program Studi</label>
                                                         <div class="col-md-9">
                                                             <select class="form-control" v-model="editid_jurusan">
                                                                 <option disabled value="">Pilih</option>
