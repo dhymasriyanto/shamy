@@ -50,11 +50,19 @@ function initVue() {
                         vm.bobot = "";
                         vm.jenis = "";
                         $('#modaltambah').modal('hide');
+                        toastr.options = {
+                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["success"]("Data berhasil di tambah", "Sukses")
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
+                        // $("#pesan").text("Ada kesalahan");
+                        toastr.options = {
+                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["error"]("Terjadi Kesalahan", "Error")
+                        // console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -76,11 +84,17 @@ function initVue() {
                         vm.editbobot = "";
                         vm.editjenis = "";
                         $('#modaledit').modal('hide');
+                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["success"]("Data berhasil di edit", "Sukses")
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
+                        // $("#pesan").text("Ada kesalahan");
+                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["error"]("Terjadi Kesalahan", "Error")
+                        // console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -95,10 +109,16 @@ function initVue() {
                         vm.editid = "";
                         vm.editnama = "";
                         $("#modalhapus").modal('hide');
+                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["success"]("Data berhasil di hapus", "Sukses")
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
+                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                        }
+                        Command: toastr["error"]("Terjadi Kesalahan", "Error")
+                        // console.log(error);
                     })
                     .then(function () {
                         // always executed
