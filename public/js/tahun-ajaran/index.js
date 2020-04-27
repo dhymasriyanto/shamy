@@ -18,39 +18,31 @@ function initVue() {
         },
         methods: {
             create: function () {
-                // console.log(this.nama)
                 axios.post('/tahun-ajaran/create',{tahun_ajaran : this.tahun_ajaran})
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.tahun_ajaran = "";
                         $('#modaltambah').modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
                     });
             },
             update: function () {
-                // console.log(this.nama)
                 axios.post('/tahun-ajaran/update/'+this.editid,{tahun_ajaran : this.edittahun_ajaran})
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.edittahun_ajaran = "";
                         $('#modaledit').modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -61,14 +53,12 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.edittahun_ajaran = "";
                         $("#modalhapus").modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -79,11 +69,9 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datatahunajaran = response.data;
-                        // console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -96,11 +84,9 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.edittahun_ajaran = response.data[0]['tahun_ajaran'];
                         vm.editid = id;
-                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -114,11 +100,9 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.edittahun_ajaran = response.data[0]['tahun_ajaran'];
                         vm.editid = id;
-                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed

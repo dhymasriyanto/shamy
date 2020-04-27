@@ -22,11 +22,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                     <div class="row">
                         <div class="col-12">
                             <div class="card-box">
-                                <h4 class="m-t-0 header-title">Data Dosen</h4>
-                                <p class="text-muted mb-4 font-14">
-                                    Sub title
-                                </p>
-
                                 <div class="row">
                                     <div class="col-12">
                                         <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
@@ -46,8 +41,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <input class="form-control" v-model="search2"><br><br>
                                             </div>
                                         </div>
-
-                                        <table id="example" class="table table-bordered table-hover">
+                                        <table id="responsive-datatable" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
                                                 <th>No</th>
@@ -308,9 +302,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                 </div>
             </div>
         </div>
-        {{--Templates--}}
-        {{--Define your javascript below--}}
-{{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
         <script src="{{asset('adminto/libs/toastr/toastr.min.js')}}"></script>
         <script src="{{asset('adminto/js/pages/toastr.init.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/dosen/index.js')}}"></script>

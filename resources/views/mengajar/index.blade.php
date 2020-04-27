@@ -21,11 +21,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                     <div class="row">
                         <div class="col-12">
                             <div class="card-box">
-                                <h4 class="m-t-0 header-title">Title</h4>
-                                <p class="text-muted mb-4 font-14">
-                                    Sub title
-                                </p>
-
                                 <div class="row">
                                     <div class="col-12">
                                         <a href="/mengajar/tambah/" class="btn btn-dark waves-effect"> <i class="fa fa-plus mr-1"></i>Tambah</a><br><br>
@@ -61,9 +56,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                 </div>
             </div>
         </div>
-        {{--Templates--}}
-        {{--Define your javascript below--}}
-{{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
         <script type="text/javascript" src="{{asset('js/mengajar/index.js')}}"></script>
     </div>
 @endsection

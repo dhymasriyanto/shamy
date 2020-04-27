@@ -18,39 +18,31 @@ function initVue() {
         },
         methods: {
             create: function () {
-                // console.log(this.nama)
                 axios.post('/pegawai/create',{nama : this.nama})
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.nama = "";
                         $('#modaltambah').modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
                     });
             },
             update: function () {
-                // console.log(this.nama)
                 axios.post('/pegawai/update/'+this.editid,{nama : this.editnama})
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         $('#modaledit').modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -61,14 +53,12 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         $("#modalhapus").modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -79,11 +69,9 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datapegawai = response.data;
-                        // console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -96,11 +84,9 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.editnama = response.data[0]['nama'];
                         vm.editid = id;
-                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -114,11 +100,9 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.editnama = response.data[0]['nama'];
                         vm.editid = id;
-                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed

@@ -20,32 +20,26 @@ function initVue() {
         },
         methods: {
             create: function () {
-                // console.log(this.nama)
                 axios.post('/fakultas/create',{nama : this.nama, singkatan : this.singkatan})
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.nama = "";
                         vm.singkatan = "";
                         $('#modaltambah').modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
                     });
             },
             update: function () {
-                // console.log(this.nama)
                 axios.post('/fakultas/update/'+this.editid,{nama : this.editnama, singkatan : this.editsingkatan})
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         vm.editsingkatan = "";
@@ -53,8 +47,6 @@ function initVue() {
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -65,14 +57,12 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         $("#modalhapus").modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -83,11 +73,9 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datafakultas = response.data;
-                        // console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -100,12 +88,9 @@ function initVue() {
                         vm.editnama = response.data[0]['nama'];
                         vm.editsingkatan = response.data[0]['singkatan'];
                         vm.editid = id;
-                        // console.log(response.data[0]['nama']);
-                        // console.log(response.data[0]['singkatan']);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -116,14 +101,11 @@ function initVue() {
                 axios.get("/fakultas/get/"+id)
                     .then(function (response) {
                         // handle success
-                        // this.editnama = response.data;
                         vm.editnama = response.data[0]['nama'];
                         vm.editid = id;
-                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed

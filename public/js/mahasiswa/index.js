@@ -35,12 +35,10 @@ function initVue() {
         },
         methods: {
             create: function () {
-                // console.log(this.nama)
                 axios.post('/mahasiswa/create',{nama : this.nama, nomor_induk : this.nim, id_jurusan : this.id_jurusan, jenis_pendaftaran : this.jenis_pendaftaran, jenis_kelamin : this.jenis_kelamin, tempat_lahir : this.tempat_lahir, tanggal_lahir : this.tanggal_lahir, agama : this.agama})
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.nama = "";
                         vm.nim = "";
                         vm.id_jurusan = "";
@@ -57,24 +55,20 @@ function initVue() {
                     })
                     .catch(function (error) {
                         // handle error
-                        // $("#pesan").text("Ada kesalahan");
                         toastr.options = {
                             "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
                         }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
-                        // console.log(error);
                     })
                     .then(function () {
                         // always executed
                     });
             },
             update: function () {
-                // console.log(this.nama)
                 axios.post('/mahasiswa/update/'+this.editid,{nama : this.editnama, nomor_induk : this.editnim, id_jurusan : this.editid_jurusan, jenis_pendaftaran : this.editjenis_pendaftaran, jenis_kelamin : this.editjenis_kelamin, tempat_lahir : this.edittempat_lahir, tanggal_lahir : this.edittanggal_lahir, agama : this.editagama})
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         vm.editnim = "";
@@ -91,11 +85,9 @@ function initVue() {
                     })
                     .catch(function (error) {
                         // handle error
-                        // $("#pesan").text("Ada kesalahan");
                         toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
                         }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
-                        // console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -106,7 +98,6 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         $("#modalhapus").modal('hide');
@@ -119,7 +110,6 @@ function initVue() {
                         toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
                         }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
-                        // console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -131,15 +121,9 @@ function initVue() {
                         // handle success
                         vm.datamahasiswa = response.data;
                         vm.allJurusan();
-                        // console.log(response);
-                        // const ayam = response.data;
-                        // ayam.forEach(function(element) {
-                        //     console.log(element);
-                        // });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -150,15 +134,9 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datajurusan = response.data;
-                        // console.log(response);
-                        // const ayam = response.data;
-                        // ayam.forEach(function(element) {
-                        //     console.log(element);
-                        // });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -177,12 +155,9 @@ function initVue() {
                         vm.edittanggal_lahir = response.data[0]['tanggal_lahir'];
                         vm.editagama = response.data[0]['agama'];
                         vm.editid = id;
-                        // console.log(response.data[0]['nama']);
-                        // console.log(response.data[0]['nomor_induk']);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -196,11 +171,9 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.editnama = response.data[0]['nama'];
                         vm.editid = id;
-                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed

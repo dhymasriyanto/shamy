@@ -25,12 +25,10 @@ function initVue() {
         },
         methods: {
             create: function () {
-                // console.log(this.nama)
                 axios.post('/jurusan/create',{nama : this.nama, kode : this.kode, singkatan : this.singkatan, id_fakultas : this.id_fakultas})
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.nama = "";
                         vm.kode = "";
                         vm.singkatan = "";
@@ -39,20 +37,16 @@ function initVue() {
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
                     });
             },
             update: function () {
-                // console.log(this.nama)
                 axios.post('/jurusan/update/'+this.editid,{nama : this.editnama, kode : this.editkode, singkatan : this.editsingkatan, id_fakultas : this.editid_fakultas})
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         vm.editkode = "";
@@ -62,8 +56,6 @@ function initVue() {
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -74,14 +66,12 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.editnama = "";
                         $("#modalhapus").modal('hide');
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -93,15 +83,9 @@ function initVue() {
                         // handle success
                         vm.datajurusan = response.data;
                         vm.allFakultas();
-                        // console.log(response);
-                        // const ayam = response.data;
-                        // ayam.forEach(function(element) {
-                        //     console.log(element);
-                        // });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -112,15 +96,9 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datafakultas = response.data;
-                        // console.log(response);
-                        // const ayam = response.data;
-                        // ayam.forEach(function(element) {
-                        //     console.log(element);
-                        // });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -135,11 +113,9 @@ function initVue() {
                         vm.editsingkatan = response.data[0]['singkatan'];
                         vm.editid_fakultas = response.data[0]['id_fakultas'];
                         vm.editid = id;
-                        // console.log(response.data[0]['nama']);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -153,11 +129,9 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.editnama = response.data[0]['nama'];
                         vm.editid = id;
-                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed

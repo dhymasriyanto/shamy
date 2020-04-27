@@ -40,7 +40,6 @@ function initVue() {
                 });
             },
             create: function () {
-                // console.log(this.nama)
                 axios.post('/kelas', {
                     nama: this.nama,
                     semester: this.semester,
@@ -51,7 +50,6 @@ function initVue() {
                 })
                     .then(function (response) {
                         // handle success
-                        console.log(response);
                         vm.nama = "";
                         vm.semester = "";
                         vm.id_tahun_ajaran = "";
@@ -62,19 +60,15 @@ function initVue() {
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
                     });
             },
             edit: function (id) {
-                // console.log(this.nama)
                 axios.get('/kelas/' + id)
                     .then(function (response) {
                         // handle success
-                        // console.log(response);
                         vm.nama = response.data[0]['nama'];
                         vm.semester = response.data[0]['semester'];
                         vm.id_tahun_ajaran = response.data[0]['id_tahun_ajaran'];
@@ -85,8 +79,6 @@ function initVue() {
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -94,7 +86,6 @@ function initVue() {
                 $("#modaledit").modal('show');
             },
             update: function () {
-                // console.log(this.nama)
                 axios.put('/kelas/' + this.id, {
                     nama: this.nama,
                     semester: this.semester,
@@ -105,7 +96,6 @@ function initVue() {
                 })
                     .then(function (response) {
                         // handle success
-                        // console.log(response);
 
                         $('#modaledit').modal('hide');
                         vm.all();
@@ -119,8 +109,6 @@ function initVue() {
                     })
                     .catch(function (error) {
                         // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -134,12 +122,9 @@ function initVue() {
                         vm.nama = '';
                         vm.id = '';
                         $("#modalhapus").modal('hide');
-
-                        // console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -152,13 +137,9 @@ function initVue() {
                         vm.datakelas = response.data;
                         vm.allJurusan();
                         vm.allTahunAjaran();
-
-                        // vm.allMahasiswa();
-                        // console.log(vm.allJurusan());
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -169,7 +150,6 @@ function initVue() {
             //         .then(function (response) {
             //             vm.datamahasiswa = response.data;
             //         }).catch(function (error) {
-            //         console.log(error);
             //     }).then(function () {
             //
             //     });
@@ -178,17 +158,14 @@ function initVue() {
             allRincianKelas: function (id) {
                 axios.get('/kelas/allrinciankelas/' + id)
                     .then(function (response) {
-                        // console.log(response.data);
                         // if (response.data != null) {
                         vm.allrinciankelas = response.data;
-                        // console.log(vm.allrinciankelas);
 
                         // } else {
                         //     vm.allrinciankelas = [];
                         // }
 
                     }).catch(function (error) {
-                    console.log(error);
                 }).then(function () {
 
                 });
@@ -200,7 +177,6 @@ function initVue() {
                         // vm.id = response.data[0]['id'];
 
                         vm.rinciankelas = response.data;
-                        console.log(vm.rinciankelas[0]['mahasiswa'].length);
                         if (vm.rinciankelas[0]['mahasiswa'].length != 0) {
 
                             vm.allRincianKelas(id);
@@ -221,15 +197,9 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datajurusan = response.data;
-                        // console.log(response);
-                        // const ayam = response.data;
-                        // ayam.forEach(function(element) {
-                        //     console.log(element);
-                        // });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -240,15 +210,9 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datatahunajaran = response.data;
-                        // console.log(response);
-                        // const ayam = response.data;
-                        // ayam.forEach(function(element) {
-                        //     console.log(element);
-                        // });
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -261,11 +225,9 @@ function initVue() {
                         // this.editnama = response.data;
                         vm.nama = response.data[0]['nama'];
                         vm.id = id;
-                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -283,11 +245,9 @@ function initVue() {
                         vm.id = kelasid;
                         vm.mahasiswaid = mahasiswaid;
 
-                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -311,12 +271,9 @@ function initVue() {
                         vm.lihatRincian(vm.id);
                         vm.mahasiswaid = "";
                         vm.id = "";
-
-                        console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed

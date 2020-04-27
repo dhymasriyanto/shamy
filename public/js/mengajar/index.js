@@ -19,11 +19,9 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.all();
-                        console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -34,11 +32,9 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datamengajar = response.data;
-                        console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
