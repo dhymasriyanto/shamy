@@ -13,6 +13,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 @endsection
 
 @section('main_content')
+    <link href="{{asset('adminto/libs/toastr/toastr.min.css')}}" rel="stylesheet" type="text/css" />
     <div class="main_content_app d-none">
         <!-- main app -->
         <div id="app">
@@ -200,6 +201,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                 </div>
             </div>
         </div>
+        <script src="{{asset('adminto/libs/toastr/toastr.min.js')}}"></script>
+        <script src="{{asset('adminto/js/pages/toastr.init.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/jurusan/index.js')}}"></script>
     </div>
 @endsection
