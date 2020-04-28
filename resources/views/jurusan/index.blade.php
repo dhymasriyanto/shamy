@@ -13,6 +13,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 @endsection
 
 @section('main_content')
+    <link href="adminto/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="adminto/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
     <link href="{{asset('adminto/libs/toastr/toastr.min.css')}}" rel="stylesheet" type="text/css" />
     <div class="main_content_app d-none">
         <!-- main app -->
@@ -27,33 +29,41 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                     <div class="col-12">
                                         <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
                                                 class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
-                                        <table id="example" class="table table-bordered table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Kode</th>
-                                                <th>Fakultas</th>
-                                                <th>Singkatan</th>
-                                                <th>Opsi</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr v-for="(jurusan,no) in datajurusan">
-                                                <td>@{{  no+1 }}</td>
-                                                <td>@{{  jurusan.nama }}</td>
-                                                <td>@{{  jurusan.kode }}</td>
-                                                <td>@{{  jurusan.get_fakultas.nama }}</td>
-                                                <td>@{{  jurusan.singkatan }}</td>
-                                                <td><button type="button" @click="edit(jurusan.id)" class="btn btn-success waves-effect waves-light"><i
-                                                            class="fa fa-edit mr-1" ></i>Edit</button>
-                                                    <button class="btn btn-danger waves-effect" @click="hapusdata(jurusan.id)"><i
-                                                            class="fa fa-trash mr-1" ></i>Hapus
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+{{--                                        <table id="example" class="table table-bordered table-hover">--}}
+{{--                                            <thead>--}}
+{{--                                            <tr>--}}
+{{--                                                <th>No</th>--}}
+{{--                                                <th>Nama</th>--}}
+{{--                                                <th>Kode</th>--}}
+{{--                                                <th>Fakultas</th>--}}
+{{--                                                <th>Singkatan</th>--}}
+{{--                                                <th>Opsi</th>--}}
+{{--                                            </tr>--}}
+{{--                                            </thead>--}}
+{{--                                            <tbody>--}}
+{{--                                            <tr v-for="(jurusan,no) in datajurusan">--}}
+{{--                                                <td>@{{  no+1 }}</td>--}}
+{{--                                                <td>@{{  jurusan.nama }}</td>--}}
+{{--                                                <td>@{{  jurusan.kode }}</td>--}}
+{{--                                                <td>@{{  jurusan.get_fakultas.nama }}</td>--}}
+{{--                                                <td>@{{  jurusan.singkatan }}</td>--}}
+{{--                                                <td><button type="button" @click="edit(jurusan.id)" class="btn btn-success waves-effect waves-light"><i--}}
+{{--                                                            class="fa fa-edit mr-1" ></i>Edit</button>--}}
+{{--                                                    <button class="btn btn-danger waves-effect" @click="hapusdata(jurusan.id)"><i--}}
+{{--                                                            class="fa fa-trash mr-1" ></i>Hapus--}}
+{{--                                                    </button>--}}
+{{--                                                </td>--}}
+{{--                                            </tr>--}}
+{{--                                            </tbody>--}}
+{{--                                        </table>--}}
+                                        <div id="tabledemo">
+                                            <h3>Vue Datatable example</h3>
+                                            Filter by anything: <input v-model="search">
+                                            <hr>
+                                            <data-table :comments="comments">
+
+                                            </data-table>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -201,6 +211,10 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                 </div>
             </div>
         </div>
+        <script src="adminto/libs/datatables/jquery.dataTables.min.js"></script>
+        <script src="adminto/libs/datatables/dataTables.bootstrap4.js"></script>
+        <script src="adminto/libs/datatables/dataTables.responsive.min.js"></script>
+        <script src="adminto/libs/datatables/responsive.bootstrap4.min.js"></script>
         <script src="{{asset('adminto/libs/toastr/toastr.min.js')}}"></script>
         <script src="{{asset('adminto/js/pages/toastr.init.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/jurusan/index.js')}}"></script>

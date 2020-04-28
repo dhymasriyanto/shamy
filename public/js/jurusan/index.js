@@ -15,7 +15,9 @@ function initVue() {
             editkode : '',
             editsingkatan : '',
             editid_fakultas : '',
-            editid : ''
+            editid : '',
+            search :'',
+            comments : []
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -105,7 +107,7 @@ function initVue() {
                 axios.get('/jurusan/all')
                     .then(function (response) {
                         // handle success
-                        vm.datajurusan = response.data;
+                        vm.comments = response.data;
                         vm.allFakultas();
                     })
                     .catch(function (error) {
@@ -163,11 +165,79 @@ function initVue() {
                 $("#modalhapus").modal('show');
             }
         },
+        computed: {
+            filteredComments: function () {
+                let self = this
+                let search = self.search.toLowerCase()
+                return self.comments.filter(function (comments) {
+                    return  comments.name.toLowerCase().indexOf(search) !== -1 ||
+                        comments.email.toLowerCase().indexOf(search) !== -1 ||
+                        comments.body.toLowerCase().indexOf(search) !== -1
+                })
+            }
+        },
         components: {}
     });
     $('.app-placeholder').addClass('d-none');
     $('.main_content_app').removeClass('d-none');
 }
+
+Vue.component('data-table', {
+    render: function (createElement) {
+        return createElement(
+            "table", {
+                "id": "datatable",
+                "class": ["table", "table-bordered", "dt-responsive", "nowrap", "dataTable", "no-footer", "dtr-inline", "collapsed"],
+                "role": "grid"
+            }, []
+        )
+    },
+    props: ['comments'],
+    data() {
+        return {
+            headers: [
+                { title: 'No' },
+                { title: 'Nama' },
+                { title: 'Kode' },
+                { title: 'Fakultas' },
+                { title: 'Singkatan' },
+                { title: 'Aksi' },
+            ],
+            rows: [] ,
+            dtHandle: null
+        }
+    },
+    watch: {
+        comments(val, oldVal) {
+            let vm2 = this;
+            vm2.rows = [];
+            var nomor = 0;
+            val.forEach(function (item) {
+                let row = [];
+                row.push(nomor += 1);
+                row.push(item.nama);
+                row.push(item.kode);
+                row.push(item.get_fakultas.nama);
+                row.push(item.singkatan);
+                row.push('<button type="button" @click.native="edit(1)" class="btn btn-success waves-effect waves-light"><i class="fa fa-edit mr-1" ></i>Edit</button>');
+                vm2.rows.push(row);
+            });
+            vm2.dtHandle.clear();
+            vm2.dtHandle.rows.add(vm2.rows);
+            vm2.dtHandle.draw();
+        }
+    },
+    mounted() {
+        let vm2 = this;
+        vm2.dtHandle = $(this.$el).DataTable({
+            columns: vm2.headers,
+            data: vm2.rows,
+            searching: true,
+            paging: true,
+            info: false
+        });
+    }
+});
 
 try {
     initVue();
