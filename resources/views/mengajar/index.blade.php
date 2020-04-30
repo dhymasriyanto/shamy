@@ -29,7 +29,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                 <div class="row">
                                     <div class="col-12">
                                         <a href="/mengajar/tambah/" class="btn btn-dark waves-effect"> <i class="fa fa-plus mr-1"></i>Tambah</a><br><br>
-                                        <table id="example" class="table table-bordered table-hover">
+                                        <table class="table table-hover table-bordered" >
                                             <thead>
                                             <tr>
                                                 <th>No</th>

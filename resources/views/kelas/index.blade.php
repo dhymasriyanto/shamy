@@ -43,6 +43,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <th>Nama</th>
                                                 <th>Jurusan</th>
                                                 <th>Tahun Ajaran</th>
+                                                <th>Jumlah Peserta Didik</th>
                                                 {{--                                                <th>Mahasiswa</th>--}}
                                                 <th>Opsi</th>
                                             </tr>
@@ -54,6 +55,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <td>@{{ kelas.nama }}</td>
                                                 <td>@{{ kelas.get_jurusan.nama }}</td>
                                                 <td>@{{ kelas.get_tahun_ajaran.tahun_ajaran }}</td>
+                                                <td v-if="!kelas.mahasiswa.length">Belum ada peserta didik</td>
+                                                <td v-else>@{{ kelas.mahasiswa.length }}</td>
                                                 {{--                                                <td><span v-for="mahasiswa in datamahasiswa">--}}
                                                 {{--                                                        <span v-for="n in kelas.mahasiswa.length">--}}
                                                 {{--                                                            <p v-if="kelas.mahasiswa[n-1] == mahasiswa.id">--}}
@@ -64,7 +67,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 {{--                                                </td>--}}
                                                 <td>
                                                     <button class="btn btn-info waves-effect"
-                                                            @click="lihatRincian(kelas.id)">Rincian
+                                                            @click="lihatRincian(kelas.id)"><i class="fas fa-th-list mr-1"></i>Rincian
                                                     </button>
                                                     <button type="button" @click="edit(kelas.id)"
                                                             class="btn btn-success waves-effect waves-light"><i
@@ -96,7 +99,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <h4>Yakin ingin menghapus @{{ nama }} ? </h4>
+                                                <h4>Yakin ingin menghapus @{{ editnama }} ? </h4>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-success waves-effect waves-light"
@@ -206,7 +209,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 {{--                                                                            </button>--}}
                                                                             <button class="btn btn-danger waves-effect"
                                                                                     @click="hapusmodal(kelas.id, mahasiswa.id)"><i
-                                                                                    class="fa fa-trash mr-1"></i>Hapus
+                                                                                    class="far fa-window-close mr-1"></i>Keluarkan
                                                                             </button>
 
 {{--                                                                            <button class="btn btn-danger waves-effect" data-toggle="modal" data-target="#hapusmodal"><i--}}
@@ -241,7 +244,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <h4>Yakin ingin menghapus @{{ nama }} ? </h4>
+                                                <h4>Yakin ingin mengeluarkan @{{ editnama }} dari kelas? </h4>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-success waves-effect waves-light"
@@ -367,7 +370,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <label class="col-md-3 col-form-label">Nama Kelas</label>
                                                         <div class="col-md-9">
                                                             <input name="nama" type="text" class="form-control"
-                                                                   v-model="nama">
+                                                                   v-model="editnama">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">
@@ -379,7 +382,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <label class="col-md-3 col-form-label">Semester</label>
                                                         <div class="col-md-9">
                                                             <input name="nama" type="text" class="form-control"
-                                                                   v-model="semester">
+                                                                   v-model="editsemester">
                                                             <span id="pesan" class="form-text text-muted">
                                                             </span>
                                                             <span style="color: red" class="form-text text-muted">
@@ -390,7 +393,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Jurusan</label>
                                                         <div class="col-md-9">
-                                                            <select class="form-control" v-model="id_jurusan">
+                                                            <select class="form-control" v-model="editid_jurusan">
                                                                 <option disabled value="">Pilih</option>
                                                                 <option v-for="jurusan in datajurusan"
                                                                         v-bind:value="jurusan.id">
@@ -408,7 +411,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Tahun Ajaran</label>
                                                         <div class="col-md-9">
-                                                            <select class="form-control" v-model="id_tahun_ajaran">
+                                                            <select class="form-control" v-model="editid_tahun_ajaran">
                                                                 <option disabled value="">Pilih</option>
                                                                 <option v-for="tahun_ajaran in datatahunajaran"
                                                                         v-bind:value="tahun_ajaran.id">
@@ -428,7 +431,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <div class="col-md-9">
                                                             <input hidden name="mahasiswa" type="text"
                                                                    class="form-control"
-                                                                   v-model="mahasiswa">
+                                                                   v-model="editmahasiswa">
                                                         </div>
                                                     </div>
                                                 </form>
