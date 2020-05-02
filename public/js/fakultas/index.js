@@ -10,7 +10,34 @@ function initVue() {
             singkatan : '',
             editnama : '',
             editsingkatan : '',
-            editid : ''
+            editid : '',
+            search :'',
+            list: [],
+            filter: '',
+            fields: [
+                {
+                    key: 'index',
+                    label: 'No'
+                },
+                {
+                    key: 'nama',
+                    label: 'Nama',
+                    sortable: true,
+                },
+                {
+                    key: 'singkatan',
+                    label: 'Singkatan',
+                    sortable: true,
+                },
+                {
+                    key: 'aksi',
+                    label: 'Aksi',
+                },
+            ],
+            perPage: 10,
+            pageOptions: [10, 15, 20],
+            totalRows: 1,
+            currentPage: 1,
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -92,7 +119,8 @@ function initVue() {
                 axios.get('/fakultas/all')
                     .then(function (response) {
                         // handle success
-                        vm.datafakultas = response.data;
+                        vm.list = response.data;
+                        vm.totalRows = vm.list.length;
                     })
                     .catch(function (error) {
                         // handle error
@@ -131,6 +159,13 @@ function initVue() {
                         // always executed
                     });
                 $("#modalhapus").modal('show');
+            }
+        },
+        computed: {
+            filteredItems() {
+                return this.list.filter(fakultas => {
+                    return (fakultas.nama.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+                })
             }
         },
         components: {}
