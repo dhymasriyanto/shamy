@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Login | {{ config('app.name', 'Laravel') }}</title>
+    <title>Daftar Ulang | {{ config('app.name', 'Laravel') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="{{config('app.name_long')}}" name="description" />
     <meta content="{{config('app.author')}}" name="author" />
@@ -36,7 +36,7 @@
                     <p class="text-muted mt-2 mb-4">{{config('app.name')}}</p>
                 </div>
                 <div class="text-center mb-4">
-                    <h4 class="text-uppercase mt-0">Masuk</h4>
+                    <h4 class="text-uppercase mt-0">Daftar Ulang</h4>
                 </div>
                 <div class="card-group">
                     <div class="card">
@@ -47,27 +47,26 @@
                                     {{ $errors->first('username') }} {{ $errors->first('password') }}
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('auth.login') }}">
+                            <form method="POST" action="/daftarulang/{{$id}}">
                                 @csrf
                                 <div class="form-group mb-3">
-                                    <label for="emailaddress">{{ __('User ID') }}</label>
-                                    <input class="form-control" id="email" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autofocus placeholder="Enter your user ID">
+                                    <label for="password">NIM</label>
+                                    <input class="form-control"id="password" type="text" class="form-control" required disabled value="{{$nim}}" placeholder="Enter your password">
                                 </div>
-
+                                <div class="form-group mb-3">
+                                    <label for="password">Nama</label>
+                                    <input class="form-control"id="password" type="text" class="form-control" required disabled value="{{$nama}}" placeholder="Enter your password">
+                                </div>
                                 <div class="form-group mb-3">
                                     <label for="password">{{ __('Password') }}</label>
                                     <input class="form-control"id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter your password">
                                 </div>
-
-{{--                                <div class="form-group mb-3">--}}
-{{--                                    <div class="custom-control custom-checkbox">--}}
-{{--                                        <input  class="custom-control-input" type="checkbox" name="remember"  id="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>--}}
-{{--                                        <label class="custom-control-label" for="remember">{{ __('Remember Me') }}</label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
+                                <div class="form-group mb-3">
+                                    <label for="password">{{ __('Konfirmasi Password') }}</label>
+                                    <input class="form-control"id="password" type="password" class="form-control @error('password') is-invalid @enderror" required autocomplete="current-password" placeholder="Enter your password">
+                                </div>
                                 <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-primary btn-block waves-effect btn-rounded" type="submit"> Masuk </button>
+                                    <button class="btn btn-primary btn-block waves-effect btn-rounded" type="submit"> Daftar Ulang </button>
                                 </div>
 
                             </form>
@@ -81,34 +80,6 @@
                                     <a  href="{{ route('password.request') }}" class="text-muted ml-1">{{ __('Lupa password?') }}</a>
                                 @endif
                             </div> <!-- end col -->
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body p-4">
-                            @if ($message = Session::get('auth.error'))
-                                <div class="alert alert-warning alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    {{ $message }}
-                                </div>
-                            @endif
-                            <p class="text-muted">Sign in menggunakan:</p>
-                            <ul class="list-group mb-0 user-list">
-                                <li class="list-group-item">
-                                    <a href="{{route('auth.login.redirect')}}" class="user-list-item">
-                                        <div class="user avatar-sm float-left mr-2">
-                                            <img src="{{asset('images/logo.png')}}" alt="logo" class="img-fluid rounded-circle">
-                                        </div>
-                                        <div class="user-desc">
-                                            <h5 class="name mt-0 mb-1">AULIA ID</h5>
-                                            <p class="desc text-muted mb-0 font-12">Single identity STAI Auliaurrasyidin</p>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                            <hr>
-                        </div> <!-- end card-body -->
-                        <div class="card-footer">
-                            <footer class="blockquote-footer text-muted">Autentikasi single identity. <a href="{{config('services.laravelpassport.host').'/tentang'}}">Pelajari lebih lanjut</a> </footer>
                         </div>
                     </div>
                 </div>
