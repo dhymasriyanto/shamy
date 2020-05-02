@@ -8,7 +8,29 @@ function initVue() {
             datatahunajaran : [],
             tahun_ajaran : '',
             edittahun_ajaran : '',
-            editid : ''
+            editid : '',
+            search :'',
+            list: [],
+            filter: '',
+            fields: [
+                {
+                    key: 'index',
+                    label: 'No'
+                },
+                {
+                    key: 'tahun_ajaran',
+                    label: 'Tahun Ajaran',
+                    sortable: true,
+                },
+                {
+                    key: 'aksi',
+                    label: 'Aksi',
+                },
+            ],
+            perPage: 10,
+            pageOptions: [10, 15, 20],
+            totalRows: 1,
+            currentPage: 1,
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -92,7 +114,8 @@ function initVue() {
                 axios.get('/tahun-ajaran/all')
                     .then(function (response) {
                         // handle success
-                        vm.datatahunajaran = response.data;
+                        vm.list = response.data;
+                        vm.totalRows = vm.list.length;
                     })
                     .catch(function (error) {
                         // handle error
@@ -132,6 +155,13 @@ function initVue() {
                         // always executed
                     });
                 $("#modalhapus").modal('show');
+            }
+        },
+        computed: {
+            filteredItems() {
+                return this.list.filter(tahunajaran => {
+                    return (tahunajaran.tahun_ajaran.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+                })
             }
         },
         components: {}

@@ -26,31 +26,82 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-12">
-                                        <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
-                                                class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
-                                        <table id="example" class="table table-bordered table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Opsi</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr v-for="(pegawai,no) in datapegawai">
-                                                <td>@{{  no+1 }}</td>
-                                                <td>@{{  pegawai.nama }}</td>
-                                                <td><button type="button" @click="edit(pegawai.id)" class="btn btn-success waves-effect waves-light"><i
-                                                            class="fa fa-edit mr-1" ></i>Edit</button>
-                                                    <button class="btn btn-danger waves-effect" @click="hapusdata(pegawai.id)"><i
-                                                            class="fa fa-trash mr-1" ></i>Hapus
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="card-box">
+                                            <div class="col-12">
+                                                <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
+                                                        class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
+                                                <div class="form-row">
+                                                    <div class="col-3">
+                                                        <h5>Nama</h5>
+                                                        <input class="form-control" v-model="search"><br><br>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="col-12 col-md-4 my-3 float-left">
+                                                        <b-form-group
+                                                            label="Per page"
+                                                            label-cols-sm="3"
+                                                            label-align-sm="left"
+                                                            label-size="sm"
+                                                            label-for="perPageSelect"
+                                                            class="ml-0">
+                                                            <b-form-select
+                                                                v-model="perPage"
+                                                                id="perPageSelect"
+                                                                size="sm"
+                                                                :options="pageOptions">
+                                                            </b-form-select>
+                                                        </b-form-group>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="alert alert-warning" v-if="!filteredItems.length">
+                                                        <strong>Sorry!</strong> No data
+                                                    </div>
+                                                    <b-table
+                                                        v-if="filteredItems.length"
+                                                        head-variant="light"
+                                                        ref="table"
+                                                        hover
+                                                        :items="filteredItems"
+                                                        :fields="fields"
+                                                        :current-page="currentPage"
+                                                        :per-page="perPage"
+                                                        :filter="filter"
+                                                        selectable
+                                                        select-mode="single"
+                                                        responsive="md">
+                                                        <template v-slot:cell(index)="data">
+                                                            @{{ data.index + 1 }}
+                                                        </template>
+                                                        <template v-slot:cell(tempattanggal)="data">
+                                                            @{{ data.item.tempat_lahir }}, @{{ data.item.tanggal_lahir }}
+                                                        </template>
+                                                        <template v-slot:cell(aksi)="data">
+                                                            <button type="button" @click="edit(data.item.id)" class="btn btn-success waves-effect waves-light"><i
+                                                                    class="fa fa-edit mr-1" ></i>Edit</button>
+                                                            <button class="btn btn-danger waves-effect" @click="hapusdata(data.item.id)"><i
+                                                                    class="fa fa-trash mr-1" ></i>Hapus
+                                                            </button>
+                                                        </template>
+                                                    </b-table>
+                                                    <div class="col-12 col-md-6 float-left">
+                                                        <p>Showing @{{(currentPage*perPage+1)-perPage}} to @{{(currentPage*perPage)}} of @{{totalRows}} entries</p>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 float-right">
+                                                        <b-pagination
+                                                            v-model="currentPage"
+                                                            :total-rows="totalRows"
+                                                            :per-page="perPage"
+                                                            align="right"
+                                                            size="sm"
+                                                            class="my-0"
+                                                            pills>
+                                                        </b-pagination>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-
                                 </div>
                                 <!-- end row -->
                                 <!-- sample modal content -->

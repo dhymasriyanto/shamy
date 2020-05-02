@@ -15,7 +15,44 @@ function initVue() {
             editkode : '',
             editsingkatan : '',
             editid_fakultas : '',
-            editid : ''
+            editid : '',
+            search :'',
+            list: [],
+            filter: '',
+            fields: [
+                {
+                    key: 'index',
+                    label: 'No'
+                },
+                {
+                    key: 'nama',
+                    label: 'Nama',
+                    sortable: true,
+                },
+                {
+                    key: 'kode',
+                    label: 'Kode',
+                    sortable: true,
+                },
+                {
+                    key: 'get_fakultas.nama',
+                    label: 'Fakultas',
+                    sortable: true,
+                },
+                {
+                    key: 'singkatan',
+                    label: 'Singkatan',
+                    sortable: true,
+                },
+                {
+                    key: 'aksi',
+                    label: 'Aksi',
+                },
+            ],
+            perPage: 10,
+            pageOptions: [10, 15, 20],
+            totalRows: 1,
+            currentPage: 1,
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -105,7 +142,8 @@ function initVue() {
                 axios.get('/jurusan/all')
                     .then(function (response) {
                         // handle success
-                        vm.datajurusan = response.data;
+                        vm.list = response.data;
+                        vm.totalRows = vm.list.length;
                         vm.allFakultas();
                     })
                     .catch(function (error) {
@@ -161,6 +199,13 @@ function initVue() {
                         // always executed
                     });
                 $("#modalhapus").modal('show');
+            }
+        },
+        computed: {
+            filteredItems() {
+                return this.list.filter(jurusan => {
+                    return (jurusan.nama.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+                })
             }
         },
         components: {}
