@@ -23,7 +23,48 @@ function initVue() {
             editagama : '',
             editid : '',
             search :'',
-            search2 :''
+            search2 :'',
+            list: [],
+            filter: '',
+            fields: [
+                {
+                key: 'index',
+                label: 'No'
+                },
+                {
+                    key: 'nama',
+                    label: 'Nama',
+                    sortable: true,
+                },
+                {
+                    key: 'get_jurusan.nama',
+                    label: 'Jurusan',
+                    sortable: true,
+                },
+                {
+                    key: 'jenis_kelamin',
+                    label: 'Jenis Kelamin',
+                    sortable: true,
+                },
+                {
+                    key: 'tempattanggal',
+                    label: 'Tempat Lahir',
+                    sortable: true,
+                },
+                {
+                    key: 'agama',
+                    label: 'Agama',
+                    sortable: true,
+                },
+                {
+                    key: 'aksi',
+                    label: 'Aksi',
+                },
+            ],
+            perPage: 10,
+            pageOptions: [10, 15, 20],
+            totalRows: 1,
+            currentPage: 1,
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -115,7 +156,8 @@ function initVue() {
                 axios.get('/dosen/all')
                     .then(function (response) {
                         // handle success
-                        vm.datadosen = response.data;
+                        vm.list = response.data;
+                        vm.totalRows = vm.list.length;
                         vm.allJurusan();
                     })
                     .catch(function (error) {
@@ -177,7 +219,7 @@ function initVue() {
         },
         computed: {
             filteredItems() {
-                return this.datadosen.filter(dosen => {
+                return this.list.filter(dosen => {
                     return (dosen.get_jurusan.nama.toLowerCase().indexOf(this.search.toLowerCase()) > -1 && dosen.nama.toLowerCase().indexOf(this.search2.toLowerCase()) > -1)
                 })
             }

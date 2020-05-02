@@ -41,39 +41,70 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <input class="form-control" v-model="search2"><br><br>
                                             </div>
                                         </div>
-                                        <table id="responsive-datatable" class="table table-bordered table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>NIDN</th>
-                                                <th>Nama</th>
-                                                <th>Program Studi</th>
-                                                <th>Jenis Kelamin</th>
-                                                <th>Tempat, Tanggal Lahir</th>
-                                                <th>Agama</th>
-                                                <th>Opsi</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr v-for="(dosen, no) in filteredItems">
-                                                <td>@{{  no+1 }}</td>
-                                                <td>@{{  dosen.nomor_induk }}</td>
-                                                <td>@{{  dosen.nama }}</td>
-                                                <td>@{{  dosen.get_jurusan.nama }}</td>
-                                                <td>@{{  dosen.jenis_kelamin }}</td>
-                                                <td>@{{  dosen.tempat_lahir }}, @{{  dosen.tanggal_lahir }}</td>
-                                                <td>@{{  dosen.agama }}</td>
-                                                <td><button type="button" @click="edit(dosen.id)" class="btn btn-success waves-effect waves-light"><i
-                                                            class="fa fa-edit mr-1" ></i>Edit</button>
-                                                    <button class="btn btn-danger waves-effect" @click="hapusdata(dosen.id)"><i
-                                                            class="fa fa-trash mr-1" ></i>Hapus
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                    <div>
+                                        <div class="col-12 col-md-4 my-3 float-left">
+                                            <b-form-group
+                                                label="Per page"
+                                                label-cols-sm="3"
+                                                label-align-sm="left"
+                                                label-size="sm"
+                                                label-for="perPageSelect"
+                                                class="ml-0">
+                                                <b-form-select
+                                                    v-model="perPage"
+                                                    id="perPageSelect"
+                                                    size="sm"
+                                                    :options="pageOptions">
+                                                </b-form-select>
+                                            </b-form-group>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="alert alert-warning" v-if="!filteredItems.length">
+                                            <strong>Sorry!</strong> No data
+                                        </div>
+                                        <b-table
+                                            v-if="filteredItems.length"
+                                            head-variant="light"
+                                            ref="table"
+                                            hover
+                                            :items="filteredItems"
+                                            :fields="fields"
+                                            :current-page="currentPage"
+                                            :per-page="perPage"
+                                            :filter="filter"
+                                            selectable
+                                            select-mode="single"
+                                            responsive="md">
+                                            <template v-slot:cell(index)="data">
+                                                @{{ data.index + 1 }}
+                                            </template>
+                                            <template v-slot:cell(tempattanggal)="data">
+                                                @{{ data.item.tempat_lahir }}, @{{ data.item.tanggal_lahir }}
+                                            </template>
+                                            <template v-slot:cell(aksi)="data">
+                                                <button type="button" @click="edit(data.item.id)" class="btn btn-success waves-effect waves-light"><i
+                                                        class="fa fa-edit mr-1" ></i>Edit</button>
+                                                <button class="btn btn-danger waves-effect" @click="hapusdata(data.item.id)"><i
+                                                        class="fa fa-trash mr-1" ></i>Hapus
+                                                </button>
+                                            </template>
+                                        </b-table>
+                                        <div class="col-12 col-md-6 float-left">
+                                            <p>Showing @{{(currentPage*perPage+1)-perPage}} to @{{(currentPage*perPage)}} of @{{totalRows}} entries</p>
+                                        </div>
+                                        <div class="col-12 col-md-6 float-right">
+                                            <b-pagination
+                                                v-model="currentPage"
+                                                :total-rows="totalRows"
+                                                :per-page="perPage"
+                                                align="right"
+                                                size="sm"
+                                                class="my-0"
+                                                pills>
+                                            </b-pagination>
+                                        </div>
                                     </div>
-
+                                    </div>
                                 </div>
                                 <!-- end row -->
                                 <!-- sample modal content -->

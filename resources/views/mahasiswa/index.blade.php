@@ -22,13 +22,70 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                     <div class="row">
                         <div class="col-12">
                             <div class="card-box">
+{{--                                <div class="row">--}}
+{{--                                    <div class="col-12">--}}
+{{--                                        <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i--}}
+{{--                                                class="fa fa-plus mr-1" ></i>Tambah</button><br><br>--}}
+{{--                                        <div class="form-row">--}}
+{{--                                            <div class="col-3">--}}
+{{--                                                <h5>Program Studi</h5>--}}
+{{--                                                <select class="form-control" v-model="search">--}}
+{{--                                                    <option value="">Semua</option>--}}
+{{--                                                    <option v-for="jurusan in datajurusan" v-bind:value="jurusan.nama">--}}
+{{--                                                        @{{ jurusan.nama }}--}}
+{{--                                                    </option>--}}
+{{--                                                </select>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="col-3">--}}
+{{--                                                <h5>Nama</h5>--}}
+{{--                                                <input class="form-control" v-model="search2"><br><br>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <table id="example" class="table table-bordered table-hover">--}}
+{{--                                            <thead>--}}
+{{--                                            <tr>--}}
+{{--                                                <th>No</th>--}}
+{{--                                                <th>Nama</th>--}}
+{{--                                                <th>NIM</th>--}}
+{{--                                                <th>Program Studi</th>--}}
+{{--                                                <th>Status Aktif</th>--}}
+{{--                                                <th>Jenis Pendaftaran</th>--}}
+{{--                                                <th>Jenis Kelamin</th>--}}
+{{--                                                <th>Tempat, Tanggal Lahir</th>--}}
+{{--                                                <th>Agama</th>--}}
+{{--                                                <th>Opsi</th>--}}
+{{--                                            </tr>--}}
+{{--                                            </thead>--}}
+{{--                                            <tbody>--}}
+{{--                                            <tr v-for="(mahasiswa,no) in filteredItems">--}}
+{{--                                                <td>@{{  no+1 }}</td>--}}
+{{--                                                <td>@{{  mahasiswa.nama }}</td>--}}
+{{--                                                <td>@{{  mahasiswa.nomor_induk }}</td>--}}
+{{--                                                <td>@{{  mahasiswa.get_jurusan.nama }}</td>--}}
+{{--                                                <td>-</td>--}}
+{{--                                                <td>@{{  mahasiswa.jenis_pendaftaran }}</td>--}}
+{{--                                                <td>@{{  mahasiswa.jenis_kelamin }}</td>--}}
+{{--                                                <td>@{{  mahasiswa.tempat_lahir }}, @{{  mahasiswa.tanggal_lahir }}</td>--}}
+{{--                                                <td>@{{  mahasiswa.agama }}</td>--}}
+{{--                                                <td><button type="button" @click="edit(mahasiswa.id)" class="btn btn-success waves-effect waves-light"><i--}}
+{{--                                                            class="fa fa-edit mr-1" ></i>Edit</button>--}}
+{{--                                                    <button class="btn btn-danger waves-effect" @click="hapusdata(mahasiswa.id)"><i--}}
+{{--                                                            class="fa fa-trash mr-1" ></i>Hapus--}}
+{{--                                                    </button>--}}
+{{--                                                </td>--}}
+{{--                                            </tr>--}}
+{{--                                            </tbody>--}}
+{{--                                        </table>--}}
+{{--                                    </div>--}}
+
+{{--                                </div>--}}
                                 <div class="row">
                                     <div class="col-12">
                                         <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
                                                 class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
                                         <div class="form-row">
                                             <div class="col-3">
-                                                <h5>Program Studi</h5>
+                                                <h5>Jurusan</h5>
                                                 <select class="form-control" v-model="search">
                                                     <option value="">Semua</option>
                                                     <option v-for="jurusan in datajurusan" v-bind:value="jurusan.nama">
@@ -41,44 +98,71 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <input class="form-control" v-model="search2"><br><br>
                                             </div>
                                         </div>
-                                        <table id="example" class="table table-bordered table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Nama</th>
-                                                <th>NIM</th>
-                                                <th>Program Studi</th>
-                                                <th>Status Aktif</th>
-                                                <th>Jenis Pendaftaran</th>
-                                                <th>Jenis Kelamin</th>
-                                                <th>Tempat, Tanggal Lahir</th>
-                                                <th>Agama</th>
-                                                <th>Opsi</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr v-for="(mahasiswa,no) in filteredItems">
-                                                <td>@{{  no+1 }}</td>
-                                                <td>@{{  mahasiswa.nama }}</td>
-                                                <td>@{{  mahasiswa.nomor_induk }}</td>
-                                                <td>@{{  mahasiswa.get_jurusan.nama }}</td>
-                                                <td>-</td>
-                                                <td>@{{  mahasiswa.jenis_pendaftaran }}</td>
-                                                <td>@{{  mahasiswa.jenis_kelamin }}</td>
-                                                <td>@{{  mahasiswa.tempat_lahir }}, @{{  mahasiswa.tanggal_lahir }}</td>
-                                                <td>@{{  mahasiswa.agama }}</td>
-                                                <td><button type="button" @click="edit(mahasiswa.id)" class="btn btn-success waves-effect waves-light"><i
+                                        <div>
+                                            <div class="col-12 col-md-4 my-3 float-left">
+                                                <b-form-group
+                                                    label="Per page"
+                                                    label-cols-sm="3"
+                                                    label-align-sm="left"
+                                                    label-size="sm"
+                                                    label-for="perPageSelect"
+                                                    class="ml-0">
+                                                    <b-form-select
+                                                        v-model="perPage"
+                                                        id="perPageSelect"
+                                                        size="sm"
+                                                        :options="pageOptions">
+                                                    </b-form-select>
+                                                </b-form-group>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="alert alert-warning" v-if="!filteredItems.length">
+                                                <strong>Sorry!</strong> No data
+                                            </div>
+                                            <b-table
+                                                v-if="filteredItems.length"
+                                                head-variant="light"
+                                                ref="table"
+                                                hover
+                                                :items="filteredItems"
+                                                :fields="fields"
+                                                :current-page="currentPage"
+                                                :per-page="perPage"
+                                                :filter="filter"
+                                                selectable
+                                                select-mode="single"
+                                                responsive="md">
+                                                <template v-slot:cell(index)="data">
+                                                    @{{ data.index + 1 }}
+                                                </template>
+                                                <template v-slot:cell(tempattanggal)="data">
+                                                    @{{ data.item.tempat_lahir }}, @{{ data.item.tanggal_lahir }}
+                                                </template>
+                                                <template v-slot:cell(aksi)="data">
+                                                    <button type="button" @click="edit(data.item.id)" class="btn btn-success waves-effect waves-light"><i
                                                             class="fa fa-edit mr-1" ></i>Edit</button>
-                                                    <button class="btn btn-danger waves-effect" @click="hapusdata(mahasiswa.id)"><i
+                                                    <button class="btn btn-danger waves-effect" @click="hapusdata(data.item.id)"><i
                                                             class="fa fa-trash mr-1" ></i>Hapus
                                                     </button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                                </template>
+                                            </b-table>
+                                            <div class="col-12 col-md-6 float-left">
+                                                <p>Showing @{{(currentPage*perPage+1)-perPage}} to @{{(currentPage*perPage)}} of @{{totalRows}} entries</p>
+                                            </div>
+                                            <div class="col-12 col-md-6 float-right">
+                                                <b-pagination
+                                                    v-model="currentPage"
+                                                    :total-rows="totalRows"
+                                                    :per-page="perPage"
+                                                    align="right"
+                                                    size="sm"
+                                                    class="my-0"
+                                                    pills>
+                                                </b-pagination>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                </div>
+                                    </div>
                                 <!-- end row -->
                                 <!-- sample modal content -->
                                 <div v-on:keyup.enter="hapus" id="modalhapus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

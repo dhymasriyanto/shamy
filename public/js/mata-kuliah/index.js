@@ -26,7 +26,58 @@ function initVue() {
             search :'',
             search2 :'',
             search3 :'',
-            search4 :''
+            search4 :'',
+            list: [],
+            filter: '',
+            fields: [
+                {
+                    key: 'index',
+                    label: 'No'
+                },
+                {
+                    key: 'kode',
+                    label: 'Kode',
+                    sortable: true,
+                },
+                {
+                    key: 'nama',
+                    label: 'Nama',
+                    sortable: true,
+                },
+                {
+                    key: 'singkatan',
+                    label: 'Singkatan',
+                    sortable: true,
+                },
+                {
+                    key: 'get_kurikulum.nama',
+                    label: 'Kurikulum',
+                    sortable: true,
+                },
+                {
+                    key: 'bobot',
+                    label: 'Bobot',
+                    sortable: true,
+                },
+                {
+                    key: 'jenis',
+                    label: 'Jenis',
+                    sortable: true,
+                },
+                {
+                    key: 'get_jurusan.nama',
+                    label: 'Jurusan',
+                    sortable: true,
+                },
+                {
+                    key: 'aksi',
+                    label: 'Aksi',
+                },
+            ],
+            perPage: 10,
+            pageOptions: [10, 15, 20, 30, 50, 100],
+            totalRows: 1,
+            currentPage: 1,
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -118,7 +169,8 @@ function initVue() {
                 axios.get('/mata-kuliah/all')
                     .then(function (response) {
                         // handle success
-                        vm.datamatakuliah = response.data;
+                        vm.list = response.data;
+                        vm.totalRows = vm.list.length;
                         vm.allDosen();
                         vm.allKurikulum();
                     })
@@ -195,7 +247,7 @@ function initVue() {
         },
         computed: {
             filteredItems() {
-                return this.datamatakuliah.filter(matakuliah => {
+                return this.list.filter(matakuliah => {
                     return (matakuliah.get_jurusan.nama.toLowerCase().indexOf(this.search.toLowerCase()) > -1 && matakuliah.nama.toLowerCase().indexOf(this.search2.toLowerCase()) > -1 && matakuliah.bobot.toString().indexOf(this.search3) > -1 && matakuliah.jenis.toLowerCase().indexOf(this.search4.toLowerCase()) > -1)
                 })
             }
