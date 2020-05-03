@@ -51,19 +51,19 @@
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label for="password">NIM</label>
-                                    <input class="form-control"id="password" type="text" class="form-control" required disabled value="{{$nim}}" placeholder="Enter your password">
+                                    <input class="form-control" id="nim" type="text" class="form-control" required disabled value="{{$nim}}" placeholder="Enter your password">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="password">Nama</label>
-                                    <input class="form-control"id="password" type="text" class="form-control" required disabled value="{{$nama}}" placeholder="Enter your password">
+                                    <input class="form-control" id="nama" type="text" class="form-control" required disabled value="{{$nama}}" placeholder="Enter your password">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="password">{{ __('Password') }}</label>
-                                    <input class="form-control"id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter your password">
+                                    <input class="form-control" id="password" type="password" class="form-control" data-parsley-required-message="Password harus diisi!" name="password" required autocomplete="current-password" placeholder="Enter your password">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="password">{{ __('Konfirmasi Password') }}</label>
-                                    <input class="form-control"id="password" type="password" class="form-control @error('password') is-invalid @enderror" required autocomplete="current-password" placeholder="Enter your password">
+                                    <input class="form-control" id="password2" data-parsley-equalto="#password" type="password" data-parsley-required-message="Konfirmasi password harus diisi!" data-parsley-equalto-message="Password yang dimasukkan harus sama!" class="form-control" required  placeholder="Enter your confirmation password">
                                 </div>
                                 <div class="form-group mb-0 text-center">
                                     <button class="btn btn-primary btn-block waves-effect btn-rounded" type="submit"> Daftar Ulang </button>
@@ -94,5 +94,11 @@
     <script src="{{asset('adminto/js/vendor.min.js')}}"></script>
     {{--    <!-- App js -->--}}
     <script src="{{asset('adminto/js/app.min.js')}}"></script>
+
+    <!-- Validation js (Parsleyjs) -->
+    <script src="{{asset('adminto/libs/parsleyjs/parsley.min.js')}}"></script>
+
+    <!-- validation init -->
+    <script src="{{asset('adminto/js/pages/form-validation.init.js')}}"></script>
 </body>
 </html>

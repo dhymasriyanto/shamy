@@ -47,16 +47,16 @@
                                     {{ $errors->first('username') }} {{ $errors->first('password') }}
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('auth.login') }}">
+                            <form method="post" action="{{ route('auth.login') }}">
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label for="emailaddress">{{ __('User ID') }}</label>
-                                    <input class="form-control" id="email" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autofocus placeholder="Enter your user ID">
+                                    <input class="form-control" id="email" type="text" data-parsley-required-message="User ID harus diisi!" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autofocus placeholder="Enter your user ID">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="password">{{ __('Password') }}</label>
-                                    <input class="form-control"id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter your password">
+                                    <input class="form-control" id="password" type="password" data-parsley-required-message="Password harus diisi!" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter your password">
                                 </div>
 
 {{--                                <div class="form-group mb-3">--}}
@@ -123,5 +123,10 @@
     <script src="{{asset('adminto/js/vendor.min.js')}}"></script>
     {{--    <!-- App js -->--}}
     <script src="{{asset('adminto/js/app.min.js')}}"></script>
+    <!-- Validation js (Parsleyjs) -->
+    <script src="{{asset('adminto/libs/parsleyjs/parsley.min.js')}}"></script>
+
+    <!-- validation init -->
+    <script src="{{asset('adminto/js/pages/form-validation.init.js')}}"></script>
 </body>
 </html>
