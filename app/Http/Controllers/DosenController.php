@@ -30,7 +30,7 @@ class DosenController extends Controller
 
     public function all()
     {
-        $dosen = Dosen::with('getJurusan')->get();;
+        $dosen = Dosen::with('getJurusan')->orderBy('nama', 'asc')->get();;
         return response($dosen);
     }
 
@@ -42,6 +42,9 @@ class DosenController extends Controller
     public function create(Request $request)
     {
         //
+        if ($request->agama == null){
+            $request->agama = "Tidak diisi";
+        }
         Dosen::create([
                 'nama' => $request->nama,
                 'nomor_induk' => $request->nomor_induk,

@@ -32,13 +32,18 @@ function initVue() {
                 label: 'No'
                 },
                 {
+                    key: 'nomor_induk',
+                    label: 'NIDN',
+                    sortable: true,
+                },
+                {
                     key: 'nama',
                     label: 'Nama',
                     sortable: true,
                 },
                 {
                     key: 'get_jurusan.nama',
-                    label: 'Jurusan',
+                    label: 'Program Studi',
                     sortable: true,
                 },
                 {
