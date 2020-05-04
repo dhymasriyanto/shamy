@@ -37,21 +37,14 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <div class="col-12 col-md-4 my-3 float-left">
-                                                        <b-form-group
-                                                            label="Per page"
-                                                            label-cols-sm="3"
-                                                            label-align-sm="left"
-                                                            label-size="sm"
-                                                            label-for="perPageSelect"
-                                                            class="ml-0">
-                                                            <b-form-select
-                                                                v-model="perPage"
-                                                                id="perPageSelect"
-                                                                size="sm"
-                                                                :options="pageOptions">
-                                                            </b-form-select>
-                                                        </b-form-group>
+                                                    <div class="col-sm-1" style="margin-bottom: 1.5rem; padding-left: 0px; ">
+                                                        <h5>Jumlah entri</h5>
+                                                        <b-form-select
+                                                            v-model="perPage"
+                                                            id="perPageSelect"
+                                                            class="form-control"
+                                                            :options="pageOptions">
+                                                        </b-form-select>
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="alert alert-warning" v-if="!filteredItems.length">
@@ -59,8 +52,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     </div>
                                                     <b-table
                                                         v-if="filteredItems.length"
-                                                        head-variant="light"
+                                                        head-variant="dark"
                                                         ref="table"
+                                                        striped
                                                         hover
                                                         :items="filteredItems"
                                                         :fields="fields"
@@ -77,15 +71,17 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             @{{ data.item.tempat_lahir }}, @{{ data.item.tanggal_lahir }}
                                                         </template>
                                                         <template v-slot:cell(aksi)="data">
-                                                            <button type="button" @click="edit(data.item.id)" class="btn btn-success waves-effect waves-light"><i
-                                                                    class="fa fa-edit mr-1" ></i>Edit</button>
-                                                            <button class="btn btn-danger waves-effect" @click="hapusdata(data.item.id)"><i
-                                                                    class="fa fa-trash mr-1" ></i>Hapus
-                                                            </button>
+                                                            <div class="button-list">
+                                                                <button type="button" @click="edit(data.item.id)" class="btn btn-success waves-effect waves-light"><i
+                                                                        class="mdi mdi-18px mdi-file-document-edit-outline" ></i> Ubah </button>
+                                                                <button class="btn btn-danger waves-effect" @click="hapusdata(data.item.id)"><i
+                                                                        class="mdi mdi-18px mdi-delete-forever" ></i> Hapus
+                                                                </button>
+                                                            </div>
                                                         </template>
                                                     </b-table>
                                                     <div class="col-12 col-md-6 float-left">
-                                                        <p>Showing @{{(currentPage*perPage+1)-perPage}} to @{{(currentPage*perPage)}} of @{{totalRows}} entries</p>
+                                                        <p>Menampilkan @{{(currentPage*perPage+1)-perPage}} sampai @{{(currentPage*perPage)}} dari @{{totalRows}} data</p>
                                                     </div>
                                                     <div class="col-12 col-md-6 float-right">
                                                         <b-pagination
@@ -93,9 +89,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             :total-rows="totalRows"
                                                             :per-page="perPage"
                                                             align="right"
-                                                            size="sm"
-                                                            class="my-0"
-                                                            pills>
+                                                            class="my-0">
                                                         </b-pagination>
                                                     </div>
                                                 </div>
@@ -130,22 +124,22 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
                                             <div class="modal-body">
-                                                <form role="form">
+                                                <form @submit.prevent="create()" id="formtambah">
                                                     <!-- Name -->
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Nama</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama"  type="text" class="form-control" v-model="nama">
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+                                                            <input name="nama" required type="text" class="form-control" v-model="nama">
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal">Batal</button>
-                                                <button type="button" @click="create()" class="btn btn-success waves-effect waves-light">Simpan</button>
+                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal"><i class="mdi mdi-18px mdi-file-cancel-outline"></i> Batal </button>
+                                                <button type="submit" form="formtambah" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-18px mdi-content-save-outline"></i> Simpan </button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
@@ -158,22 +152,22 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
                                             <div class="modal-body">
-                                                <form role="form">
+                                                <form @submit.prevent="update()" id="formedit">
                                                     <!-- Name -->
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Nama</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama"  type="text" class="form-control" v-model="editnama">
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+                                                            <input name="nama" required type="text" class="form-control" v-model="editnama">
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal">Batal</button>
-                                                <button type="button" @click="update()" class="btn btn-success waves-effect waves-light">Simpan</button>
+                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal"><i class="mdi mdi-18px mdi-file-cancel-outline"></i> Batal </button>
+                                                <button type="submit" form="formedit" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-18px mdi-content-save-outline"></i> Simpan </button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->

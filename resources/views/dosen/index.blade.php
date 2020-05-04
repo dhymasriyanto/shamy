@@ -27,36 +27,29 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
                                                 class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
                                         <div class="form-row">
-                                            <div class="col-3">
+                                            <div class="col-6">
                                                 <h5>Jurusan</h5>
-                                                <select class="form-control" v-model="search">
+                                                <select class="form-control custom-select"  v-model="search">
                                                     <option value="">Semua</option>
                                                     <option v-for="jurusan in datajurusan" v-bind:value="jurusan.nama">
                                                         @{{ jurusan.nama }}
                                                     </option>
                                                 </select>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-6">
                                                 <h5>Nama</h5>
                                                 <input class="form-control" v-model="search2"><br><br>
                                             </div>
                                         </div>
                                     <div>
-                                        <div class="col-12 col-md-4 my-3 float-left">
-                                            <b-form-group
-                                                label="Per page"
-                                                label-cols-sm="3"
-                                                label-align-sm="left"
-                                                label-size="sm"
-                                                label-for="perPageSelect"
-                                                class="ml-0">
-                                                <b-form-select
-                                                    v-model="perPage"
-                                                    id="perPageSelect"
-                                                    size="sm"
-                                                    :options="pageOptions">
-                                                </b-form-select>
-                                            </b-form-group>
+                                        <div class="col-sm-1" style="margin-bottom: 1.5rem; padding-left: 0px; ">
+                                            <h5>Jumlah entri</h5>
+                                            <b-form-select
+                                                v-model="perPage"
+                                                id="perPageSelect"
+                                                class="form-control"
+                                                :options="pageOptions">
+                                            </b-form-select>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="alert alert-warning" v-if="!filteredItems.length">
@@ -64,8 +57,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         </div>
                                         <b-table
                                             v-if="filteredItems.length"
-                                            head-variant="light"
+                                            head-variant="dark"
                                             ref="table"
+                                            striped
                                             hover
                                             :items="filteredItems"
                                             :fields="fields"
@@ -82,15 +76,17 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 @{{ data.item.tempat_lahir }}, @{{ data.item.tanggal_lahir }}
                                             </template>
                                             <template v-slot:cell(aksi)="data">
-                                                <button type="button" @click="edit(data.item.id)" class="btn btn-success waves-effect waves-light"><i
-                                                        class="fa fa-edit mr-1" ></i>Edit</button>
-                                                <button class="btn btn-danger waves-effect" @click="hapusdata(data.item.id)"><i
-                                                        class="fa fa-trash mr-1" ></i>Hapus
-                                                </button>
+                                                <div class="button-list">
+                                                    <button type="button" @click="edit(data.item.id)" class="btn btn-success waves-effect waves-light"><i
+                                                            class="mdi mdi-18px mdi-file-document-edit-outline" ></i> Ubah </button>
+                                                    <button class="btn btn-danger waves-effect" @click="hapusdata(data.item.id)"><i
+                                                            class="mdi mdi-18px mdi-delete-forever" ></i> Hapus
+                                                    </button>
+                                                </div>
                                             </template>
                                         </b-table>
                                         <div class="col-12 col-md-6 float-left">
-                                            <p>Showing @{{(currentPage*perPage+1)-perPage}} to @{{(currentPage*perPage)}} of @{{totalRows}} entries</p>
+                                            <p>Menampilkan @{{(currentPage*perPage+1)-perPage}} sampai @{{(currentPage*perPage)}} dari @{{totalRows}} data</p>
                                         </div>
                                         <div class="col-12 col-md-6 float-right">
                                             <b-pagination
@@ -98,9 +94,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 :total-rows="totalRows"
                                                 :per-page="perPage"
                                                 align="right"
-                                                size="sm"
-                                                class="my-0"
-                                                pills>
+                                                class="my-0">
                                             </b-pagination>
                                         </div>
                                     </div>
@@ -133,95 +127,94 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
                                             <div class="modal-body">
-                                                <form role="form">
+                                                <form @submit.prevent="create()" id="formtambah">
                                                     <!-- Name -->
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">NIDN</label>
                                                         <div class="col-md-9">
-                                                            <input type="number" class="form-control" v-model="nip">
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+                                                            <input type="number" required class="form-control" v-model="nip">
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Nama</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control" v-model="nama">
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+                                                            <input type="text" class="form-control" required v-model="nama">
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Program Studi</label>
                                                         <div class="col-md-9">
-                                                            <select class="form-control" v-model="id_jurusan">
+                                                            <select class="form-control custom-select" required v-model="id_jurusan">
                                                                 <option disabled value="">Pilih</option>
                                                                 <option v-for="jurusan in datajurusan" v-bind:value="jurusan.id">
                                                                     @{{ jurusan.nama }}
                                                                 </option>
                                                             </select>
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Jenis Kelamin</label>
                                                         <div class="col-md-9">
-                                                            <select class="form-control" v-model="jenis_kelamin">
+                                                            <select class="form-control custom-select" required v-model="jenis_kelamin">
                                                                 <option disabled value="">Pilih</option>
                                                                 <option value="Laki-laki">Laki-laki</option>
                                                                 <option value="Perempuan">Perempuan</option>
 
                                                             </select>
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Tempat Lahir</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control" v-model="tempat_lahir">
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+                                                            <input type="text" class="form-control" required v-model="tempat_lahir">
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Tanggal Lahir</label>
                                                         <div class="col-md-9">
-                                                            <input type="date" class="form-control" v-model="tanggal_lahir">
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+                                                            <input type="date" class="form-control" required v-model="tanggal_lahir">
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Agama</label>
                                                         <div class="col-md-9">
-                                                            <select class="form-control" v-model="agama">
-                                                                <option value="Tidak diisi">Pilih</option>
+                                                            <select class="form-control custom-select" v-model="agama">
+                                                                <option value="">Pilih</option>
                                                                 <option value="Islam">Islam</option>
                                                                 <option value="Kristen Protestan">Kristen Protestan</option>
                                                                 <option value="Katolik">Katolik</option>
                                                                 <option value="Hindu">Hindu</option>
                                                                 <option value="Buddha">Buddha</option>
                                                                 <option value="Kong Hu Cu">Kong Hu Cu</option>
-
                                                             </select>
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal">Batal</button>
-                                                <button type="button" @click="create()" class="btn btn-success waves-effect waves-light">Simpan</button>
+                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal"><i class="mdi mdi-18px mdi-file-cancel-outline"></i> Batal </button>
+                                                <button type="submit" form="formtambah" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-18px mdi-content-save-outline"></i> Simpan </button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
@@ -234,70 +227,70 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
                                             <div class="modal-body">
-                                                <form role="form">
+                                                <form @submit.prevent="update()" id="formedit">
                                                     <!-- Name -->
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">NIDN</label>
+                                                        <label class="col-md-3 col-form-label required">NIDN</label>
                                                         <div class="col-md-9">
                                                             <input name="nama"  type="text" class="form-control" v-model="editnip">
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Nama</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" type="text" class="form-control" v-model="editnama">
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+                                                            <input name="nama" type="text" class="form-control" required v-model="editnama">
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Program Studi</label>
                                                         <div class="col-md-9">
-                                                            <select class="form-control" v-model="editid_jurusan">
+                                                            <select class="form-control" required v-model="editid_jurusan">
                                                                 <option disabled value="">Pilih</option>
                                                                 <option v-for="jurusan in datajurusan" v-bind:value="jurusan.id">
                                                                     @{{ jurusan.nama }}
                                                                 </option>
                                                             </select>
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Jenis Kelamin</label>
                                                         <div class="col-md-9">
-                                                            <select class="form-control" v-model="editjenis_kelamin">
+                                                            <select class="form-control" required v-model="editjenis_kelamin">
                                                                 <option disabled value="">Pilih</option>
                                                                 <option value="Laki-laki">Laki-laki</option>
                                                                 <option value="Perempuan">Perempuan</option>
 
                                                             </select>
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Tempat Lahir</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama"  type="text" class="form-control" v-model="edittempat_lahir">
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+                                                            <input name="nama"  type="text" class="form-control" required v-model="edittempat_lahir">
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Tanggal Lahir</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama"  type="date" class="form-control" v-model="edittanggal_lahir">
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+                                                            <input name="nama"  type="date" class="form-control" required v-model="edittanggal_lahir">
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -313,16 +306,16 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 <option value="Kong Hu Cu">Kong Hu Cu</option>
 
                                                             </select>
-                                                            <span style="color: red" class="form-text text-muted">
-                                                                **keterangan
-                                                            </span>
+{{--                                                            <span style="color: red" class="form-text text-muted">--}}
+{{--                                                                **keterangan--}}
+{{--                                                            </span>--}}
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal">Batal</button>
-                                                <button type="button" @click="update()" class="btn btn-success waves-effect waves-light">Simpan</button>
+                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal"><i class="mdi mdi-18px mdi-file-cancel-outline"></i> Batal </button>
+                                                <button type="submit" form="formedit" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-18px mdi-content-save-outline"></i> Simpan </button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
