@@ -22,6 +22,8 @@ function initVue() {
             edittanggal_lahir : '',
             editagama : '',
             editid : '',
+            updated_by : '',
+            created_by : '',
             search :'',
             search2 :'',
             list: [],
@@ -189,6 +191,15 @@ function initVue() {
                 axios.get("/dosen/get/"+id)
                     .then(function (response) {
                         // handle success
+                        axios.get("/log/"+response.data[0]['updated_by']+"/"+response.data[0]['created_by'])
+                            .then(function (response) {
+                                vm.updated_by = response.data['updatedby'];
+                                vm.created_by = response.data['createdby'];
+                            })
+                            .catch(function (error) {
+                            })
+                            .then(function () {
+                            });
                         vm.editnama = response.data[0]['nama'];
                         vm.editnip = response.data[0]['nomor_induk'];
                         vm.editid_jurusan = response.data[0]['id_jurusan'];

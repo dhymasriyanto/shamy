@@ -162,6 +162,16 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </div>
                                                     </div>
                                                 </form>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="createdby" class="col-form-label">Dibuat oleh</label>
+                                                        <input class="form-control" id="createdby" disabled v-model="created_by">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="updatedby" class="col-form-label">Terakhir diubah oleh</label>
+                                                        <input class="form-control" id="updatedby" disabled v-model="updated_by">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal"><i class="mdi mdi-18px mdi-file-cancel-outline"></i> Batal </button>
