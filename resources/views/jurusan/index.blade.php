@@ -26,7 +26,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                     <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
                                             class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
                                     <div class="form-row">
-                                        <div class="col-3">
+                                        <div class="col-md-3">
                                             <h5>Nama</h5>
                                             <input class="form-control" v-model="search"><br><br>
                                         </div>
@@ -222,11 +222,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <div class="form-row">
                                                     <div class="form-group col-md-6">
                                                         <label for="createdby" class="col-form-label">Dibuat oleh</label>
-                                                        <input class="form-control" id="createdby" disabled v-model="created_by">
+                                                        <input style="background-color: rgba(128,128,128,0.18)" class="form-control" id="createdby" disabled v-model="created_by">
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label for="updatedby" class="col-form-label">Terakhir diubah oleh</label>
-                                                        <input class="form-control" id="updatedby" disabled v-model="updated_by">
+                                                        <input style="background-color: rgba(128,128,128,0.18)" class="form-control" id="updatedby" disabled v-model="updated_by">
                                                     </div>
                                                 </div>
                                             </div>

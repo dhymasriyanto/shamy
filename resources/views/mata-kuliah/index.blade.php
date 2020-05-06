@@ -27,7 +27,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
                                                 class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
                                         <div class="form-row">
-                                            <div class="col-3">
+                                            <div class="col-md-3">
                                                 <h5>Jurusan</h5>
                                                 <select class="form-control" v-model="search">
                                                     <option value="">Semua</option>
@@ -36,11 +36,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     </option>
                                                 </select>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-md-3">
                                                 <h5>Nama</h5>
                                                 <input class="form-control" v-model="search2">
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-md-3">
                                                 <h5>Bobot</h5>
                                                 <select class="form-control" v-model="search3">
                                                     <option selected value="">Pilih</option>
@@ -50,7 +50,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <option value="4">4</option>
                                                 </select>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-md-3">
                                                 <h5>Jenis</h5>
                                                 <select class="form-control" v-model="search4">
                                                     <option selected value="">Pilih</option>
@@ -341,11 +341,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <div class="form-row">
                                                     <div class="form-group col-md-6">
                                                         <label for="createdby" class="col-form-label">Dibuat oleh</label>
-                                                        <input class="form-control" id="createdby" disabled v-model="created_by">
+                                                        <input style="background-color: rgba(128,128,128,0.18)" class="form-control" id="createdby" disabled v-model="created_by">
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label for="updatedby" class="col-form-label">Terakhir diubah oleh</label>
-                                                        <input class="form-control" id="updatedby" disabled v-model="updated_by">
+                                                        <input style="background-color: rgba(128,128,128,0.18)" class="form-control" id="updatedby" disabled v-model="updated_by">
                                                     </div>
                                                 </div>
                                             </div>
