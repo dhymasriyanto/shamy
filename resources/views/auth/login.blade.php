@@ -41,10 +41,10 @@
                 <div class="card-group">
                     <div class="card">
                         <div class="card-body p-4">
-                            @if ($errors->has('email') || $errors->has('password'))
+                            @if ($errors->has('username') || $errors->has('password'))
                                 <div class="alert alert-danger alert-dismissable">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    {{ $errors->first('username') }} {{ $errors->first('password') }}
+                                    User ID atau Kata Sandi Salah!
                                 </div>
                             @endif
                             <form method="post" action="{{ route('auth.login') }}">
