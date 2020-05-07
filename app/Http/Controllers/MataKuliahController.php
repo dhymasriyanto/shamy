@@ -20,12 +20,7 @@ class MataKuliahController extends Controller
 
     public function index(Request $request)
     {
-        $matakuliah = MataKuliah::all();
-        $data = [
-            'data' => $matakuliah
-        ];
-
-        return $this->renderPage($request, 'mata-kuliah.index', $data);
+        return $this->renderPage($request, 'mata-kuliah.index');
     }
 
     public function all()

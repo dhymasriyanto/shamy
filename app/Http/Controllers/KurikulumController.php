@@ -20,12 +20,7 @@ class KurikulumController extends Controller
 
     public function index(Request $request)
     {
-        $kurikulum = Kurikulum::all();
-        $data = [
-            'data' => $kurikulum
-        ];
-
-        return $this->renderPage($request, 'kurikulum.index', $data);
+        return $this->renderPage($request, 'kurikulum.index');
     }
 
     public function all()

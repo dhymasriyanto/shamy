@@ -20,12 +20,7 @@ class JurusanController extends Controller
 
     public function index(Request $request)
     {
-        $jurusan = Jurusan::all();
-        $data = [
-            'data' => $jurusan
-        ];
-
-        return $this->renderPage($request, 'jurusan.index', $data);
+        return $this->renderPage($request, 'jurusan.index');
     }
 
     public function all()

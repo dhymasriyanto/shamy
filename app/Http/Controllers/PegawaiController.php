@@ -21,12 +21,7 @@ class PegawaiController extends Controller
 
     public function index(Request $request)
     {
-        $pegawai = Pegawai::all();
-        $data = [
-            'data' => $pegawai
-        ];
-
-        return $this->renderPage($request, 'pegawai.index', $data);
+        return $this->renderPage($request, 'pegawai.index');
     }
 
     public function all()

@@ -19,12 +19,7 @@ class TahunAjaranController extends Controller
 
     public function index(Request $request)
     {
-        $tahunajaran = TahunAjaran::all();
-        $data = [
-            'data' => $tahunajaran
-        ];
-
-        return $this->renderPage($request, 'tahun-ajaran.index', $data);
+        return $this->renderPage($request, 'tahun-ajaran.index');
     }
 
     public function all()

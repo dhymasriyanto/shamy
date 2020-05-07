@@ -20,12 +20,7 @@ class FakultasController extends Controller
 
     public function index(Request $request)
     {
-        $fakultas = Fakultas::all();
-        $data = [
-            'data' => $fakultas
-        ];
-
-        return $this->renderPage($request, 'fakultas.index', $data);
+        return $this->renderPage($request, 'fakultas.index');
     }
 
     public function all()

@@ -21,12 +21,7 @@ class MahasiswaController extends Controller
 
     public function index(Request $request)
     {
-        $mahasiswa = Mahasiswa::all();
-        $data = [
-            'data' => $mahasiswa
-        ];
-
-        return $this->renderPage($request, 'mahasiswa.index', $data);
+        return $this->renderPage($request, 'mahasiswa.index');
     }
 
     public function all()

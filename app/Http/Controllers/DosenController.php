@@ -20,12 +20,7 @@ class DosenController extends Controller
 
     public function index(Request $request)
     {
-        $dosen = Dosen::all();
-        $data = [
-            'data' => $dosen
-        ];
-
-        return $this->renderPage($request, 'dosen.index', $data);
+        return $this->renderPage($request, 'dosen.index');
     }
 
     public function all()
