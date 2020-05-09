@@ -85,13 +85,14 @@ function initVue() {
             if (typeof pjax !== 'undefined') {
                 pjax.refresh();
             }
+            toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"}
             this.all();
         },
         methods: {
             create: function () {
                 axios.post('/mata-kuliah/create',{nama : this.nama, kode : this.kode, singkatan : this.singkatan, id_jurusan : this.id_jurusan, id_kurikulum : this.id_kurikulum, bobot : this.bobot, jenis : this.jenis})
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
                         vm.nama = "";
                         vm.kode = "";
@@ -101,16 +102,8 @@ function initVue() {
                         vm.bobot = "";
                         vm.jenis = "";
                         $('#modaltambah').modal('hide');
-                        toastr.options = {
-                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
-                        Command: toastr["success"]("Data berhasil di tambah", "Sukses")
                     })
                     .catch(function (error) {
-                        // handle error
-                        toastr.options = {
-                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {
@@ -120,7 +113,7 @@ function initVue() {
             update: function () {
                 axios.post('/mata-kuliah/update/'+this.editid,{nama : this.editnama, kode : this.editkode, singkatan : this.editsingkatan, id_jurusan : this.editid_jurusan, id_kurikulum : this.editid_kurikulum, bobot : this.editbobot, jenis : this.editjenis})
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
                         vm.editid = "";
                         vm.editnama = "";
@@ -131,14 +124,8 @@ function initVue() {
                         vm.editbobot = "";
                         vm.editjenis = "";
                         $('#modaledit').modal('hide');
-                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
-                        Command: toastr["success"]("Data berhasil di edit", "Sukses")
                     })
                     .catch(function (error) {
-                        // handle error
-                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {
@@ -148,19 +135,13 @@ function initVue() {
             hapus: function () {
                 axios.delete('/mata-kuliah/' + this.editid)
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
                         vm.editid = "";
                         vm.editnama = "";
                         $("#modalhapus").modal('hide');
-                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
-                        Command: toastr["success"]("Data berhasil di hapus", "Sukses")
                     })
                     .catch(function (error) {
-                        // handle error
-                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {

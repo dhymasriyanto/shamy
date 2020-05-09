@@ -80,7 +80,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <button type="button" @click="edit(data.item.id)" class="btn btn-success waves-effect waves-light"><i
                                                             class="mdi mdi-18px mdi-file-document-edit-outline" ></i> Ubah </button>
                                                     <button class="btn btn-danger waves-effect" @click="hapusdata(data.item.id)"><i
-                                                            class="mdi mdi-18px mdi-delete-forever" ></i> Hapus
+                                                            class="mdi mdi-18px mdi-delete-forever"></i> Hapus
                                                     </button>
                                                 </div>
                                             </template>

@@ -84,13 +84,14 @@ function initVue() {
             if (typeof pjax !== 'undefined') {
                 pjax.refresh();
             }
+            toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"}
             this.all();
         },
         methods: {
             create: function () {
                 axios.post('/mahasiswa/create',{nama : this.nama, nomor_induk : this.nim, id_jurusan : this.id_jurusan, jenis_pendaftaran : this.jenis_pendaftaran, jenis_kelamin : this.jenis_kelamin, tempat_lahir : this.tempat_lahir, tanggal_lahir : this.tanggal_lahir, agama : this.agama})
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
                         vm.nama = "";
                         vm.nim = "";
@@ -101,16 +102,8 @@ function initVue() {
                         vm.tanggal_lahir = "";
                         vm.agama = "";
                         $('#modaltambah').modal('hide');
-                        toastr.options = {
-                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
-                        Command: toastr["success"]("Data berhasil di tambah", "Sukses")
                     })
                     .catch(function (error) {
-                        // handle error
-                        toastr.options = {
-                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {
@@ -120,7 +113,7 @@ function initVue() {
             update: function () {
                 axios.post('/mahasiswa/update/'+this.editid,{nama : this.editnama, nomor_induk : this.editnim, id_jurusan : this.editid_jurusan, jenis_pendaftaran : this.editjenis_pendaftaran, jenis_kelamin : this.editjenis_kelamin, tempat_lahir : this.edittempat_lahir, tanggal_lahir : this.edittanggal_lahir, agama : this.editagama})
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
                         vm.editid = "";
                         vm.editnama = "";
@@ -132,14 +125,8 @@ function initVue() {
                         vm.edittanggal_lahir = "";
                         vm.editagama = "";
                         $('#modaledit').modal('hide');
-                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
-                        Command: toastr["success"]("Data berhasil di edit", "Sukses")
                     })
                     .catch(function (error) {
-                        // handle error
-                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {
@@ -149,19 +136,13 @@ function initVue() {
             hapus: function () {
                 axios.delete('/mahasiswa/' + this.editid)
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
                         vm.editid = "";
                         vm.editnama = "";
                         $("#modalhapus").modal('hide');
-                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
-                        Command: toastr["success"]("Data berhasil di hapus", "Sukses")
                     })
                     .catch(function (error) {
-                        // handle error
-                        toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {

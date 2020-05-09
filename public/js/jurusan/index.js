@@ -60,29 +60,22 @@ function initVue() {
             if (typeof pjax !== 'undefined') {
                 pjax.refresh();
             }
+            toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"}
             this.all();
         },
         methods: {
             create: function () {
                 axios.post('/jurusan/create',{nama : this.nama, kode : this.kode, singkatan : this.singkatan, id_fakultas : this.id_fakultas})
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
                         vm.nama = "";
                         vm.kode = "";
                         vm.singkatan = "";
                         vm.id_fakultas = "";
                         $('#modaltambah').modal('hide');
-                        toastr.options = {
-                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
-                        Command: toastr["success"]("Data berhasil di tambah", "Sukses")
                     })
                     .catch(function (error) {
-                        // handle error
-                        toastr.options = {
-                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {
@@ -92,7 +85,7 @@ function initVue() {
             update: function () {
                 axios.post('/jurusan/update/'+this.editid,{nama : this.editnama, kode : this.editkode, singkatan : this.editsingkatan, id_fakultas : this.editid_fakultas})
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
                         vm.editid = "";
                         vm.editnama = "";
@@ -100,16 +93,8 @@ function initVue() {
                         vm.editsingkatan = "";
                         vm.editid_fakultas = "";
                         $('#modaledit').modal('hide');
-                        toastr.options = {
-                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
-                        Command: toastr["success"]("Data berhasil di edit", "Sukses")
                     })
                     .catch(function (error) {
-                        // handle error
-                        toastr.options = {
-                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {
@@ -119,21 +104,13 @@ function initVue() {
             hapus: function () {
                 axios.delete('/jurusan/' + this.editid)
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
                         vm.editid = "";
                         vm.editnama = "";
                         $("#modalhapus").modal('hide');
-                        toastr.options = {
-                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
-                        Command: toastr["success"]("Data berhasil di hapus", "Sukses")
                     })
                     .catch(function (error) {
-                        // handle error
-                        toastr.options = {
-                            "closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
-                        }
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {

@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class JurusanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -30,14 +25,8 @@ class JurusanController extends Controller
         return response($jurusan);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
-        //
         Jurusan::create([
                 'nama' => $request->nama,
                 'kode' => $request->kode,
@@ -46,55 +35,17 @@ class JurusanController extends Controller
                 'created_by' => Auth::id()
             ]
         );
-        echo $request->nama;
+        return response(['pesan'=>"Data berhasil ditambahkan"]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
         $jurusan = Jurusan::where('id',$id)->get();
-
         return response($jurusan);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
         $jurusan = Jurusan::find($id);
         $jurusan->nama = $request->nama;
         $jurusan->kode = $request->kode;
@@ -102,19 +53,12 @@ class JurusanController extends Controller
         $jurusan->id_fakultas = $request->id_fakultas;
         $jurusan->updated_by = Auth::id();
         $jurusan->save();
+        return response(['pesan'=>"Data berhasil diubah"]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id, Request $request)
     {
         Jurusan::destroy($id);
-        $data = [];
-
-        return response('sukses');
+        return response(['pesan'=>"Data berhasil dihapus"]);
     }
 }
