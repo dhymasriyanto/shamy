@@ -145,6 +145,9 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.list = response.data;
+                        for (var i = 0; i < vm.list.length; i++){
+                            vm.list[i]['tanggal_lahir'] = moment(vm.list[i]['tanggal_lahir'], 'YYYY-MM-DD').format('DD/MM/YYYY');
+                        }
                         vm.totalRows = vm.list.length;
                         vm.allJurusan();
                     })

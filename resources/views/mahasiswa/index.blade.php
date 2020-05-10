@@ -366,6 +366,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         </div>
         <script src="{{asset('adminto/libs/toastr/toastr.min.js')}}"></script>
         <script src="{{asset('adminto/js/pages/toastr.init.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
         <script type="text/javascript" src="{{asset('js/mahasiswa/index.js')}}"></script>
     </div>
 @endsection
