@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dosen;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,7 +47,9 @@ class DosenController extends Controller
     public function edit($id)
     {
         $dosen = Dosen::where('id',$id)->get();
-        return response($dosen);
+        $update = User::where('id',$dosen[0]['updated_by'])->value('name');
+        $create = User::where('id',$dosen[0]['created_by'])->value('name');
+        return response(['data'=>$dosen,'updatedby'=>$update,'createdby'=>$create]);
     }
 
     public function update(Request $request, $id)

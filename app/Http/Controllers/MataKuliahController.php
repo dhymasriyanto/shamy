@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\MataKuliah;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,7 +44,9 @@ class MataKuliahController extends Controller
     public function edit($id)
     {
         $matakuliah = MataKuliah::where('id',$id)->get();
-        return response($matakuliah);
+        $update = User::where('id',$matakuliah[0]['updated_by'])->value('name');
+        $create = User::where('id',$matakuliah[0]['created_by'])->value('name');
+        return response(['data'=>$matakuliah,'updatedby'=>$update,'createdby'=>$create]);
     }
 
     public function update(Request $request, $id)

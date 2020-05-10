@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kurikulum;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +38,9 @@ class KurikulumController extends Controller
     public function edit($id)
     {
         $kurikulum = Kurikulum::where('id',$id)->get();
-        return response($kurikulum);
+        $update = User::where('id',$kurikulum[0]['updated_by'])->value('name');
+        $create = User::where('id',$kurikulum[0]['created_by'])->value('name');
+        return response(['data'=>$kurikulum,'updatedby'=>$update,'createdby'=>$create]);
     }
 
     public function update(Request $request, $id)

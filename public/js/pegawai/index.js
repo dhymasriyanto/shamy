@@ -107,17 +107,10 @@ function initVue() {
                 axios.get("/pegawai/get/"+id)
                     .then(function (response) {
                         // handle success
-                        axios.get("/log/"+response.data[0]['updated_by']+"/"+response.data[0]['created_by'])
-                            .then(function (response) {
-                                vm.updated_by = response.data['updatedby'];
-                                vm.created_by = response.data['createdby'];
-                            })
-                            .catch(function (error) {
-                            })
-                            .then(function () {
-                            });
-                        vm.editnama = response.data[0]['nama'];
+                        vm.editnama = response.data['data'][0]['nama'];
                         vm.editid = id;
+                        vm.updated_by = response.data['updatedby'];
+                        vm.created_by = response.data['createdby'];
                     })
                     .catch(function (error) {
                         // handle error

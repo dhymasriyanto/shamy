@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Fakultas;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,9 @@ class FakultasController extends Controller
     public function edit($id)
     {
         $fakultas = Fakultas::where('id',$id)->get();
-        return response($fakultas);
+        $update = User::where('id',$fakultas[0]['updated_by'])->value('name');
+        $create = User::where('id',$fakultas[0]['created_by'])->value('name');
+        return response(['data'=>$fakultas,'updatedby'=>$update,'createdby'=>$create]);
     }
 
     public function update(Request $request, $id)

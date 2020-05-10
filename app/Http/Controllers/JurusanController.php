@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jurusan;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,7 +42,9 @@ class JurusanController extends Controller
     public function edit($id)
     {
         $jurusan = Jurusan::where('id',$id)->get();
-        return response($jurusan);
+        $update = User::where('id',$jurusan[0]['updated_by'])->value('name');
+        $create = User::where('id',$jurusan[0]['created_by'])->value('name');
+        return response(['data'=>$jurusan,'updatedby'=>$update,'createdby'=>$create]);
     }
 
     public function update(Request $request, $id)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pegawai;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -38,7 +39,9 @@ class PegawaiController extends Controller
     public function edit($id)
     {
         $pegawai = Pegawai::where('id',$id)->get();
-        return response($pegawai);
+        $update = User::where('id',$pegawai[0]['updated_by'])->value('name');
+        $create = User::where('id',$pegawai[0]['created_by'])->value('name');
+        return response(['data'=>$pegawai,'updatedby'=>$update,'createdby'=>$create]);
     }
 
     public function update(Request $request, $id)

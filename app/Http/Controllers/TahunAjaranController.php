@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TahunAjaran;
+use App\User;
 use Illuminate\Http\Request;
 
 class TahunAjaranController extends Controller
@@ -35,7 +36,9 @@ class TahunAjaranController extends Controller
     public function edit($id)
     {
         $tahun_ajaran = TahunAjaran::where('id',$id)->get();
-        return response($tahun_ajaran);
+        $update = User::where('id',$tahun_ajaran[0]['updated_by'])->value('name');
+        $create = User::where('id',$tahun_ajaran[0]['created_by'])->value('name');
+        return response(['data'=>$tahun_ajaran,'updatedby'=>$update,'createdby'=>$create]);
     }
 
     public function update(Request $request, $id)

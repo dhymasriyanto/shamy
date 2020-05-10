@@ -107,17 +107,10 @@ function initVue() {
                 axios.get("/tahun-ajaran/get/"+id)
                     .then(function (response) {
                         // handle success
-                        axios.get("/log/"+response.data[0]['updated_by']+"/"+response.data[0]['created_by'])
-                            .then(function (response) {
-                                vm.updated_by = response.data['updatedby'];
-                                vm.created_by = response.data['createdby'];
-                            })
-                            .catch(function (error) {
-                            })
-                            .then(function () {
-                            });
-                        vm.edittahun_ajaran = response.data[0]['tahun_ajaran'];
+                        vm.edittahun_ajaran = response.data['data'][0]['tahun_ajaran'];
                         vm.editid = id;
+                        vm.updated_by = response.data['updatedby'];
+                        vm.created_by = response.data['createdby'];
                     })
                     .catch(function (error) {
                         // handle error

@@ -194,23 +194,16 @@ function initVue() {
                 axios.get("/mata-kuliah/get/"+id)
                     .then(function (response) {
                         // handle success
-                        axios.get("/log/"+response.data[0]['updated_by']+"/"+response.data[0]['created_by'])
-                            .then(function (response) {
-                                vm.updated_by = response.data['updatedby'];
-                                vm.created_by = response.data['createdby'];
-                            })
-                            .catch(function (error) {
-                            })
-                            .then(function () {
-                            });
-                        vm.editnama = response.data[0]['nama'];
-                        vm.editkode = response.data[0]['kode'];
-                        vm.editsingkatan = response.data[0]['singkatan'];
-                        vm.editid_jurusan = response.data[0]['id_jurusan'];
-                        vm.editid_kurikulum = response.data[0]['id_kurikulum'];
-                        vm.editbobot = response.data[0]['bobot'];
-                        vm.editjenis = response.data[0]['jenis'];
+                        vm.editnama = response.data['data'][0]['nama'];
+                        vm.editkode = response.data['data'][0]['kode'];
+                        vm.editsingkatan = response.data['data'][0]['singkatan'];
+                        vm.editid_jurusan = response.data['data'][0]['id_jurusan'];
+                        vm.editid_kurikulum = response.data['data'][0]['id_kurikulum'];
+                        vm.editbobot = response.data['data'][0]['bobot'];
+                        vm.editjenis = response.data['data'][0]['jenis'];
                         vm.editid = id;
+                        vm.updated_by = response.data['updatedby'];
+                        vm.created_by = response.data['createdby'];
                     })
                     .catch(function (error) {
                         // handle error

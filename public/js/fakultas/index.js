@@ -116,18 +116,11 @@ function initVue() {
                 axios.get("/fakultas/get/"+id)
                     .then(function (response) {
                         // handle success
-                        axios.get("/log/"+response.data[0]['updated_by']+"/"+response.data[0]['created_by'])
-                            .then(function (response) {
-                                vm.updated_by = response.data['updatedby'];
-                                vm.created_by = response.data['createdby'];
-                            })
-                            .catch(function (error) {
-                            })
-                            .then(function () {
-                            });
-                        vm.editnama = response.data[0]['nama'];
-                        vm.editsingkatan = response.data[0]['singkatan'];
+                        vm.editnama = response.data['data'][0]['nama'];
+                        vm.editsingkatan = response.data['data'][0]['singkatan'];
                         vm.editid = id;
+                        vm.updated_by = response.data['updatedby'];
+                        vm.created_by = response.data['createdby'];
                     })
                     .catch(function (error) {
                         // handle error

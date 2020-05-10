@@ -26,10 +26,4 @@ class Controller extends BaseController
         $layout = $request->ajax() ? 'ajax': 'app';
         return view($view, $data, ['appLayout' => 'layouts.'.$layout]);
     }
-
-    public function log($updatedid,$createdid){
-        $update = User::where('id',$updatedid)->value('name');
-        $create = User::where('id',$createdid)->value('name');
-        return response(['updatedby'=>$update,'createdby'=>$create]);
-    }
 }

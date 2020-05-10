@@ -149,20 +149,13 @@ function initVue() {
                 axios.get("/jurusan/get/"+id)
                     .then(function (response) {
                         // handle success
-                        axios.get("/log/"+response.data[0]['updated_by']+"/"+response.data[0]['created_by'])
-                            .then(function (response) {
-                                vm.updated_by = response.data['updatedby'];
-                                vm.created_by = response.data['createdby'];
-                            })
-                            .catch(function (error) {
-                            })
-                            .then(function () {
-                            });
-                        vm.editnama = response.data[0]['nama'];
-                        vm.editkode = response.data[0]['kode'];
-                        vm.editsingkatan = response.data[0]['singkatan'];
-                        vm.editid_fakultas = response.data[0]['id_fakultas'];
+                        vm.editnama = response.data['data'][0]['nama'];
+                        vm.editkode = response.data['data'][0]['kode'];
+                        vm.editsingkatan = response.data['data'][0]['singkatan'];
+                        vm.editid_fakultas = response.data['data'][0]['id_fakultas'];
                         vm.editid = id;
+                        vm.updated_by = response.data['updatedby'];
+                        vm.created_by = response.data['createdby'];
                     })
                     .catch(function (error) {
                         // handle error

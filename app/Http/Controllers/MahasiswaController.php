@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mahasiswa;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -45,7 +46,9 @@ class MahasiswaController extends Controller
     public function edit($id)
     {
         $mahasiswa = Mahasiswa::where('id',$id)->get();
-        return response($mahasiswa);
+        $update = User::where('id',$mahasiswa[0]['updated_by'])->value('name');
+        $create = User::where('id',$mahasiswa[0]['created_by'])->value('name');
+        return response(['data'=>$mahasiswa,'updatedby'=>$update,'createdby'=>$create]);
     }
 
     public function update(Request $request, $id)
