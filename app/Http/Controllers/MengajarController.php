@@ -29,7 +29,7 @@ class MengajarController extends Controller
 
     public function all()
     {
-        $mengajar = Mengajar::all();
+        $mengajar = Mengajar::with(['getJurusan','getKelas','getDosen','getMataKuliah','getTahunAjaran'])->get();
 
         return response($mengajar);
     }

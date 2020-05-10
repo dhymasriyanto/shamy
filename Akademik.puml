@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor mahasiswa
+actor admin
+rectangle akademik {
+    mahasiswa -- (melihat riwayat khs)
+    mahasiswa -- (melihat kelas)
+    mahasiswa -- (melihat jadwal)
+    mahasiswa -- (manajemen profil)
+    (manajemen profil) -- admin
+    (manajemen kelas) -- admin
+    (manajemen jadwal) -- admin
+}
+@enduml
