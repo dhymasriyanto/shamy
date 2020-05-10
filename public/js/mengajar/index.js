@@ -5,8 +5,11 @@ function initVue() {
     var vm = new Vue({
         el: '#app',
         data: {
+            keyword:'',
             perPage:10,
             currentPage:1,
+            pageOptions: [10, 15, 20],
+            showData:'',
             fields: [
                 {
                     key: 'no',
@@ -95,7 +98,6 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datamengajar = response.data;
-
                         // vm.items = response.data;
                         console.log(response);
                     })
@@ -108,12 +110,23 @@ function initVue() {
                         vm.isBusy = false;
 
                     });
-            }
+            },
+
         },
         computed: {
+            showingData(){
+                this.showData = "Menampilkan " + ((this.currentPage*this.perPage+1)-this.perPage) + " sampai " + (this.currentPage*this.perPage) + " dari " + this.datamengajar.length;
+                return this.showData;
+            },
             rows() {
                 return this.datamengajar.length
-            }
+            },
+            items () {
+                return this.keyword
+                    ? this.datamengajar.filter(item => item.get_jurusan.nama.toLowerCase().includes(this.keyword) || item.get_kelas.nama.toLowerCase().includes(this.keyword) || item.get_dosen.nama.toLowerCase().includes(this.keyword) || item.get_mata_kuliah.nama.toLowerCase().includes(this.keyword) || item.get_tahun_ajaran.tahun_ajaran.toLowerCase().includes(this.keyword))
+                    : this.datamengajar
+            },
+
         },
         components: {}
     });

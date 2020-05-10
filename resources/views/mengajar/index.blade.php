@@ -30,23 +30,61 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
-                                                    <b-button pill variant="dark" class="mb-2" href="" v-b-modal.modal-1><i
+                                        <b-button pill variant="dark" class="mb-2" href="" v-b-modal.modal-1><i
                                                     class="fa fa-plus mr-1"></i>Tambah
                                         </b-button>
                                         <b-modal id="modal-1" title="Tambah data">
                                             <p class="my-4"> Hello </p>
                                         </b-modal>
+                                        <div>
+                                            <b-form-group
+                                                    class="ml-2 col-4 float-left mb-2">
+                                               Tampilkan
+                                                <b-form-select
+                                                        class="col-3"
+                                                        v-model="perPage"
+                                                        size="sm"
+                                                        :options="pageOptions">
+                                                </b-form-select>
+                                                data
+                                            </b-form-group>
+                                            <b-input-group class="col-3 float-right mr-2 mb-2">
+                                                <b-form-input
+                                                        v-model="keyword"
+                                                        size="sm"
+                                                        placeholder="Cari"
+                                                        type="text"
+                                                ></b-form-input>
+                                                <b-input-group-append>
+                                                    <b-button
+                                                            :disabled="!keyword"
+                                                            size="sm"
+                                                            variant="link"
+                                                            @click="keyword = ''"
+
+                                                    >
+                                                        <i class="fa fa-times"></i></b-button>
+                                                </b-input-group-append>
+                                            </b-input-group>
+                                        </div>
                                         <b-table
+                                                show-empty
+                                                :keyword="keyword"
                                                 head-variant="light"
                                                 id="my-table"
                                                 hover
                                                 :busy="isBusy"
-                                                :items="datamengajar"
+                                                :items="items"
                                                 :fields="fields"
                                                 :per-page="perPage"
                                                 :current-page="currentPage"
                                                 small
                                         >
+                                            <template v-slot:empty>
+                                                <div class="text-center text-danger my-2">
+                                                    <h4>Data tidak ditemukan!</h4>
+                                                </div>
+                                            </template>
                                             <template v-slot:table-busy>
                                                 <div class="text-center text-danger my-2">
                                                     <b-spinner class="align-middle"></b-spinner>
@@ -76,11 +114,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </template>
 
                                         </b-table>
-                                        <div class="col-12 col-md-6 float-left">
-                                            <p>Current Page: @{{ currentPage }}</p>
+                                        <div class="float-left ml-2">
+                                            <p> @{{ showingData }}</p>
                                         </div>
-                                        <div class="col-12 col-md-6 float-right">
+                                        <div class="mr-2">
                                             <b-pagination
+                                                    align="right"
                                                     pills
                                                     size="sm"
                                                     v-model="currentPage"
