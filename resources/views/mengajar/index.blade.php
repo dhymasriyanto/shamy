@@ -30,11 +30,18 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <b-button pill variant="dark" class="mb-2" href="" v-b-modal.modal-1><i
+                                        <b-button pill variant="dark" class="mb-3" href="" v-b-modal.modal-1><i
                                                     class="fa fa-plus mr-1"></i>Tambah
                                         </b-button>
                                         <b-modal id="modal-1" title="Tambah data">
-                                            <p class="my-4"> Hello </p>
+                                            <b-input-group >
+                                                <label  class="col-md-3 col-form-label">Tahun Ajaran</label>
+                                                <b-form-input
+                                                        size="sm"
+                                                        placeholder="Jurusan"
+                                                        type="text"
+                                                ></b-form-input>
+                                            </b-input-group>
                                         </b-modal>
                                         <div>
                                             <b-form-group
@@ -50,17 +57,17 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </b-form-group>
                                             <b-input-group class="col-3 float-right mr-2 mb-2">
                                                 <b-form-input
-                                                        v-model="keyword"
+                                                        v-model="filter"
                                                         size="sm"
                                                         placeholder="Cari"
                                                         type="text"
                                                 ></b-form-input>
                                                 <b-input-group-append>
                                                     <b-button
-                                                            :disabled="!keyword"
+                                                            :disabled="!filter"
                                                             size="sm"
                                                             variant="link"
-                                                            @click="keyword = ''"
+                                                            @click="filter = ''"
 
                                                     >
                                                         <i class="fa fa-times"></i></b-button>
@@ -69,15 +76,16 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         </div>
                                         <b-table
                                                 show-empty
-                                                :keyword="keyword"
+                                                :filter="filter"
                                                 head-variant="light"
                                                 id="my-table"
                                                 hover
                                                 :busy="isBusy"
-                                                :items="items"
+                                                :items="datamengajar"
                                                 :fields="fields"
                                                 :per-page="perPage"
                                                 :current-page="currentPage"
+                                                @filtered="onFiltered"
                                                 small
                                         >
                                             <template v-slot:empty>
@@ -123,7 +131,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     pills
                                                     size="sm"
                                                     v-model="currentPage"
-                                                    :total-rows="rows"
+                                                    :total-rows="totalRows"
                                                     :per-page="perPage"
                                                     aria-controls="my-table"
                                             >
