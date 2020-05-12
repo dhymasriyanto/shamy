@@ -5,6 +5,7 @@ function initVue() {
     var vm = new Vue({
         el: '#app',
         data: {
+            selected:null,
             sampai: 0,
             tampil: 0,
             filter: '',
@@ -13,6 +14,7 @@ function initVue() {
             pageOptions: [10, 15, 20],
             showData: '',
             totalRows: 0,
+            isBusy: true,
             fields: [
                 {
                     key: 'no',
@@ -70,9 +72,22 @@ function initVue() {
 
                 }
             ],
-            isBusy: true,
-            datamengajar: [],
 
+            
+            datamengajar: [],
+            datajurusan:[],
+            datakelas:[],
+            datadosen:[],
+            datamatakuliah:[],
+            datatahunajaran:[],
+            id_jurusan:'',
+            id_kelas:'',
+            id_dosen:'',
+            id_matakuliah:'',
+            id_tahunajaran:'',
+            coba:[]
+
+            
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -81,6 +96,41 @@ function initVue() {
             this.all();
         },
         methods: {
+            checkFormValidity() {
+                const valid = vm.$refs.form.checkValidity()
+                //variabel yang akan di cek
+                vm.id_jurusan = valid
+                vm.id_kelas = valid
+                vm.id_matakuliah = valid
+                vm.id_dosen = valid
+                vm.id_tahunajaran = valid
+                return valid
+            },
+            resetModal() {
+                //Ketika ditutup maka akan tereset data variabel nya
+            },
+            handleOk(bvModalEvt) {
+                // Prevent modal from closing
+                bvModalEvt.preventDefault();
+                // Trigger submit handler
+                vm.handleSubmit();
+            },
+            handleSubmit() {
+                // Exit when the form isn't valid
+                // if (!vm.checkFormValidity()) {
+                //   return;
+                // }
+                // Push the name to submitted names
+                vm.coba.push(vm.id_jurusan);
+                vm.coba.push(vm.id_kelas);
+                vm.coba.push(vm.id_matakuliah);
+                vm.coba.push(vm.id_dosen);
+                vm.coba.push(vm.id_tahunajaran);
+                // Hide the modal manually
+                vm.$nextTick(() => {
+                  vm.$bvModal.hide('modal-1');
+                })
+            },
             hapus: function (id) {
                 axios.delete('/mengajar/' + id)
                     .then(function (response) {
@@ -102,6 +152,12 @@ function initVue() {
                         // handle success
                         vm.datamengajar = response.data;
                         vm.totalRows = vm.datamengajar.length;
+                        vm.allJurusan();
+                        vm.allKelas();
+                        vm.allDosen();
+                        vm.allMataKuliah();
+                        vm.allTahunAjaran();
+
                         // vm.items = response.data;
                         console.log(response);
                     })
@@ -114,6 +170,65 @@ function initVue() {
                         vm.isBusy = false;
 
                     });
+            },
+            allJurusan: function () {
+                axios.get('/jurusan/all')
+                    .then(function (response) {
+                        // handle success
+                        vm.datajurusan = response.data;
+                        // console.log(response);
+                        // const ayam = response.data;
+                        // ayam.forEach(function(element) {
+                        //     console.log(element);
+                        // });
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
+            allKelas:function(){
+                axios.get('/kelas/all')
+                .then(function(response){
+                    vm.datakelas = response.data;
+                }).catch(function(error){
+                    console.log(error);
+                }).then(function(){
+
+                });
+            },
+            allDosen:function() {
+                axios.get('/dosen/all')
+                .then(function(response){
+                    vm.datadosen=response.data;
+                }).catch(function(error){
+                    console.log(error);
+                }).then(function(){
+
+                });
+            },
+            allMataKuliah:function() {
+                axios.get('/mata-kuliah/all')
+                .then(function(response){
+                    vm.datamatakuliah=response.data;
+                }).catch(function(error) {
+                    console.log(error);
+                }).then(function(){
+
+                });
+            },
+            allTahunAjaran:function(){
+                axios.get('/tahun-ajaran/all')
+                .then(function(response){
+                    vm.datatahunajaran=response.data;
+                }).catch(function(error) {
+                    console.log(error);
+                }).then(function(){
+
+                });
             },
             onFiltered: function (filteredItems) {
                 this.totalRows = filteredItems.length

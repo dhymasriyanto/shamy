@@ -33,15 +33,101 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         <b-button pill variant="dark" class="mb-3" href="" v-b-modal.modal-1><i
                                                     class="fa fa-plus mr-1"></i>Tambah
                                         </b-button>
-                                        <b-modal id="modal-1" title="Tambah data">
-                                            <b-input-group >
-                                                <label  class="col-md-3 col-form-label">Tahun Ajaran</label>
-                                                <b-form-input
-                                                        size="sm"
-                                                        placeholder="Jurusan"
-                                                        type="text"
-                                                ></b-form-input>
-                                            </b-input-group>
+                                        <b-modal 
+                                            id="modal-1"
+                                            title="Tambah data"
+                                            ref="modal"
+                                            {{-- @show = "resetModal" --}}
+                                            @hidden ="resetModal"
+                                            @ok ="handleOk"
+                                        >
+                                            <b-form  ref="form" @submit.stop.prevent="handleSubmit">
+                                                <b-input-group >
+                                                    <label  class="col-md-3 col-form-label">Jurusan</label>
+                                                    <b-form-group
+                                                            size="sm"
+                                                    >
+                                                    <b-form-select size="sm"  v-model="id_jurusan">
+                                                        <option disabled value="">Pilih Jurusan</option>
+                                                        <option
+                                                        v-for="jurusan in datajurusan"
+                                                        v-bind:value="jurusan.id"
+                                                     >
+                                                       @{{ jurusan.nama }}
+                                                     </option>
+    
+                                                    </b-form-select>
+                                                    </b-form-group>
+                                                </b-input-group>
+                                                <b-input-group >
+                                                    <label  class="col-md-3 col-form-label">Kelas</label>
+                                                    <b-form-group
+                                                            size="sm"
+                                                    >
+                                                    <b-form-select size="sm"  v-model="id_kelas">
+                                                        <option disabled value="">Pilih Kelas</option>
+                                                        <option
+                                                        v-for="kelas in datakelas"
+                                                        v-bind:value="kelas.id"
+                                                     >
+                                                       @{{ kelas.nama }}
+                                                     </option>
+    
+                                                    </b-form-select>
+                                                    </b-form-group>
+                                                </b-input-group>
+                                                <b-input-group >
+                                                    <label  class="col-md-3 col-form-label">Dosen</label>
+                                                    <b-form-group
+                                                            size="sm"
+                                                    >
+                                                    <b-form-select size="sm"  v-model="id_dosen">
+                                                        <option disabled value="">Pilih Dosen</option>
+                                                        <option
+                                                        v-for="dosen in datadosen"
+                                                        v-bind:value="dosen.id"
+                                                     >
+                                                       @{{ dosen.nama }}
+                                                     </option>
+    
+                                                    </b-form-select>
+                                                    </b-form-group>
+                                                </b-input-group>
+                                                <b-input-group >
+                                                    <label  class="col-md-3 col-form-label">Mata Kuliah</label>
+                                                    <b-form-group
+                                                            size="sm"
+                                                    >
+                                                    <b-form-select size="sm"  v-model="id_matakuliah">
+                                                        <option disabled value="">Pilih Mata Kuliah</option>
+                                                        <option
+                                                        v-for="matakuliah in datamatakuliah"
+                                                        v-bind:value="matakuliah.id"
+                                                     >
+                                                       @{{ matakuliah.nama }}
+                                                     </option>
+    
+                                                    </b-form-select>
+                                                    </b-form-group>
+                                                </b-input-group>
+                                                <b-input-group >
+                                                    <label  class="col-md-3 col-form-label">Tahun Ajaran</label>
+                                                    <b-form-group
+                                                            size="sm"
+                                                    >
+                                                    <b-form-select size="sm"  v-model="id_tahunajaran">
+                                                        <option disabled value="">Pilih Tahun Ajaran</option>
+                                                        <option
+                                                        v-for="tahunajaran in datatahunajaran"
+                                                        v-bind:value="tahunajaran.id"
+                                                     >
+                                                       @{{ tahunajaran.tahun_ajaran }}
+                                                     </option>
+    
+                                                    </b-form-select>
+                                                    </b-form-group>
+                                                </b-input-group>
+                                            </b-form>
                                         </b-modal>
                                         <div>
                                             <b-form-group
@@ -52,6 +138,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         v-model="perPage"
                                                         size="sm"
                                                         :options="pageOptions">
+
                                                 </b-form-select>
                                                 data
                                             </b-form-group>
