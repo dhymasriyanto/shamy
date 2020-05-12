@@ -27,18 +27,23 @@ class MataKuliahController extends Controller
 
     public function create(Request $request)
     {
-        MataKuliah::create([
-                'nama' => $request->nama,
-                'kode' => $request->kode,
-                'singkatan' => $request->singkatan,
-                'bobot' => $request->bobot,
-                'jenis' => $request->jenis,
-                'id_jurusan' => $request->id_jurusan,
-                'id_kurikulum' => $request->id_kurikulum,
-                'created_by' => Auth::id()
-            ]
-        );
-        return response(['pesan'=>"Data berhasil ditambahkan"]);
+        if (MataKuliah::where('kode',$request->kode)->get() == '[]'){
+            MataKuliah::create([
+                    'nama' => $request->nama,
+                    'kode' => $request->kode,
+                    'singkatan' => $request->singkatan,
+                    'bobot' => $request->bobot,
+                    'jenis' => $request->jenis,
+                    'id_jurusan' => $request->id_jurusan,
+                    'id_kurikulum' => $request->id_kurikulum,
+                    'created_by' => Auth::id()
+                ]
+            );
+            return response(['pesan'=>"Data berhasil ditambahkan"]);
+        }
+        else{
+            return response(['pesan'=>"Data sudah ada"]);
+        }
     }
 
     public function edit($id)

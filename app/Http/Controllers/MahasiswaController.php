@@ -28,19 +28,25 @@ class MahasiswaController extends Controller
 
     public function create(Request $request)
     {
-        Mahasiswa::create([
-                'nama' => $request->nama,
-                'nomor_induk' => $request->nomor_induk,
-                'id_jurusan' => $request->id_jurusan,
-                'jenis_pendaftaran' => $request->jenis_pendaftaran,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'tempat_lahir' => $request->tempat_lahir,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'agama' => $request->agama,
-                'created_by' => Auth::id()
-            ]
-        );
-        return response(['pesan'=>"Data berhasil ditambahkan"]);
+        if (Mahasiswa::where('nomor_induk',$request->nomor_induk)->get() == '[]'){
+            Mahasiswa::create([
+                    'nama' => $request->nama,
+                    'nomor_induk' => $request->nomor_induk,
+                    'id_jurusan' => $request->id_jurusan,
+                    'jenis_pendaftaran' => $request->jenis_pendaftaran,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'tempat_lahir' => $request->tempat_lahir,
+                    'tanggal_lahir' => $request->tanggal_lahir,
+                    'agama' => $request->agama,
+                    'created_by' => Auth::id()
+                ]
+            );
+            return response(['pesan'=>"Data berhasil ditambahkan"]);
+        }
+        else{
+            return response(['pesan'=>"Data sudah ada"]);
+        }
+
     }
 
     public function edit($id)

@@ -67,13 +67,18 @@ function initVue() {
             create: function () {
                 axios.post('/jurusan/create',{nama : this.nama, kode : this.kode, singkatan : this.singkatan, id_fakultas : this.id_fakultas})
                     .then(function (response) {
-                        Command: toastr["success"](response.data.pesan, "Sukses")
-                        vm.all();
-                        vm.nama = "";
-                        vm.kode = "";
-                        vm.singkatan = "";
-                        vm.id_fakultas = "";
-                        $('#modaltambah').modal('hide');
+                        if (response.data.pesan == 'Data sudah ada'){
+                            Command: toastr["warning"](response.data.pesan, "Error")
+                        }
+                        else {
+                            Command: toastr["success"](response.data.pesan, "Sukses")
+                            vm.all();
+                            vm.nama = "";
+                            vm.kode = "";
+                            vm.singkatan = "";
+                            vm.id_fakultas = "";
+                            $('#modaltambah').modal('hide');
+                        }
                     })
                     .catch(function (error) {
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
@@ -170,7 +175,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         // this.editnama = response.data;
-                        vm.editnama = response.data[0]['nama'];
+                        vm.editnama = response.data['data'][0]['nama'];
                         vm.editid = id;
                     })
                     .catch(function (error) {

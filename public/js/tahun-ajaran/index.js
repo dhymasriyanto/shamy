@@ -125,7 +125,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         // this.editnama = response.data;
-                        vm.edittahun_ajaran = response.data[0]['tahun_ajaran'];
+                        vm.edittahun_ajaran = response.data['data'][0]['tahun_ajaran'];
                         vm.editid = id;
                     })
                     .catch(function (error) {

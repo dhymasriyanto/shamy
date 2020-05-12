@@ -134,7 +134,7 @@ function initVue() {
                 axios.get("/fakultas/get/"+id)
                     .then(function (response) {
                         // handle success
-                        vm.editnama = response.data[0]['nama'];
+                        vm.editnama = response.data['data'][0]['nama'];
                         vm.editid = id;
                     })
                     .catch(function (error) {

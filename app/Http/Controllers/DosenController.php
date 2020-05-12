@@ -27,21 +27,26 @@ class DosenController extends Controller
 
     public function create(Request $request)
     {
-        if ($request->agama == null){
-            $request->agama = "Tidak diisi";
+        if (Dosen::where('nomor_induk',$request->nomor_induk)->get() == '[]'){
+            if ($request->agama == null){
+                $request->agama = "Tidak diisi";
+            }
+            Dosen::create([
+                    'nama' => $request->nama,
+                    'nomor_induk' => $request->nomor_induk,
+                    'id_jurusan' => $request->id_jurusan,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'tempat_lahir' => $request->tempat_lahir,
+                    'tanggal_lahir' => $request->tanggal_lahir,
+                    'agama' => $request->agama,
+                    'created_by' => Auth::id()
+                ]
+            );
+            return response(['pesan'=>"Data berhasil ditambahkan"]);
         }
-        Dosen::create([
-                'nama' => $request->nama,
-                'nomor_induk' => $request->nomor_induk,
-                'id_jurusan' => $request->id_jurusan,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'tempat_lahir' => $request->tempat_lahir,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'agama' => $request->agama,
-                'created_by' => Auth::id()
-            ]
-        );
-        return response(['pesan'=>"Data berhasil ditambahkan"]);
+        else{
+            return response(['pesan'=>"Data sudah ada"]);
+        }
     }
 
     public function edit($id)

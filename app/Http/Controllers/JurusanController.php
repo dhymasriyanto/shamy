@@ -28,15 +28,20 @@ class JurusanController extends Controller
 
     public function create(Request $request)
     {
-        Jurusan::create([
-                'nama' => $request->nama,
-                'kode' => $request->kode,
-                'singkatan' => $request->singkatan,
-                'id_fakultas' => $request->id_fakultas,
-                'created_by' => Auth::id()
-            ]
-        );
-        return response(['pesan'=>"Data berhasil ditambahkan"]);
+        if (Jurusan::where('kode',$request->kode)->get() == '[]'){
+            Jurusan::create([
+                    'nama' => $request->nama,
+                    'kode' => $request->kode,
+                    'singkatan' => $request->singkatan,
+                    'id_fakultas' => $request->id_fakultas,
+                    'created_by' => Auth::id()
+                ]
+            );
+            return response(['pesan'=>"Data berhasil ditambahkan"]);
+        }
+        else{
+            return response(['pesan'=>"Data sudah ada"]);
+        }
     }
 
     public function edit($id)

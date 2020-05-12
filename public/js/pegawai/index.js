@@ -125,7 +125,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         // this.editnama = response.data;
-                        vm.editnama = response.data[0]['nama'];
+                        vm.editnama = response.data['data'][0]['nama'];
                         vm.editid = id;
                     })
                     .catch(function (error) {

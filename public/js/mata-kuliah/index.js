@@ -92,16 +92,21 @@ function initVue() {
             create: function () {
                 axios.post('/mata-kuliah/create',{nama : this.nama, kode : this.kode, singkatan : this.singkatan, id_jurusan : this.id_jurusan, id_kurikulum : this.id_kurikulum, bobot : this.bobot, jenis : this.jenis})
                     .then(function (response) {
-                        Command: toastr["success"](response.data.pesan, "Sukses")
-                        vm.all();
-                        vm.nama = "";
-                        vm.kode = "";
-                        vm.singkatan = "";
-                        vm.id_jurusan = "";
-                        vm.id_kurikulum = "";
-                        vm.bobot = "";
-                        vm.jenis = "";
-                        $('#modaltambah').modal('hide');
+                        if (response.data.pesan == 'Data sudah ada'){
+                            Command: toastr["warning"](response.data.pesan, "Error")
+                        }
+                        else {
+                            Command: toastr["success"](response.data.pesan, "Sukses")
+                            vm.all();
+                            vm.nama = "";
+                            vm.kode = "";
+                            vm.singkatan = "";
+                            vm.id_jurusan = "";
+                            vm.id_kurikulum = "";
+                            vm.bobot = "";
+                            vm.jenis = "";
+                            $('#modaltambah').modal('hide');
+                        }
                     })
                     .catch(function (error) {
                         Command: toastr["error"]("Terjadi Kesalahan", "Error")
@@ -216,9 +221,7 @@ function initVue() {
             hapusdata: function (id) {
                 axios.get("/mata-kuliah/get/"+id)
                     .then(function (response) {
-                        // handle success
-                        // this.editnama = response.data;
-                        vm.editnama = response.data[0]['nama'];
+                        vm.editnama = response.data['data'][0]['nama'];
                         vm.editid = id;
                     })
                     .catch(function (error) {
