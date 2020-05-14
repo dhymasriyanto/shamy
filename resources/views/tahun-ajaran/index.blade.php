@@ -64,6 +64,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         ref="table"
                                                         striped
                                                         hover
+                                                        bordered
                                                         :items="filteredItems"
                                                         :fields="fields"
                                                         :current-page="currentPage"

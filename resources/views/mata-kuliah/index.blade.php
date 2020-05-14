@@ -40,7 +40,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                     <div class="col-12">
                                         <div class="form-row">
                                             <div class="col-md-3">
-                                                <h5>Jurusan</h5>
+                                                <h5>Program Studi</h5>
                                                 <select class="form-control" v-model="search">
                                                     <option value="">Semua</option>
                                                     <option v-for="jurusan in datajurusan" v-bind:value="jurusan.nama">
@@ -92,6 +92,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 ref="table"
                                                 striped
                                                 hover
+                                                bordered
                                                 :items="filteredItems"
                                                 :fields="fields"
                                                 :current-page="currentPage"

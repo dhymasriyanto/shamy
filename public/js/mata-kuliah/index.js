@@ -68,7 +68,7 @@ function initVue() {
                 },
                 {
                     key: 'get_jurusan.nama',
-                    label: 'Jurusan',
+                    label: 'Program Studi',
                     sortable: true,
                 },
                 {
