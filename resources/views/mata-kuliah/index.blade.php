@@ -21,11 +21,23 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
+                            <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
+                                    class="fa fa-plus mr-1" ></i>Tambah</button>
+                            <div style="float: right" class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><b-link href="/">Beranda</b-link></li>
+                                        <li class="breadcrumb-item active">{{$title}}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-12">
-                                        <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
-                                                class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
                                         <div class="form-row">
                                             <div class="col-md-3">
                                                 <h5>Jurusan</h5>
@@ -61,7 +73,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </div>
                                         </div>
                                         <div>
-                                            <div class="col-sm-1" style="margin-bottom: 1.5rem; padding-left: 0px; ">
+                                            <div class="col-sm-1" style="margin-bottom: 1.5rem; margin-top: -1.5rem; padding-left: 0px; ">
                                                 <h5>Jumlah entri</h5>
                                                 <b-form-select
                                                     v-model="perPage"

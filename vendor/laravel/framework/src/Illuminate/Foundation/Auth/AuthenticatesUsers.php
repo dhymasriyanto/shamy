@@ -31,13 +31,6 @@ trait AuthenticatesUsers
      */
     public function login(Request $request)
     {
-        $users = \App\User::where('username',$request->username)->get();
-        $nim = \App\Mahasiswa::where('nomor_induk',$request->username)->get();
-        if ($users == '[]' && $nim != '[]' && $request->password == $nim[0]["nomor_induk"]){
-            $id = $nim[0]['id'];
-            return $this->daftarulangform($id);
-        }
-
 
         $this->validateLogin($request);
 
@@ -61,40 +54,6 @@ trait AuthenticatesUsers
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
-    }
-
-    public function daftarulangform($id)
-    {
-        $mahasiswa = \App\Mahasiswa::where('id',$id)->value('nomor_induk');
-        if (\App\User::where('username',$mahasiswa)->get() != '[]'){
-            return redirect('auth/login');
-        }
-        $mahasiswa = \App\Mahasiswa::where('id',$id)->get();
-        $nim = $mahasiswa[0]['nomor_induk'];
-        $nama = $mahasiswa[0]['nama'];
-        return view('auth.daftarulang',['id'=>$id,'nim'=>$nim,'nama'=>$nama]);
-    }
-    public function daftarulang($id, Request $request)
-    {
-        $mahasiswa = \App\Mahasiswa::where('id',$id)->value('nomor_induk');
-        if (\App\User::where('username',$mahasiswa)->get() != '[]'){
-            return redirect('auth/login');
-        }
-        $mahasiswa2 = \App\Mahasiswa::where('id',$id)->get();
-        $nim = $mahasiswa2[0]['nomor_induk'];
-        $nama = $mahasiswa2[0]['nama'];
-
-        \App\User::create([
-                'driver' => "SHAMI",
-                'username' => $nim,
-                'name' => $nama,
-                'email' => null,
-                'password' => Hash::make($request->password),
-                'role' => "mahasiswa",
-            ]
-        );
-
-        return redirect('auth/login');
     }
 
     /**

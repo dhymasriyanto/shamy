@@ -16,7 +16,7 @@
         <li>
             <a href="{{route('home')}}">
                 <i class="mdi mdi-view-dashboard"></i>
-                <span> Dashboard </span>
+                <span> Beranda </span>
             </a>
         </li>
         @if(\Illuminate\Support\Facades\Auth::user()->role == "admin")

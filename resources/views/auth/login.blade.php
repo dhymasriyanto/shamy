@@ -28,7 +28,7 @@
 <div class="account-pages mt-5 mb-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-12">
+            <div class="col-lg-6 col-12">
                 <div class="text-center">
                     <a class="nav-link" href="{{ route('auth.login.form') }}">
                         <span><img src="{{asset('images/logo.png') }}" alt="Logo" height="64"></span>
