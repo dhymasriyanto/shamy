@@ -119,8 +119,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <h4>Yakin ingin menghapus @{{ editnama }} ? </h4>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-success waves-effect waves-light" data-dismiss="modal">Tidak</button>
-                                                <button type="button" @click="hapus()" class="btn btn-danger waves-effect waves-light">Ya</button>
+                                                <button type="button" class="btn btn-success waves-effect waves-light" data-dismiss="modal"><i class="mdi mdi-18px mdi-close"></i> Tidak </button>
+                                                <button type="button" @click="hapus()" class="btn btn-danger waves-effect waves-light"><i class="mdi mdi-18px mdi-check"></i> Iya </button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->

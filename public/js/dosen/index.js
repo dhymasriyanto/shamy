@@ -55,7 +55,7 @@ function initVue() {
                 },
                 {
                     key: 'tempattanggal',
-                    label: 'Tempat Lahir',
+                    label: 'Tempat,Tanggal Lahir',
                     sortable: true,
                 },
                 {
