@@ -1,0 +1,39 @@
+@startuml sequence_diagram
+hide footbox
+autonumber
+
+actor Mahasiswa
+boundary Kelas
+boundary Barang
+control StuffsController
+entity Stuff
+
+Kelas -> Mahasiswa : Menampilkan halaman Kelas
+
+activate Kelas
+
+Mahasiswa -> Kelas : Menekan menu Inventori
+
+Kelas -> StuffsController : index()
+
+activate StuffsController
+
+StuffsController -> Stuff : all()
+
+activate Stuff
+
+Stuff --> StuffsController : query
+
+deactivate Stuff
+
+StuffsController -> Barang : view()
+
+deactivate StuffsController
+
+deactivate Kelas
+
+activate Barang
+
+Barang -> Mahasiswa : Menampilkan halaman Persediaan
+
+@enduml
