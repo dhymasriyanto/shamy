@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::post('daftarulang/{id}', 'Auth\LoginController@daftarulang')->name('daftarulang');
+
 //Dosen Controller
 Route::get('/dosen/all', 'DosenController@all')->name('dosen.all');
 Route::post('/dosen/create', 'DosenController@create')->name('dosen.create');

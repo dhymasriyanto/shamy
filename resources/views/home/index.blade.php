@@ -21,21 +21,21 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                     <div class="row">
                         <div class="col-12">
                             <div class="card-box">
-                                <h4 class="m-t-0 header-title">Selamat Datang di Website Akademik</h4>
+                                <h4 class="m-t-0 header-title">Selamat Datang di Sistem Akademik</h4>
                                 <p class="text-muted mb-4 font-14">
-                                    STAI TEMBILAHAN
+                                    STAI Auliaurrasyidin Tembilahan Riau
                                 </p>
 
                                 <div class="row">
                                     <div class="col-12">
-                                        TODO:<br>
-                                        Mengolah data JSON,<br>
-                                        Fitur lanjutan yang dibutuhkan,<br>
-                                        Isi dashboard,<br>
-                                        Foto,<br>
-                                        Status aktif,<br>
-                                        API,<br>
-                                        JQuery Validate
+{{--                                        TODO:<br>--}}
+{{--                                        Mengolah data JSON,<br>--}}
+{{--                                        Fitur lanjutan yang dibutuhkan,<br>--}}
+{{--                                        Isi dashboard,<br>--}}
+{{--                                        Foto,<br>--}}
+{{--                                        Status aktif,<br>--}}
+{{--                                        API,<br>--}}
+{{--                                        JQuery Validate--}}
                                     </div>
 
                                 </div>

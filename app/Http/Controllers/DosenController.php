@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Dosen;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DosenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -20,88 +16,49 @@ class DosenController extends Controller
 
     public function index(Request $request)
     {
-        $dosen = Dosen::all();
-        $data = [
-            'data' => $dosen
-        ];
-
-        return $this->renderPage($request, 'dosen.index', $data);
+        return $this->renderPage($request, 'dosen.index');
     }
 
     public function all()
     {
-        $dosen = Dosen::with('getJurusan')->get();;
+        $dosen = Dosen::with('getJurusan')->orderBy('nama', 'asc')->get();;
         return response($dosen);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
-        //
-        Dosen::create([
-                'nama' => $request->nama,
-                'nomor_induk' => $request->nomor_induk,
-                'id_jurusan' => $request->id_jurusan,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'tempat_lahir' => $request->tempat_lahir,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'agama' => $request->agama,
-                'created_by' => Auth::id()
-            ]
-        );
-        echo $request->nama;
+        if (Dosen::where('nomor_induk',$request->nomor_induk)->get() == '[]'){
+            if ($request->agama == null){
+                $request->agama = "Tidak diisi";
+            }
+            Dosen::create([
+                    'nama' => $request->nama,
+                    'nomor_induk' => $request->nomor_induk,
+                    'id_jurusan' => $request->id_jurusan,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'tempat_lahir' => $request->tempat_lahir,
+                    'tanggal_lahir' => $request->tanggal_lahir,
+                    'agama' => $request->agama,
+                    'created_by' => Auth::id()
+                ]
+            );
+            return response(['pesan'=>"Data berhasil ditambahkan"]);
+        }
+        else{
+            return response(['pesan'=>"Data sudah ada"]);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
         $dosen = Dosen::where('id',$id)->get();
-
-        return response($dosen);
+        $update = User::where('id',$dosen[0]['updated_by'])->value('name');
+        $create = User::where('id',$dosen[0]['created_by'])->value('name');
+        return response(['data'=>$dosen,'updatedby'=>$update,'createdby'=>$create]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
         $dosen = Dosen::find($id);
         $dosen->nama = $request->nama;
         $dosen->nomor_induk = $request->nomor_induk;
@@ -112,19 +69,12 @@ class DosenController extends Controller
         $dosen->id_jurusan = $request->id_jurusan;
         $dosen->updated_by = Auth::id();
         $dosen->save();
+        return response(['pesan'=>"Data berhasil diubah"]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id, Request $request)
     {
         Dosen::destroy($id);
-        $data = [];
-
-        return response('sukses');
+        return response(['pesan'=>"Data berhasil dihapus"]);
     }
 }

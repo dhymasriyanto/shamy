@@ -8,49 +8,66 @@ function initVue() {
             datatahunajaran : [],
             tahun_ajaran : '',
             edittahun_ajaran : '',
-            editid : ''
+            editid : '',
+            updated_by : '',
+            created_by : '',
+            search :'',
+            list: [],
+            filter: '',
+            fields: [
+                {
+                    key: 'index',
+                    label: 'No'
+                },
+                {
+                    key: 'tahun_ajaran',
+                    label: 'Tahun Ajaran',
+                    sortable: true,
+                },
+                {
+                    key: 'aksi',
+                    label: 'Aksi',
+                },
+            ],
+            perPage: 10,
+            pageOptions: [10, 15, 20],
+            totalRows: 1,
+            currentPage: 1,
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
                 pjax.refresh();
             }
+            toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"}
             this.all();
         },
         methods: {
             create: function () {
-                // console.log(this.nama)
                 axios.post('/tahun-ajaran/create',{tahun_ajaran : this.tahun_ajaran})
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
-                        // console.log(response);
                         vm.tahun_ajaran = "";
                         $('#modaltambah').modal('hide');
                     })
                     .catch(function (error) {
-                        // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
+                        Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {
                         // always executed
                     });
             },
             update: function () {
-                // console.log(this.nama)
                 axios.post('/tahun-ajaran/update/'+this.editid,{tahun_ajaran : this.edittahun_ajaran})
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.edittahun_ajaran = "";
                         $('#modaledit').modal('hide');
                     })
                     .catch(function (error) {
-                        // handle error
-                        $("#pesan").text("Ada kesalahan");
-                        console.log(error);
+                        Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {
                         // always executed
@@ -59,16 +76,14 @@ function initVue() {
             hapus: function () {
                 axios.delete('/tahun-ajaran/' + this.editid)
                     .then(function (response) {
-                        // handle success
+                        Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
-                        // console.log(response);
                         vm.editid = "";
                         vm.edittahun_ajaran = "";
                         $("#modalhapus").modal('hide');
                     })
                     .catch(function (error) {
-                        // handle error
-                        console.log(error);
+                        Command: toastr["error"]("Terjadi Kesalahan", "Error")
                     })
                     .then(function () {
                         // always executed
@@ -78,12 +93,11 @@ function initVue() {
                 axios.get('/tahun-ajaran/all')
                     .then(function (response) {
                         // handle success
-                        vm.datatahunajaran = response.data;
-                        // console.log(response);
+                        vm.list = response.data;
+                        vm.totalRows = vm.list.length;
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -93,14 +107,13 @@ function initVue() {
                 axios.get("/tahun-ajaran/get/"+id)
                     .then(function (response) {
                         // handle success
-                        // this.editnama = response.data;
-                        vm.edittahun_ajaran = response.data[0]['tahun_ajaran'];
+                        vm.edittahun_ajaran = response.data['data'][0]['tahun_ajaran'];
                         vm.editid = id;
-                        // console.log(response.data);
+                        vm.updated_by = response.data['updatedby'];
+                        vm.created_by = response.data['createdby'];
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
@@ -112,18 +125,23 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         // this.editnama = response.data;
-                        vm.edittahun_ajaran = response.data[0]['tahun_ajaran'];
+                        vm.edittahun_ajaran = response.data['data'][0]['tahun_ajaran'];
                         vm.editid = id;
-                        // console.log(response.data);
                     })
                     .catch(function (error) {
                         // handle error
-                        console.log(error);
                     })
                     .then(function () {
                         // always executed
                     });
                 $("#modalhapus").modal('show');
+            }
+        },
+        computed: {
+            filteredItems() {
+                return this.list.filter(tahunajaran => {
+                    return (tahunajaran.tahun_ajaran.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+                })
             }
         },
         components: {}

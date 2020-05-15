@@ -5,17 +5,23 @@
  * Time: 13:53
  */
 ?>
+<script>
+    function closemenu() {
+        $("body").removeClass("sidebar-enable");
+    }
+</script>
 <div id="sidebar-menu">
     <ul class="metismenu" id="side-menu">
         <li class="menu-title">Menu Utama</li>
         <li>
             <a href="{{route('home')}}">
                 <i class="mdi mdi-view-dashboard"></i>
-                <span> Dashboard </span>
+                <span> Beranda </span>
             </a>
         </li>
+        @if(\Illuminate\Support\Facades\Auth::user()->role == "admin")
         <li class="menu-title">Data Master</li>
-        <li>
+        <li onclick="closemenu()">
             <a href="{{route('dosen.index')}}">
                 <i class="mdi mdi-account-box-outline"></i>
                 <span> Data Dosen </span>
@@ -42,14 +48,14 @@
             </a>
             <a href="{{route('jurusan.index')}}">
                 <i class="mdi mdi-account-check-outline"></i>
-                <span> Data Jurusan </span>
+                <span> Data Program Studi </span>
             </a>
             <a href="{{route('mata-kuliah.index')}}">
                 <i class="mdi mdi-book"></i>
                 <span> Data Mata Kuliah </span>
             </a>
         </li>
-
+        @endif
         <li class="menu-title">Data Transaksional</li>
         <li>
             <a href="{{route('kelas.index')}}">

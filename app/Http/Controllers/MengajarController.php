@@ -19,12 +19,7 @@ class MengajarController extends Controller
 
     public function index(Request $request)
     {
-        $mengajar = Mengajar::all();
-        $data = [
-            'data' => $mengajar
-        ];
-
-        return $this->renderPage($request, 'mengajar.index', $data);
+        return $this->renderPage($request, 'mengajar.index');
     }
 
     public function all()
