@@ -35,11 +35,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         </b-button>
                                         <b-modal 
                                             id="modal-1"
-                                            title="Tambah data"
-                                            ref="modal"
-                                            {{-- @show = "resetModal" --}}
-                                            @hidden ="resetModal"
-                                            @ok ="handleOk"
                                         >
                                             <b-form  ref="form" @submit.stop.prevent="handleSubmit">
                                                 <b-input-group >

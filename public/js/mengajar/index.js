@@ -96,41 +96,7 @@ function initVue() {
             this.all();
         },
         methods: {
-            checkFormValidity() {
-                const valid = vm.$refs.form.checkValidity()
-                //variabel yang akan di cek
-                vm.id_jurusan = valid
-                vm.id_kelas = valid
-                vm.id_matakuliah = valid
-                vm.id_dosen = valid
-                vm.id_tahunajaran = valid
-                return valid
-            },
-            resetModal() {
-                //Ketika ditutup maka akan tereset data variabel nya
-            },
-            handleOk(bvModalEvt) {
-                // Prevent modal from closing
-                bvModalEvt.preventDefault();
-                // Trigger submit handler
-                vm.handleSubmit();
-            },
-            handleSubmit() {
-                // Exit when the form isn't valid
-                // if (!vm.checkFormValidity()) {
-                //   return;
-                // }
-                // Push the name to submitted names
-                vm.coba.push(vm.id_jurusan);
-                vm.coba.push(vm.id_kelas);
-                vm.coba.push(vm.id_matakuliah);
-                vm.coba.push(vm.id_dosen);
-                vm.coba.push(vm.id_tahunajaran);
-                // Hide the modal manually
-                vm.$nextTick(() => {
-                  vm.$bvModal.hide('modal-1');
-                })
-            },
+       
             hapus: function (id) {
                 axios.delete('/mengajar/' + id)
                     .then(function (response) {
