@@ -79,6 +79,7 @@ function initVue() {
             }
             toastr.options = {"closeButton": true, "debug": false, "newestOnTop": true, "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": true, "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"}
             this.all();
+            this.allJurusan();
         },
         methods: {
             create: function () {
@@ -154,7 +155,6 @@ function initVue() {
                             vm.list[i]['tanggal_lahir'] = moment(vm.list[i]['tanggal_lahir'], 'YYYY-MM-DD').format('DD/MM/YYYY');
                         }
                         vm.totalRows = vm.list.length;
-                        vm.allJurusan();
                     })
                     .catch(function (error) {
                         // handle error
