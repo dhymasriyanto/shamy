@@ -41,57 +41,13 @@
                 <div class="card-group">
                     <div class="card">
                         <div class="card-body p-4">
-                            @if ($errors->has('username') || $errors->has('password'))
-                                <div class="alert alert-danger alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    User ID atau Kata Sandi Salah!
-                                </div>
-                            @endif
-                            <form method="post" action="{{ route('auth.login') }}">
-                                @csrf
-                                <div class="form-group mb-3">
-                                    <label for="emailaddress">{{ __('User ID') }}</label>
-                                    <input class="form-control" id="email" type="text" data-parsley-required-message="User ID harus diisi!" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autofocus placeholder="Enter your user ID">
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="password">{{ __('Password') }}</label>
-                                    <input class="form-control" id="password" type="password" data-parsley-required-message="Password harus diisi!" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter your password">
-                                </div>
-
-{{--                                <div class="form-group mb-3">--}}
-{{--                                    <div class="custom-control custom-checkbox">--}}
-{{--                                        <input  class="custom-control-input" type="checkbox" name="remember"  id="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>--}}
-{{--                                        <label class="custom-control-label" for="remember">{{ __('Remember Me') }}</label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-                                <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-primary btn-block waves-effect btn-rounded" type="submit"> Masuk </button>
-                                </div>
-
-                            </form>
-                        </div> <!-- end card-body -->
-                        <div class="card-footer">
-                            <div class="text-center blockquote-footer">
-                                @if (Route::has('auth.register'))
-                                    <a  href="{{ route('auth.register') }}" class="text-muted ml-1">{{ __('Belum terdaftar?') }}</a>
-                                @endif
-                                @if (Route::has('password.request'))
-                                    <a  href="{{ route('password.request') }}" class="text-muted ml-1">{{ __('Lupa password?') }}</a>
-                                @endif
-                            </div> <!-- end col -->
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body p-4">
                             @if ($message = Session::get('auth.error'))
                                 <div class="alert alert-warning alert-dismissable">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                     {{ $message }}
                                 </div>
                             @endif
-                            <p class="text-muted">Sign in menggunakan:</p>
+                            <p class="text-muted">Masuk menggunakan:</p>
                             <ul class="list-group mb-0 user-list">
                                 <li class="list-group-item">
                                     <a href="{{route('auth.login.redirect')}}" class="user-list-item">
