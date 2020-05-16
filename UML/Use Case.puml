@@ -1,10 +1,10 @@
-@startuml
+@startuml usecase_akademik
 left to right direction
 skinparam packageStyle rectangle
 actor mahasiswa
 actor admin
 rectangle akademik {
-    mahasiswa -- (Melihat riwayat khs)
+    mahasiswa -- (Melihat IPK)
     mahasiswa -- (Melihat kelas)
     mahasiswa -- (Melihat jadwal)
     mahasiswa -- (manajemen profil)

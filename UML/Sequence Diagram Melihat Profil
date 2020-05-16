@@ -1,0 +1,39 @@
+@startuml sequence_diagram
+hide footbox
+
+actor Pengguna
+boundary Beranda
+autonumber
+boundary Profil
+control ProfilesController
+control Controller
+entity User
+
+Beranda -> Pengguna : Menampilkan halaman Beranda
+
+activate Beranda
+
+Pengguna -> Beranda : Menekan menu Profil
+
+Beranda -> ProfilesController : show()
+
+activate ProfilesController
+
+ProfilesController -> User : all()
+
+activate User  
+
+User --> ProfilesController : query
+
+deactivate User
+
+ProfilesController -> Profil : view()
+
+deactivate ProfilesController
+
+deactivate Beranda
+
+activate Profil
+Profil -> Pengguna : Menampilkan halaman Profil
+
+@enduml

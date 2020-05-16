@@ -4,6 +4,46 @@ autonumber
 
 actor Mahasiswa
 boundary Beranda
+boundary KHS
+control KHSController
+control Controller
+entity KHSModel
+
+Beranda -> Mahasiswa : Menampilkan halaman Beranda
+
+activate Beranda
+
+Mahasiswa -> Beranda : Menekan menu KHS
+
+Beranda -> KHSController : index()
+
+activate KHSController
+
+KHSController -> Controller : renderPage()
+
+deactivate KHSController
+
+activate Controller
+
+Controller --> KHS : view()
+
+deactivate Beranda
+
+activate KHS
+
+deactivate Controller
+
+KHS -> Mahasiswa : Menampilkan halaman KHS
+
+KHS -> KHSController  : all()
+
+activate KHSController
+@startuml sequence_diagram
+hide footbox
+autonumber
+
+actor Mahasiswa
+boundary Beranda
 boundary Kelas
 control KelasController
 control Controller
@@ -33,7 +73,7 @@ activate Kelas
 
 deactivate Controller
 
-Kelas -> Mahasiswa : Menampilkan halaman Kelas
+Kelas -> Mahasiswa : Menampilkan halaman KHS
 
 Kelas -> KelasController  : all()
 
@@ -51,6 +91,6 @@ KelasController -> Kelas : response(data)
 
 deactivate KelasController
 
-Kelas -> Mahasiswa : Merender data Mahasiswa
+Kelas -> Mahasiswa : Merender data Nilai
 
 @enduml

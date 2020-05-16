@@ -18,4 +18,9 @@ class Mahasiswa extends Model
     {
         return $this->belongsToMany('App\Kelas','kelas');
     }
+
+    public function getNilai()
+    {
+        return $this->belongsTo('App\Nilai', 'id_nilai');
+    }
 }
