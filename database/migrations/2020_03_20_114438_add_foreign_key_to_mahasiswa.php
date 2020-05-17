@@ -15,9 +15,7 @@ class AddForeignKeyToMahasiswa extends Migration
     {
         Schema::table('mahasiswa', function (Blueprint $table) {
             $table->unsignedBigInteger('id_jurusan');
-            $table->unsignedBigInteger('id_nilai');
-            $table->foreign('id_nilai')->references('id')->on('nilai')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_jurusan')->references('id')->on('jurusan')->onDelete('cascade')->onUpdate('cascade');
+           $table->foreign('id_jurusan')->references('id')->on('jurusan')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -30,7 +28,6 @@ class AddForeignKeyToMahasiswa extends Migration
     {
         Schema::table('mahasiswa', function (Blueprint $table) {
             $table->dropForeign('id_jurusan');
-            $table->dropForeign('id_nilai');
         });
     }
 }

@@ -15,8 +15,7 @@ class CreateNilaiTable extends Migration
     {
         Schema::create('nilai', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->json('ips');
-            $table->double('ipk');
+            $table->json('nilai');
             $table->timestamps();
         });
     }
