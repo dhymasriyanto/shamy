@@ -38,8 +38,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <b-form-group
                                                             size="sm"
                                                     >
-                                                    <b-form-select size="sm"  v-model="id_jurusan">
-                                                        <option disabled value="">Pilih Jurusan</option>
+                                                    <b-form-select  size="sm"  v-model="id_jurusan">
+                                                        <option class="col-md-9" disabled value="">Pilih Jurusan</option>
                                                         <option
                                                         v-for="jurusan in datajurusan"
                                                         v-bind:value="jurusan.id"
@@ -56,7 +56,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             size="sm"
                                                     >
                                                     <b-form-select size="sm"  v-model="id_kelas">
-                                                        <option disabled value="">Pilih Kelas</option>
+                                                        <option class="col-md-9" disabled value="">Pilih Kelas</option>
                                                         <option
                                                         v-for="kelas in datakelas"
                                                         v-bind:value="kelas.id"
@@ -73,7 +73,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             size="sm"
                                                     >
                                                     <b-form-select size="sm"  v-model="id_dosen">
-                                                        <option disabled value="">Pilih Dosen</option>
+                                                        <option class="col-md-9" disabled value="">Pilih Dosen</option>
                                                         <option
                                                         v-for="dosen in datadosen"
                                                         v-bind:value="dosen.id"
@@ -84,40 +84,40 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     </b-form-select>
                                                     </b-form-group>
                                                 </b-input-group>
-                                                <b-input-group >
-                                                    <label  class="col-md-3 col-form-label">Mata Kuliah</label>
-                                                    <b-form-group
-                                                            size="sm"
-                                                    >
-                                                    <b-form-select size="sm"  v-model="id_matakuliah">
-                                                        <option disabled value="">Pilih Mata Kuliah</option>
-                                                        <option
-                                                        v-for="matakuliah in datamatakuliah"
-                                                        v-bind:value="matakuliah.id"
-                                                     >
-                                                       @{{ matakuliah.nama }}
-                                                     </option>
-    
-                                                    </b-form-select>
-                                                    </b-form-group>
-                                                </b-input-group>
-                                                <b-input-group >
-                                                    <label  class="col-md-3 col-form-label">Tahun Ajaran</label>
-                                                    <b-form-group
-                                                            size="sm"
-                                                    >
-                                                    <b-form-select size="sm"  v-model="id_tahunajaran">
-                                                        <option disabled value="">Pilih Tahun Ajaran</option>
-                                                        <option
-                                                        v-for="tahunajaran in datatahunajaran"
-                                                        v-bind:value="tahunajaran.id"
-                                                     >
-                                                       @{{ tahunajaran.tahun_ajaran }}
-                                                     </option>
-    
-                                                    </b-form-select>
-                                                    </b-form-group>
-                                                </b-input-group>
+{{--                                                <b-input-group >--}}
+{{--                                                    <label  class="col-md-3 col-form-label">Mata Kuliah</label>--}}
+{{--                                                    <b-form-group--}}
+{{--                                                            size="sm"--}}
+{{--                                                    >--}}
+{{--                                                    <b-form-select size="sm"  v-model="id_matakuliah">--}}
+{{--                                                        <option disabled value="">Pilih Mata Kuliah</option>--}}
+{{--                                                        <option--}}
+{{--                                                        v-for="matakuliah in datamatakuliah"--}}
+{{--                                                        v-bind:value="matakuliah.id"--}}
+{{--                                                     >--}}
+{{--                                                       @{{ matakuliah.nama }}--}}
+{{--                                                     </option>--}}
+{{--    --}}
+{{--                                                    </b-form-select>--}}
+{{--                                                    </b-form-group>--}}
+{{--                                                </b-input-group>--}}
+{{--                                                <b-input-group >--}}
+{{--                                                    <label  class="col-md-3 col-form-label">Tahun Ajaran</label>--}}
+{{--                                                    <b-form-group--}}
+{{--                                                            size="sm"--}}
+{{--                                                    >--}}
+{{--                                                    <b-form-select size="sm"  v-model="id_tahunajaran">--}}
+{{--                                                        <option disabled value="">Pilih Tahun Ajaran</option>--}}
+{{--                                                        <option--}}
+{{--                                                        v-for="tahunajaran in datatahunajaran"--}}
+{{--                                                        v-bind:value="tahunajaran.id"--}}
+{{--                                                     >--}}
+{{--                                                       @{{ tahunajaran.tahun_ajaran }}--}}
+{{--                                                     </option>--}}
+{{--    --}}
+{{--                                                    </b-form-select>--}}
+{{--                                                    </b-form-group>--}}
+{{--                                                </b-input-group>--}}
                                             </b-form>
                                         </b-modal>
                                         <div>

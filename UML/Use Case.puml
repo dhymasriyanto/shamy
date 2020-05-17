@@ -3,13 +3,13 @@ left to right direction
 skinparam packageStyle rectangle
 actor Mahasiswa
 actor Admin
-rectangle "Sistem Akademik STAI Auliaurrasyidin (Modul KHS, Modul Kelas dan Modul Pengajaran) " {
+rectangle "Sistem Akademik STAI Auliaurrasyidin (Modul Nilai, Modul Kelas dan Modul Akta Ajar) " {
 
     Mahasiswa --- (Melihat Nilai)
 
     Mahasiswa --- (Melihat Kelas)
 
-    Mahasiswa --- (Melihat Daftar Mengajar)
+    Mahasiswa --- (Melihat Akta Ajar)
 
     Admin --- (Manajemen Profil)
     Mahasiswa --- (Manajemen Profil)
@@ -18,19 +18,19 @@ rectangle "Sistem Akademik STAI Auliaurrasyidin (Modul KHS, Modul Kelas dan Modu
     Admin --- (Manajemen Kelas)
     note top of (Manajemen Kelas) : Lihat, Ubah, Tambah, Hapus
 
-    Admin --- (Manajemen Pengajaran)
-    note top of (Manajemen Pengajaran) : Lihat, Ubah, Tambah, Hapus
+    Admin --- (Manajemen Akta Ajar)
+    note top of (Manajemen Akta Ajar) : Lihat, Ubah, Tambah, Hapus
 
     Admin --- (Manajemen Nilai)
     note top of (Manajemen Nilai) : Lihat, Ubah, Tambah, Hapus
 
     (Melihat Nilai) ..> (Login) : include
     (Melihat Kelas) ..> (Login) : include
-    (Melihat Daftar Mengajar) ..> (Login) : include
+    (Melihat Akta Ajar) ..> (Login) : include
     (Manajemen Profil) ..> (Login) : include
     (Manajemen Kelas) ..> (Login) : include
     (Manajemen Nilai) ..> (Login) : include
-    (Manajemen Pengajaran) ..> (Login) : include
+    (Manajemen Akta Ajar) ..> (Login) : include
 
     }
 @enduml

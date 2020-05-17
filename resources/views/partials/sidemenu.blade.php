@@ -64,7 +64,7 @@
             </a>
             <a href="{{route('mengajar.index')}}">
                 <i class="mdi mdi-clipboard-account"></i>
-                <span> Aktifitas Mengajar </span>
+                <span> Akta Ajar </span>
             </a>
             <a href="{{route('mengajar.index')}}">
                 <i class="far fa-file"></i>
