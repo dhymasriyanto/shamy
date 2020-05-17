@@ -60,20 +60,15 @@
         <li>
             <a href="{{route('kelas.index')}}">
                 <i class="mdi mdi-table-column"></i>
-                <span> Data Kelas </span>
+                <span> Kelas </span>
             </a>
             <a href="{{route('mengajar.index')}}">
                 <i class="mdi mdi-clipboard-account"></i>
-                <span>Jadwal</span>
+                <span> Aktifitas Mengajar </span>
             </a>
             <a href="{{route('mengajar.index')}}">
-                <i class="mdi mdi-clipboard-account"></i>
-                <span> Riwayat KRS </span>
-            </a>
-
-            <a href="{{route('mengajar.index')}}">
-                <i class="mdi mdi-clipboard-account"></i>
-                <span> Info Pembayaran </span>
+                <i class="far fa-file"></i>
+                <span> Nilai </span>
             </a>
         </li>
 
