@@ -44,10 +44,12 @@ Route::get('/kelas/allmahasiswa', 'KelasController@allmahasiswa')->name('kelas.a
 Route::get('/kelas/allrinciankelas/{id}', 'KelasController@allrinciankelas')->name('kelas.allrinciankelas');
 Route::delete('/kelas/hapusmahasiswa', 'KelasController@hapusmahasiswa')->name('kelas.hapusmahasiswa');
 
+//Kurikulum Controller
 Route::get('/kurikulum/all', 'KurikulumController@all')->name('kurikulum.all');
 Route::post('/kurikulum/create', 'KurikulumController@create')->name('kurikulum.create');
 Route::post('/kurikulum/update/{id}', 'KurikulumController@update')->name('kurikulum.update');
 Route::get('/kurikulum/get/{id}', 'KurikulumController@edit')->name('kurikulum.edit');
+Route::get('/kurikulum/allrincianmatkul/{id}', 'KurikulumController@allrincianmatkul')->name('kurikulum.allrincianmatkul');
 
 //Mahasiswa Controller
 Route::get('/mahasiswa/all', 'MahasiswaController@all')->name('mahasiswa.all');

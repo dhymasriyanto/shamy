@@ -22,7 +22,7 @@ class MahasiswaController extends Controller
 
     public function all()
     {
-        $mahasiswa = Mahasiswa::with('getJurusan')->get();;
+        $mahasiswa = Mahasiswa::with('getJurusan')->orderBy('nama', 'asc')->get();;
         return response($mahasiswa);
     }
 

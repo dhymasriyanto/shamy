@@ -1,0 +1,95 @@
+@startuml sequence_diagram
+hide footbox
+autonumber
+
+actor Admin
+boundary dosen.index
+control DosenController
+entity Dosen
+entity User
+
+dosen.index -> Admin : Menampilkan halaman Data Dosen
+
+activate dosen.index
+
+Admin -> dosen.index : Klik tombol Ubah di salah satu data
+
+dosen.index -> DosenController : edit(id)
+
+activate DosenController
+
+DosenController -> Dosen : where(id)->get()
+
+Dosen -> DosenController : data
+
+DosenController -> User : where()->value()
+
+User -> DosenController : data updated
+
+DosenController -> User : where()->value()
+
+User -> DosenController : data created
+
+DosenController -> dosen.index : response(data,data updated, data created)
+
+deactivate DosenController
+
+dosen.index -> Admin : Menampilkan modal ubah data dosen
+
+Admin -> dosen.index : Ubah data
+
+Admin -> dosen.index : Klik tombol Simpan
+
+dosen.index -> DosenController : update(id)
+
+activate DosenController
+
+DosenController -> Dosen : find(id)
+
+activate Dosen
+
+Dosen -> DosenController : data
+
+DosenController -> Dosen : save()
+
+Dosen -> DosenController : pesan
+
+deactivate Dosen
+
+DosenController -> dosen.index : response(pesan)
+
+deactivate DosenController
+
+alt pesan = gagal
+
+dosen.index -> Admin : Pemberitahuan gagal mengubah data
+
+else pesan = berhasil
+
+dosen.index -> Admin : Pemberitahuan berhasil mengubah data
+
+dosen.index -> DosenController  : all()
+
+activate DosenController
+
+DosenController -> Dosen : with()->orderBy()->get()
+
+activate Dosen
+
+Dosen -> DosenController : data
+
+deactivate Dosen
+
+DosenController -> dosen.index : response(data)
+
+deactivate DosenController
+
+dosen.index -> Admin : Merender data dosen
+
+deactivate dosen.index
+
+deactivate DosenController
+
+end
+
+@enduml

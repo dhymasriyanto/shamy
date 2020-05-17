@@ -21,7 +21,7 @@ class MataKuliahController extends Controller
 
     public function all()
     {
-        $matakuliah = MataKuliah::with('getJurusan','getKurikulum')->get();
+        $matakuliah = MataKuliah::all();
         return response($matakuliah);
     }
 
@@ -34,8 +34,6 @@ class MataKuliahController extends Controller
                     'singkatan' => $request->singkatan,
                     'bobot' => $request->bobot,
                     'jenis' => $request->jenis,
-                    'id_jurusan' => $request->id_jurusan,
-                    'id_kurikulum' => $request->id_kurikulum,
                     'created_by' => Auth::id()
                 ]
             );
@@ -60,8 +58,6 @@ class MataKuliahController extends Controller
         $matakuliah->nama = $request->nama;
         $matakuliah->kode = $request->kode;
         $matakuliah->singkatan = $request->singkatan;
-        $matakuliah->id_jurusan = $request->id_jurusan;
-        $matakuliah->id_kurikulum = $request->id_kurikulum;
         $matakuliah->bobot = $request->bobot;
         $matakuliah->jenis = $request->jenis;
         $matakuliah->updated_by = Auth::id();
