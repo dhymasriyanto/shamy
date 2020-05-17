@@ -1,0 +1,18 @@
+@startuml activity_diagram_sistem_baru
+skinparam defaultTextAlignment center
+
+start
+:Administrator membuat kelas
+sesuai jurusan dan kurikulum;
+:Administrator memasukkan mahasiswa
+ke dalam kelas tersebut;
+:Administrator melakukan penugasan kepada
+dosen mata kuliah sesuai kelas;
+start
+:Administrator memilih kelas
+sesuai jurusan dan tahun ajaran yang berlaku;
+:Administrator memilih mahasiswa
+dan memasukkan nilai yang sesuai;
+stop
+
+@enduml

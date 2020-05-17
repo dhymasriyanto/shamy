@@ -1,0 +1,24 @@
+@startuml activity_diagram_sistem_lama
+skinparam defaultTextAlignment center
+
+
+start
+:Administrator membuat data kelas
+sesuai jurusan dan kurikulum;
+:Administrator merekap mahasiswa
+yang telah terdaftar pada kelas tersebut;
+:Administrator membuat laporan data kelas;
+:Administrator melakukan penugasan kepada
+dosen mata kuliah sesuai kelas;
+:Administrator membuat laporan akta ajar dengan Microsoft Excel;
+start
+:Administrator membuat laporan nilai tiap kelas
+dan mengelola data dalam Microsoft Excel
+yang telah diberikan dosen mata kuliah;
+:Administrator mengupload laporan nilai,
+laporan kelas dan laporan akta ajar ke web PDDikti;
+stop
+
+
+
+@enduml
