@@ -81,7 +81,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </template>
                                                         <template v-slot:cell(aksi)="data">
                                                             <div class="button-list">
-                                                                <button type="button" @click="lihatRincian(data.item.id)" class="btn btn-success waves-effect waves-light"><i
+                                                                <button type="button" @click="lihatRincian(data.item.id)" class="btn btn-info waves-effect waves-light"><i
                                                                         class="mdi mdi-18px mdi-file-document-edit-outline" ></i> Rincian </button>
                                                                 <button type="button" @click="edit(data.item.id)" class="btn btn-success waves-effect waves-light"><i
                                                                         class="mdi mdi-18px mdi-file-document-edit-outline" ></i> Ubah </button>
@@ -107,7 +107,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 <!-- end row -->
                         <div v-on:keyup.enter="lihatRincian" id="modalRincian" class="modal fade" tabindex="-1"
                              role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -122,19 +121,24 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                     <div class="modal-body">
                                         <div v-for="matkul in rincianmatkul">
                                             <!-- Name -->
-                                            <button class="btn btn-dark waves-effect" data-toggle="modal" data-target="#modaltambah"> <i
-                                                    class="fa fa-plus mr-1" ></i>Tambah</button>
+                                            <button class="btn btn-dark waves-effect" data-dismiss="modal" data-toggle="modal" data-target="#modalTambahRincian"> <i
+                                                    class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
                                             <div class="form-group">
-                                                <div >
+                                                <div>
                                                     <div
                                                         v-if="!matkul.matakuliah.length">Belum ada mata kuliah yang ditambahkan
                                                     </div>
-
                                                     <div class="form-row">
+                                                        <div class="col-md-3">
+                                                            <h5>Kode MK</h5>
+                                                            <input class="form-control" v-model="search6"><br><br>
+                                                        </div>
                                                         <div class="col-md-3">
                                                             <h5>Nama</h5>
                                                             <input class="form-control" v-model="search5"><br><br>
                                                         </div>
+                                                    </div>
+
                                                     </div>
                                                     <div>
                                                         <div class="col-sm-1" style="margin-bottom: 1.5rem; margin-top: -1.5rem; padding-left: 0px; ">
@@ -177,13 +181,101 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             </template>
                                                         </b-table>
                                                         <div class="col-12 col-md-6 float-left">
-                                                            <p>Menampilkan @{{(currentPage*perPage+1)-perPage}} sampai @{{(currentPage*perPage)}} dari @{{totalRows}} data</p>
+                                                            <p>Menampilkan @{{(currentPage*perPage+1)-perPage}} sampai @{{(currentPage*perPage)}} dari @{{totalRows2}} data</p>
                                                         </div>
                                                         <div class="col-12 col-md-6 float-right">
                                                             <b-pagination
                                                                 v-model="currentPage"
                                                                 :total-rows="totalRows"
                                                                 :per-page="perPage"
+                                                                align="right"
+                                                                class="my-0">
+                                                            </b-pagination>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        <div v-on:keyup.enter="tambahRincian" id="modalTambahRincian" class="modal fade" tabindex="-1"
+                             role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myModalLabel">Tambah Mata Kuliah di Kurikulum @{{namamodal}}</h4>
+                                        <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#modalRincian"
+                                                aria-hidden="true">×
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div v-for="matkul in rincianmatkul">
+                                            <!-- Name -->
+                                            <div class="form-group">
+                                                <div >
+                                                    <div
+                                                        v-if="!matkul.matakuliah.length">Belum ada mata kuliah yang ditambahkan
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="col-md-3">
+                                                            <h5>Kode MK</h5>
+                                                            <input class="form-control" v-model="search8"><br><br>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <h5>Nama</h5>
+                                                            <input class="form-control" v-model="search7"><br><br>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="col-sm-1" style="margin-bottom: 1.5rem; margin-top: -1.5rem; padding-left: 0px; ">
+                                                            <h5>Jumlah entri</h5>
+                                                            <b-form-select
+                                                                v-model="perPage"
+                                                                id="perPageSelect"
+                                                                class="form-control"
+                                                                :options="pageOptions">
+                                                            </b-form-select>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="alert alert-warning" v-if="!filteredItems.length">
+                                                            <strong>Sorry!</strong> No data
+                                                        </div>
+                                                        <b-table
+                                                            v-if="filteredItems.length"
+                                                            head-variant="dark"
+                                                            ref="table"
+                                                            striped
+                                                            hover
+                                                            bordered
+                                                            :items="filteredItems3"
+                                                            :fields="fields3"
+                                                            :current-page="currentPage"
+                                                            :per-page="perPage"
+                                                            :filter="filter"
+                                                            selectable
+                                                            select-mode="single"
+                                                            responsive="md">
+                                                            <template v-slot:cell(index)="data">
+                                                                @{{ data.index + 1 }}
+                                                            </template>
+                                                            <template v-slot:cell(aksi)="data">
+                                                                <div class="button-list">
+                                                                    <button class="btn btn-success waves-effect" @click="editRincian(data.item.id)"><i
+                                                                            class="mdi mdi-18px mdi-plus" ></i> Tambahkan
+                                                                    </button>
+                                                                </div>
+                                                            </template>
+                                                        </b-table>
+                                                        <div class="col-12 col-md-6 float-left">
+                                                            <p>Menampilkan @{{(currentPage*perPage+1)-perPage}} sampai @{{(currentPage*perPage)}} dari @{{totalRows3}} data</p>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 float-right">
+                                                            <b-pagination
+                                                                v-model="currentPage3"
+                                                                :total-rows="totalRows3"
+                                                                :per-page="perPage3"
                                                                 align="right"
                                                                 class="my-0">
                                                             </b-pagination>

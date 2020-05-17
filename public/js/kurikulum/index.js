@@ -8,6 +8,7 @@ function initVue() {
             datakurikulum : [],
             datajurusan : [],
             datatahunajaran : [],
+            datamatakuliah : [],
             rincianmatkul: [],
             allrincianmatkul: [],
             nama : '',
@@ -28,6 +29,9 @@ function initVue() {
             created_by : '',
             search :'',
             search5 :'',
+            search6 :'',
+            search7 :'',
+            search8 :'',
             namamodal : '',
             list: [],
             filter: '',
@@ -100,6 +104,40 @@ function initVue() {
             pageOptions2: [10, 15, 20],
             totalRows2: 1,
             currentPage2: 1,
+            fields3: [
+                {
+                    key: 'index',
+                    label: 'No'
+                },
+                {
+                    key: 'kode',
+                    label: 'Kode MK',
+                    sortable: true,
+                },
+                {
+                    key: 'nama',
+                    label: 'Nama',
+                    sortable: true,
+                },
+                {
+                    key: 'bobot',
+                    label: 'Bobot',
+                    sortable: true,
+                },
+                {
+                    key: 'jenis',
+                    label: 'Jenis',
+                    sortable: true,
+                },
+                {
+                    key: 'aksi',
+                    label: 'Aksi',
+                },
+            ],
+            perPage3: 10,
+            pageOptions3: [10, 15, 20],
+            totalRows3: 1,
+            currentPage3: 1,
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -109,6 +147,7 @@ function initVue() {
             this.all();
             this.allJurusan();
             this.allTahunAjaran();
+            this.allMataKuliah();
         },
         methods: {
             create: function () {
@@ -253,6 +292,20 @@ function initVue() {
                         // always executed
                     });
             },
+            allMataKuliah: function () {
+                axios.get('/mata-kuliah/all')
+                    .then(function (response) {
+                        // handle success
+                        vm.datamatakuliah = response.data;
+                        vm.totalRows3 = vm.datamatakuliah.length;
+                    })
+                    .catch(function (error) {
+                        // handle error
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
             edit: function (id) {
                 axios.get("/kurikulum/get/"+id)
                     .then(function (response) {
@@ -300,7 +353,12 @@ function initVue() {
             },
             filteredItems2() {
                 return this.allrincianmatkul.filter(rincian => {
-                    return (rincian.nama.toLowerCase().indexOf(this.search5.toLowerCase()) > -1)
+                    return (rincian.kode.toLowerCase().indexOf(this.search6.toLowerCase()) > -1 && rincian.nama.toLowerCase().indexOf(this.search5.toLowerCase()) > -1)
+                })
+            },
+            filteredItems3() {
+                return this.datamatakuliah.filter(matakuliah => {
+                    return (matakuliah.kode.toLowerCase().indexOf(this.search8.toLowerCase()) > -1 && matakuliah.nama.toLowerCase().indexOf(this.search7.toLowerCase()) > -1)
                 })
             }
         },
