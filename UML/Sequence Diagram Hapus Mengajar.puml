@@ -1,0 +1,65 @@
+@startuml sequence_diagram_hapus_Mengajar
+hide footbox
+autonumber
+
+actor Admin
+boundary mengajar.index
+control MengajarController
+entity Mengajar
+
+mengajar.index -> Admin : Menampilkan halaman Mengajar
+
+activate mengajar.index
+
+Admin -> mengajar.index : Menekan tombol hapus Mengajar
+
+alt Menghapus Mengajar
+
+mengajar.index -> Admin : Menampilkan pop-up modal konfirmasi
+
+
+mengajar.index -> MengajarController : show()
+
+activate MengajarController
+
+MengajarController -> Mengajar : find(id)
+
+activate Mengajar
+
+Mengajar -> MengajarController : data
+
+deactivate Mengajar
+
+MengajarController -> mengajar.index : response(data)
+
+deactivate MengajarController
+
+mengajar.index -> Admin : Merender nama Mengajar
+
+Admin -> mengajar.index : Menekan tombol ya
+
+mengajar.index -> MengajarController : destroy()
+
+activate MengajarController
+
+MengajarController -> Mengajar : destroy(id)
+
+activate Mengajar
+
+deactivate Mengajar
+
+MengajarController -> mengajar.index : response(message)
+
+deactivate MengajarController
+
+mengajar.index -> Admin : Menampilkan toast berisikan pesan
+
+else Batal menghapus Mengajar
+
+Admin -> mengajar.index : Menekan tombol tidak / silang
+
+end
+
+mengajar.index -> Admin : Menutup pop-up modal ubah Mengajar
+
+@enduml

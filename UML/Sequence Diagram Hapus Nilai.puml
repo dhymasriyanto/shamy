@@ -1,0 +1,65 @@
+@startuml sequence_diagram_hapus_nilai
+hide footbox
+autonumber
+
+actor Admin
+boundary nilai.index
+control NilaiController
+entity Nilai
+
+nilai.index -> Admin : Menampilkan halaman Nilai
+
+activate nilai.index
+
+Admin -> nilai.index : Menekan tombol hapus Nilai
+
+alt Menghapus Nilai
+
+nilai.index -> Admin : Menampilkan pop-up modal konfirmasi
+
+
+nilai.index -> NilaiController : show()
+
+activate NilaiController
+
+NilaiController -> Nilai : find(id)
+
+activate Nilai
+
+Nilai -> NilaiController : data
+
+deactivate Nilai
+
+NilaiController -> nilai.index : response(data)
+
+deactivate NilaiController
+
+nilai.index -> Admin : Merender id nilai yang ingin dihapus
+
+Admin -> nilai.index : Menekan tombol ya
+
+nilai.index -> NilaiController : destroy()
+
+activate NilaiController
+
+NilaiController -> Nilai : destroy(id)
+
+activate Nilai
+
+deactivate Nilai
+
+NilaiController -> nilai.index : response(message)
+
+deactivate NilaiController
+
+nilai.index -> Admin : Menampilkan toast berisikan pesan
+
+else Batal menghapus Nilai
+
+Admin -> nilai.index : Menekan tombol tidak / silang
+
+end
+
+nilai.index -> Admin : Menutup pop-up modal ubah Nilai
+
+@enduml

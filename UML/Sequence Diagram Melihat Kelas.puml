@@ -1,0 +1,56 @@
+@startuml sequence_diagram_lihat_kelas
+hide footbox
+autonumber
+
+actor Mahasiswa
+boundary beranda.index
+boundary kelas.index
+control KelasController
+control Controller
+entity Kelas
+
+beranda.index -> Mahasiswa : Menampilkan halaman beranda
+
+activate beranda.index
+
+Mahasiswa -> beranda.index : Menekan menu Kelas
+
+beranda.index -> KelasController : index()
+
+activate KelasController
+
+KelasController -> Controller : renderPage()
+
+deactivate KelasController
+
+activate Controller
+
+Controller --> kelas.index : view()
+
+deactivate beranda.index
+
+activate kelas.index
+
+deactivate Controller
+
+kelas.index -> Mahasiswa : Menampilkan halaman Kelas
+
+kelas.index -> KelasController  : all()
+
+activate KelasController
+
+KelasController -> Kelas : with()->get()
+
+activate Kelas
+
+Kelas -> KelasController : data
+
+deactivate Kelas
+
+KelasController -> kelas.index : response(data)
+
+deactivate KelasController
+
+kelas.index -> Mahasiswa : Merender data pada tabel Kelas
+
+@enduml

@@ -1,0 +1,175 @@
+@startuml sequence_diagram_ubah_profil
+hide footbox
+autonumber
+
+actor Pengguna
+boundary profil.index
+boundary profil.edit
+control ProfilesController
+control Controller
+entity User
+
+profil.index -> Pengguna : Menampilkan halaman Profil
+
+activate profil.index
+
+Pengguna -> profil.index : Menekan tombol ubah profil
+
+profil.index -> ProfilesController : edit()
+
+activate ProfilesController
+
+
+ProfilesController -> Controller : renderPage()
+
+deactivate ProfilesController
+
+activate Controller
+
+Controller -> profil.edit : view()
+
+deactivate profil.index
+
+activate profil.edit
+
+deactivate Controller
+
+profil.edit -> Pengguna : Menampilkan halaman edit profil
+
+profil.edit -> ProfilesController : show()
+
+activate ProfilesController
+
+ProfilesController -> User : find(id)
+
+activate User
+
+User -> ProfilesController : data
+
+deactivate User
+
+ProfilesController -> profil.edit : response(data)
+
+deactivate ProfilesController
+
+profil.edit -> Pengguna : Merender data User
+
+Pengguna -> profil.edit : Mengisi form yang ingin di ubah
+
+alt Menekan ganti password
+
+profil.edit -> Pengguna : Menampilkan pop-up modal ubah password
+
+profil.edit -> ProfilesController : show()
+
+activate ProfilesController
+
+ProfilesController -> User : find(id)
+
+activate User
+
+User -> ProfilesController : data
+
+deactivate User
+
+ProfilesController -> profil.edit : response(data)
+
+deactivate ProfilesController
+
+profil.edit -> Pengguna : Merender data password
+
+Pengguna -> profil.edit : Mengubah password
+
+Pengguna -> profil.edit : Menekan tombol simpan
+
+alt Benar
+
+profil.edit -> ProfilesController : update()
+
+activate ProfilesController
+
+ProfilesController -> User : where(id)->update()
+
+activate User
+
+deactivate User
+
+ProfilesController -> profil.edit : response(message)
+
+deactivate ProfilesController
+
+profil.edit -> Pengguna : Menampilkan toast berisikan pesan sukses
+
+else Password lama salah
+
+profil.edit -> Pengguna : Menampilkan toast berisikan pesan error
+
+else konfirmasi password baru salah
+
+profil.edit -> Pengguna : Menampilkan toast berisikan pesan error
+
+end
+
+profil.edit -> Pengguna : Menutup pop-up modal ubah password
+
+else Batal mengubah password
+
+Pengguna -> profil.edit : Menekan tombol batal / silang
+
+profil.edit -> Pengguna : Menutup pop-up modal ubah password
+
+end
+
+Pengguna -> profil.edit : Menekan tombol simpan
+
+'ProfilesController -> User : find(id)
+'
+'activate User
+'
+'User -> ProfilesController : data
+'
+'ProfilesController -> User : save()
+'
+profil.edit -> ProfilesController : update()
+
+activate ProfilesController
+
+ProfilesController -> User : where(id)->update()
+
+activate User
+
+deactivate User
+
+ProfilesController -> profil.edit : response(message)
+
+deactivate ProfilesController
+
+'ProfilesController -> Controller : renderPage()
+'
+'deactivate ProfilesController
+'
+'activate Controller
+'
+'Controller -> profil.index : view()->response(message)
+
+profil.edit -> Pengguna : Menampilkan toast berisikan pesan
+
+profil.edit -> ProfilesController : show()
+
+activate ProfilesController
+
+ProfilesController -> User : find(id)
+
+activate User
+
+User -> ProfilesController : data
+
+deactivate User
+
+ProfilesController -> profil.edit : response(data)
+
+deactivate ProfilesController
+
+profil.edit -> Pengguna : Merender data User
+
+@enduml

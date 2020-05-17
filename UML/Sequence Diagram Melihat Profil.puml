@@ -1,0 +1,56 @@
+@startuml sequence_diagram_lihat_profil
+hide footbox
+
+actor Pengguna
+boundary beranda.index
+autonumber
+boundary profil.index
+control ProfilesController
+control Controller
+entity User
+
+beranda.index -> Pengguna : Menampilkan halaman Beranda
+
+activate beranda.index
+
+Pengguna -> beranda.index : Menekan menu Profil
+
+beranda.index -> ProfilesController : index()
+
+activate ProfilesController
+
+ProfilesController -> Controller : renderPage()
+
+deactivate ProfilesController
+
+activate Controller
+
+Controller -> profil.index : view()
+
+deactivate beranda.index
+
+deactivate Controller
+
+activate profil.index
+
+profil.index -> Pengguna : Menampilkan halaman Profil
+
+profil.index -> ProfilesController : show(id)
+
+activate ProfilesController
+
+ProfilesController -> User : find(id)
+
+activate User
+
+User --> ProfilesController : data
+
+deactivate User
+
+ProfilesController -> profil.index : response(data)
+
+deactivate ProfilesController
+
+profil.index -> Pengguna : Merender data User
+
+@enduml

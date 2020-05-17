@@ -1,0 +1,66 @@
+@startuml sequence_diagram_ubah_nilai
+hide footbox
+autonumber
+
+actor Admin
+boundary nilai.index
+control NilaiController
+entity Nilai
+
+nilai.index -> Admin : Menampilkan halaman Nilai
+
+activate nilai.index
+
+Admin -> nilai.index : Menekan tombol ubah Nilai
+
+alt Mengubah nilai
+
+nilai.index -> Admin : Menampilkan pop-up modal ubah nilai
+
+nilai.index -> NilaiController : show()
+
+activate NilaiController
+
+NilaiController -> Nilai : with()->get()->find(id)
+
+activate Nilai
+
+Nilai -> NilaiController : data
+
+deactivate Nilai
+
+NilaiController -> nilai.index : response(data)
+
+deactivate NilaiController
+
+nilai.index -> Admin : Merender data nilai
+
+Admin -> nilai.index : Mengubah nilai
+
+Admin -> nilai.index : Menekan tombol simpan
+
+nilai.index -> NilaiController : update()
+
+activate NilaiController
+
+NilaiController -> Nilai : where(id)->update()
+
+activate Nilai
+
+deactivate Nilai
+
+NilaiController -> nilai.index : response(message)
+
+deactivate NilaiController
+
+nilai.index -> Admin : Menampilkan toast berisikan pesan
+
+else Batal mengubah nilai
+
+Admin -> nilai.index : Menekan tombol batal / silang
+
+end
+
+nilai.index -> Admin : Menutup pop-up modal ubah nilai
+
+@enduml

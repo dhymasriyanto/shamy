@@ -1,0 +1,56 @@
+@startuml sequence_diagram_lihat_pengajaran
+hide footbox
+autonumber
+
+actor Mahasiswa
+boundary beranda.index
+boundary mengajar.index
+control MengajarController
+control Controller
+entity Mengajar
+
+beranda.index -> Mahasiswa : Menampilkan halaman Beranda
+
+activate beranda.index
+
+Mahasiswa -> beranda.index : Menekan menu Mengajar
+
+beranda.index -> MengajarController : index()
+
+activate MengajarController
+
+MengajarController -> Controller : renderPage()
+
+deactivate MengajarController
+
+activate Controller
+
+Controller --> mengajar.index : view()
+
+deactivate beranda.index
+
+activate mengajar.index
+
+deactivate Controller
+
+mengajar.index -> Mahasiswa : Menampilkan halaman Mengajar
+
+mengajar.index -> MengajarController  : all()
+
+activate MengajarController
+
+MengajarController -> Mengajar : with()->get()
+
+activate Mengajar
+
+Mengajar -> MengajarController : data
+
+deactivate Mengajar
+
+MengajarController -> mengajar.index : response(data)
+
+deactivate MengajarController
+
+mengajar.index -> Mahasiswa : Merender data pada tabel Mengajar
+
+@enduml

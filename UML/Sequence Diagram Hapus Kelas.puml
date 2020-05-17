@@ -1,0 +1,65 @@
+@startuml sequence_diagram_hapus_kelas
+hide footbox
+autonumber
+
+actor Admin
+boundary kelas.index
+control KelasController
+entity Kelas
+
+kelas.index -> Admin : Menampilkan halaman Kelas
+
+activate kelas.index
+
+Admin -> kelas.index : Menekan tombol hapus Kelas
+
+alt Menghapus Kelas
+
+kelas.index -> Admin : Menampilkan pop-up modal konfirmasi
+
+
+kelas.index -> KelasController : show()
+
+activate KelasController
+
+KelasController -> Kelas : with()->get()->find(id)
+
+activate Kelas
+
+Kelas -> KelasController : data
+
+deactivate Kelas
+
+KelasController -> kelas.index : response(data)
+
+deactivate KelasController
+
+kelas.index -> Admin : Merender nama Kelas
+
+Admin -> kelas.index : Menekan tombol ya
+
+kelas.index -> KelasController : destroy()
+
+activate KelasController
+
+KelasController -> Kelas : destroy(id)
+
+activate Kelas
+
+deactivate Kelas
+
+KelasController -> kelas.index : response(message)
+
+deactivate KelasController
+
+kelas.index -> Admin : Menampilkan toast berisikan pesan
+
+else Batal menghapus Kelas
+
+Admin -> kelas.index : Menekan tombol tidak / silang
+
+end
+
+kelas.index -> Admin : Menutup pop-up modal ubah Kelas
+
+@enduml

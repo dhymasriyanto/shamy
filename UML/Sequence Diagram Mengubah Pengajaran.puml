@@ -1,0 +1,66 @@
+@startuml sequence_diagram_ubah_mengajar
+hide footbox
+autonumber
+
+actor Admin
+boundary mengajar.index
+control MengajarController
+entity Mengajar
+
+mengajar.index -> Admin : Menampilkan halaman Mengajar
+
+activate mengajar.index
+
+Admin -> mengajar.index : Menekan tombol ubah Mengajar
+
+alt Mengubah Mengajar
+
+mengajar.index -> Admin : Menampilkan pop-up modal ubah Mengajar
+
+mengajar.index -> MengajarController : show()
+
+activate MengajarController
+
+MengajarController -> Mengajar : find(id)
+
+activate Mengajar
+
+Mengajar -> MengajarController : data
+
+deactivate Mengajar
+
+MengajarController -> mengajar.index : response(data)
+
+deactivate MengajarController
+
+mengajar.index -> Admin : Merender data Mengajar
+
+Admin -> mengajar.index : Mengubah Mengajar
+
+Admin -> mengajar.index : Menekan tombol simpan
+
+mengajar.index -> MengajarController : update()
+
+activate MengajarController
+
+MengajarController -> Mengajar : where(id)->update()
+
+activate Mengajar
+
+deactivate Mengajar
+
+MengajarController -> mengajar.index : response(message)
+
+deactivate MengajarController
+
+mengajar.index -> Admin : Menampilkan toast berisikan pesan
+
+else Batal mengubah Mengajar
+
+Admin -> mengajar.index : Menekan tombol batal / silang
+
+end
+
+mengajar.index -> Admin : Menutup pop-up modal ubah Mengajar
+
+@enduml

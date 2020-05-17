@@ -1,0 +1,66 @@
+@startuml sequence_diagram_ubah_kelas
+hide footbox
+autonumber
+
+actor Admin
+boundary kelas.index
+control KelasController
+entity Kelas
+
+kelas.index -> Admin : Menampilkan halaman Kelas
+
+activate kelas.index
+
+Admin -> kelas.index : Menekan tombol ubah Kelas
+
+alt Mengubah Kelas
+
+kelas.index -> Admin : Menampilkan pop-up modal ubah Kelas
+
+kelas.index -> KelasController : show()
+
+activate KelasController
+
+KelasController -> Kelas : with()->get()->find(id)
+
+activate Kelas
+
+Kelas -> KelasController : data
+
+deactivate Kelas
+
+KelasController -> kelas.index : response(data)
+
+deactivate KelasController
+
+kelas.index -> Admin : Merender data Kelas
+
+Admin -> kelas.index : Mengubah Kelas
+
+Admin -> kelas.index : Menekan tombol simpan
+
+kelas.index -> KelasController : update()
+
+activate KelasController
+
+KelasController -> Kelas : where(id)->update()
+
+activate Kelas
+
+deactivate Kelas
+
+KelasController -> kelas.index : response(message)
+
+deactivate KelasController
+
+kelas.index -> Admin : Menampilkan toast berisikan pesan
+
+else Batal mengubah Kelas
+
+Admin -> kelas.index : Menekan tombol batal / silang
+
+end
+
+kelas.index -> Admin : Menutup pop-up modal ubah Kelas
+
+@enduml

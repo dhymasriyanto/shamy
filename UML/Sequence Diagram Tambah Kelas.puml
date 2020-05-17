@@ -1,0 +1,48 @@
+@startuml sequence_diagram_tambah_kelas
+hide footbox
+autonumber
+
+actor Admin
+boundary kelas.index
+control KelasController
+entity Kelas
+
+kelas.index -> Admin : Menampilkan halaman Kelas
+
+activate kelas.index
+
+Admin -> kelas.index : Menekan tombol tambah Kelas
+
+alt Mengubah Kelas
+
+kelas.index -> Admin : Menampilkan pop-up modal tambah Kelas
+
+Admin -> kelas.index : Mengisi form untuk membuat Kelas
+
+Admin -> kelas.index : Menekan tombol simpan
+
+kelas.index -> KelasController : store()
+
+activate KelasController
+
+KelasController -> Kelas : create()
+
+activate Kelas
+
+deactivate Kelas
+
+KelasController -> kelas.index : response(message)
+
+deactivate KelasController
+
+kelas.index -> Admin : Menampilkan toast berisikan pesan
+
+else Batal mengubah Kelas
+
+Admin -> kelas.index : Menekan tombol batal / silang
+
+end
+
+kelas.index -> Admin : Menutup pop-up modal tambah Kelas
+
+@enduml

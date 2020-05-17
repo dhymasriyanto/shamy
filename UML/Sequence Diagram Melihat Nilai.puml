@@ -1,0 +1,56 @@
+@startuml sequence_diagram_lihat_nilai
+hide footbox
+autonumber
+
+actor Mahasiswa
+boundary beranda.index
+boundary nilai.index
+control NilaiController
+control Controller
+entity Nilai
+
+beranda.index -> Mahasiswa : Menampilkan halaman beranda
+
+activate beranda.index
+
+Mahasiswa -> beranda.index : Menekan menu Nilai
+
+beranda.index -> NilaiController : index()
+
+activate NilaiController
+
+NilaiController -> Controller : renderPage()
+
+deactivate NilaiController
+
+activate Controller
+
+Controller --> nilai.index : view()
+
+deactivate beranda.index
+
+activate nilai.index
+
+deactivate Controller
+
+nilai.index -> Mahasiswa : Menampilkan halaman Nilai
+
+nilai.index -> NilaiController  : all()
+
+activate NilaiController
+
+NilaiController -> Nilai : with()->get()
+
+activate Nilai
+
+Nilai -> NilaiController : data
+
+deactivate Nilai
+
+NilaiController -> nilai.index : response(data)
+
+deactivate NilaiController
+
+nilai.index -> Mahasiswa : Merender data pada tabel Nilai
+
+@enduml
