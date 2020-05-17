@@ -30,10 +30,10 @@
                 <i class="mdi mdi-account-group"></i>
                 <span> Data Mahasiswa </span>
             </a>
-            <a href="{{route('pegawai.index')}}">
-                <i class="mdi mdi-account-supervisor-circle"></i>
-                <span> Data Pegawai </span>
-            </a>
+{{--            <a href="{{route('pegawai.index')}}">--}}
+{{--                <i class="mdi mdi-account-supervisor-circle"></i>--}}
+{{--                <span> Data Pegawai </span>--}}
+{{--            </a>--}}
             <a href="{{route('fakultas.index')}}">
                 <i class="mdi mdi-office-building"></i>
                 <span> Data Fakultas </span>

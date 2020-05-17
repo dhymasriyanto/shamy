@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kurikulum;
+use App\MataKuliah;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,14 +22,47 @@ class KurikulumController extends Controller
 
     public function all()
     {
-        $kurikulum = Kurikulum::all();
+        $kurikulum = Kurikulum::with('getJurusan','getTahunAjaran')->get();
         return response($kurikulum);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $kurikulum = [Kurikulum::with(['getJurusan', 'getTahunAjaran'])->get()->find($id)];
+        return response($kurikulum);
+    }
+
+    public function allrincianmatkul($id)
+    {
+        $ids = [Kurikulum::with(['getJurusan', 'getTahunAjaran'])->get()->find($id)];
+        $matkul = [null];
+        $j = 0;
+        foreach ($ids as $id) {
+            for ($i = 0; $i < count($id->matakuliah); $i++) {
+                $matkul[$j] = MataKuliah::where('id', $id->matakuliah[$i])->first();
+                $j++;
+            }
+        }
+
+        return response($matkul);
     }
 
     public function create(Request $request)
     {
         Kurikulum::create([
                 'nama' => $request->nama,
+                'aturan_lulus' => $request->aturan_lulus,
+                'aturan_wajib' => $request->aturan_wajib,
+                'aturan_pilihan' => $request->aturan_pilihan,
+                'matakuliah' => [],
+                'id_jurusan' => $request->id_jurusan,
+                'id_tahun_ajaran' => $request->id_tahun_ajaran,
                 'created_by' => Auth::id()
             ]
         );
@@ -47,6 +81,11 @@ class KurikulumController extends Controller
     {
         $kurikulum = Kurikulum::find($id);
         $kurikulum->nama = $request->nama;
+        $kurikulum->aturan_lulus = $request->aturan_lulus;
+        $kurikulum->aturan_wajib = $request->aturan_wajib;
+        $kurikulum->aturan_pilihan = $request->aturan_pilihan;
+        $kurikulum->id_jurusan = $request->id_jurusan;
+        $kurikulum->id_tahun_ajaran = $request->id_tahun_ajaran;
         $kurikulum->updated_by = Auth::id();
         $kurikulum->save();
         return response(['pesan'=>"Data berhasil diubah"]);

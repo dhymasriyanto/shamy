@@ -40,15 +40,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                     <div class="col-12">
                                         <div class="form-row">
                                             <div class="col-md-3">
-                                                <h5>Program Studi</h5>
-                                                <select class="form-control" v-model="search">
-                                                    <option value="">Semua</option>
-                                                    <option v-for="jurusan in datajurusan" v-bind:value="jurusan.nama">
-                                                        @{{ jurusan.nama }}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
                                                 <h5>Nama</h5>
                                                 <input class="form-control" v-model="search2">
                                             </div>
@@ -189,20 +180,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Kurikulum</label>
-                                                        <div class="col-md-9">
-                                                            <select class="form-control" required v-model="id_kurikulum">
-                                                                <option disabled value="">Pilih</option>
-                                                                <option v-for="kurikulum in datakurikulum" v-bind:value="kurikulum.id">
-                                                                    @{{ kurikulum.nama }}
-                                                                </option>
-                                                            </select>
-{{--                                                            <span style="color: red" class="form-text text-muted">--}}
-{{--                                                                **keterangan--}}
-{{--                                                            </span>--}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Bobot (SKS)</label>
                                                         <div class="col-md-9">
                                                             <select class="form-control" required v-model="bobot">
@@ -226,20 +203,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 <option value="Wajib Program Studi">Wajib Program Studi</option>
                                                                 <option value="Pilihan">Pilihan</option>
                                                                 <option value="Tugas akhir/Skripsi/Tesis/Disertasi">Tugas akhir/Skripsi/Tesis/Disertasi</option>
-                                                            </select>
-{{--                                                            <span style="color: red" class="form-text text-muted">--}}
-{{--                                                                **keterangan--}}
-{{--                                                            </span>--}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Program Studi</label>
-                                                        <div class="col-md-9">
-                                                            <select class="form-control" required v-model="id_jurusan">
-                                                                <option disabled value="">Pilih</option>
-                                                                <option v-for="jurusan in datajurusan" v-bind:value="jurusan.id">
-                                                                    @{{ jurusan.nama }}
-                                                                </option>
                                                             </select>
 {{--                                                            <span style="color: red" class="form-text text-muted">--}}
 {{--                                                                **keterangan--}}
@@ -293,20 +256,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Kurikulum</label>
-                                                        <div class="col-md-9">
-                                                            <select class="form-control" required v-model="editid_kurikulum">
-                                                                <option disabled value="">Pilih</option>
-                                                                <option v-for="kurikulum in datakurikulum" v-bind:value="kurikulum.id">
-                                                                    @{{ kurikulum.nama }}
-                                                                </option>
-                                                            </select>
-{{--                                                            <span style="color: red" class="form-text text-muted">--}}
-{{--                                                                **keterangan--}}
-{{--                                                            </span>--}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Bobot (SKS)</label>
                                                         <div class="col-md-9">
                                                             <select class="form-control" required v-model="editbobot">
@@ -330,20 +279,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 <option value="Wajib Program Studi">Wajib Program Studi</option>
                                                                 <option value="Pilihan">Pilihan</option>
                                                                 <option value="Tugas akhir/Skripsi/Tesis/Disertasi">Tugas akhir/Skripsi/Tesis/Disertasi</option>
-                                                            </select>
-{{--                                                            <span style="color: red" class="form-text text-muted">--}}
-{{--                                                                **keterangan--}}
-{{--                                                            </span>--}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Program Studi</label>
-                                                        <div class="col-md-9">
-                                                            <select class="form-control" required v-model="editid_jurusan">
-                                                                <option disabled value="">Pilih</option>
-                                                                <option v-for="jurusan in datajurusan" v-bind:value="jurusan.id">
-                                                                    @{{ jurusan.nama }}
-                                                                </option>
                                                             </select>
 {{--                                                            <span style="color: red" class="form-text text-muted">--}}
 {{--                                                                **keterangan--}}

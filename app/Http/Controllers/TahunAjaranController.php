@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\TahunAjaran;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TahunAjaranController extends Controller
 {
@@ -27,7 +28,8 @@ class TahunAjaranController extends Controller
     public function create(Request $request)
     {
         TahunAjaran::create([
-                'tahun_ajaran' => $request->tahun_ajaran
+                'tahun_ajaran' => $request->tahun_ajaran,
+                'created_by' => Auth::id()
             ]
         );
         return response(['pesan'=>"Data berhasil ditambahkan"]);
@@ -45,6 +47,7 @@ class TahunAjaranController extends Controller
     {
         $tahun_ajaran = TahunAjaran::find($id);
         $tahun_ajaran->tahun_ajaran = $request->tahun_ajaran;
+        $tahun_ajaran->updated_by = Auth::id();
         $tahun_ajaran->save();
         return response(['pesan'=>"Data berhasil diubah"]);
     }
