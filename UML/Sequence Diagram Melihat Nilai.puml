@@ -39,7 +39,7 @@ nilai.index -> NilaiController  : all()
 
 activate NilaiController
 
-NilaiController -> Nilai : with()->get()
+NilaiController -> Nilai : find(id_mahasiswa)
 
 activate Nilai
 

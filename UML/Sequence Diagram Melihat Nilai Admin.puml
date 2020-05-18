@@ -1,0 +1,59 @@
+@startuml sequence_diagram_lihat_nilai
+hide footbox
+autonumber
+
+actor Administrator
+boundary beranda.index
+boundary nilai.index
+control NilaiController
+control JurusanController
+control Controller
+entity Nilai
+entity Jurusan
+
+beranda.index -> Administrator : Menampilkan halaman beranda
+
+activate beranda.index
+
+Administrator -> beranda.index : Menekan menu Nilai
+
+beranda.index -> NilaiController : index()
+
+activate NilaiController
+
+NilaiController -> Controller : renderPage()
+
+deactivate NilaiController
+
+activate Controller
+
+Controller --> nilai.index : view()
+
+deactivate beranda.index
+
+activate nilai.index
+
+deactivate Controller
+
+nilai.index -> Administrator : Menampilkan halaman Nilai
+
+nilai.index -> JurusanController  : all()
+
+activate JurusanController
+
+JurusanController -> Jurusan :with()->get()
+
+activate Jurusan
+
+Jurusan -> JurusanController : data
+
+deactivate Jurusan
+
+
+JurusanController -> nilai.index : response(data)
+
+deactivate JurusanController
+
+nilai.index -> Administrator : Merender data jurusan pada dropdown jurusan
+
+@enduml

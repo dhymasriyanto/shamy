@@ -51,7 +51,7 @@ deactivate KelasController
 
 nilai.index -> Administrator : Merender data Kelas pada tabel
 
-alt Mengubah Nilai
+alt Menambah Nilai
 
 Administrator -> nilai.index : Memilih Kelas pada tabel
 
@@ -70,15 +70,16 @@ KelasController -> nilai.index : response(data)
 deactivate KelasController
 
 nilai.index -> Administrator : Merender data Mahasiswa pada tabel
-Administrator -> nilai.index : Menekan tombol reset/hapus nilai
-alt Hapus
-Administrator -> nilai.index : Menekan tombol ya
 
-nilai.index -> NilaiController : destroy()
+Administrator -> nilai.index : Mengisi nilai pada input field masing-masing mahasiswa
+
+Administrator -> nilai.index : Menekan tombol simpan
+
+nilai.index -> NilaiController : store()
 
 activate NilaiController
 
-NilaiController -> Nilai : destroy(id)
+NilaiController -> Nilai : create()
 
 activate Nilai
 
@@ -90,9 +91,9 @@ deactivate NilaiController
 
 nilai.index -> Administrator : Menampilkan toast berisikan pesan
 
-else Batal menghapus Nilai
+else Batal mengubah Nilai
 
-Administrator    -> nilai.index : Menekan tombol tidak / silang
+Administrator -> nilai.index : Menekan tombol batal / silang
 
 end
 

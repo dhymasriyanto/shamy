@@ -1,43 +1,79 @@
-@startuml sequence_diagram_ubah_nilai
+@startuml sequence_diagram_tambah_nilai
 hide footbox
 autonumber
 
-actor Admin
+actor Administrator
 boundary nilai.index
+control JurusanController
+control TahunAjaranController
+control KelasController
+control MahasiswaController
 control NilaiController
+entity Jurusan
+entity TahunAjaran
+entity Kelas
+entity Mahasiswa
 entity Nilai
 
-nilai.index -> Admin : Menampilkan halaman Nilai
+
+nilai.index -> Administrator : Menampilkan halaman Nilai
 
 activate nilai.index
 
-Admin -> nilai.index : Menekan tombol ubah Nilai
 
-alt Mengubah nilai
+Administrator -> nilai.index : Memilih jurusan pada dropdown
 
-nilai.index -> Admin : Menampilkan pop-up modal ubah nilai
 
-nilai.index -> NilaiController : show()
+nilai.index -> TahunAjaranController : all()
+activate TahunAjaranController
 
-activate NilaiController
+TahunAjaranController -> TahunAjaran : with()->get()
+activate TahunAjaran
+TahunAjaran -> TahunAjaranController : data
 
-NilaiController -> Nilai : with()->get()->find(id)
+deactivate TahunAjaran
+TahunAjaranController -> nilai.index : response(data)
+deactivate TahunAjaranController
+nilai.index -> Administrator : Merender data tahun ajaran pada dropdown
 
-activate Nilai
+Administrator -> nilai.index : Memilih tahun ajaran pada dropdown
 
-Nilai -> NilaiController : data
+nilai.index -> KelasController : all()
+activate KelasController
 
-deactivate Nilai
+KelasController -> Kelas : with()->get()
+activate Kelas
+Kelas -> KelasController : data
 
-NilaiController -> nilai.index : response(data)
+deactivate Kelas
+KelasController -> nilai.index : response(data)
+deactivate KelasController
 
-deactivate NilaiController
+nilai.index -> Administrator : Merender data Kelas pada tabel
 
-nilai.index -> Admin : Merender data nilai
+alt Mengubah Nilai
 
-Admin -> nilai.index : Mengubah nilai
+Administrator -> nilai.index : Memilih Kelas pada tabel
 
-Admin -> nilai.index : Menekan tombol simpan
+nilai.index -> Administrator : Menampilkan pop-up modal tambah nilai mahasiswa
+
+nilai.index -> KelasController : allRincianKelas()
+
+activate KelasController
+
+KelasController -> Mahasiswa : with()->get()
+activate Mahasiswa
+Mahasiswa -> KelasController : data
+
+deactivate Mahasiswa
+KelasController -> nilai.index : response(data)
+deactivate KelasController
+
+nilai.index -> Administrator : Merender data Mahasiswa pada tabel
+
+Administrator -> nilai.index : Mengisi nilai pada input field masing-masing mahasiswa
+
+Administrator -> nilai.index : Menekan tombol simpan
 
 nilai.index -> NilaiController : update()
 
@@ -52,15 +88,14 @@ deactivate Nilai
 NilaiController -> nilai.index : response(message)
 
 deactivate NilaiController
+nilai.index -> Administrator : Menampilkan toast berisikan pesan
 
-nilai.index -> Admin : Menampilkan toast berisikan pesan
+else Batal mengubah Nilai
 
-else Batal mengubah nilai
-
-Admin -> nilai.index : Menekan tombol batal / silang
+Administrator -> nilai.index : Menekan tombol batal / silang
 
 end
 
-nilai.index -> Admin : Menutup pop-up modal ubah nilai
+nilai.index -> Administrator : Menutup pop-up modal tambah Nilai
 
 @enduml

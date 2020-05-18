@@ -1,4 +1,4 @@
-@startuml sequence_diagram_ubah_mengajar
+@startuml sequence_diagram_tambah_nilai
 hide footbox
 autonumber
 
@@ -11,33 +11,34 @@ entity Mengajar
 entity Kelas
 entity Dosen
 
-mengajar.index -> Administrator : Menampilkan halaman Mengajar
+mengajar.index -> Administrator : Menampilkan halaman Akta Mengajar
 
-activate mengajar.index
-
-Administrator -> mengajar.index : Menekan tombol ubah Mengajar
+Administrator -> mengajar.index : Menekan tombol tambah Mengajar
 
 alt Mengubah Mengajar
 
-mengajar.index -> Administrator : Menampilkan pop-up modal ubah Mengajar
+mengajar.index -> Administrator : Menampilkan pop-up modal tambah Mengajar
 
-mengajar.index -> MengajarController : show()
 
-activate MengajarController
+mengajar.index -> KelasController  : all()
 
-MengajarController -> Mengajar : find(id)
+activate KelasController
 
-activate Mengajar
+KelasController -> Kelas : with()->get()
 
-Mengajar -> MengajarController : data
+activate Kelas
 
-deactivate Mengajar
+Kelas -> KelasController : data
 
-MengajarController -> mengajar.index : response(data)
+deactivate Kelas
 
-deactivate MengajarController
+KelasController -> mengajar.index : response(data)
 
-mengajar.index -> Administrator : Merender data Mengajar
+deactivate KelasController
+
+mengajar.index -> Administrator : Merender data kelas pada dropdown pilih kelas
+
+
 
 mengajar.index -> DosenController  : all()
 
@@ -57,18 +58,17 @@ deactivate DosenController
 
 mengajar.index -> Administrator : Merender data Dosen pada dropdown pilih Dosen
 
-
-Administrator -> mengajar.index : Mengubah Dosen
-
+Administrator -> mengajar.index : Memilih Jurusan
+Administrator -> mengajar.index : Memilih Dosen
 
 
 Administrator -> mengajar.index : Menekan tombol simpan
 
-mengajar.index -> MengajarController : update()
+mengajar.index -> MengajarController : store()
 
 activate MengajarController
 
-MengajarController -> Mengajar : where(id)->update()
+MengajarController -> Mengajar : create()
 
 activate Mengajar
 
@@ -86,6 +86,6 @@ Administrator -> mengajar.index : Menekan tombol batal / silang
 
 end
 
-mengajar.index -> Administrator : Menutup pop-up modal ubah Mengajar
+mengajar.index -> Administrator : Menutup pop-up modal tambah Mengajar
 
 @enduml
