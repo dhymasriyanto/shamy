@@ -21,8 +21,14 @@ function initVue() {
                     // sortByFormatted : true
                 },
                 {
+                    key: 'nama',
+                    label: 'Nama Kelas',
+                    sortable :true,
+                },
+
+                {
                     key: 'get_jurusan',
-                    label: 'Nama Jurusan',
+                    label: 'Jurusan',
                     sortable: true,
                     // sortByFormatted : true
 
@@ -33,12 +39,7 @@ function initVue() {
                     label: 'Semester',
                     sortable :true,
                 },
-                {
-                    key: 'nama',
-                    label: 'Nama',
-                    sortable :true,
-                },
-                
+
                 {
                     key: 'get_tahun_ajaran',
                     label: 'Nama Tahun Ajaran',

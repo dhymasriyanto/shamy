@@ -87,9 +87,28 @@ function initVue() {
             if (typeof pjax !== 'undefined') {
                 pjax.refresh();
             }
+            this.start();
             this.all();
         },
         methods: {
+            start: function () {
+                this.$Progress.start()
+            },
+            set: function (num) {
+                this.$Progress.set(num)
+            },
+            increase: function (num) {
+                this.$Progress.increase(num)
+            },
+            decrease: function (num) {
+                this.$Progress.decrease(num)
+            },
+            finish: function (response) {
+                this.$Progress.finish();
+            },
+            fail: function () {
+                this.$Progress.fail()
+            },
             flash: function (type, message) {
                 if (type == "success") {
                     toastr.success(message);
@@ -107,6 +126,11 @@ function initVue() {
             resetModal: function () {
                 // this.name = ''
                 // this.nameState = null
+                this.id_jurusan = '';
+                this.id_kelas = '';
+                this.id_dosen = '';
+                this.id_mata_kuliah = '';
+                this.id_tahun_ajaran = '';
             },
             handleOk: function (bvModalEvt) {
                 // Prevent modal from closing
@@ -120,7 +144,7 @@ function initVue() {
                 // if (!this.checkFormValidity()) {
                 //     return
                 // }
-                console.log(this.id_dosen, this.id_jurusan, this.id_mata_kuliah, this. id_tahun_ajaran, this.id_kelas);
+                // console.log(this.id_dosen, this.id_jurusan, this.id_mata_kuliah, this.id_tahun_ajaran, this.id_kelas);
                 // Push the name to submitted names
                 // this.submittedNames.push(this.name)
                 this.create()
@@ -132,24 +156,24 @@ function initVue() {
                 })
             },
             create: function () {
+                this.start();
                 axios.post('/mengajar', {
-                    id_jurusan : this.id_jurusan,
-                    id_kelas : this.id_kelas,
-                    id_dosen : this.id_dosen,
-                    id_mata_kuliah : this.id_mata_kuliah,
-                    id_tahun_ajaran : this.id_tahun_ajaran
+                    id_jurusan: this.id_jurusan,
+                    id_kelas: this.id_kelas,
+                    id_dosen: this.id_dosen,
+                    id_mata_kuliah: this.id_mata_kuliah,
+                    id_tahun_ajaran: this.id_tahun_ajaran
                 })
                     .then(function (response) {
                         console.log(response.data);
                         vm.all();
                         vm.flash(response.data.type, response.data.message);
-
                     })
                     .catch(function (error) {
-
+                        vm.fail();
+                        vm.flash();
                     })
                     .then(function () {
-
                     })
             },
             hapus: function (id) {
@@ -178,12 +202,14 @@ function initVue() {
                         vm.allDosen();
                         vm.allMataKuliah();
                         vm.allTahunAjaran();
-
+                        vm.finish();
                         // vm.items = response.data;
                         console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
+                        vm.fail();
+
                         console.log(error);
                     })
                     .then(function () {

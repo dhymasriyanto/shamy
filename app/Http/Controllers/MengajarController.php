@@ -24,7 +24,7 @@ class MengajarController extends Controller
 
     public function all()
     {
-        $mengajar = Mengajar::with(['getJurusan', 'getKelas', 'getDosen', 'getMataKuliah', 'getTahunAjaran'])->get();
+        $mengajar = Mengajar::with(['getJurusan', 'getKelas', 'getDosen', 'getMataKuliah', 'getTahunAjaran'])->latest()->get();
 
         return response($mengajar);
     }

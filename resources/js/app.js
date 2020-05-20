@@ -8,6 +8,21 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
+import VueProgressBar from 'vue-progressbar'
+
+Vue.use(VueProgressBar, {
+    color: 'rgb(143, 255, 199)',
+    failedColor: 'red',
+    height: '6px',
+    autoFinish: false,
+    autoRevert: true,
+    transition: {
+        speed: '0.5s',
+        opacity: '0.6s',
+        termination: 300
+    },
+})
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -19,12 +34,12 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-Vue.component(
-    'passport-clients',
-    require('./components/Clients.vue').default
-);
+// Vue.component(
+//     'passport-clients',
+//     require('./components/Clients.vue').default
+// );
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
