@@ -24,7 +24,7 @@ class MengajarController extends Controller
 
     public function all()
     {
-        $mengajar = Mengajar::with(['getJurusan','getKelas','getDosen','getMataKuliah','getTahunAjaran'])->get();
+        $mengajar = Mengajar::with(['getJurusan', 'getKelas', 'getDosen', 'getMataKuliah', 'getTahunAjaran'])->get();
 
         return response($mengajar);
     }
@@ -42,18 +42,27 @@ class MengajarController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $mengajar = new Mengajar();
+        $mengajar->id_jurusan = $request->id_jurusan;
+        $mengajar->id_kelas = $request->id_kelas;
+        $mengajar->id_dosen = $request->id_dosen;
+        $mengajar->id_mata_kuliah = $request->id_mata_kuliah;
+        $mengajar->id_tahun_ajaran = $request->id_tahun_ajaran;
+        $mengajar->save();
+
+        return response(['type' => 'success', 'message' => 'Data berhasil di simpan']);
+//        return response($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,7 +73,7 @@ class MengajarController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -75,8 +84,8 @@ class MengajarController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -87,7 +96,7 @@ class MengajarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, Request $request)

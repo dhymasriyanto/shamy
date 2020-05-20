@@ -5,7 +5,6 @@ function initVue() {
     var vm = new Vue({
         el: '#app',
         data: {
-            selected:null,
             sampai: 0,
             tampil: 0,
             filter: '',
@@ -72,22 +71,17 @@ function initVue() {
 
                 }
             ],
-
-            
             datamengajar: [],
-            datajurusan:[],
-            datakelas:[],
-            datadosen:[],
-            datamatakuliah:[],
-            datatahunajaran:[],
-            id_jurusan:'',
-            id_kelas:'',
-            id_dosen:'',
-            id_matakuliah:'',
-            id_tahunajaran:'',
-            coba:[]
-
-            
+            datajurusan: [],
+            datakelas: [],
+            datadosen: [],
+            datamatakuliah: [],
+            datatahunajaran: [],
+            id_jurusan: '',
+            id_kelas: '',
+            id_dosen: '',
+            id_mata_kuliah: '',
+            id_tahun_ajaran: ''
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -96,7 +90,68 @@ function initVue() {
             this.all();
         },
         methods: {
-       
+            flash: function (type, message) {
+                if (type == "success") {
+                    toastr.success(message);
+                } else if (type == "error") {
+                    toastr.error(message);
+                } else {
+                    toastr.error("Ada kesalahan!")
+                }
+            },
+            checkFormValidity: function () {
+                // const valid = this.$refs.form.checkValidity()
+                // this.nameState = valid
+                // return valid
+            },
+            resetModal: function () {
+                // this.name = ''
+                // this.nameState = null
+            },
+            handleOk: function (bvModalEvt) {
+                // Prevent modal from closing
+                bvModalEvt.preventDefault()
+                // Trigger submit handler
+                // this.create()
+                this.handleSubmit();
+            },
+            handleSubmit: function () {
+                // Exit when the form isn't valid
+                // if (!this.checkFormValidity()) {
+                //     return
+                // }
+                console.log(this.id_dosen, this.id_jurusan, this.id_mata_kuliah, this. id_tahun_ajaran, this.id_kelas);
+                // Push the name to submitted names
+                // this.submittedNames.push(this.name)
+                this.create()
+
+                // Hide the modal manually
+                this.$nextTick(() => {
+                    this.$bvModal.hide('modal-1')
+
+                })
+            },
+            create: function () {
+                axios.post('/mengajar', {
+                    id_jurusan : this.id_jurusan,
+                    id_kelas : this.id_kelas,
+                    id_dosen : this.id_dosen,
+                    id_mata_kuliah : this.id_mata_kuliah,
+                    id_tahun_ajaran : this.id_tahun_ajaran
+                })
+                    .then(function (response) {
+                        console.log(response.data);
+                        vm.all();
+                        vm.flash(response.data.type, response.data.message);
+
+                    })
+                    .catch(function (error) {
+
+                    })
+                    .then(function () {
+
+                    })
+            },
             hapus: function (id) {
                 axios.delete('/mengajar/' + id)
                     .then(function (response) {
@@ -156,43 +211,43 @@ function initVue() {
                         // always executed
                     });
             },
-            allKelas:function(){
+            allKelas: function () {
                 axios.get('/kelas/all')
-                .then(function(response){
-                    vm.datakelas = response.data;
-                }).catch(function(error){
+                    .then(function (response) {
+                        vm.datakelas = response.data;
+                    }).catch(function (error) {
                     console.log(error);
-                }).then(function(){
+                }).then(function () {
 
                 });
             },
-            allDosen:function() {
+            allDosen: function () {
                 axios.get('/dosen/all')
-                .then(function(response){
-                    vm.datadosen=response.data;
-                }).catch(function(error){
+                    .then(function (response) {
+                        vm.datadosen = response.data;
+                    }).catch(function (error) {
                     console.log(error);
-                }).then(function(){
+                }).then(function () {
 
                 });
             },
-            allMataKuliah:function() {
+            allMataKuliah: function () {
                 axios.get('/mata-kuliah/all')
-                .then(function(response){
-                    vm.datamatakuliah=response.data;
-                }).catch(function(error) {
+                    .then(function (response) {
+                        vm.datamatakuliah = response.data;
+                    }).catch(function (error) {
                     console.log(error);
-                }).then(function(){
+                }).then(function () {
 
                 });
             },
-            allTahunAjaran:function(){
+            allTahunAjaran: function () {
                 axios.get('/tahun-ajaran/all')
-                .then(function(response){
-                    vm.datatahunajaran=response.data;
-                }).catch(function(error) {
+                    .then(function (response) {
+                        vm.datatahunajaran = response.data;
+                    }).catch(function (error) {
                     console.log(error);
-                }).then(function(){
+                }).then(function () {
 
                 });
             },
@@ -207,8 +262,8 @@ function initVue() {
                 this.sampai = this.currentPage * this.perPage;
                 if (this.totalRows != 0) {
                     this.tampil = (this.currentPage * this.perPage + 1) - this.perPage;
-                }else{
-                    this.tampil =0;
+                } else {
+                    this.tampil = 0;
                 }
                 if (this.totalRows < this.sampai) {
                     this.sampai = this.totalRows;

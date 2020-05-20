@@ -5,6 +5,61 @@ function initVue() {
     var vm = new Vue({
         el: '#app',
         data: {
+            sampai: 0,
+            tampil: 0,
+            filter: '',
+            perPage: 10,
+            currentPage: 1,
+            pageOptions: [10, 15, 20],
+            showData: '',
+            totalRows: 0,
+            isBusy: true,
+            fields: [
+                {
+                    key: 'no',
+                    sortable: false,
+                    // sortByFormatted : true
+                },
+                {
+                    key: 'get_jurusan',
+                    label: 'Nama Jurusan',
+                    sortable: true,
+                    // sortByFormatted : true
+
+                },
+
+                {
+                    key: 'semester',
+                    label: 'Semester',
+                    sortable :true,
+                },
+                {
+                    key: 'nama',
+                    label: 'Nama',
+                    sortable :true,
+                },
+                
+                {
+                    key: 'get_tahun_ajaran',
+                    label: 'Nama Tahun Ajaran',
+
+                    sortable: true,
+                    // sortByFormatted : true
+
+                },
+                {
+                    key: 'created_at',
+                    label: 'Dibuat Tanggal',
+                    sortable: true
+                },
+                {
+                    key: 'aksi',
+                    sortable: false,
+                    // sortByFormatted : true
+
+                }
+            ],
+
             datakelas: [],
             // datamahasiswa: [],
             rinciankelas: [],
@@ -151,6 +206,7 @@ function initVue() {
                     .then(function (response) {
                         // handle success
                         vm.datakelas = response.data;
+                        vm.totalRows = vm.datakelas.length;
                         vm.allJurusan();
                         vm.allTahunAjaran();
 
@@ -163,6 +219,7 @@ function initVue() {
                     })
                     .then(function () {
                         // always executed
+                        vm.isBusy=false;
                     });
             },
             // allMahasiswa: function () {
@@ -347,7 +404,26 @@ function initVue() {
                 $("#hapusmodal").modal('hide');
 
             },
+            onFiltered: function (filteredItems) {
+                this.totalRows = filteredItems.length
+                this.currentPage = 1
+            }
 
+        },
+        computed:{
+            showingData() {
+                this.sampai = this.currentPage * this.perPage;
+                if (this.totalRows != 0) {
+                    this.tampil = (this.currentPage * this.perPage + 1) - this.perPage;
+                }else{
+                    this.tampil =0;
+                }
+                if (this.totalRows < this.sampai) {
+                    this.sampai = this.totalRows;
+                }
+                this.showData = "Menampilkan " + (this.tampil) + " sampai " + (this.sampai) + " dari " + this.totalRows + " data";
+                return this.showData;
+            },
         },
         components: {}
     });

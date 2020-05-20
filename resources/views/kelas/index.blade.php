@@ -2,7 +2,7 @@
 
 use App\Libs\AppHelpers;
 
-$title = 'Data Kelas';
+$title = 'Kelas';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
 
@@ -30,52 +30,158 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 class="fa fa-plus mr-1"></i>Tambah
                                         </button>
                                         <br><br>
-                                        <table id="example" class="table table-bordered table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Semester</th>
-                                                <th>Nama</th>
-                                                <th>Jurusan</th>
-                                                <th>Tahun Ajaran</th>
-                                                <th>Jumlah Peserta Didik</th>
-                                                {{--                                                <th>Mahasiswa</th>--}}
-                                                <th>Opsi</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr v-for="(kelas,n) in datakelas">
-                                                <td>@{{ (n+1) }}</td>
-                                                <td>@{{ kelas.semester }}</td>
-                                                <td>@{{ kelas.nama }}</td>
-                                                <td>@{{ kelas.get_jurusan.nama }}</td>
-                                                <td>@{{ kelas.get_tahun_ajaran.tahun_ajaran }}</td>
-                                                <td v-if="!kelas.mahasiswa.length">Belum ada peserta didik</td>
-                                                <td v-else>@{{ kelas.mahasiswa.length }}</td>
-                                                {{--                                                <td><span v-for="mahasiswa in datamahasiswa">--}}
-                                                {{--                                                        <span v-for="n in kelas.mahasiswa.length">--}}
-                                                {{--                                                            <p v-if="kelas.mahasiswa[n-1] == mahasiswa.id">--}}
-                                                {{--                                                                @{{ (n)+ ". " + mahasiswa.nama }}--}}
-                                                {{--                                                            </p>--}}
-                                                {{--                                                        </span>--}}
-                                                {{--                                                    </span>--}}
-                                                {{--                                                </td>--}}
-                                                <td>
-                                                    <button class="btn btn-info waves-effect"
-                                                            @click="lihatRincian(kelas.id)"><i class="fas fa-th-list mr-1"></i>Rincian
-                                                    </button>
-                                                    <button type="button" @click="edit(kelas.id)"
-                                                            class="btn btn-success waves-effect waves-light"><i
-                                                            class="fa fa-edit mr-1"></i>Edit
-                                                    </button>
-                                                    <button class="btn btn-danger waves-effect"
-                                                            @click="hapusdata(kelas.id)"><i
-                                                            class="fa fa-trash mr-1"></i>Hapus
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+{{--                                        <table id="example" class="table table-bordered table-hover">--}}
+{{--                                            <thead>--}}
+{{--                                            <tr>--}}
+{{--                                                <th>No</th>--}}
+{{--                                                <th>Semester</th>--}}
+{{--                                                <th>Nama</th>--}}
+{{--                                                <th>Jurusan</th>--}}
+{{--                                                <th>Tahun Ajaran</th>--}}
+{{--                                                <th>Jumlah Peserta Didik</th>--}}
+{{--                                                --}}{{--                                                <th>Mahasiswa</th>--}}
+{{--                                                <th>Opsi</th>--}}
+{{--                                            </tr>--}}
+{{--                                            </thead>--}}
+{{--                                            <tbody>--}}
+{{--                                            <tr v-for="(kelas,n) in datakelas">--}}
+{{--                                                <td>@{{ (n+1) }}</td>--}}
+{{--                                                <td>@{{ kelas.semester }}</td>--}}
+{{--                                                <td>@{{ kelas.nama }}</td>--}}
+{{--                                                <td>@{{ kelas.get_jurusan.nama }}</td>--}}
+{{--                                                <td>@{{ kelas.get_tahun_ajaran.tahun_ajaran }}</td>--}}
+{{--                                                <td v-if="!kelas.mahasiswa.length">Belum ada peserta didik</td>--}}
+{{--                                                <td v-else>@{{ kelas.mahasiswa.length }}</td>--}}
+{{--                                                --}}{{--                                                <td><span v-for="mahasiswa in datamahasiswa">--}}
+{{--                                                --}}{{--                                                        <span v-for="n in kelas.mahasiswa.length">--}}
+{{--                                                --}}{{--                                                            <p v-if="kelas.mahasiswa[n-1] == mahasiswa.id">--}}
+{{--                                                --}}{{--                                                                @{{ (n)+ ". " + mahasiswa.nama }}--}}
+{{--                                                --}}{{--                                                            </p>--}}
+{{--                                                --}}{{--                                                        </span>--}}
+{{--                                                --}}{{--                                                    </span>--}}
+{{--                                                --}}{{--                                                </td>--}}
+{{--                                                <td>--}}
+{{--                                                    <button class="btn btn-info waves-effect"--}}
+{{--                                                            @click="lihatRincian(kelas.id)"><i class="fas fa-th-list mr-1"></i>Rincian--}}
+{{--                                                    </button>--}}
+{{--                                                    <button type="button" @click="edit(kelas.id)"--}}
+{{--                                                            class="btn btn-success waves-effect waves-light"><i--}}
+{{--                                                            class="fa fa-edit mr-1"></i>Edit--}}
+{{--                                                    </button>--}}
+{{--                                                    <button class="btn btn-danger waves-effect"--}}
+{{--                                                            @click="hapusdata(kelas.id)"><i--}}
+{{--                                                            class="fa fa-trash mr-1"></i>Hapus--}}
+{{--                                                    </button>--}}
+{{--                                                </td>--}}
+{{--                                            </tr>--}}
+{{--                                            </tbody>--}}
+{{--                                        </table>--}}
+<b-form-group
+                                                    class="ml-2 col-4 float-left mb-2">
+                                               Tampilkan
+                                                <b-form-select
+                                                        class="col-3"
+                                                        v-model="perPage"
+                                                        size="sm"
+                                                        :options="pageOptions">
+
+                                                </b-form-select>
+                                                data
+                                            </b-form-group>
+                                            <b-input-group class="col-3 float-right mr-2 mb-2">
+                                                <b-form-input
+                                                        v-model="filter"
+                                                        size="sm"
+                                                        placeholder="Cari"
+                                                        type="text"
+                                                ></b-form-input>
+                                                <b-input-group-append>
+                                                    <b-button
+                                                            :disabled="!filter"
+                                                            size="sm"
+                                                            variant="link"
+                                                            @click="filter = ''"
+
+                                                    >
+                                                        <i class="fa fa-times"></i></b-button>
+                                                </b-input-group-append>
+                                            </b-input-group>
+                                        <b-table
+                                                show-empty
+                                                :filter="filter"
+                                                head-variant="light"
+                                                id="my-table"
+                                                hover
+                                                :busy="isBusy"
+                                                :items="datakelas"
+                                                :fields="fields"
+                                                :per-page="perPage"
+                                                :current-page="currentPage"
+                                                @filtered="onFiltered"
+                                                small
+                                        >
+                                        <template v-slot:empty>
+                                            <div class="text-center text-danger my-2">
+                                                <h4>Data tidak ditemukan!</h4>
+                                            </div>
+                                        </template>
+                                        <template v-slot:table-busy>
+                                            <div class="text-center text-danger my-2">
+                                                <b-spinner class="align-middle"></b-spinner>
+                                                <strong>Memuat...</strong>
+                                            </div>
+                                        </template>
+                                        <template v-slot:cell(no)="data">
+                                            @{{ data.index + 1 }}
+                                        </template>
+                                        <template v-slot:cell(semester)="data">
+                                            @{{ data.item.semester }}
+                                        </template>
+                                        <template v-slot:cell(nama)="data">
+                                            @{{ data.item.nama }}
+                                        </template>
+                                        <template v-slot:cell(get_jurusan)="data">
+                                            @{{ data.item.get_jurusan.nama }}
+                                        </template>
+                                            <template v-slot:cell(get_tahun_ajaran)="data">
+                                            @{{ data.item.get_tahun_ajaran.tahun_ajaran }}
+                                        </template>
+                                        <template v-slot:cell(aksi)>
+                                            <b-button
+                                            variant="info"
+                                            pill
+                                            >
+                                            Rincian
+                                        </b-button>
+                                        <b-button
+                                        variant="success"
+                                            pill
+                                        >
+                                            Ubah
+                                        </b-button>
+                                        <b-button
+                                        variant="danger"
+                                            pill
+                                        >
+                                            Hapus
+                                        </b-button>
+                                        </template>
+                                        </b-table>
+                                        <div class="float-left ml-2">
+                                            <p> @{{ showingData }}</p>
+                                        </div>
+                                        <div class="mr-2">
+                                            <b-pagination
+                                                    align="right"
+                                                    pills
+                                                    size="sm"
+                                                    v-model="currentPage"
+                                                    :total-rows="totalRows"
+                                                    :per-page="perPage"
+                                                    aria-controls="my-table"
+                                            >
+                                            </b-pagination>
+                                        </div>
                                     </div>
 
                                 </div>

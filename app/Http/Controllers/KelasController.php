@@ -84,15 +84,17 @@ class KelasController extends Controller
     public function store(Request $request)
     {
 
-        Kelas::create([
-            'nama' => $request->nama,
-            'semester' => $request->semester,
-            'id_jurusan' => $request->id_jurusan,
-            'id_tahun_ajaran' => $request->id_tahun_ajaran,
-            'mahasiswa' => $request->mahasiswa
-        ]);
+        Kelas::create(
+            [
+                'nama' => $request->nama,
+                'semester' => $request->semester,
+                'id_jurusan' => $request->id_jurusan,
+                'id_tahun_ajaran' => $request->id_tahun_ajaran,
+                'mahasiswa' => $request->mahasiswa
+            ]
+        );
 
-        return response(['type'=>'success','message'=>'Berhasil menyimpan data']);
+        return response(['type' => 'success', 'message' => 'Berhasil menyimpan data']);
     }
 
     /**
@@ -136,7 +138,7 @@ class KelasController extends Controller
             'id_tahun_ajaran' => $request->id_tahun_ajaran,
             'mahasiswa' => $request->mahasiswa
         ]);
-        return response(['type'=>'success','message'=>'Berhasil menyimpan data']);
+        return response(['type' => 'success', 'message' => 'Berhasil menyimpan data']);
 
 //        return response($request);
     }
@@ -151,7 +153,7 @@ class KelasController extends Controller
     {
         Kelas::destroy($id);
 
-        return response(['type'=>'success','message'=>'Berhasil menghapus data']);
+        return response(['type' => 'success', 'message' => 'Berhasil menghapus data']);
     }
 
     public function hapusmahasiswa(Request $request)
@@ -176,10 +178,10 @@ class KelasController extends Controller
 
 //        $data = json_encode($kk);
 
-        Kelas::where('id',$request->id)->update([
+        Kelas::where('id', $request->id)->update([
             'mahasiswa' => $kk
         ]);
-        return response(['type'=>'success','message'=>'Berhasil mengeluarkan mahasiswa dari kelas']);
+        return response(['type' => 'success', 'message' => 'Berhasil mengeluarkan mahasiswa dari kelas']);
 
     }
 }

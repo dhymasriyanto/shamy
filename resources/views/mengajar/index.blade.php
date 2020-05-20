@@ -2,7 +2,7 @@
 
 use App\Libs\AppHelpers;
 
-$title = 'Jadwal';
+$title = 'Akta Ajar';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
 
@@ -26,11 +26,15 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
+
                                         <b-button pill variant="dark" class="mb-3" href="" v-b-modal.modal-1><i
                                                     class="fa fa-plus mr-1"></i>Tambah
                                         </b-button>
                                         <b-modal 
                                             id="modal-1"
+{{--                                            @show="resetModal"--}}
+                                            @hidden="resetModal"
+                                            @ok="handleOk"
                                         >
                                             <b-form  ref="form" @submit.stop.prevent="handleSubmit">
                                                 <b-input-group >
@@ -84,40 +88,40 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     </b-form-select>
                                                     </b-form-group>
                                                 </b-input-group>
-{{--                                                <b-input-group >--}}
-{{--                                                    <label  class="col-md-3 col-form-label">Mata Kuliah</label>--}}
-{{--                                                    <b-form-group--}}
-{{--                                                            size="sm"--}}
-{{--                                                    >--}}
-{{--                                                    <b-form-select size="sm"  v-model="id_matakuliah">--}}
-{{--                                                        <option disabled value="">Pilih Mata Kuliah</option>--}}
-{{--                                                        <option--}}
-{{--                                                        v-for="matakuliah in datamatakuliah"--}}
-{{--                                                        v-bind:value="matakuliah.id"--}}
-{{--                                                     >--}}
-{{--                                                       @{{ matakuliah.nama }}--}}
-{{--                                                     </option>--}}
-{{--    --}}
-{{--                                                    </b-form-select>--}}
-{{--                                                    </b-form-group>--}}
-{{--                                                </b-input-group>--}}
-{{--                                                <b-input-group >--}}
-{{--                                                    <label  class="col-md-3 col-form-label">Tahun Ajaran</label>--}}
-{{--                                                    <b-form-group--}}
-{{--                                                            size="sm"--}}
-{{--                                                    >--}}
-{{--                                                    <b-form-select size="sm"  v-model="id_tahunajaran">--}}
-{{--                                                        <option disabled value="">Pilih Tahun Ajaran</option>--}}
-{{--                                                        <option--}}
-{{--                                                        v-for="tahunajaran in datatahunajaran"--}}
-{{--                                                        v-bind:value="tahunajaran.id"--}}
-{{--                                                     >--}}
-{{--                                                       @{{ tahunajaran.tahun_ajaran }}--}}
-{{--                                                     </option>--}}
-{{--    --}}
-{{--                                                    </b-form-select>--}}
-{{--                                                    </b-form-group>--}}
-{{--                                                </b-input-group>--}}
+                                                <b-input-group >
+                                                    <label  class="col-md-3 col-form-label">Mata Kuliah</label>
+                                                    <b-form-group
+                                                            size="sm"
+                                                    >
+                                                    <b-form-select size="sm"  v-model="id_mata_kuliah">
+                                                        <option disabled value="">Pilih Mata Kuliah</option>
+                                                        <option
+                                                        v-for="matakuliah in datamatakuliah"
+                                                        v-bind:value="matakuliah.id"
+                                                     >
+                                                       @{{ matakuliah.nama }}
+                                                     </option>
+
+                                                    </b-form-select>
+                                                    </b-form-group>
+                                                </b-input-group>
+                                                <b-input-group >
+                                                    <label  class="col-md-3 col-form-label">Tahun Ajaran</label>
+                                                    <b-form-group
+                                                            size="sm"
+                                                    >
+                                                    <b-form-select size="sm"  v-model="id_tahun_ajaran">
+                                                        <option disabled value="">Pilih Tahun Ajaran</option>
+                                                        <option
+                                                        v-for="tahunajaran in datatahunajaran"
+                                                        v-bind:value="tahunajaran.id"
+                                                     >
+                                                       @{{ tahunajaran.tahun_ajaran }}
+                                                     </option>
+
+                                                    </b-form-select>
+                                                    </b-form-group>
+                                                </b-input-group>
                                             </b-form>
                                         </b-modal>
                                         <div>
