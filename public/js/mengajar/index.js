@@ -104,8 +104,8 @@ function initVue() {
             },
             finish: function (type, message) {
                 this.$Progress.finish();
-                if(type && message)
-                this.flash(type, message);
+                if (type && message)
+                    this.flash(type, message);
             },
             fail: function () {
                 this.$Progress.fail()
@@ -125,7 +125,7 @@ function initVue() {
                 // console.log(valid)
                 return valid
             },
-            getValidationState({ dirty, validated, valid = null }) {
+            getValidationState({dirty, validated, valid = null}) {
                 return dirty || validated ? valid : null;
             },
             resetModal: function () {
@@ -143,29 +143,49 @@ function initVue() {
                 // Trigger submit handler
                 this.handleSubmit();
             },
-             handleSubmit: async function () {
-                 // Exit when the form isn't valid
-                 // if (!this.checkFormValidity()) {
-                 //     return
-                 // }
+            handleSubmit: async function () {
+                // Exit when the form isn't valid
+                // if (!this.checkFormValidity()) {
+                //     return
+                // }
 
-                 const isValid = await this.$refs.observer.validate();
-                 if (!isValid) {
-                     // ABORT!!
-                     return
-                 }
+                const isValid = await this.$refs.observer.validate();
+                if (!isValid) {
+                    // ABORT!!
+                    return
+                }
 
-                 // if (!this.errors) return
-                 // Push the name to submitted names
-                 // this.submittedNames.push(this.name)
-                 this.create()
+                // if (!this.errors) return
+                // Push the name to submitted names
+                // this.submittedNames.push(this.name)
+                this.create()
 
-                 // Hide the modal manually
-                 this.$nextTick(() => {
-                     this.$bvModal.hide('modal-1');
-                     this.$refs.observer.reset();
-                 })
-             },
+                // Hide the modal manually
+                this.$nextTick(() => {
+                    this.$bvModal.hide('modal-1');
+                    this.$refs.observer.reset();
+                })
+            },
+            onChange: function () {
+                if (this.id_jurusan == '') {
+                    this.id_tahun_ajaran = '';
+                    this.id_kelas = '';
+                    this.id_dosen = '';
+                } else if (this.id_tahun_ajaran == '') {
+                    this.id_kelas = '';
+                    this.id_dosen = '';
+                }
+                else if (this.id_kelas = '') {
+                    this.id_dosen = '';
+                }
+                else if (this.id_jurusan != '' && this.id_kelas == '') {
+                    this.id_dosen = '';
+
+                }
+
+
+                // this.$emit('input', value);
+            },
             create: function () {
                 this.start();
                 axios.post('/mengajar', {
@@ -224,7 +244,7 @@ function initVue() {
                         console.log(error);
 
 
-})
+                    })
                     .then(function () {
                         // always executed
                         vm.isBusy = false;
@@ -306,11 +326,13 @@ function initVue() {
                 this.showData = "Menampilkan " + (this.tampil) + " sampai " + (this.sampai) + " dari " + this.totalRows + " data";
                 return this.showData;
             },
+            selected() {
+                return this.value
+            }
 
 
         },
-        components: {
-        }
+        components: {}
     });
     $('.app-placeholder').addClass('d-none');
     $('.main_content_app').removeClass('d-none');
