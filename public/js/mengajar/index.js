@@ -41,7 +41,6 @@ function initVue() {
 
                     sortable: true,
                     // sortByFormatted : true
-
                 },
                 {
                     key: 'get_mata_kuliah',
@@ -103,8 +102,10 @@ function initVue() {
             decrease: function (num) {
                 this.$Progress.decrease(num)
             },
-            finish: function (response) {
+            finish: function (type, message) {
                 this.$Progress.finish();
+                if(type && message)
+                this.flash(type, message);
             },
             fail: function () {
                 this.$Progress.fail()
@@ -119,9 +120,13 @@ function initVue() {
                 }
             },
             checkFormValidity: function () {
-                // const valid = this.$refs.form.checkValidity()
-                // this.nameState = valid
-                // return valid
+                const valid = this.$refs.form.checkValidity()
+                this.id_jurusan = valid
+                // console.log(valid)
+                return valid
+            },
+            getValidationState({ dirty, validated, valid = null }) {
+                return dirty || validated ? valid : null;
             },
             resetModal: function () {
                 // this.name = ''
@@ -136,25 +141,31 @@ function initVue() {
                 // Prevent modal from closing
                 bvModalEvt.preventDefault()
                 // Trigger submit handler
-                // this.create()
                 this.handleSubmit();
             },
-            handleSubmit: function () {
-                // Exit when the form isn't valid
-                // if (!this.checkFormValidity()) {
-                //     return
-                // }
-                // console.log(this.id_dosen, this.id_jurusan, this.id_mata_kuliah, this.id_tahun_ajaran, this.id_kelas);
-                // Push the name to submitted names
-                // this.submittedNames.push(this.name)
-                this.create()
+             handleSubmit: async function () {
+                 // Exit when the form isn't valid
+                 // if (!this.checkFormValidity()) {
+                 //     return
+                 // }
 
-                // Hide the modal manually
-                this.$nextTick(() => {
-                    this.$bvModal.hide('modal-1')
+                 const isValid = await this.$refs.observer.validate();
+                 if (!isValid) {
+                     // ABORT!!
+                     return
+                 }
 
-                })
-            },
+                 // if (!this.errors) return
+                 // Push the name to submitted names
+                 // this.submittedNames.push(this.name)
+                 this.create()
+
+                 // Hide the modal manually
+                 this.$nextTick(() => {
+                     this.$bvModal.hide('modal-1');
+                     this.$refs.observer.reset();
+                 })
+             },
             create: function () {
                 this.start();
                 axios.post('/mengajar', {
@@ -166,8 +177,8 @@ function initVue() {
                 })
                     .then(function (response) {
                         console.log(response.data);
-                        vm.all();
-                        vm.flash(response.data.type, response.data.message);
+                        vm.all(response.data.type, response.data.message);
+                        // vm.flash(response.data.type, response.data.message);
                     })
                     .catch(function (error) {
                         vm.fail();
@@ -191,7 +202,7 @@ function initVue() {
                         // always executed
                     });
             },
-            all: function () {
+            all: function (type, message) {
                 axios.get('/mengajar/all')
                     .then(function (response) {
                         // handle success
@@ -202,16 +213,18 @@ function initVue() {
                         vm.allDosen();
                         vm.allMataKuliah();
                         vm.allTahunAjaran();
-                        vm.finish();
+                        vm.finish(type, message);
                         // vm.items = response.data;
-                        console.log(response);
+                        // console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
                         vm.fail();
 
                         console.log(error);
-                    })
+
+
+})
                     .then(function () {
                         // always executed
                         vm.isBusy = false;
@@ -224,10 +237,6 @@ function initVue() {
                         // handle success
                         vm.datajurusan = response.data;
                         // console.log(response);
-                        // const ayam = response.data;
-                        // ayam.forEach(function(element) {
-                        //     console.log(element);
-                        // });
                     })
                     .catch(function (error) {
                         // handle error
@@ -300,7 +309,8 @@ function initVue() {
 
 
         },
-        components: {}
+        components: {
+        }
     });
     $('.app-placeholder').addClass('d-none');
     $('.main_content_app').removeClass('d-none');

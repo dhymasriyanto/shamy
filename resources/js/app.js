@@ -10,6 +10,29 @@ window.Vue = require('vue');
 
 
 import VueProgressBar from 'vue-progressbar'
+import {
+    ValidationObserver,
+    ValidationProvider,
+    extend,
+    localize
+} from "vee-validate";
+import id from "vee-validate/dist/locale/id.json";
+import * as rules from "vee-validate/dist/rules";
+// import App from "./App";
+//
+// import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap-vue/dist/bootstrap-vue.css";
+
+// Install VeeValidate rules and localization
+Object.keys(rules).forEach(rule => {
+    extend(rule, rules[rule]);
+});
+
+localize("id", id);
+
+// Install VeeValidate components globally
+Vue.component("ValidationObserver", ValidationObserver);
+Vue.component("ValidationProvider", ValidationProvider);
 
 Vue.use(VueProgressBar, {
     color: 'rgb(143, 255, 199)',
