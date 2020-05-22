@@ -56,7 +56,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="alert alert-warning" v-if="!filteredItems.length">
-                                                        <strong>Sorry!</strong> No data
+                                                        <strong>Maaf!</strong> Data Tidak Ada
                                                     </div>
                                                     <b-table
                                                         v-if="filteredItems.length"
@@ -78,6 +78,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </template>
                                                         <template v-slot:cell(aturanjumlahsks)="data">
                                                             @{{ data.item.aturan_lulus }} - @{{ data.item.aturan_wajib }} - @{{ data.item.aturan_pilihan }}
+                                                        </template>
+                                                        <template v-slot:cell(jumlahsks)="data">
+                                                            @{{ data.item.skswajib }} - @{{ data.item.skspilihan }}
                                                         </template>
                                                         <template v-slot:cell(aksi)="data">
                                                             <div class="button-list">
@@ -110,7 +113,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                 <!-- end row -->
                         <div v-on:keyup.enter="lihatRincian" id="modalRincian" class="modal fade" tabindex="-1"
                              role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-xl">
+                            <div class="modal-dialog modal-dialog-scrollable modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="myModalLabel">Rincian Mata Kuliah di Kurikulum @{{namamodal}}</h4>
@@ -121,13 +124,10 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                     <div class="modal-body">
                                         <div v-for="matkul in rincianmatkul">
                                             <!-- Name -->
-                                            <button class="btn btn-dark waves-effect" data-dismiss="modal" data-toggle="modal" data-target="#modalTambahRincian"> <i
+                                            <button class="btn btn-dark waves-effect" data-dismiss="modal" data-toggle="modal" @click="allMataKuliah()"> <i
                                                     class="fa fa-plus mr-1" ></i>Tambah</button><br><br>
                                             <div class="form-group">
                                                 <div>
-                                                    <div
-                                                        v-if="!matkul.matakuliah.length">Belum ada mata kuliah yang ditambahkan
-                                                    </div>
                                                     <div class="form-row">
                                                         <div class="col-md-3">
                                                             <h5>Kode MK</h5>
@@ -144,18 +144,18 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <div class="col-sm-1" style="margin-bottom: 1.5rem; margin-top: -1.5rem; padding-left: 0px; ">
                                                             <h5>Jumlah entri</h5>
                                                             <b-form-select
-                                                                v-model="perPage"
+                                                                v-model="perPage2"
                                                                 id="perPageSelect"
                                                                 class="form-control"
-                                                                :options="pageOptions">
+                                                                :options="pageOptions2">
                                                             </b-form-select>
                                                         </div>
                                                         <div class="clearfix"></div>
-                                                        <div class="alert alert-warning" v-if="!filteredItems.length">
-                                                            <strong>Sorry!</strong> No data
+                                                        <div class="alert alert-warning" v-if="!filteredItems2.length">
+                                                            <strong>Maaf!</strong> Data Tidak Ada
                                                         </div>
                                                         <b-table
-                                                            v-if="filteredItems.length"
+                                                            v-if="filteredItems2.length"
                                                             head-variant="dark"
                                                             ref="table"
                                                             striped
@@ -163,8 +163,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             bordered
                                                             :items="filteredItems2"
                                                             :fields="fields2"
-                                                            :current-page="currentPage"
-                                                            :per-page="perPage"
+                                                            :current-page="currentPage2"
+                                                            :per-page="perPage2"
                                                             :filter="filter"
                                                             selectable
                                                             select-mode="single"
@@ -174,7 +174,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             </template>
                                                             <template v-slot:cell(aksi)="data">
                                                                 <div class="button-list">
-                                                                    <button class="btn btn-danger waves-effect" @click="editRincian(data.item.id)"><i
+                                                                    <button class="btn btn-danger waves-effect" @click="modalHapusRincian(data.item.id,data.item.nama)"><i
                                                                             class="mdi mdi-18px mdi-delete-forever" ></i> Hapus
                                                                     </button>
                                                                 </div>
@@ -185,9 +185,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </div>
                                                         <div class="col-12 col-md-6 float-right">
                                                             <b-pagination
-                                                                v-model="currentPage"
-                                                                :total-rows="totalRows"
-                                                                :per-page="perPage"
+                                                                v-model="currentPage2"
+                                                                :total-rows="totalRows2"
+                                                                :per-page="perPage2"
                                                                 align="right"
                                                                 class="my-0">
                                                             </b-pagination>
@@ -201,7 +201,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                             </div><!-- /.modal-dialog -->
                         <div v-on:keyup.enter="tambahRincian" id="modalTambahRincian" class="modal fade" tabindex="-1"
                              role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-xl">
+                            <div class="modal-dialog modal-dialog-scrollable modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="myModalLabel">Tambah Mata Kuliah di Kurikulum @{{namamodal}}</h4>
@@ -214,10 +214,6 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <!-- Name -->
                                             <div class="form-group">
                                                 <div >
-                                                    <div
-                                                        v-if="!matkul.matakuliah.length">Belum ada mata kuliah yang ditambahkan
-                                                    </div>
-
                                                     <div class="form-row">
                                                         <div class="col-md-3">
                                                             <h5>Kode MK</h5>
@@ -232,18 +228,18 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         <div class="col-sm-1" style="margin-bottom: 1.5rem; margin-top: -1.5rem; padding-left: 0px; ">
                                                             <h5>Jumlah entri</h5>
                                                             <b-form-select
-                                                                v-model="perPage"
+                                                                v-model="perPage3"
                                                                 id="perPageSelect"
                                                                 class="form-control"
-                                                                :options="pageOptions">
+                                                                :options="pageOptions3">
                                                             </b-form-select>
                                                         </div>
                                                         <div class="clearfix"></div>
-                                                        <div class="alert alert-warning" v-if="!filteredItems.length">
-                                                            <strong>Sorry!</strong> No data
+                                                        <div class="alert alert-warning" v-if="!filteredItems3.length">
+                                                            <strong>Maaf!</strong> Data Tidak Ada
                                                         </div>
                                                         <b-table
-                                                            v-if="filteredItems.length"
+                                                            v-if="filteredItems3.length"
                                                             head-variant="dark"
                                                             ref="table"
                                                             striped
@@ -251,8 +247,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             bordered
                                                             :items="filteredItems3"
                                                             :fields="fields3"
-                                                            :current-page="currentPage"
-                                                            :per-page="perPage"
+                                                            :current-page="currentPage3"
+                                                            :per-page="perPage3"
                                                             :filter="filter"
                                                             selectable
                                                             select-mode="single"
@@ -262,14 +258,14 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             </template>
                                                             <template v-slot:cell(aksi)="data">
                                                                 <div class="button-list">
-                                                                    <button class="btn btn-success waves-effect" @click="editRincian(data.item.id)"><i
+                                                                    <button class="btn btn-success waves-effect" @click="tambahRincian(data.item.id)"><i
                                                                             class="mdi mdi-18px mdi-plus" ></i> Tambahkan
                                                                     </button>
                                                                 </div>
                                                             </template>
                                                         </b-table>
                                                         <div class="col-12 col-md-6 float-left">
-                                                            <p>Menampilkan @{{(currentPage*perPage+1)-perPage}} sampai @{{(currentPage*perPage)}} dari @{{totalRows3}} data</p>
+                                                            <p>Menampilkan @{{(currentPage3*perPage3+1)-perPage3}} sampai @{{(currentPage3*perPage3)}} dari @{{totalRows3}} data</p>
                                                         </div>
                                                         <div class="col-12 col-md-6 float-right">
                                                             <b-pagination
@@ -307,6 +303,24 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
+                            <!-- sample modal content -->
+                            <div v-on:keyup.enter="hapusRincian" id="modalhapusrincian" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myModalLabel">Konfirmasi</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Yakin ingin menghapus @{{ editnama }} ? </h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success waves-effect waves-light" data-dismiss="modal"><i class="mdi mdi-18px mdi-close"></i> Tidak </button>
+                                            <button type="button" @click="hapusRincian()" class="btn btn-danger waves-effect waves-light"><i class="mdi mdi-18px mdi-check"></i> Iya </button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
                                 <div v-on:keyup.enter="create" id="modaltambah" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -348,19 +362,19 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Aturan Jumlah SKS (Lulus)</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" required type="text" class="form-control" v-model="aturan_lulus">
+                                                            <input name="nama" required type="number" class="form-control" v-model="aturan_lulus">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Aturan Jumlah SKS (Lulus)</label>
+                                                        <label class="col-md-3 col-form-label">Aturan Jumlah SKS (Wajib)</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" required type="text" class="form-control" v-model="aturan_wajib">
+                                                            <input name="nama" required type="number" class="form-control" v-model="aturan_wajib">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Aturan Jumlah SKS (Lulus)</label>
+                                                        <label class="col-md-3 col-form-label">Aturan Jumlah SKS (Pilihan)</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" required type="text" class="form-control" v-model="aturan_pilihan">
+                                                            <input name="nama" required type="number" class="form-control" v-model="aturan_pilihan">
                                                         </div>
                                                     </div>
                                                 </form>
@@ -413,19 +427,19 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Aturan Jumlah SKS (Lulus)</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" required type="text" class="form-control" v-model="editaturan_lulus">
+                                                            <input name="nama" required type="number" class="form-control" v-model="editaturan_lulus">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Aturan Jumlah SKS (Lulus)</label>
+                                                        <label class="col-md-3 col-form-label">Aturan Jumlah SKS (Wajib)</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" required type="text" class="form-control" v-model="editaturan_wajib">
+                                                            <input name="nama" required type="number" class="form-control" v-model="editaturan_wajib">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Aturan Jumlah SKS (Lulus)</label>
+                                                        <label class="col-md-3 col-form-label">Aturan Jumlah SKS (Pilihan)</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" required type="text" class="form-control" v-model="editaturan_pilihan">
+                                                            <input name="nama" required type="number" class="form-control" v-model="editaturan_pilihan">
                                                         </div>
                                                     </div>
                                                 </form>

@@ -52,6 +52,10 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <h5>Nama</h5>
                                                 <input class="form-control" v-model="search2"><br><br>
                                             </div>
+                                            <div class="col-md-3">
+                                                <h5>NIM</h5>
+                                                <input class="form-control" v-model="search3"><br><br>
+                                            </div>
                                         </div>
                                         <div>
                                             <div class="col-sm-1" style="margin-bottom: 1.5rem;margin-top: -1.5rem; padding-left: 0px; ">
@@ -65,7 +69,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </div>
                                             <div class="clearfix"></div>
                                             <div class="alert alert-warning" v-if="!filteredItems.length">
-                                                <strong>Sorry!</strong> No data
+                                                <strong>Maaf!</strong> Data Tidak Ada
                                             </div>
                                             <b-table
                                                 v-if="filteredItems.length"
@@ -90,6 +94,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 </template>
                                                 <template v-slot:cell(aksi)="data">
                                                     <div class="button-list">
+                                                        <button type="button" @click="lihatRincian(data.item.id)" class="btn btn-info waves-effect waves-light"><i
+                                                                class="mdi mdi-18px mdi-file-document-edit-outline" ></i> Rincian </button>
                                                         <button type="button" @click="edit(data.item.id)" class="btn btn-success waves-effect waves-light"><i
                                                                 class="mdi mdi-18px mdi-file-document-edit-outline" ></i> Ubah </button>
                                                         <button class="btn btn-danger waves-effect" @click="hapusdata(data.item.id)"><i
@@ -113,6 +119,92 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                     </div>
                                     </div>
                                 <!-- end row -->
+                                    <div v-on:keyup.enter="lihatRincian" id="modalRincian" class="modal fade" tabindex="-1"
+                                         role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="myModalLabel">Rincian Mahasiswa</h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">×
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="createdby" class="col-form-label">Nama</label>
+                                                            <input style="background-color: rgba(128,128,128,0.18)" class="form-control" disabled v-model="rinciannama">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="updatedby" class="col-form-label">NIM</label>
+                                                            <input style="background-color: rgba(128,128,128,0.18)" class="form-control" disabled v-model="rinciannim">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="updatedby" class="col-form-label">NIK</label>
+                                                            <input style="background-color: rgba(128,128,128,0.18)" class="form-control" disabled v-model="rinciannik">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="updatedby" class="col-form-label">Program Studi</label>
+                                                            <input style="background-color: rgba(128,128,128,0.18)" class="form-control" disabled v-model="rincianjurusan">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="updatedby" class="col-form-label">Jenis Pendaftaran</label>
+                                                            <input style="background-color: rgba(128,128,128,0.18)" class="form-control" disabled v-model="rincianjenisdaftar">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="updatedby" class="col-form-label">Jenis Kelamin</label>
+                                                            <input style="background-color: rgba(128,128,128,0.18)" class="form-control" disabled v-model="rincianjeniskelamin">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="updatedby" class="col-form-label">Tanggal, Tempat Lahir</label>
+                                                            <input style="background-color: rgba(128,128,128,0.18)" class="form-control" disabled v-model="rinciantempattanggallahir">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="updatedby" class="col-form-label">Agama</label>
+                                                            <input style="background-color: rgba(128,128,128,0.18)" class="form-control" disabled v-model="rincianagama">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <label for="updatedby" class="col-form-label">Alamat</label>
+                                                            <textarea style="background-color: rgba(128,128,128,0.18)" class="form-control" disabled>@{{ rincianalamat }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div v-for="mahasiswa in rincian">
+                                                        <!-- Name -->
+                                                        <div class="form-group">
+                                                            <div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="alert alert-warning" v-if="!allrincian.length">
+                                                                    <strong>Status Aktif Belum Ada</strong>
+                                                                </div>
+                                                                <b-table
+                                                                    v-if="allrincian.length"
+                                                                    head-variant="dark"
+                                                                    ref="table"
+                                                                    striped
+                                                                    hover
+                                                                    bordered
+                                                                    :items="allrincian"
+                                                                    :fields="fields2"
+                                                                    :filter="filter"
+                                                                    selectable
+                                                                    select-mode="single"
+                                                                    responsive="md">
+                                                                </b-table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
                                 <!-- sample modal content -->
                                 <div v-on:keyup.enter="hapus" id="modalhapus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -153,10 +245,16 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">NIM</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" required type="text" class="form-control" v-model="nim">
+                                                            <input name="nama" maxlength="13" required type="number" class="form-control" v-model="nim">
 {{--                                                            <span style="color: red" class="form-text text-muted">--}}
 {{--                                                                **keterangan--}}
 {{--                                                            </span>--}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">NIK</label>
+                                                        <div class="col-md-9">
+                                                            <input name="nama" maxlength="13" required type="text" class="form-control" v-model="nik">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -237,6 +335,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 {{--                                                            </span>--}}
                                                         </div>
                                                     </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Alamat</label>
+                                                        <div class="col-md-9">
+                                                            <textarea name="nama" required type="date" class="form-control" v-model="alamat"></textarea>
+                                                        </div>
+                                                    </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
@@ -268,10 +372,16 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">NIM</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" required type="text" class="form-control" v-model="editnim">
+                                                            <input name="nama" maxlength="13" required type="text" class="form-control" v-model="editnim">
 {{--                                                            <span style="color: red" class="form-text text-muted">--}}
 {{--                                                                **keterangan--}}
 {{--                                                            </span>--}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">NIK</label>
+                                                        <div class="col-md-9">
+                                                            <input name="nama" maxlength="13" required type="text" class="form-control" v-model="editnik">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -350,6 +460,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 {{--                                                            <span style="color: red" class="form-text text-muted">--}}
 {{--                                                                **keterangan--}}
 {{--                                                            </span>--}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-form-label">Alamat</label>
+                                                        <div class="col-md-9">
+                                                            <textarea name="nama" required type="date" class="form-control" v-model="editalamat"></textarea>
                                                         </div>
                                                     </div>
                                                 </form>

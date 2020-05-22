@@ -19,7 +19,7 @@
                 <span> Beranda </span>
             </a>
         </li>
-        @if(\Illuminate\Support\Facades\Auth::user()->role == "admin")
+        @if(\Illuminate\Support\Facades\Auth::user()->role == "administrator")
         <li class="menu-title">Data Master</li>
         <li onclick="closemenu()">
             <a href="{{route('dosen.index')}}">
@@ -56,21 +56,26 @@
             </a>
         </li>
         @endif
-        <li class="menu-title">Data Transaksional</li>
-        <li>
-            <a href="{{route('kelas.index')}}">
-                <i class="mdi mdi-table-column"></i>
-                <span> Kelas </span>
-            </a>
-            <a href="{{route('mengajar.index')}}">
-                <i class="mdi mdi-clipboard-account"></i>
-                <span> Akta Ajar </span>
-            </a>
-            <a href="{{route('mengajar.index')}}">
-                <i class="far fa-file"></i>
-                <span> Nilai </span>
-            </a>
-        </li>
+{{--        <li class="menu-title">Data Transaksional</li>--}}
+{{--        <li>--}}
+{{--            <a href="{{route('kelas.index')}}">--}}
+{{--                <i class="mdi mdi-table-column"></i>--}}
+{{--                <span> Data Kelas </span>--}}
+{{--            </a>--}}
+{{--            <a href="{{route('mengajar.index')}}">--}}
+{{--                <i class="mdi mdi-clipboard-account"></i>--}}
+{{--                <span>Jadwal</span>--}}
+{{--            </a>--}}
+{{--            <a href="{{route('mengajar.index')}}">--}}
+{{--                <i class="mdi mdi-clipboard-account"></i>--}}
+{{--                <span> Riwayat KRS </span>--}}
+{{--            </a>--}}
+
+{{--            <a href="{{route('mengajar.index')}}">--}}
+{{--                <i class="mdi mdi-clipboard-account"></i>--}}
+{{--                <span> Info Pembayaran </span>--}}
+{{--            </a>--}}
+{{--        </li>--}}
 
     </ul>
 </div>

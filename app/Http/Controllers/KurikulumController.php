@@ -23,6 +23,29 @@ class KurikulumController extends Controller
     public function all()
     {
         $kurikulum = Kurikulum::with('getJurusan','getTahunAjaran')->get();
+        $jumlahsks = Kurikulum::all()->pluck('matakuliah');
+        $i = 0;
+        foreach ($jumlahsks as $x){
+            $jumlah = 0;
+            foreach ($x as $y){
+                $bobot =  MataKuliah::where('id',$y)->where('jenis','Wajib Program Studi')->value('bobot');
+                $jumlah = $jumlah + $bobot;
+
+            }
+            $kurikulum[$i]['skswajib'] = $jumlah;
+            $i = $i + 1;
+        }
+        $j = 0;
+        foreach ($jumlahsks as $x){
+            $jumlah = 0;
+            foreach ($x as $y){
+                $bobot =  MataKuliah::where('id',$y)->where('jenis','Pilihan')->value('bobot');
+                $jumlah = $jumlah + $bobot;
+
+            }
+            $kurikulum[$j]['skspilihan'] = $jumlah;
+            $j = $j + 1;
+        }
         return response($kurikulum);
     }
 
@@ -38,7 +61,7 @@ class KurikulumController extends Controller
         return response($kurikulum);
     }
 
-    public function allrincianmatkul($id)
+    public function allRincianMatkul($id)
     {
         $ids = [Kurikulum::with(['getJurusan', 'getTahunAjaran'])->get()->find($id)];
         $matkul = [null];
@@ -51,6 +74,37 @@ class KurikulumController extends Controller
         }
 
         return response($matkul);
+    }
+
+    public function tambahRincianMatkul(Request $request)
+    {
+        $matakuliah = Kurikulum::find($request->kurikulumid);
+        $matakuliah2 = $matakuliah->matakuliah;
+        array_push($matakuliah2, $request->matkulid);
+        $matakuliah->update(['matakuliah'=>$matakuliah2]);
+        $matakuliah->save();
+        return response(['pesan'=>"Data berhasil ditambahkan"]);
+    }
+
+    public function hapusRincianMatkul(Request $request)
+    {
+        $matakuliah = Kurikulum::find($request->kurikulumid);
+        $matakuliah2 = $matakuliah->matakuliah;
+        if (count($matakuliah2) == 1){
+            $matakuliah->matakuliah = [];
+            $matakuliah->save();
+        }
+        else{
+            $data = [];
+            foreach ($matakuliah2 as $k) {
+                if ($k != $request->matkulid) {
+                    array_push($data,$k);
+                }
+            }
+            $matakuliah->update(['matakuliah'=>$data]);
+            $matakuliah->save();
+        }
+        return response(['pesan'=>"Data berhasil dihapus"]);
     }
 
     public function create(Request $request)
@@ -95,5 +149,12 @@ class KurikulumController extends Controller
     {
         Kurikulum::destroy($id);
         return response(['pesan'=>"Data berhasil dihapus"]);
+    }
+
+    public function mataKuliah($id)
+    {
+        $sudah = Kurikulum::where('id',$id)->value('matakuliah');
+        $matakuliah = MataKuliah::whereNotIn('id',$sudah)->orderBy('id', 'asc')->get();
+        return response($matakuliah);
     }
 }

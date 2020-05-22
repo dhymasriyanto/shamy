@@ -75,7 +75,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </div>
                                             <div class="clearfix"></div>
                                             <div class="alert alert-warning" v-if="!filteredItems.length">
-                                                <strong>Sorry!</strong> No data
+                                                <strong>Maaf!</strong> Data Tidak Ada
                                             </div>
                                             <b-table
                                                 v-if="filteredItems.length"
