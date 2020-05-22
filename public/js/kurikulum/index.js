@@ -33,6 +33,7 @@ function initVue() {
             search7 :'',
             search8 :'',
             namamodal : '',
+            idmodal : '',
             list: [],
             filter: '',
             fields: [
@@ -58,6 +59,11 @@ function initVue() {
                 {
                     key: 'aturanjumlahsks',
                     label: 'Aturan Jumlah SKS\n(Lulus-Wajib-Pilihan)',
+                    sortable: true,
+                },
+                {
+                    key: 'jumlahsks',
+                    label: 'Jumlah SKS Mata Kuliah\n(Wajib-Pilihan)',
                     sortable: true,
                 },
                 {
@@ -100,8 +106,8 @@ function initVue() {
                     label: 'Aksi',
                 },
             ],
-            perPage2: 10,
-            pageOptions2: [10, 15, 20],
+            perPage2: 5,
+            pageOptions2: [5, 10, 20],
             totalRows2: 1,
             currentPage2: 1,
             fields3: [
@@ -134,8 +140,8 @@ function initVue() {
                     label: 'Aksi',
                 },
             ],
-            perPage3: 10,
-            pageOptions3: [10, 15, 20],
+            perPage3: 5,
+            pageOptions3: [5, 10, 20],
             totalRows3: 1,
             currentPage3: 1,
         },
@@ -147,7 +153,6 @@ function initVue() {
             this.all();
             this.allJurusan();
             this.allTahunAjaran();
-            this.allMataKuliah();
         },
         methods: {
             create: function () {
@@ -223,10 +228,17 @@ function initVue() {
                         // always executed
                     });
             },
-            allRincianKelas: function (id) {
+            allRincianMatkul: function (id) {
                 axios.get('/kurikulum/allrincianmatkul/' + id)
                     .then(function (response) {
                         vm.allrincianmatkul = response.data;
+                        if(response.data[0] == null){
+                            vm.allrincianmatkul = [];
+                            vm.totalRows2 = vm.allrincianmatkul.length;
+                        }
+                        else{
+                            vm.totalRows2 = vm.allrincianmatkul.length;
+                        }
                     }).catch(function (error) {
                 }).then(function () {
 
@@ -236,13 +248,12 @@ function initVue() {
             lihatRincian: function (id) {
                 axios.get("/kurikulum/"+id)
                     .then(function (response) {
-                        // vm.id = response.data[0]['id'];
-
+                        vm.idmodal = id;
                         vm.rincianmatkul = response.data;
                         vm.totalRows2 = vm.rincianmatkul[0]['matakuliah'].length;
                         vm.namamodal = vm.rincianmatkul[0]['nama'] + " - " + vm.rincianmatkul[0]['get_jurusan']['nama'];
                         if (vm.rincianmatkul[0]['matakuliah'].length != 0) {
-                            vm.allRincianKelas(id);
+                            vm.allRincianMatkul(id);
                         }
 
                         $("#modalRincian").modal('show');
@@ -265,6 +276,37 @@ function initVue() {
                     $("#modalhapus").modal('show');
                 });
 
+            },
+            tambahRincian: function (id) {
+                axios.post('/kurikulum/tambahrincianmatkul',{kurikulumid : this.idmodal,matkulid : id})
+                    .then(function (response) {
+                        Command: toastr["success"](response.data.pesan, "Sukses")
+                    }).catch(function (error) {
+                    Command: toastr["error"]("Terjadi Kesalahan", "Error")
+                }).then(function () {
+                    vm.allMataKuliah(vm.idmodal);
+                    vm.allRincianMatkul(vm.idmodal);
+                    vm.all();
+                });
+
+            },
+            hapusRincian: function () {
+                axios.post('/kurikulum/hapusrincianmatkul',{kurikulumid : this.idmodal,matkulid : this.editid})
+                    .then(function (response) {
+                        Command: toastr["success"](response.data.pesan, "Sukses")
+                    }).catch(function (error) {
+                    Command: toastr["error"]("Terjadi Kesalahan", "Error")
+                }).then(function () {
+                    vm.allRincianMatkul(vm.idmodal);
+                    vm.all();
+                    $("#modalhapusrincian").modal('hide');
+                });
+
+            },
+            modalHapusRincian: function (id,nama) {
+                vm.editnama = nama;
+                vm.editid = id;
+                $("#modalhapusrincian").modal('show');
             },
             allJurusan: function () {
                 axios.get('/jurusan/all')
@@ -293,7 +335,7 @@ function initVue() {
                     });
             },
             allMataKuliah: function () {
-                axios.get('/mata-kuliah/all')
+                axios.get('/kurikulum/matakuliah/' + vm.idmodal)
                     .then(function (response) {
                         // handle success
                         vm.datamatakuliah = response.data;
@@ -303,7 +345,7 @@ function initVue() {
                         // handle error
                     })
                     .then(function () {
-                        // always executed
+                        $('#modalTambahRincian').modal('show');
                     });
             },
             edit: function (id) {

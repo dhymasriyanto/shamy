@@ -8,6 +8,9 @@ class Mahasiswa extends Model
 {
     protected $table = 'mahasiswa';
     protected $guarded = ['id'];
+    protected $casts = [
+        'status_aktif' => 'json'
+    ];
 
     public function getJurusan()
     {

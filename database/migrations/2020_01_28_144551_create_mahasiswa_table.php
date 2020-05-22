@@ -15,7 +15,8 @@ class CreateMahasiswaTable extends Migration
     {
         Schema::create('mahasiswa', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nomor_induk', 255)->comment('Nomor induk mahasiswa')->nullable()->unique();
+            $table->string('nomor_induk', 13)->comment('Nomor induk mahasiswa')->nullable()->unique();
+            $table->string('nomor_induk_kependudukan', 16)->comment('Nomor induk kependudukan')->nullable()->unique();
             $table->string('nama', 255)->comment('Nama mahasiswa')->nullable();
             $table->json('status_aktif')->comment('Status aktif/tidak aktif mahasiswa berdasarkan pembayaran melalui sistem pembayaran terpisah')->nullable();
             $table->string('jenis_pendaftaran', 255)->comment('Jenis Pendaftaran')->nullable();
@@ -23,6 +24,7 @@ class CreateMahasiswaTable extends Migration
             $table->string('tempat_lahir', 255)->comment('Tempat Lahir')->nullable();
             $table->date('tanggal_lahir')->comment('Tanggal Lahir')->nullable();
             $table->string('agama', 255)->comment('Agama')->nullable();
+            $table->string('alamat', 255)->comment('Alamat')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->integer('created_by')->default(0);
             $table->timestamp('updated_at')->useCurrent();

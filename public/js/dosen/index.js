@@ -26,6 +26,7 @@ function initVue() {
             created_by : '',
             search :'',
             search2 :'',
+            search3 :'',
             list: [],
             filter: '',
             fields: [
@@ -218,7 +219,7 @@ function initVue() {
         computed: {
             filteredItems() {
                 return this.list.filter(dosen => {
-                    return (dosen.get_jurusan.nama.toLowerCase().indexOf(this.search.toLowerCase()) > -1 && dosen.nama.toLowerCase().indexOf(this.search2.toLowerCase()) > -1)
+                    return (dosen.get_jurusan.nama.toLowerCase().indexOf(this.search.toLowerCase()) > -1 && dosen.nama.toLowerCase().indexOf(this.search2.toLowerCase()) > -1 && dosen.nomor_induk.toLowerCase().indexOf(this.search3.toLowerCase()) > -1)
                 })
             }
         },

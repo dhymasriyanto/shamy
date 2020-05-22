@@ -49,13 +49,17 @@ Route::get('/kurikulum/all', 'KurikulumController@all')->name('kurikulum.all');
 Route::post('/kurikulum/create', 'KurikulumController@create')->name('kurikulum.create');
 Route::post('/kurikulum/update/{id}', 'KurikulumController@update')->name('kurikulum.update');
 Route::get('/kurikulum/get/{id}', 'KurikulumController@edit')->name('kurikulum.edit');
-Route::get('/kurikulum/allrincianmatkul/{id}', 'KurikulumController@allrincianmatkul')->name('kurikulum.allrincianmatkul');
+Route::get('/kurikulum/allrincianmatkul/{id}', 'KurikulumController@allRincianMatkul')->name('kurikulum.allrincianmatkul');
+Route::get('/kurikulum/matakuliah/{id}', 'KurikulumController@mataKuliah')->name('kurikulum.matakuliah');
+Route::post('/kurikulum/tambahrincianmatkul', 'KurikulumController@tambahRincianMatkul')->name('kurikulum.tambahrincianmatkul');
+Route::post('/kurikulum/hapusrincianmatkul', 'KurikulumController@hapusRincianMatkul')->name('kurikulum.hapusrincianmatkul');
 
 //Mahasiswa Controller
 Route::get('/mahasiswa/all', 'MahasiswaController@all')->name('mahasiswa.all');
 Route::post('/mahasiswa/create', 'MahasiswaController@create')->name('mahasiswa.create');
 Route::post('/mahasiswa/update/{id}', 'MahasiswaController@update')->name('mahasiswa.update');
 Route::get('/mahasiswa/get/{id}', 'MahasiswaController@edit')->name('mahasiswa.edit');
+Route::get('/mahasiswa/allrincian/{id}', 'MahasiswaController@allRincian')->name('kurikulum.allrincian');
 
 //Mata Kuliah Controller
 Route::get('/mata-kuliah/all', 'MataKuliahController@all')->name('mata-kuliah.all');

@@ -56,7 +56,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </div>
                                             <div class="clearfix"></div>
                                             <div class="alert alert-warning" v-if="!filteredItems.length">
-                                                <strong>Sorry!</strong> No data
+                                                <strong>Maaf!</strong> Data Tidak Ada
                                             </div>
                                             <b-table
                                                 v-if="filteredItems.length"
@@ -147,7 +147,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Kode</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" required type="text" class="form-control" v-model="kode">
+                                                            <input name="nama" maxlength="3" required type="text" class="form-control" v-model="kode">
 {{--                                                            <span style="color: red" class="form-text text-muted">--}}
 {{--                                                                **keterangan--}}
 {{--                                                            </span>--}}
@@ -207,7 +207,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Kode</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama" required type="text" class="form-control" v-model="editkode">
+                                                            <input name="nama" maxlength="3" required type="text" class="form-control" v-model="editkode">
 {{--                                                            <span style="color: red" class="form-text text-muted">--}}
 {{--                                                                **keterangan--}}
 {{--                                                            </span>--}}

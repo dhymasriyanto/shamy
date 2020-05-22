@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique()->nullable()->comment('Email');
             $table->string('photo')->nullable()->comment('Photo profil');
 //            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable()->comment('Password');
             $table->string('role')->nullable()->comment('Peran');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

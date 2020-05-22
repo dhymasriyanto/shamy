@@ -52,6 +52,10 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <h5>Nama</h5>
                                                 <input class="form-control" v-model="search2"><br><br>
                                             </div>
+                                            <div class="col-md-3">
+                                                <h5>NIDN</h5>
+                                                <input class="form-control" v-model="search3"><br><br>
+                                            </div>
                                         </div>
                                     <div>
                                         <div class="col-sm-1" style="margin-bottom: 1.5rem; margin-top: -1.5rem; ; padding-left: 0px; ">
@@ -65,7 +69,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="alert alert-warning" v-if="!filteredItems.length">
-                                            <strong>Sorry!</strong> No data
+                                            <strong>Maaf!</strong> Data Tidak Ada
                                         </div>
                                         <b-table
                                             v-if="filteredItems.length"
@@ -145,7 +149,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">NIDN</label>
                                                         <div class="col-md-9">
-                                                            <input type="number" required class="form-control" v-model="nip">
+                                                            <input type="number" required maxlength="30" class="form-control" v-model="nip">
 {{--                                                            <span style="color: red" class="form-text text-muted">--}}
 {{--                                                                **keterangan--}}
 {{--                                                            </span>--}}
@@ -245,7 +249,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label required">NIDN</label>
                                                         <div class="col-md-9">
-                                                            <input name="nama"  type="text" class="form-control" v-model="editnip">
+                                                            <input name="nama" maxlength="30" type="text" class="form-control" v-model="editnip">
 {{--                                                            <span style="color: red" class="form-text text-muted">--}}
 {{--                                                                **keterangan--}}
 {{--                                                            </span>--}}

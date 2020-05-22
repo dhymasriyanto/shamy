@@ -2,17 +2,17 @@
 hide footbox
 autonumber
 
-actor Admin
+actor Administrator
 boundary dosen.index
 control DosenController
 entity Dosen
 entity User
 
-dosen.index -> Admin : Menampilkan halaman Data Dosen
+dosen.index -> Administrator : Menampilkan halaman Data Dosen
 
 activate dosen.index
 
-Admin -> dosen.index : Klik tombol Ubah di salah satu data
+Administrator -> dosen.index : Klik tombol Ubah di salah satu data
 
 dosen.index -> DosenController : edit(id)
 
@@ -34,11 +34,11 @@ DosenController -> dosen.index : response(data,data updated, data created)
 
 deactivate DosenController
 
-dosen.index -> Admin : Menampilkan modal ubah data dosen
+dosen.index -> Administrator : Menampilkan modal ubah data dosen
 
-Admin -> dosen.index : Ubah data
+Administrator -> dosen.index : Ubah data
 
-Admin -> dosen.index : Klik tombol Simpan
+Administrator -> dosen.index : Klik tombol Simpan
 
 dosen.index -> DosenController : update(id)
 
@@ -62,11 +62,11 @@ deactivate DosenController
 
 alt pesan = gagal
 
-dosen.index -> Admin : Pemberitahuan gagal mengubah data
+dosen.index -> Administrator : Pemberitahuan gagal mengubah data
 
 else pesan = berhasil
 
-dosen.index -> Admin : Pemberitahuan berhasil mengubah data
+dosen.index -> Administrator : Pemberitahuan berhasil mengubah data
 
 dosen.index -> DosenController  : all()
 
@@ -84,7 +84,7 @@ DosenController -> dosen.index : response(data)
 
 deactivate DosenController
 
-dosen.index -> Admin : Merender data dosen
+dosen.index -> Administrator : Merender data dosen
 
 deactivate dosen.index
 

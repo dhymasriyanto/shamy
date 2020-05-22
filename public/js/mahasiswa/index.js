@@ -9,25 +9,42 @@ function initVue() {
             datajurusan : [],
             nama : '',
             nim : '',
+            nik : '',
+            rincian: [],
+            rinciannama: '',
+            rinciannim: '',
+            rinciannik: '',
+            rincianjurusan: '',
+            rincianjenisdaftar: '',
+            rincianjeniskelamin: '',
+            rinciantempattanggallahir: '',
+            rincianagama: '',
+            rincianalamat: '',
+            allrincian: [],
             id_jurusan : '',
             jenis_pendaftaran : '',
             jenis_kelamin : '',
             tempat_lahir : '',
             tanggal_lahir : '',
             agama : '',
+            alamat : '',
             editnama : '',
             editnim : '',
+            editnik : '',
             editid_jurusan : '',
             editjenis_pendaftaran : '',
             editjenis_kelamin : '',
             edittempat_lahir : '',
             edittanggal_lahir : '',
             editagama : '',
+            editalamat : '',
             editid : '',
+            idmodal : '',
             updated_by : '',
             created_by : '',
             search :'',
             search2 :'',
+            search3 :'',
             list: [],
             filter: '',
             fields: [
@@ -48,11 +65,6 @@ function initVue() {
                 {
                     key: 'get_jurusan.nama',
                     label: 'Program Studi',
-                    sortable: true,
-                },
-                {
-                    key: 'jenis_pendaftaran',
-                    label: 'Jenis Pendaftaran',
                     sortable: true,
                 },
                 {
@@ -79,6 +91,18 @@ function initVue() {
             pageOptions: [10, 15, 20, 30, 50, 100],
             totalRows: 1,
             currentPage: 1,
+            fields2: [
+                {
+                    key: 'semester',
+                    label: 'Semester',
+                    sortable: true,
+                },
+                {
+                    key: 'status',
+                    label: 'Status Mahasiswa',
+                    sortable: true,
+                },
+            ],
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -90,7 +114,7 @@ function initVue() {
         },
         methods: {
             create: function () {
-                axios.post('/mahasiswa/create',{nama : this.nama, nomor_induk : this.nim, id_jurusan : this.id_jurusan, jenis_pendaftaran : this.jenis_pendaftaran, jenis_kelamin : this.jenis_kelamin, tempat_lahir : this.tempat_lahir, tanggal_lahir : this.tanggal_lahir, agama : this.agama})
+                axios.post('/mahasiswa/create',{nama : this.nama, nomor_induk : this.nim, id_jurusan : this.id_jurusan, jenis_pendaftaran : this.jenis_pendaftaran, jenis_kelamin : this.jenis_kelamin, tempat_lahir : this.tempat_lahir, tanggal_lahir : this.tanggal_lahir, agama : this.agama, nomor_induk_kependudukan : this.nik, alamat : this.alamat})
                     .then(function (response) {
                         if (response.data.pesan == 'Data sudah ada'){
                             Command: toastr["warning"](response.data.pesan, "Error")
@@ -100,12 +124,14 @@ function initVue() {
                             vm.all();
                             vm.nama = "";
                             vm.nim = "";
+                            vm.nik = "";
                             vm.id_jurusan = "";
                             vm.jenis_pendaftaran = "";
                             vm.jenis_kelamin = "";
                             vm.tempat_lahir = "";
                             vm.tanggal_lahir = "";
                             vm.agama = "";
+                            vm.alamat = "";
                             $('#modaltambah').modal('hide');
                         }
                     })
@@ -117,19 +143,21 @@ function initVue() {
                     });
             },
             update: function () {
-                axios.post('/mahasiswa/update/'+this.editid,{nama : this.editnama, nomor_induk : this.editnim, id_jurusan : this.editid_jurusan, jenis_pendaftaran : this.editjenis_pendaftaran, jenis_kelamin : this.editjenis_kelamin, tempat_lahir : this.edittempat_lahir, tanggal_lahir : this.edittanggal_lahir, agama : this.editagama})
+                axios.post('/mahasiswa/update/'+this.editid,{nama : this.editnama, nomor_induk : this.editnim, id_jurusan : this.editid_jurusan, jenis_pendaftaran : this.editjenis_pendaftaran, jenis_kelamin : this.editjenis_kelamin, tempat_lahir : this.edittempat_lahir, tanggal_lahir : this.edittanggal_lahir, agama : this.editagama, nomor_induk_kependudukan : this.editnik, alamat : this.editalamat})
                     .then(function (response) {
                         Command: toastr["success"](response.data.pesan, "Sukses")
                         vm.all();
                         vm.editid = "";
                         vm.editnama = "";
                         vm.editnim = "";
+                        vm.editnik = "";
                         vm.editid_jurusan = "";
                         vm.editjenis_pendaftaran = "";
                         vm.editjenis_kelamin = "";
                         vm.edittempat_lahir = "";
                         vm.edittanggal_lahir = "";
                         vm.editagama = "";
+                        vm.editalamat = "";
                         $('#modaledit').modal('hide');
                     })
                     .catch(function (error) {
@@ -185,18 +213,59 @@ function initVue() {
                         // always executed
                     });
             },
+            allRincian: function (id) {
+                axios.get('/mahasiswa/allrincian/' + id)
+                    .then(function (response) {
+                        vm.allrincian = response.data;
+                    }).catch(function (error) {
+                }).then(function () {
+
+                });
+
+            },
+            lihatRincian: function (id) {
+                axios.get("/mahasiswa/"+id)
+                    .then(function (response) {
+                        vm.idmodal = id;
+                        vm.allrincian = [];
+                        vm.rincian = response.data;
+                        vm.rinciannama = vm.rincian[0]['nama'];
+                        vm.rinciannim = vm.rincian[0]['nomor_induk'];
+                        vm.rinciannik = vm.rincian[0]['nomor_induk_kependudukan'];
+                        vm.rincianjurusan = vm.rincian[0]['get_jurusan']['nama'];
+                        vm.rincianjenisdaftar = vm.rincian[0]['jenis_pendaftaran'];
+                        vm.rincianjeniskelamin = vm.rincian[0]['jenis_kelamin'];
+                        vm.rincian[0]['tanggal_lahir'] = moment(vm.rincian[0]['tanggal_lahir'], 'YYYY-MM-DD').format('DD/MM/YYYY');
+                        vm.rinciantempattanggallahir = vm.rincian[0]['tempat_lahir'] + ", " + vm.rincian[0]['tanggal_lahir'];
+                        vm.rincianagama = vm.rincian[0]['agama'];
+                        vm.rincianalamat = vm.rincian[0]['alamat'];
+                        if (vm.rincian[0]['status_aktif'].length != 0) {
+                            vm.allRincian(id);
+                        }
+                        $("#modalRincian").modal('show');
+
+                    }).catch(function (error) {
+
+                }).then(function () {
+
+
+                });
+
+            },
             edit: function (id) {
                 axios.get("/mahasiswa/get/"+id)
                     .then(function (response) {
                         // handle success
                         vm.editnama = response.data['data'][0]['nama'];
                         vm.editnim = response.data['data'][0]['nomor_induk'];
+                        vm.editnik = response.data['data'][0]['nomor_induk_kependudukan'];
                         vm.editid_jurusan = response.data['data'][0]['id_jurusan'];
                         vm.editjenis_pendaftaran = response.data['data'][0]['jenis_pendaftaran'];
                         vm.editjenis_kelamin = response.data['data'][0]['jenis_kelamin'];
                         vm.edittempat_lahir = response.data['data'][0]['tempat_lahir'];
                         vm.edittanggal_lahir = response.data['data'][0]['tanggal_lahir'];
                         vm.editagama = response.data['data'][0]['agama'];
+                        vm.editalamat = response.data['data'][0]['alamat'];
                         vm.editid = id;
                         vm.updated_by = response.data['updatedby'];
                         vm.created_by = response.data['createdby'];
@@ -229,9 +298,9 @@ function initVue() {
         computed: {
             filteredItems() {
                 return this.list.filter(mahasiswa => {
-                    return (mahasiswa.get_jurusan.nama.toLowerCase().indexOf(this.search.toLowerCase()) > -1 && mahasiswa.nama.toLowerCase().indexOf(this.search2.toLowerCase()) > -1)
+                    return (mahasiswa.get_jurusan.nama.toLowerCase().indexOf(this.search.toLowerCase()) > -1 && mahasiswa.nama.toLowerCase().indexOf(this.search2.toLowerCase()) > -1 && mahasiswa.nomor_induk.toLowerCase().indexOf(this.search3.toLowerCase()) > -1)
                 })
-            }
+            },
         },
         components: {}
     });
