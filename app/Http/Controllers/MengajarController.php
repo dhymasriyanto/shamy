@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Kelas;
 use App\Mengajar;
 use Illuminate\Http\Request;
 
@@ -47,12 +48,12 @@ class MengajarController extends Controller
      */
     public function store(Request $request)
     {
+//        $kelas = [Kelas::with(['getJurusan',  'getKurikulum', 'getMataKuliah' ,'getTahunAjaran'])->get()->find($request->id_kelas)];
+
         $mengajar = new Mengajar();
         $mengajar->id_jurusan = $request->id_jurusan;
         $mengajar->id_kelas = $request->id_kelas;
         $mengajar->id_dosen = $request->id_dosen;
-        $mengajar->id_mata_kuliah = $request->id_mata_kuliah;
-        $mengajar->id_tahun_ajaran = $request->id_tahun_ajaran;
         $mengajar->save();
 
         return response(['type' => 'success', 'message' => 'Data berhasil di simpan']);

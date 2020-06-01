@@ -17,6 +17,16 @@ class Kelas extends Model
         return $this->belongsTo('App\Jurusan', 'id_jurusan');
     }
 
+    public function getMataKuliah()
+    {
+        return $this->belongsTo('App\MataKuliah', 'id_mata_kuliah');
+    }
+
+    public function getKurikulum()
+    {
+        return $this->belongsTo('App\Kurikulum', 'id_kurikulum');
+    }
+
     public function getTahunAjaran()
     {
         return $this->belongsTo('App\TahunAjaran', 'id_tahun_ajaran');

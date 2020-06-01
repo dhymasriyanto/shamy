@@ -43,6 +43,8 @@ Route::get('/kelas/all', 'KelasController@all')->name('kelas.all');
 Route::get('/kelas/allmahasiswa', 'KelasController@allmahasiswa')->name('kelas.allmahasiswa');
 Route::get('/kelas/allrinciankelas/{id}', 'KelasController@allrinciankelas')->name('kelas.allrinciankelas');
 Route::delete('/kelas/hapusmahasiswa', 'KelasController@hapusmahasiswa')->name('kelas.hapusmahasiswa');
+Route::put('/kelas/tambahmahasiswa', 'KelasController@tambahmahasiswa')->name('kelas.tambahmahasiswa');
+Route::get('/kelas/mahasiswa/{id}', 'KelasController@mahasiswa')->name('kelas.mahasiswa');
 
 //Kurikulum Controller
 Route::get('/kurikulum/all', 'KurikulumController@all')->name('kurikulum.all');
@@ -92,7 +94,8 @@ Route::resources([
     'mata-kuliah' => 'MataKuliahController',
     'mengajar' => 'MengajarController',
     'pegawai' => 'PegawaiController',
-    'tahun-ajaran' => 'TahunAjaranController'
+    'tahun-ajaran' => 'TahunAjaranController',
+    'nilai'=> 'NilaiController'
 ]);
 
 // Authentication Routes...

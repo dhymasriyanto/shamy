@@ -19,6 +19,7 @@ class Jurusan extends Model
         return $this->hasMany('App\Mahasiswa', 'id_jurusan');
     }
 
+
     public function getKelas()
     {
         return $this->hasMany('App\Kelas');

@@ -102,19 +102,19 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <template v-slot:cell(get_dosen)="data">
                                                 @{{ data.item.get_dosen.nama }}
                                             </template>
-                                            <template v-slot:cell(get_mata_kuliah)="data">
-                                                @{{ data.item.get_mata_kuliah.nama }}
-                                            </template>
-                                            <template v-slot:cell(get_tahun_ajaran)="data">
-                                                @{{ data.item.get_tahun_ajaran.tahun_ajaran }}
-                                            </template>
+{{--                                            <template v-slot:cell(get_kelas)="data">--}}
+{{--                                                @{{ data.item.get_kelas.id_mata_kuliah }}--}}
+{{--                                            </template>--}}
+{{--                                            <template v-slot:cell(get_tahun_ajaran)="data">--}}
+{{--                                                @{{ data.item.get_tahun_ajaran.tahun_ajaran }}--}}
+{{--                                            </template>--}}
                                             <template v-slot:cell(aksi)="data">
                                                 <b-button-group>
                                                     <button class="btn btn-info btn-rounded" title="Rincian">
                                                         <span><i class="mdi mdi-eye"></i></span>
                                                     </button>
                                                     <button class="btn btn-success" title="Ubah">
-                                                        <span><i class="mdi mdi-eye"></i></span>
+                                                        <span><i class=" mdi mdi-square-edit-outline"></i></span>
                                                     </button>
                                                     <button class="btn btn-danger btn-rounded" title="Hapus">
                                                         <span><i class="mdi mdi-trash-can"></i></span>
@@ -140,10 +140,13 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         </div>
                                     </div>
                                     <b-modal
+                                            title="Tambah Akta Ajar"
                                             id="modal-1"
                                             @hidden="resetModal"
                                             @ok="handleOk"
                                             ref="modal"
+                                            ok-title="Simpan"
+                                            cancel-title="Batal"
                                     >
                                         <validation-observer ref="observer" v-slot="{ handleOk }">
                                             <b-form ref="form" @submit.stop.prevent="handleSubmit">
@@ -152,15 +155,15 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                      v-slot="validationContext">
                                                     <b-form-group id="example-input-group-1" label="Jurusan"
                                                                   label-for="example-input-1">
-                                                        <b-form-select
-                                                                @change="onChange"
-                                                                id="example-input-1"
-                                                                name="jurusan"
-                                                                v-model="id_jurusan"
-                                                                :state="getValidationState(validationContext)"
-                                                                aria-describedby="input-1-live-feedback"
+                                                        <b-form-select class="js-example-basic-single"
+                                                                       @change="onChange"
+                                                                       id="example-input-1"
+                                                                       name="jurusan"
+                                                                       v-model="id_jurusan"
+                                                                       :state="getValidationState(validationContext)"
+                                                                       aria-describedby="input-1-live-feedback"
                                                         >
-                                                            <option class="col-md-9"  value="">Pilih Jurusan
+                                                            <option class="col-md-9" value="">Pilih Jurusan
                                                             </option>
                                                             <option
                                                                     v-for="jurusan in datajurusan"
@@ -172,10 +175,13 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </b-form-select>
 
                                                         <b-form-invalid-feedback
-                                                                id="input-1-live-feedback">@{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                                                                id="input-1-live-feedback">@{{
+                                                            validationContext.errors[0] }}
+                                                        </b-form-invalid-feedback>
                                                     </b-form-group>
                                                 </validation-provider>
-                                                <validation-provider  v-if="id_jurusan" name="Tahun Ajaran" :rules="{ required: true }"
+                                                <validation-provider v-if="id_jurusan" name="Tahun Ajaran"
+                                                                     :rules="{ required: true }"
                                                                      v-slot="validationContext">
                                                     <b-form-group id="example-input-group-2" label="Tahun Ajaran"
                                                                   label-for="example-input-2">
@@ -187,7 +193,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 :state="getValidationState(validationContext)"
                                                                 aria-describedby="input-2-live-feedback"
                                                         >
-                                                            <option class="col-md-9"  value="">Pilih Tahun Ajaran
+                                                            <option class="col-md-9" value="">Pilih Tahun Ajaran
                                                             </option>
                                                             <option
                                                                     v-for="tahun_ajaran in datatahunajaran"
@@ -199,10 +205,13 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </b-form-select>
 
                                                         <b-form-invalid-feedback
-                                                                id="input-2-live-feedback">@{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                                                                id="input-2-live-feedback">@{{
+                                                            validationContext.errors[0] }}
+                                                        </b-form-invalid-feedback>
                                                     </b-form-group>
                                                 </validation-provider>
-                                                <validation-provider v-if="id_tahun_ajaran" name="Kelas" :rules="{ required: true }"
+                                                <validation-provider v-if="id_tahun_ajaran" name="Kelas"
+                                                                     :rules="{ required: true }"
                                                                      v-slot="validationContext">
                                                     <b-form-group id="example-input-group-3" label="Kelas"
                                                                   label-for="example-input-3">
@@ -214,24 +223,27 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 :state="getValidationState(validationContext)"
                                                                 aria-describedby="input-3-live-feedback"
                                                         >
-                                                            <option  class="col-md-9"  value="">Pilih Kelas
+                                                            <option class="col-md-9" value="">Pilih Kelas
                                                             </option>
                                                             <option
                                                                     v-for="kelas in datakelas"
                                                                     v-if="(kelas.id_jurusan == id_jurusan) && (kelas.id_tahun_ajaran == id_tahun_ajaran)"
                                                                     v-bind:value="kelas.id"
                                                             >
-                                                                @{{ kelas.nama }}
+                                                                @{{ kelas.get_mata_kuliah.nama + " " + kelas.nama + " " +  kelas.get_kurikulum.nama + " (Semester " + kelas.semester +")"}}
                                                             </option>
 
                                                         </b-form-select>
 
                                                         <b-form-invalid-feedback
-                                                                id="input-3-live-feedback">@{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                                                                id="input-3-live-feedback">@{{
+                                                            validationContext.errors[0] }}
+                                                        </b-form-invalid-feedback>
                                                     </b-form-group>
                                                 </validation-provider>
-                                                <validation-provider v-if="id_kelas" name="Dosen" :rules="{ required: true }"
-                                                                                           v-slot="validationContext">
+                                                <validation-provider v-if="id_kelas" name="Dosen"
+                                                                     :rules="{ required: true }"
+                                                                     v-slot="validationContext">
                                                     <b-form-group id="example-input-group-4" label="Dosen"
                                                                   label-for="example-input-4">
                                                         <b-form-select
@@ -241,7 +253,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 :state="getValidationState(validationContext)"
                                                                 aria-describedby="input-4-live-feedback"
                                                         >
-                                                            <option class="col-md-9"  value="">Pilih Dosen
+                                                            <option class="col-md-9" value="">Pilih Dosen
                                                             </option>
                                                             <option
                                                                     v-for="dosen in datadosen"
@@ -254,7 +266,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                         </b-form-select>
 
                                                         <b-form-invalid-feedback
-                                                                id="input-4-live-feedback">@{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                                                                id="input-4-live-feedback">@{{
+                                                            validationContext.errors[0] }}
+                                                        </b-form-invalid-feedback>
                                                     </b-form-group>
                                                 </validation-provider>
 

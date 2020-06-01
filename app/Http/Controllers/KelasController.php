@@ -30,7 +30,7 @@ class KelasController extends Controller
 
     public function all()
     {
-        $kelas = Kelas::with(['getJurusan', 'getTahunAjaran'])->get();
+        $kelas = Kelas::with(['getJurusan', 'getKurikulum', 'getTahunAjaran', 'getMataKuliah'])->latest()->get();
         return response($kelas);
     }
 
@@ -52,7 +52,7 @@ class KelasController extends Controller
     public function allrinciankelas($id)
     {
 
-        $ids = [Kelas::with(['getJurusan', 'getTahunAjaran'])->get()->find($id)];
+        $ids = [Kelas::with(['getJurusan', 'getKurikulum',  'getTahunAjaran','getMataKuliah'])->get()->find($id)];
         $mahasiswa = [null];
         $j = 0;
         foreach ($ids as $id) {
@@ -90,6 +90,8 @@ class KelasController extends Controller
                 'semester' => $request->semester,
                 'id_jurusan' => $request->id_jurusan,
                 'id_tahun_ajaran' => $request->id_tahun_ajaran,
+                'id_mata_kuliah'=> $request->id_mata_kuliah,
+                'id_kurikulum'=>$request->id_kurikulum,
                 'mahasiswa' => $request->mahasiswa
             ]
         );
@@ -107,7 +109,7 @@ class KelasController extends Controller
     {
 
 //        $kelas = Kelas::with(['getJurusan','getTahunAjaran'])->find($id);
-        $kelas = [Kelas::with(['getJurusan', 'getTahunAjaran'])->get()->find($id)];
+        $kelas = [Kelas::with(['getJurusan',  'getKurikulum', 'getTahunAjaran','getMataKuliah'])->get()->find($id)];
         return response($kelas);
     }
 
@@ -136,6 +138,8 @@ class KelasController extends Controller
             'semester' => $request->semester,
             'id_jurusan' => $request->id_jurusan,
             'id_tahun_ajaran' => $request->id_tahun_ajaran,
+            'id_kurikulum'=>$request->id_kurikulum,
+            'id_mata_kuliah' => $request->id_mata_kuliah,
             'mahasiswa' => $request->mahasiswa
         ]);
         return response(['type' => 'success', 'message' => 'Berhasil menyimpan data']);
@@ -156,9 +160,28 @@ class KelasController extends Controller
         return response(['type' => 'success', 'message' => 'Berhasil menghapus data']);
     }
 
+    public function mahasiswa($id, Request $request)
+    {
+        $sudah = Kelas::where('id',$id)->value('mahasiswa');
+//        $mahasiswa = Mahasiswa::with('getJurusan')->whereNotIn('id', $sudah)->orderBy('id', 'asc')->get();
+        $mahasiswa = Mahasiswa::with('getJurusan')->where('id_jurusan',$request->id_jurusan)->whereNotIn('id', $sudah)->orderBy('id', 'asc')->get();
+        return response($mahasiswa);
+    }
+
+    public function tambahmahasiswa(Request $request)
+    {
+        $kelas = Kelas::find($request->kelasid);
+
+        $mahasiswa = $kelas->mahasiswa;
+        array_push($mahasiswa, $request->mahasiswaid);
+        $kelas->update(['mahasiswa'=>$mahasiswa]);
+        $kelas->save();
+        return response(['type' => 'success', 'message' => 'Berhasil memasukkan mahasiswa ke kelas']);
+    }
+
     public function hapusmahasiswa(Request $request)
     {
-        $kelas = [Kelas::with(['getJurusan', 'getTahunAjaran'])->get()->find($request->id)];
+        $kelas = [Kelas::with(['getJurusan',  'getKurikulum', 'getMataKuliah' ,'getTahunAjaran'])->get()->find($request->id)];
 
 //        $mahasiswa = Kelas::where
         $mahasiswa = [null];

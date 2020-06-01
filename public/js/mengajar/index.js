@@ -42,22 +42,22 @@ function initVue() {
                     sortable: true,
                     // sortByFormatted : true
                 },
-                {
-                    key: 'get_mata_kuliah',
-                    label: 'Nama Mata Kuliah',
-
-                    sortable: true,
-                    // sortByFormatted : true
-
-                },
-                {
-                    key: 'get_tahun_ajaran',
-                    label: 'Nama Tahun Ajaran',
-
-                    sortable: true,
-                    // sortByFormatted : true
-
-                },
+                // {
+                //     key: 'get_kelas',
+                //     label: 'Nama Mata Kuliah',
+                //
+                //     sortable: true,
+                //     // sortByFormatted : true
+                //
+                // },
+                // {
+                //     key: 'get_tahun_ajaran',
+                //     label: 'Nama Tahun Ajaran',
+                //
+                //     sortable: true,
+                //     // sortByFormatted : true
+                //
+                // },
                 {
                     key: 'created_at',
                     label: 'Dibuat Tanggal',
@@ -88,6 +88,7 @@ function initVue() {
             }
             this.start();
             this.all();
+
         },
         methods: {
             start: function () {
@@ -119,12 +120,12 @@ function initVue() {
                     toastr.error("Ada kesalahan!")
                 }
             },
-            checkFormValidity: function () {
-                const valid = this.$refs.form.checkValidity()
-                this.id_jurusan = valid
-                // console.log(valid)
-                return valid
-            },
+            // checkFormValidity: function () {
+            //     const valid = this.$refs.form.checkValidity()
+            //     this.id_jurusan = valid
+            //     // console.log(valid)
+            //     return valid
+            // },
             getValidationState({dirty, validated, valid = null}) {
                 return dirty || validated ? valid : null;
             },
@@ -174,13 +175,10 @@ function initVue() {
                 } else if (this.id_tahun_ajaran == '') {
                     this.id_kelas = '';
                     this.id_dosen = '';
-                }
-                else if (this.id_kelas = '') {
+                } else if (this.id_kelas = '') {
                     this.id_dosen = '';
-                }
-                else if (this.id_jurusan != '' && this.id_kelas == '') {
+                } else if (this.id_jurusan != '' && this.id_kelas == '') {
                     this.id_dosen = '';
-
                 }
 
 
@@ -334,6 +332,7 @@ function initVue() {
         },
         components: {}
     });
+
     $('.app-placeholder').addClass('d-none');
     $('.main_content_app').removeClass('d-none');
 }

@@ -5,7 +5,7 @@
  * Time: 19:03
  */
 ?>
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -20,16 +20,17 @@
     <title>@yield('title', config('app.name'))</title>
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
     <!-- CSS-->
+
     <link rel="stylesheet" type="text/css" href="{{asset('adminto/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('adminto/css/icons.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('adminto/css/app.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-vue.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/placeholder-loading.min.css')}}">
 
-{{--    toast--}}
-    <link href="{{asset('adminto/libs/toastr/toastr.min.css')}}" rel="stylesheet" type="text/css" />
+    {{--    toast--}}
+    <link href="{{asset('adminto/libs/toastr/toastr.min.css')}}" rel="stylesheet" type="text/css"/>
 
-   <!-- JS-->
+    <!-- JS-->
     @if(\Illuminate\Support\Facades\App::environment('production'))
         <script type="text/javascript" src="{{asset('js/vue.min.js')}}"></script>
     @else
@@ -41,7 +42,7 @@
     <script type="text/javascript" src="{{asset('js/bootstrap-vue.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/pjax.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/app-custom.js')}}"></script>
-{{--    <script type="text/javascript" src="../../js/app.js"></script>--}}
+    {{--    <script type="text/javascript" src="../../js/app.js"></script>--}}
 </head>
 <body class="topbar-dark">
 <div id="preloader">
@@ -53,65 +54,66 @@
     <!-- Topbar Start -->
     <div class="navbar-custom navbar-custom-dark">
         <ul class="list-unstyled topnav-menu float-right mb-0">
-{{--            <li class="d-none d-sm-block">--}}
-{{--                <form class="app-search">--}}
-{{--                    <div class="app-search-box">--}}
-{{--                        <div class="input-group">--}}
-{{--                            <input type="text" class="form-control" placeholder="Search...">--}}
-{{--                            <div class="input-group-append">--}}
-{{--                                <button class="btn" type="submit">--}}
-{{--                                    <i class="fe-search"></i>--}}
-{{--                                </button>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </form>--}}
-{{--            </li>--}}
-{{--            <li class="dropdown notification-list">--}}
-{{--                <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">--}}
-{{--                    <i class="fe-bell noti-icon"></i>--}}
-{{--                    <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>--}}
-{{--                </a>--}}
-{{--                <div class="dropdown-menu dropdown-menu-right dropdown-lg">--}}
-{{--                    <!-- item-->--}}
-{{--                    <div class="dropdown-item noti-title">--}}
-{{--                        <h5 class="m-0">--}}
-{{--                                        <span class="float-right">--}}
-{{--                                            <a href="" class="text-dark">--}}
-{{--                                                <small>Clear All</small>--}}
-{{--                                            </a>--}}
-{{--                                        </span>Notification--}}
-{{--                        </h5>--}}
-{{--                    </div>--}}
-{{--                    <div class="slimscroll noti-scroll">--}}
-{{--                        <!-- item-->--}}
-{{--                        <a href="javascript:void(0);" class="dropdown-item notify-item active">--}}
-{{--                            <div class="notify-icon">--}}
-{{--                                <img src="{{asset('images/logo.png')}}" class="img-fluid rounded-circle" alt="" /> </div>--}}
-{{--                            <p class="notify-details">Cristina Pride</p>--}}
-{{--                            <p class="text-muted mb-0 user-msg">--}}
-{{--                                <small>Hi, How are you? What about our next meeting</small>--}}
-{{--                            </p>--}}
-{{--                        </a>--}}
-{{--                        <!-- item-->--}}
-{{--                        <a href="javascript:void(0);" class="dropdown-item notify-item">--}}
-{{--                            <div class="notify-icon bg-primary">--}}
-{{--                                <i class="mdi mdi-comment-account-outline"></i>--}}
-{{--                            </div>--}}
-{{--                            <p class="notify-details">Caleb Flakelar commented on Admin--}}
-{{--                                <small class="text-muted">1 min ago</small>--}}
-{{--                            </p>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                    <!-- All-->--}}
-{{--                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">--}}
-{{--                        View all--}}
-{{--                        <i class="fi-arrow-right"></i>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--            </li>--}}
+            {{--            <li class="d-none d-sm-block">--}}
+            {{--                <form class="app-search">--}}
+            {{--                    <div class="app-search-box">--}}
+            {{--                        <div class="input-group">--}}
+            {{--                            <input type="text" class="form-control" placeholder="Search...">--}}
+            {{--                            <div class="input-group-append">--}}
+            {{--                                <button class="btn" type="submit">--}}
+            {{--                                    <i class="fe-search"></i>--}}
+            {{--                                </button>--}}
+            {{--                            </div>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                </form>--}}
+            {{--            </li>--}}
+            {{--            <li class="dropdown notification-list">--}}
+            {{--                <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">--}}
+            {{--                    <i class="fe-bell noti-icon"></i>--}}
+            {{--                    <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>--}}
+            {{--                </a>--}}
+            {{--                <div class="dropdown-menu dropdown-menu-right dropdown-lg">--}}
+            {{--                    <!-- item-->--}}
+            {{--                    <div class="dropdown-item noti-title">--}}
+            {{--                        <h5 class="m-0">--}}
+            {{--                                        <span class="float-right">--}}
+            {{--                                            <a href="" class="text-dark">--}}
+            {{--                                                <small>Clear All</small>--}}
+            {{--                                            </a>--}}
+            {{--                                        </span>Notification--}}
+            {{--                        </h5>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="slimscroll noti-scroll">--}}
+            {{--                        <!-- item-->--}}
+            {{--                        <a href="javascript:void(0);" class="dropdown-item notify-item active">--}}
+            {{--                            <div class="notify-icon">--}}
+            {{--                                <img src="{{asset('images/logo.png')}}" class="img-fluid rounded-circle" alt="" /> </div>--}}
+            {{--                            <p class="notify-details">Cristina Pride</p>--}}
+            {{--                            <p class="text-muted mb-0 user-msg">--}}
+            {{--                                <small>Hi, How are you? What about our next meeting</small>--}}
+            {{--                            </p>--}}
+            {{--                        </a>--}}
+            {{--                        <!-- item-->--}}
+            {{--                        <a href="javascript:void(0);" class="dropdown-item notify-item">--}}
+            {{--                            <div class="notify-icon bg-primary">--}}
+            {{--                                <i class="mdi mdi-comment-account-outline"></i>--}}
+            {{--                            </div>--}}
+            {{--                            <p class="notify-details">Caleb Flakelar commented on Admin--}}
+            {{--                                <small class="text-muted">1 min ago</small>--}}
+            {{--                            </p>--}}
+            {{--                        </a>--}}
+            {{--                    </div>--}}
+            {{--                    <!-- All-->--}}
+            {{--                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">--}}
+            {{--                        View all--}}
+            {{--                        <i class="fi-arrow-right"></i>--}}
+            {{--                    </a>--}}
+            {{--                </div>--}}
+            {{--            </li>--}}
             <li class="dropdown notification-list">
-                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#"
+                   role="button" aria-haspopup="false" aria-expanded="false">
                     <img src="{{Auth::user()->getPhotoProfil()}} " alt="user-image" class="rounded-circle">
                     <span class="pro-user-name ml-1">{{Auth::user()->name}} <i class="mdi mdi-chevron-down"></i></span>
                 </a>
@@ -128,11 +130,11 @@
                     </a>
                 </div>
             </li>
-{{--            <li class="dropdown notification-list">--}}
-{{--                <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">--}}
-{{--                    <i class="fe-settings noti-icon"></i>--}}
-{{--                </a>--}}
-{{--            </li>--}}
+            {{--            <li class="dropdown notification-list">--}}
+            {{--                <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">--}}
+            {{--                    <i class="fe-settings noti-icon"></i>--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
         </ul>
         <!-- LOGO -->
         <div class="logo-box">
@@ -155,8 +157,8 @@
     <div class="left-side-menu">
         <div class="slimscroll-menu">
             <!--- Sidemenu -->
-            @include('partials.sidemenu')
-            <!-- End Sidebar -->
+        @include('partials.sidemenu')
+        <!-- End Sidebar -->
             <div class="clearfix"></div>
         </div>
         <!-- Sidebar -left -->
@@ -172,8 +174,8 @@
             </div>
         </div>
         <!-- Footer Start -->
-        @include('partials.footer')
-        <!-- end Footer -->
+    @include('partials.footer')
+    <!-- end Footer -->
     </div>
 </div>
 <!-- END wrapper -->
@@ -186,6 +188,7 @@
 <script src="{{asset('adminto/libs/toastr/toastr.min.js')}}"></script>
 
 <script src="{{asset('adminto/js/pages/toastr.init.js')}}"></script>
+{{--<script type="text/javascript" src="{{asset('adminto/libs/select2/select2.min.js')}}" defer></script>--}}
 
 <script type="text/javascript" src="{{asset('adminto/js/vendor.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('adminto/js/app.min.js')}}"></script>
