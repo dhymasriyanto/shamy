@@ -98,10 +98,13 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 @{{ data.item.nama }}
                                             </template>
                                             <template v-slot:cell(get_mata_kuliah)="data">
-                                                @{{ data.item.get_mata_kuliah.nama }}
+                                                @{{ data.item.get_mata_kuliah.kode +" - "+ data.item.get_mata_kuliah.nama }}
                                             </template>
                                             <template v-slot:cell(get_jurusan)="data">
                                                 @{{ data.item.get_jurusan.nama }}
+                                            </template>
+                                            <template v-slot:cell(semester)="data">
+                                                @{{ data.item.semester }}
                                             </template>
                                             <template v-slot:cell(get_tahun_ajaran)="data">
                                                 @{{ data.item.get_tahun_ajaran.tahun_ajaran }}
@@ -195,6 +198,22 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Kode Mata Kuliah</label>
+                                            <div class="col-sm-9">
+                                                <label class="col-form-label">: @{{ kelas.get_mata_kuliah.kode
+                                                    }} </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Bobot Mata Kuliah</label>
+                                            <div class="col-sm-9">
+                                                <label class="col-form-label">: @{{ kelas.get_mata_kuliah.bobot
+                                                    }} </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Nama Kurikulum</label>
                                             <div class="col-sm-9">
                                                 <label class="col-form-label">: @{{ kelas.get_kurikulum.nama
@@ -211,7 +230,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Jurusan</label>
+                                            <label class="col-sm-3 col-form-label">Program Studi</label>
                                             <div class="col-sm-9">
                                                 <label class="col-form-label">: @{{
                                                     kelas.get_jurusan.nama }} </label>
@@ -366,9 +385,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         <b-form ref="form" @submit.stop.prevent="handleSubmit">
 
 
-                                            <validation-provider name="Jurusan" :rules="{ required: true }"
+                                            <validation-provider name="Program Studi" :rules="{ required: true }"
                                                                  v-slot="validationContext">
-                                                <b-form-group id="example-input-group-2" label="Jurusan"
+                                                <b-form-group id="example-input-group-2" label="Program Studi"
                                                               label-for="example-input-2">
                                                     <b-form-select
                                                             @change="onChange"
@@ -378,7 +397,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             :state="getValidationState(validationContext)"
                                                             aria-describedby="input-2-live-feedback"
                                                     >
-                                                        <option class="col-md-9" value="">Pilih Jurusan
+                                                        <option class="col-md-9" value="">Pilih Program Studi
                                                         </option>
                                                         <option
                                                                 v-for="jurusan in datajurusan"
@@ -677,9 +696,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         <b-form ref="form" @submit.stop.prevent="handleSubmit">
 
 
-                                            <validation-provider name="Jurusan" :rules="{ required: true }"
+                                            <validation-provider name="Program Studi" :rules="{ required: true }"
                                                                  v-slot="validationContext">
-                                                <b-form-group id="example-input-group-2" label="Jurusan"
+                                                <b-form-group id="example-input-group-2" label="Program Studi"
                                                               label-for="example-input-2">
                                                     <b-form-select
                                                             @change="onChange"
@@ -689,7 +708,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             :state="getValidationState(validationContext)"
                                                             aria-describedby="input-2-live-feedback"
                                                     >
-                                                        <option class="col-md-9" value="">Pilih Jurusan
+                                                        <option class="col-md-9" value="">Pilih Program Studi
                                                         </option>
                                                         <option
                                                                 v-for="jurusan in datajurusan"

@@ -33,5 +33,9 @@ class Mengajar extends Model
         return $this->belongsTo('App\TahunAjaran', 'id_tahun_ajaran');
     }
 
+    public function getNilai()
+    {
+        return $this->belongsTo('App\TahunAjaran', 'id_mengajar');
+    }
 
 }

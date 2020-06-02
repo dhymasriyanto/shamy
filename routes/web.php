@@ -70,6 +70,10 @@ Route::post('/mata-kuliah/update/{id}', 'MataKuliahController@update')->name('ma
 Route::get('/mata-kuliah/get/{id}', 'MataKuliahController@edit')->name('mata-kuliah.edit');
 
 Route::get('/mengajar/all', 'MengajarController@all')->name('mengajar.all');
+Route::get('/mengajar', 'MengajarController@index')->name('mengajar.index');
+
+Route::get('/nilai/all', 'NilaiController@all')->name('nilai.all');
+
 
 //Pegawai Controller
 Route::get('/pegawai/all', 'PegawaiController@all')->name('pegawai.all');

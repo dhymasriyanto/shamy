@@ -52,11 +52,7 @@ function initVue() {
 
 
                 //
-                // {
-                //     key: 'semester',
-                //     label: 'Semester',
-                //     sortable: true,
-                // },
+
                 //
                 // {
                 //     key: 'get_tahun_ajaran',
@@ -72,8 +68,13 @@ function initVue() {
                     sortable: true
                 },
                 {
+                    key: 'semester',
+                    label: 'Semester',
+                    sortable: true,
+                },
+                {
                     key: 'get_jurusan',
-                    label: 'Jurusan',
+                    label: 'Nama Program Studi',
                     sortable: true,
                     // sortByFormatted : true
 
@@ -117,7 +118,7 @@ function initVue() {
                 },
                 {
                     key: 'get_jurusan',
-                    label: 'Jurusan',
+                    label: 'Nama Program Studi',
                     sortable: true,
                     // sortByFormatted : true
 
@@ -202,7 +203,11 @@ function initVue() {
             flash: function (type, message) {
                 if (type == "success") {
                     toastr.success(message);
-                } else if (type == "error") {
+                }
+                else if (type == "warning") {
+                    toastr.warning(message);
+                }
+                else if (type == "error") {
                     toastr.error(message);
                 } else {
                     toastr.error("Ada kesalahan!")

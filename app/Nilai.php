@@ -11,7 +11,11 @@ class Nilai extends Model
 
     public function getMahasiswa()
     {
-        return $this->hasMany('App\Mahasiswa', 'id_nilai');
+        return $this->belongsTo('App\Mahasiswa', 'id_mahasiswa');
     }
 
+    public function getMengajar()
+    {
+        return $this->belongsTo('App\Mengajar', 'id_mengajar');
+    }
 }

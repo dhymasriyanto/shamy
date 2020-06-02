@@ -97,26 +97,40 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 @{{ data.item.get_jurusan.nama }}
                                             </template>
                                             <template v-slot:cell(get_kelas)="data">
-                                                @{{ data.item.get_kelas.nama }}
+                                                <div v-for="kelas in datakelas"
+                                                     v-if="kelas.id == data.item.get_kelas.id"
+                                                >
+                                                    @{{ kelas.get_mata_kuliah.nama +" " + kelas.nama + " (Semester " +
+                                                    kelas.semester + ")"}}
+
+                                                </div>
                                             </template>
                                             <template v-slot:cell(get_dosen)="data">
                                                 @{{ data.item.get_dosen.nama }}
                                             </template>
-{{--                                            <template v-slot:cell(get_kelas)="data">--}}
-{{--                                                @{{ data.item.get_kelas.id_mata_kuliah }}--}}
-{{--                                            </template>--}}
-{{--                                            <template v-slot:cell(get_tahun_ajaran)="data">--}}
-{{--                                                @{{ data.item.get_tahun_ajaran.tahun_ajaran }}--}}
-{{--                                            </template>--}}
+                                            {{--                                            <template v-slot:cell(get_kelas)="data">--}}
+                                            {{--                                                @{{ data.item.get_kelas.id_mata_kuliah }}--}}
+                                            {{--                                            </template>--}}
+                                            {{--                                            <template v-slot:cell(get_tahun_ajaran)="data">--}}
+                                            {{--                                                @{{ data.item.get_tahun_ajaran.tahun_ajaran }}--}}
+                                            {{--                                            </template>--}}
                                             <template v-slot:cell(aksi)="data">
                                                 <b-button-group>
-                                                    <button class="btn btn-info btn-rounded" title="Rincian">
+                                                    <button class="btn btn-info btn-rounded"
+                                                            @click="lihatRincian(data.item.id)"
+
+                                                            title="Rincian">
                                                         <span><i class="mdi mdi-eye"></i></span>
                                                     </button>
-                                                    <button class="btn btn-success" title="Ubah">
+                                                    <button class="btn btn-success"
+                                                            @click="edit(data.item.id)"
+                                                            title="Ubah">
                                                         <span><i class=" mdi mdi-square-edit-outline"></i></span>
                                                     </button>
-                                                    <button class="btn btn-danger btn-rounded" title="Hapus">
+                                                    <button class="btn btn-danger btn-rounded"
+                                                            title="Hapus"
+                                                            @click="hapusdata(data.item.id)"
+                                                    >
                                                         <span><i class="mdi mdi-trash-can"></i></span>
                                                     </button>
                                                 </b-button-group>
@@ -151,9 +165,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                         <validation-observer ref="observer" v-slot="{ handleOk }">
                                             <b-form ref="form" @submit.stop.prevent="handleSubmit">
 
-                                                <validation-provider name="Jurusan" :rules="{ required: true }"
+                                                <validation-provider name="Program Studi" :rules="{ required: true }"
                                                                      v-slot="validationContext">
-                                                    <b-form-group id="example-input-group-1" label="Jurusan"
+                                                    <b-form-group id="example-input-group-1" label="Program Studi"
                                                                   label-for="example-input-1">
                                                         <b-form-select class="js-example-basic-single"
                                                                        @change="onChange"
@@ -163,7 +177,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                        :state="getValidationState(validationContext)"
                                                                        aria-describedby="input-1-live-feedback"
                                                         >
-                                                            <option class="col-md-9" value="">Pilih Jurusan
+                                                            <option class="col-md-9" value="">Pilih Program Studi
                                                             </option>
                                                             <option
                                                                     v-for="jurusan in datajurusan"
@@ -230,7 +244,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                     v-if="(kelas.id_jurusan == id_jurusan) && (kelas.id_tahun_ajaran == id_tahun_ajaran)"
                                                                     v-bind:value="kelas.id"
                                                             >
-                                                                @{{ kelas.get_mata_kuliah.nama + " " + kelas.nama + " " +  kelas.get_kurikulum.nama + " (Semester " + kelas.semester +")"}}
+                                                                @{{ kelas.get_mata_kuliah.nama + " " + kelas.nama + " "
+                                                                + kelas.get_kurikulum.nama + " (Semester " +
+                                                                kelas.semester +")"}}
                                                             </option>
 
                                                         </b-form-select>
@@ -275,12 +291,276 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </b-form>
                                         </validation-observer>
                                     </b-modal>
-                                </div>
-                                <!-- end row -->
+                                    <!-- end row -->
+                                    <b-modal
+                                            title="Ubah Akta Ajar"
+                                            id="modal-edit"
+                                            @hidden="resetModal"
+                                            @ok="handleOk"
+                                            ref="modal"
+                                            ok-title="Simpan"
+                                            cancel-title="Batal"
+                                            v-model="modalShow"
 
-                            </div> <!-- end card-box -->
-                        </div><!-- end col -->
-                    </div>
+                                    >
+                                        <validation-observer ref="observer" v-slot="{ handleOk }">
+                                            <b-form ref="form" @submit.stop.prevent="handleSubmit">
+
+                                                <validation-provider name="Program Studi" :rules="{ required: true }"
+                                                                     v-slot="validationContext">
+                                                    <b-form-group id="example-input-group-1" label="Program Studi"
+                                                                  label-for="example-input-1">
+                                                        <b-form-select class="js-example-basic-single"
+                                                                       @change="onChange"
+                                                                       id="example-input-1"
+                                                                       name="jurusan"
+                                                                       v-model="editid_jurusan"
+                                                                       :state="getValidationState(validationContext)"
+                                                                       aria-describedby="input-1-live-feedback"
+                                                                {{--                                                                       disabled--}}
+                                                        >
+                                                            <option class="col-md-9" value="">Pilih Program Studi
+                                                            </option>
+                                                            <option
+                                                                    v-for="jurusan in datajurusan"
+                                                                    v-bind:value="jurusan.id"
+                                                            >
+                                                                @{{ jurusan.nama }}
+                                                            </option>
+
+                                                        </b-form-select>
+
+                                                        <b-form-invalid-feedback
+                                                                id="input-1-live-feedback">@{{
+                                                            validationContext.errors[0] }}
+                                                        </b-form-invalid-feedback>
+                                                    </b-form-group>
+                                                </validation-provider>
+                                                <validation-provider v-if="editid_jurusan" name="Tahun Ajaran"
+                                                                     :rules="{ required: true }"
+                                                                     v-slot="validationContext">
+                                                    <b-form-group id="example-input-group-2" label="Tahun Ajaran"
+                                                                  label-for="example-input-2">
+                                                        <b-form-select
+                                                                {{--                                                                disabled--}}
+                                                                @change="onChange"
+                                                                id="example-input-2"
+                                                                name="tahun_ajaran"
+                                                                v-model="editid_tahun_ajaran"
+                                                                :state="getValidationState(validationContext)"
+                                                                aria-describedby="input-2-live-feedback"
+                                                        >
+                                                            <option class="col-md-9" value="">Pilih Tahun Ajaran
+                                                            </option>
+                                                            <option
+                                                                    v-for="tahun_ajaran in datatahunajaran"
+                                                                    v-bind:value="tahun_ajaran.id"
+                                                                    {{--                                                                    v-if="editid_tahun_ajaran == tahun_ajaran.id"--}}
+                                                            >
+                                                                @{{ tahun_ajaran.tahun_ajaran }}
+                                                            </option>
+
+                                                        </b-form-select>
+
+                                                        <b-form-invalid-feedback
+                                                                id="input-2-live-feedback">@{{
+                                                            validationContext.errors[0] }}
+                                                        </b-form-invalid-feedback>
+                                                    </b-form-group>
+                                                </validation-provider>
+                                                <validation-provider name="Kelas"
+                                                                     :rules="{ required: true }"
+                                                                     v-slot="validationContext">
+                                                    <b-form-group id="example-input-group-3" label="Kelas"
+                                                                  label-for="example-input-3">
+                                                        <b-form-select
+                                                                {{--                                                                disabled--}}
+                                                                id="example-input-3"
+                                                                name="kelas"
+                                                                v-model="editid_kelas"
+                                                                :state="getValidationState(validationContext)"
+                                                                aria-describedby="input-3-live-feedback"
+                                                        >
+                                                            <option class="col-md-9" value="">Pilih Kelas
+                                                            </option>
+                                                            <option
+                                                                    v-for="kelas in datakelas"
+                                                                    v-if="(kelas.id_jurusan == editid_jurusan) && (kelas.id_tahun_ajaran == editid_tahun_ajaran) "
+                                                                    v-bind:value="kelas.id"
+                                                            >
+                                                                @{{ kelas.get_mata_kuliah.nama + " " + kelas.nama + " "
+                                                                +
+                                                                kelas.get_kurikulum.nama + " (Semester " +
+                                                                kelas.semester
+                                                                +")"}}
+                                                            </option>
+
+                                                        </b-form-select>
+
+                                                        <b-form-invalid-feedback
+                                                                id="input-3-live-feedback">@{{
+                                                            validationContext.errors[0] }}
+                                                        </b-form-invalid-feedback>
+                                                    </b-form-group>
+                                                </validation-provider>
+                                                <validation-provider v-if="editid_kelas" name="Dosen"
+                                                                     :rules="{ required: true }"
+                                                                     v-slot="validationContext">
+                                                    <b-form-group id="example-input-group-4" label="Dosen"
+                                                                  label-for="example-input-4">
+                                                        <b-form-select
+                                                                id="example-input-4"
+                                                                name="dosen"
+                                                                v-model="editid_dosen"
+                                                                :state="getValidationState(validationContext)"
+                                                                aria-describedby="input-4-live-feedback"
+                                                        >
+                                                            <option class="col-md-9" value="">Pilih Dosen
+                                                            </option>
+                                                            <option
+                                                                    v-for="dosen in datadosen"
+                                                                    v-if="(dosen.id_jurusan == editid_jurusan) "
+                                                                    v-bind:value="dosen.id"
+                                                            >
+                                                                @{{ dosen.nama }}
+                                                            </option>
+
+                                                        </b-form-select>
+
+                                                        <b-form-invalid-feedback
+                                                                id="input-4-live-feedback">@{{
+                                                            validationContext.errors[0] }}
+                                                        </b-form-invalid-feedback>
+                                                    </b-form-group>
+                                                </validation-provider>
+
+                                            </b-form>
+                                        </validation-observer>
+                                    </b-modal>
+                                </div>
+                                <b-modal
+                                        title="Rincian Akta Ajar"
+                                        id="lihatRincian"
+                                        v-model="modalShow2"
+                                        @hidden="resetModal"
+                                        hide-footer
+                                        scrollable
+                                >
+                                    <div v-for="mengajar in rincianmengajar">
+                                        <!-- Name -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">NIDPN/NUPN</label>
+                                            <div class="col-sm-8">
+                                                <label class=" col-form-label">:
+                                                    @{{  mengajar.get_dosen.nomor_induk }} </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Nama Dosen</label>
+                                            <div class="col-sm-8">
+                                                <label class=" col-form-label">:
+                                                    @{{  mengajar.get_dosen.nama }} </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Program Studi</label>
+                                            <div class="col-sm-8">
+                                                <label class="col-form-label">
+                                                    : @{{ namajurusan }}
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Tahun Ajaran</label>
+                                            <div class="col-sm-8">
+                                                <label class=" col-form-label" >
+                                                    : @{{ tahunajaran }}
+                                                </label>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Nama Kurikulum</label>
+                                            <div class="col-sm-8">
+                                                <label class="col-form-label" >
+                                                    : @{{ namakurikulum }}
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row ">
+                                            <label class="col-sm-4 col-form-label">Nama Kelas</label>
+                                            <div class="col-sm-8">
+                                                <label class="col-form-label"  >: @{{ mengajar.get_kelas.nama }} </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Nama Mata Kuliah</label>
+                                            <div class="col-sm-8">
+                                                <label class="col-form-label" >
+                                                    : @{{ namamatakuliah  + " ("+ singkatanmatakuliah +")"}}
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Kode Mata Kuliah</label>
+                                            <div class="col-sm-8">
+                                                <label class=" col-form-label" >
+                                                    : @{{ kodematakuliah }}
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Bobot</label>
+                                            <div class="col-sm-8">
+                                                <label class=" col-form-label" >
+                                                    : @{{ bobotmatakuliah }}
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Jenis</label>
+                                            <div class="col-sm-8">
+                                                <label class=" col-form-label" >
+                                                    : @{{ jenismatakuliah }}
+                                                </label>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Semester</label>
+                                            <div class="col-sm-8">
+                                                <label class=" col-form-label">: @{{ mengajar.get_kelas.semester }} </label>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </b-modal>
+                                <b-modal
+                                        title="Hapus Akta Ajar"
+                                        id="modalhapus"
+                                        @hidden="resetModal"
+                                        @ok="handleOk"
+                                        ref="modal"
+                                        ok-title="Yakin"
+                                        cancel-title="Batal"
+                                        v-model="modalShow3"
+                                >
+                                    <h4>Yakin ingin menghapus penugasan kepada @{{ editnama.nama }} ? </h4>
+                                </b-modal>
+                            </div>
+
+                        </div> <!-- end card-box -->
+                    </div><!-- end col -->
                 </div>
             </div>
         </div>
