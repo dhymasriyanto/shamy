@@ -235,10 +235,10 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 didik</i>
                                                         </div>
                                                         <div v-else>
-{{--                                                            <b-button pill variant="dark" href=""--}}
-{{--                                                                      v-b-modal.modal-tambah><i--}}
-{{--                                                                        class="fa fa-plus mr-1"></i>Simpan--}}
-{{--                                                            </b-button>--}}
+                                                            {{--                                                            <b-button pill variant="dark" href=""--}}
+                                                            {{--                                                                      v-b-modal.modal-tambah><i--}}
+                                                            {{--                                                                        class="fa fa-plus mr-1"></i>Simpan--}}
+                                                            {{--                                                            </b-button>--}}
                                                             <b-form-group
                                                                     class="ml-2 col-4 float-left mb-2">
                                                                 Tampilkan
@@ -321,7 +321,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                     <div v-for="nilai in nilaikelas" v-if="nilai.nilai">
                                                                         <div v-if="nilai.id_mahasiswa == data.item.id && nilai.id_mengajar == id_mengajar">
 
-                                                                            @{{ nilai.nilai.nilai_indeks }}
+                                                                            @{{ nilai.nilai.nilai_indeks + ".00" }}
                                                                         </div>
                                                                     </div>
                                                                     <div v-else>-</div>
@@ -343,6 +343,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                     <b-button
                                                                             variant="success"
                                                                             pill
+{{--                                                                            v-b-modal.modal-nilai--}}
                                                                             @click="nilai(data.item.id, id_mengajar)">
                                                                         <i class="mdi mdi-square-edit-outline mr-1"></i>
                                                                     </b-button>
@@ -370,6 +371,101 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </div>
                                         </b-modal>
 
+
+                                        <b-modal
+                                                title="Ubah Nilai"
+                                                id="modal-nilai"
+                                                @hidden="resetModal"
+                                                @ok="handleOk"
+                                                ref="modal"
+                                                ok-title="Simpan"
+                                                cancel-title="Batal"
+                                                v-model="modalShow"
+                                        >
+                                            <validation-observer ref="observer" v-slot="{ handleOk }">
+                                                <b-form ref="form" @submit.stop.prevent="handleSubmit">
+
+
+
+                                                    <validation-provider name="Nilai Angka"
+                                                                         :rules="{ required: true,  regex:/^([0-9]+)$/ , min_value:0 , max_value:100}"
+                                                                         v-slot="validationContext">
+                                                        <b-form-group id="example-input-group-1" label="Nilai Angka"
+                                                                      label-for="example-input-1">
+                                                            <b-form-input
+                                                                    placeholder="Masukkan Nilai"
+                                                                    @input="onChange"
+                                                                    id="example-input-1"
+                                                                    name="nilai_angka"
+                                                                    v-model="nilai_angka"
+                                                                    :state="getValidationState(validationContext)"
+                                                                    aria-describedby="input-1-live-feedback"
+                                                            >
+
+
+                                                            </b-form-input>
+
+                                                            <b-form-invalid-feedback
+                                                                    id="input-1-live-feedback">@{{ validationContext.errors[0]
+                                                                }}
+                                                            </b-form-invalid-feedback>
+                                                        </b-form-group>
+                                                    </validation-provider>
+                                                    <validation-provider name="Nilai Indeks"
+                                                                         :rules="{ required: true ,  regex: /^([0-9]+)$/ }"
+                                                                         v-slot="validationContext">
+                                                        <b-form-group id="example-input-group-2" label="Nilai Indeks"
+                                                                      label-for="example-input-2">
+                                                            <b-form-input
+                                                                    disabled
+                                                                    placeholder="Nilai Indeks"
+                                                                    @input="onChange"
+                                                                    id="example-input-2"
+                                                                    name="nilai_indeks"
+                                                                    v-model="nilai_indeks"
+                                                                    :state="getValidationState(validationContext)"
+                                                                    aria-describedby="input-2-live-feedback"
+                                                            >
+
+
+                                                            </b-form-input>
+
+                                                            <b-form-invalid-feedback
+                                                                    id="input-2-live-feedback">@{{ validationContext.errors[0]
+                                                                }}
+                                                            </b-form-invalid-feedback>
+                                                        </b-form-group>
+                                                    </validation-provider>
+                                                    <validation-provider name="Nilai Huruf"
+                                                                         :rules="{ required: true }"
+                                                                         v-slot="validationContext">
+                                                        <b-form-group id="example-input-group-3" label="Nilai Huruf"
+                                                                      label-for="example-input-3">
+                                                            <b-form-input
+                                                                    disabled
+                                                                    placeholder="Nilai Indeks"
+                                                                    @input="onChange"
+                                                                    id="example-input-3"
+                                                                    name="nilai_huruf"
+                                                                    v-model="nilai_huruf"
+                                                                    :state="getValidationState(validationContext)"
+                                                                    aria-describedby="input-3-live-feedback"
+                                                            >
+
+
+                                                            </b-form-input>
+
+                                                            <b-form-invalid-feedback
+                                                                    id="input-3-live-feedback">@{{ validationContext.errors[0]
+                                                                }}
+                                                            </b-form-invalid-feedback>
+                                                        </b-form-group>
+                                                    </validation-provider>
+
+                                                </b-form>
+                                            </validation-observer>
+
+                                        </b-modal>
                                     </div>
                                 </div>
 

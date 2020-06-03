@@ -215,7 +215,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <label class="col-sm-3 col-form-label">Bobot Mata Kuliah</label>
                                             <div class="col-sm-9">
                                                 <label class="col-form-label">: @{{ kelas.get_mata_kuliah.bobot
-                                                    }} </label>
+                                                    }} SKS</label>
 
                                             </div>
                                         </div>

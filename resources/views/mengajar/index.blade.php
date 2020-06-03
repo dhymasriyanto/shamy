@@ -543,7 +543,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <label class="col-sm-4 col-form-label">Bobot</label>
                                             <div class="col-sm-8">
                                                 <label class=" col-form-label" >
-                                                    : @{{ bobotmatakuliah }}
+                                                    : @{{ bobotmatakuliah }} SKS
                                                 </label>
 
                                             </div>

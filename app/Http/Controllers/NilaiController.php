@@ -51,13 +51,13 @@ class NilaiController extends Controller
         return response($nn);
     }
 
-    public function nilaimahasiswa($id)
+    public function nilaimahasiswa($id, Request $request)
     {
-        $nilai = Nilai::with(['getMahasiswa', 'getMengajar'])->get()->where('id', $id);
+        $nilai = Nilai::with(['getMahasiswa', 'getMengajar'])->get()->where('id_mahasiswa', $id)->where('id_mengajar', $request->id_mengajar);
         $mahasiswa = [null];
         $j = 0;
         foreach ($nilai as $n) {
-            $nn[$j]['nilai']  = json_decode($n->nilai);
+            $nn[$j]['nilai'] = json_decode($n->nilai);
             $nn[$j]['id_mahasiswa'] = $n->id_mahasiswa;
             $nn[$j]['id_mengajar'] = $n->id_mengajar;
             $j++;
@@ -84,7 +84,25 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        $nilai = new Nilai();
+
+        $arr = array(
+            'nilai_angka' => $request->nilai_angka,
+            'nilai_indeks' => $request->nilai_indeks,
+            'nilai_huruf' => $request->nilai_huruf
+        );
+
+        $arr_tojson = json_encode($arr);
+
+        $nilaiMhs = $arr_tojson;
+
+        Nilai::where('id_mengajar', $request->id_mengajar)->where('id_mahasiswa', $request->id_mahasiswa)->update([
+            'nilai' => $nilaiMhs
+        ]);
+        return response(['type' => 'success', 'message' => 'Berhasil menyimpan nilai']);
+
+//        dump($nilaiMhs,$request->id_mahasiswa,$request->id_mengajar);
+//        $nilai->save();
     }
 
     /**

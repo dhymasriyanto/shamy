@@ -47,6 +47,11 @@ function initVue() {
             rinciankelas: [],
             allrinciankelas: [],
             nilaikelas: [],
+            id: '',
+            nama: '',
+            nilai_angka: '',
+            nilai_indeks: '',
+            nilai_huruf: '',
 
             fieldsKelas: [
                 {
@@ -114,7 +119,7 @@ function initVue() {
 
                 }
             ],
-            fieldsMahasiswa:[
+            fieldsMahasiswa: [
                 {
                     key: 'no',
                     sortable: false,
@@ -215,17 +220,7 @@ function initVue() {
 
             ],
             fieldsNilaiMahasiswa: [
-                {
-                    key: 'no',
-                    sortable: false,
-                },
-                {
-                    key: 'nilai_indeks',
-                    label: 'Nilai Index',
-                    sortable: true,
-                    // sortByFormatted : true
 
-                },
                 {
                     key: 'nilai_angka',
                     label: 'Nilai Angka',
@@ -233,13 +228,7 @@ function initVue() {
                     // sortByFormatted : true
 
                 },
-                {
-                    key: 'nilai_huruf',
-                    label: 'Nilai Huruf',
-                    sortable: true,
-                    // sortByFormatted : true
 
-                },
                 {
                     key: 'nilai_indeks',
                     label: 'Nilai Index',
@@ -248,13 +237,14 @@ function initVue() {
 
                 },
 
-
                 {
-                    key: 'aksi',
-                    sortable: false,
+                    key: 'nilai_huruf',
+                    label: 'Nilai Huruf',
+                    sortable: true,
                     // sortByFormatted : true
 
                 },
+
 
             ],
 
@@ -306,9 +296,10 @@ function initVue() {
             resetModal: function () {
                 // this.name = ''
                 // this.nameState = null
-                this.modalShow2 = false;
-                this.id_mengajar ='';
-                this.nilaikelas = [];
+                // this.modalShow2 = false;
+                this.modalShow = false;
+                // this.id_mengajar = '';
+                // this.nilaikelas = [];
             },
             handleOk: function (bvModalEvt) {
                 // Prevent modal from closing
@@ -332,19 +323,60 @@ function initVue() {
                 // if (!this.errors) return
                 // Push the name to submitted names
                 // this.submittedNames.push(this.name)
-                // this.create()
+                this.create()
 
                 // Hide the modal manually
                 this.$nextTick(() => {
 
                     this.$refs.observer.reset();
-
+                    this.modalShow = false;
                     // this.removeMahasiswa = false;
                     // this.tambahMahasiswa = false;
                 })
             },
             onChange: function () {
                 // this.$emit('input', value);
+                if (vm.nilai_angka >= 85 && vm.nilai_angka <= 100) {
+                    vm.nilai_indeks = 4.00;
+                    vm.nilai_huruf = "A";
+                } else if (vm.nilai_angka >= 75 && vm.nilai_angka <= 84) {
+                    vm.nilai_indeks = 3.00;
+                    vm.nilai_huruf = "B";
+                } else if (vm.nilai_angka >= 60 && vm.nilai_angka <= 74) {
+                    vm.nilai_indeks = 2.00;
+                    vm.nilai_huruf = "C";
+                } else if (vm.nilai_angka >= 50 && vm.nilai_angka <= 59) {
+                    vm.nilai_indeks = 1.00;
+                    vm.nilai_huruf = "D";
+                } else if (vm.nilai_angka >= 0 && vm.nilai_angka <= 49) {
+                    vm.nilai_indeks = 0.00;
+                    vm.nilai_huruf = "E";
+                }
+            },
+            create: function () {
+                this.start();
+                axios.post('/nilai', {
+                    id_mahasiswa: this.id,
+                    id_mengajar: this.id_mengajar,
+                    nilai_angka: this.nilai_angka,
+                    nilai_indeks: this.nilai_indeks,
+                    nilai_huruf: this.nilai_huruf
+                })
+                    .then(function (response) {
+                        console.log(response.data);
+                        vm.all(response.data.type, response.data.message);
+                        // vm.lihatKelas(vm.id, vm.id_mengajar);
+                        // vm.nilai(vm.id, vm.id_mengajar)
+                        vm.nilaiKelas(vm.id_mengajar);
+                        // vm.flash(response.data.type, response.data.message);
+                    })
+                    .catch(function (error) {
+                        vm.fail();
+                        vm.flash();
+                        console.log(error);
+                    })
+                    .then(function () {
+                    })
             },
             allRincianKelas: function (id, id_mengajar) {
                 // vm.isLoading = true;
@@ -357,7 +389,7 @@ function initVue() {
                         vm.allrinciankelas = response.data;
                         vm.nilaiKelas(id_mengajar);
 
-                        // vm.totalRows2 = vm.allrinciankelas.length;
+                        vm.totalRows2 = vm.allrinciankelas.length;
                         // vm.allMahasiswa();
                         // console.log(vm.allrinciankelas);
 
@@ -383,11 +415,11 @@ function initVue() {
                         // if (response.data != null) {
                         // console.log(vm.idtambah);
                         vm.nilaikelas = response.data;
-                        vm.id_mengajar=id;
+                        vm.id_mengajar = id;
                         vm.isLoading = false;
 
-                        console.log(vm.nilaikelas[0].id_mahasiswa);
-                        console.log(vm.nilaikelas[0][0].nilai_indeks);
+                        // console.log(vm.nilaikelas[0].id_mahasiswa);
+                        // console.log(vm.nilaikelas[0][0].nilai_indeks);
                         // vm.totalRows2 = vm.allrinciankelas.length;
                         // vm.allMahasiswa();
                         // console.log(vm.allrinciankelas);
@@ -418,7 +450,7 @@ function initVue() {
                         if (vm.rinciankelas[0]['mahasiswa'].length != 0) {
                             vm.isLoading = true;
 
-                            vm.allRincianKelas(id ,id_mengajar);
+                            vm.allRincianKelas(id, id_mengajar);
                         }
                         // console.log(vm.rinciankelas[0]['id_jurusan']);
                         // vm.idjurusantambah = vm.rinciankelas[0]['id_jurusan'];
@@ -434,11 +466,48 @@ function initVue() {
                 });
             },
 
+            getMahasiswa: function (id) {
+                axios.get("/mahasiswa/get/" + id)
+                    .then(function (response) {
+                        // handle success
+                        // this.editnama = response.data;
+                        vm.nama = response.data['data'][0]['nama'];
+                        // vm.editid = kelasid;
+                        // vm.mahasiswaid = mahasiswaid;
+                        // vm.modalShow4 = true;
+                        // vm.removeMahasiswa = true;
+                        // vm.finish();
+                        // console.log(response.data);
+
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                        vm.modalShow = true;
+                        vm.finish();
+
+                    });
+            },
+
             nilai: function (id_mahasiswa, id_mengajar) {
-                axios.get('/nilai/nilaimahasiswa/' + id_mahasiswa)
+                this.start();
+                axios.get('/nilai/nilaimahasiswa/' + id_mahasiswa, {
+                    params: {
+                        id_mengajar: id_mengajar
+                    }
+                })
                     .then(function (response) {
                         vm.nilaiMahasiswa = response.data;
-                        alert(vm.nilaiMahasiswa);
+                        vm.id = response.data[0]['id_mahasiswa'];
+                        vm.id_mengajar = id_mengajar;
+                        vm.getMahasiswa(vm.id);
+                        vm.nilai_angka = response.data[0]['nilai']['nilai_angka'];
+                        vm.nilai_indeks = response.data[0]['nilai']['nilai_indeks'];
+                        vm.nilai_huruf = response.data[0]['nilai']['nilai_huruf'];
+                        // alert(vm.nilaiMahasiswa);
                     })
                     .catch(function (error) {
 
