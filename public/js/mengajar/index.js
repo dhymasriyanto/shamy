@@ -27,19 +27,45 @@ function initVue() {
                 },
                 {
                     key: 'get_jurusan',
-                    label: 'Nama Program Studi',
+                    label: 'Program Studi',
+                    sortable: true,
+                    // sortByFormatted : true
+
+                },
+                {
+                    key: 'kurikulum',
+                    label: 'Kurikulum',
+
+                    sortable: true,
+                    // sortByFormatted : true
+
+                },
+
+                {
+                    key: 'mata_kuliah',
+                    label: 'Mata Kuliah',
+
                     sortable: true,
                     // sortByFormatted : true
 
                 },
                 {
                     key: 'get_kelas',
-                    label: 'Nama Kelas',
+                    label: 'Kelas',
 
                     sortable: true,
                     // sortByFormatted : true
 
                 },
+                {
+                    key: 'semester',
+                    label: 'Semester',
+
+                    sortable: true,
+                    // sortByFormatted : true
+
+                },
+
                 {
                     key: 'get_dosen',
                     label: 'Nama Dosen',
@@ -283,6 +309,7 @@ function initVue() {
                     .catch(function (error) {
                         vm.fail();
                         vm.flash();
+                        console.log(error);
                     })
                     .then(function () {
                     })

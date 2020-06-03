@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MataKuliah;
 use App\Nilai;
 use Illuminate\Http\Request;
 
@@ -25,8 +26,44 @@ class NilaiController extends Controller
     public function all()
     {
         $nilai = Nilai::with(['getMahasiswa', 'getMengajar'])->latest()->get();
-//        $nilai = Nilai::all();
-        return response($nilai);
+        $mahasiswa = [null];
+        $j = 0;
+        foreach ($nilai as $n) {
+            $nn[$j] = json_decode($n->nilai);
+            $nn[$j]['id_mahasiswa'] = $n->id_mahasiswa;
+            $nn[$j]['id_mengajar'] = $n->id_mengajar;
+            $j++;
+        }
+        return response($nn);
+    }
+
+    public function nilaikelas($id)
+    {
+        $nilai = Nilai::with(['getMahasiswa', 'getMengajar'])->get()->where('id_mengajar', $id);
+        $mahasiswa = [null];
+        $j = 0;
+        foreach ($nilai as $n) {
+            $nn[$j]['nilai'] = json_decode($n->nilai);
+            $nn[$j]['id_mahasiswa'] = $n->id_mahasiswa;
+            $nn[$j]['id_mengajar'] = $n->id_mengajar;
+            $j++;
+        }
+        return response($nn);
+    }
+
+    public function nilaimahasiswa($id)
+    {
+        $nilai = Nilai::with(['getMahasiswa', 'getMengajar'])->get()->where('id', $id);
+        $mahasiswa = [null];
+        $j = 0;
+        foreach ($nilai as $n) {
+            $nn[$j]['nilai']  = json_decode($n->nilai);
+            $nn[$j]['id_mahasiswa'] = $n->id_mahasiswa;
+            $nn[$j]['id_mengajar'] = $n->id_mengajar;
+            $j++;
+
+        }
+        return response($nn);
     }
 
     /**

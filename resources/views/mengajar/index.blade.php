@@ -100,8 +100,31 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <div v-for="kelas in datakelas"
                                                      v-if="kelas.id == data.item.get_kelas.id"
                                                 >
-                                                    @{{ kelas.get_mata_kuliah.nama +" " + kelas.nama + " (Semester " +
-                                                    kelas.semester + ")"}}
+                                                    @{{  kelas.nama }}
+
+                                                </div>
+                                            </template>
+                                            <template v-slot:cell(mata_kuliah)="data">
+                                                <div v-for="kelas in datakelas"
+                                                     v-if="kelas.id == data.item.get_kelas.id"
+                                                >
+                                                    @{{ kelas.get_mata_kuliah.nama }}
+
+                                                </div>
+                                            </template>
+                                            <template v-slot:cell(kurikulum)="data">
+                                                <div v-for="kelas in datakelas"
+                                                     v-if="kelas.id == data.item.get_kelas.id"
+                                                >
+                                                    @{{ kelas.get_kurikulum.nama }}
+
+                                                </div>
+                                            </template>
+                                            <template v-slot:cell(semester)="data">
+                                                <div v-for="kelas in datakelas"
+                                                     v-if="kelas.id == data.item.get_kelas.id"
+                                                >
+                                                    @{{ kelas.semester }}
 
                                                 </div>
                                             </template>
@@ -241,7 +264,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             </option>
                                                             <option
                                                                     v-for="kelas in datakelas"
-                                                                    v-if="(kelas.id_jurusan == id_jurusan) && (kelas.id_tahun_ajaran == id_tahun_ajaran)"
+                                                                    v-if="(kelas.id_jurusan == id_jurusan) && (kelas.id_tahun_ajaran == id_tahun_ajaran) && (kelas.mahasiswa.length)"
                                                                     v-bind:value="kelas.id"
                                                             >
                                                                 @{{ kelas.get_mata_kuliah.nama + " " + kelas.nama + " "
@@ -385,7 +408,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             </option>
                                                             <option
                                                                     v-for="kelas in datakelas"
-                                                                    v-if="(kelas.id_jurusan == editid_jurusan) && (kelas.id_tahun_ajaran == editid_tahun_ajaran) "
+                                                                    v-if="(kelas.id_jurusan == editid_jurusan) && (kelas.id_tahun_ajaran == editid_tahun_ajaran)&& (kelas.mahasiswa.length) "
                                                                     v-bind:value="kelas.id"
                                                             >
                                                                 @{{ kelas.get_mata_kuliah.nama + " " + kelas.nama + " "

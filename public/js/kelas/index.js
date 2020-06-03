@@ -45,40 +45,41 @@ function initVue() {
                     // sortByFormatted : true
                 },
                 {
-                    key: 'nama',
-                    label: 'Nama Kelas',
+                    key: 'get_jurusan',
+                    label: 'Program Studi',
                     sortable: true,
+                    // sortByFormatted : true
+
                 },
+                {
+                    key: 'get_tahun_ajaran',
+                    label: 'Tahun Ajaran',
 
+                    sortable: true,
+                    // sortByFormatted : true
 
-                //
-
-                //
-                // {
-                //     key: 'get_tahun_ajaran',
-                //     label: 'Nama Tahun Ajaran',
-                //
-                //     sortable: true,
-                //     // sortByFormatted : true
-                //
-                // },
+                },
+                {
+                    key: 'get_kurikulum',
+                    label: 'Kurikulum',
+                    sortable: true
+                },
                 {
                     key: 'get_mata_kuliah',
-                    label: 'Nama Mata Kuliah',
+                    label: 'Mata Kuliah',
                     sortable: true
+                },
+                {
+                    key: 'nama',
+                    label: 'Kelas',
+                    sortable: true,
                 },
                 {
                     key: 'semester',
                     label: 'Semester',
                     sortable: true,
                 },
-                {
-                    key: 'get_jurusan',
-                    label: 'Nama Program Studi',
-                    sortable: true,
-                    // sortByFormatted : true
 
-                },
                 {
                     key: 'mahasiswa',
                     label: 'Jumlah Peserta Didik',
@@ -118,7 +119,7 @@ function initVue() {
                 },
                 {
                     key: 'get_jurusan',
-                    label: 'Nama Program Studi',
+                    label: 'Program Studi',
                     sortable: true,
                     // sortByFormatted : true
 

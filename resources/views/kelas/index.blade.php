@@ -91,14 +91,20 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             <template v-slot:cell(no)="data">
                                                 @{{ data.index + 1 }}
                                             </template>
+                                            <template v-slot:cell(get_tahun_ajaran)="data">
+                                                @{{ data.item.get_tahun_ajaran.tahun_ajaran }}
+                                            </template>
                                             <template v-slot:cell(semester)="data">
                                                 @{{ data.item.semester }}
                                             </template>
                                             <template v-slot:cell(nama)="data">
                                                 @{{ data.item.nama }}
                                             </template>
+                                            <template v-slot:cell(get_kurikulum)="data">
+                                                @{{ data.item.get_kurikulum.nama }}
+                                            </template>
                                             <template v-slot:cell(get_mata_kuliah)="data">
-                                                @{{ data.item.get_mata_kuliah.kode +" - "+ data.item.get_mata_kuliah.nama }}
+                                                @{{ data.item.get_mata_kuliah.nama }}
                                             </template>
                                             <template v-slot:cell(get_jurusan)="data">
                                                 @{{ data.item.get_jurusan.nama }}

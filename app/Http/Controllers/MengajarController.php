@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Kelas;
+use App\Mahasiswa;
 use App\Mengajar;
+use App\Nilai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MengajarController extends Controller
 {
@@ -59,6 +62,65 @@ class MengajarController extends Controller
             $mengajar->id_kelas = $request->id_kelas;
             $mengajar->id_dosen = $request->id_dosen;
             $mengajar->save();
+
+
+            $ids = [Kelas::with(['getJurusan', 'getKurikulum', 'getTahunAjaran', 'getMataKuliah'])->get()->find($mengajar->id_kelas)];
+            $mahasiswa = [null];
+            $j = 0;
+            foreach ($ids as $id) {
+                for ($i = 0; $i < count($id->mahasiswa); $i++) {
+//                    $mahasiswa[$j] = Mahasiswa::where('id', $id->mahasiswa[$i])->with('getJurusan')->first();
+                        $nilai = new Nilai();
+//
+//                    if (Nilai::where('id_mahasiswa', $id->mahasiswa[$i])->get() == '[]') {
+
+                        $arr = array(
+//                            'id_mata_kuliah' => $id->id_mata_kuliah,
+                                'nilai_angka' => 0,
+                                'nilai_indeks' => 0,
+                                'nilai_huruf' => 'E'
+                        );
+                        $arr_tojson = json_encode($arr);
+                        $nilai->nilai = $arr_tojson;
+                        $nilai->id_mengajar = $mengajar->id;
+                        $nilai->id_mahasiswa = $id->mahasiswa[$i];
+
+
+                        $nilai->save();
+//                    } else {
+//                        $nilai2 = new Nilai();
+//                        $nilai2->where('id_mahasiswa', $id->mahasiswa[$i])->first();
+//                        $nilai2= DB::table('nilai')->where('id_mahasiswa','=',$id->mahasiswa[$i])->first();
+//                        $arr = array(
+//                            'id_mata_kuliah' => $id->id_mata_kuliah,
+//                            'nilai_angka' => 0,
+//                            'nilai_indeks' => 0,
+//                            'nilai_huruf' => 'E'
+//                        );
+
+//                        $arr_tojson = json_encode($arr);
+//                         $ar=json_decode($nilai2->nilai);
+//                        $nilaiupdate=array($ar);
+//                        array_push($nilaiupdate, $arr);
+//
+//                        Nilai::where('id_mahasiswa', '=', $id->mahasiswa[$i])
+//                            ->update([
+//                                'nilai'=>$nilaiupdate
+//                            ]);
+//                        $nilai2->where('id_mahasiswa', '=', $id->mahasiswa[$i])->update([
+//                            [
+//                                'nilai'=>$nilaiupdate
+//                            ]
+//                        ]);
+
+//                        $nilai2->save();
+//                        dump($id->mahasiswa[$i], $ar, $nilai2,$nilaiupdate);
+//                    }
+
+                    $j++;
+
+                }
+            }
 
             return response(['type' => 'success', 'message' => 'Data berhasil di simpan']);
 
