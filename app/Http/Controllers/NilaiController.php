@@ -67,7 +67,20 @@ class NilaiController extends Controller
         return response($nn);
     }
 
-    public function nilaipribadi($id, Request $request)
+
+    public function nilaipribadi($id){
+        $nilai = Nilai::with(['getMahasiswa', 'getMengajar'])->get()->where('id_mahasiswa', $id);
+        $j = 0;
+        foreach ($nilai as $n) {
+            $nn[$j]['nilai'] = json_decode($n->nilai);
+            $nn[$j]['id_mahasiswa'] = $n->id_mahasiswa;
+            $nn[$j]['id_mengajar'] = $n->id_mengajar;
+            $j++;
+        }
+        return response($nn);
+    }
+
+    public function lihatdaftarnilai($id, Request $request)
     {
         $nilai = Nilai::with(['getMahasiswa', 'getMengajar'])->get()->where('id_mahasiswa', $id);
         $mahasiswa = [null];
@@ -79,15 +92,15 @@ class NilaiController extends Controller
 //
 //        }
 //        return response($nilai);
-        $data = [
-            'nilai' => $nilai
-        ];
+//        $data = [
+//            'nilai' => $nilai
+//        ];
 
-//        JavaScript::put([
-//            'coba'=>$id
-//        ]);
+        JavaScript::put([
+            'idmahasiswa'=>$id
+        ]);
 
-        return $this->renderPage($request, 'nilai.index', $data);
+        return $this->renderPage($request, 'nilai.index');
 
 
     }

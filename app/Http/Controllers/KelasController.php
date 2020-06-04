@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Kelas;
 use App\Mahasiswa;
+use App\Mengajar;
+use App\Nilai;
 use Illuminate\Http\Request;
+use JavaScript;
 
 class KelasController extends Controller
 {
@@ -48,6 +51,15 @@ class KelasController extends Controller
 //
 //        return response($mahasiswa);
 //    }
+
+    public function lihatkelas($id, Request $request)
+    {
+        JavaScript::put([
+            'idmahasiswa'=>$id
+        ]);
+
+        return $this->renderPage($request, 'kelas.index');
+    }
 
     public function allrinciankelas($id)
     {
@@ -199,6 +211,52 @@ class KelasController extends Controller
         $kelas->update(['mahasiswa' => $mahasiswa]);
         $kelas->save();
         return response(['type' => 'success', 'message' => 'Berhasil memasukkan mahasiswa ke kelas']);
+    }
+
+    public function kelaspribadi($id){
+        $list=[$id];
+        $kelas = Kelas::with(['getJurusan', 'getKurikulum', 'getMataKuliah', 'getTahunAjaran'])->whereRaw("JSON_CONTAINS(mahasiswa, '[$id]' )")->get();
+
+//        $mahasiswa = [null];
+//        $kk = [];
+//        $j = 0;
+//        foreach ($kelas as $id) {
+//            for ($i = 0; $i < count($id->mahasiswa); $i++) {
+//                $mahasiswa[$j] = Mahasiswa::where('id', $id->mahasiswa[$i])->with('getJurusan')->first();
+//                $j++;
+//            }
+//        }
+
+        $nilai = Nilai::where('id_mahasiswa', $id)->get();
+        $i = 0;
+        $nn = [];
+        foreach ($nilai as $n){
+//            $nn[$i]=$n->id_mengajar;
+            $mengajar[$i] = Mengajar::where('id',$n->id_mengajar)->first();
+
+            $i++;
+        }
+        $j = 0;
+        foreach ($mengajar as $ajar){
+            $kelas2[$j] = Kelas::with(['getJurusan', 'getKurikulum', 'getMataKuliah', 'getTahunAjaran'])->where('id', $ajar->id_kelas)->first();
+            $a[$j]= Nilai::where('id_mengajar', $ajar->id)->where('id_mahasiswa', $id)->first();
+            foreach ($a as $b){
+//                 = $b->nilai;
+                $c[$j]=json_decode($b->nilai);
+                $kelas2[$j]['nilai'] = $c[$j];
+            }
+            $kelas2[$j]['asal'] = $a;
+//            array_push($kelas2, $a);
+            $j++;
+        }
+//        $nilai->id_mengajar
+//        $j=0;
+//        foreach ($nn as $n){
+//            $mengajar[$j] = Mengajar::where('id',$n[$j])->get();
+//            $j++;
+//        }
+//            dd($kelas2);
+        return response($kelas2);
     }
 
     public function hapusmahasiswa(Request $request)

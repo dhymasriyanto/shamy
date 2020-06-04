@@ -28,11 +28,15 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                 <div class="row">
                                     <div class="col-12">
+                                        @if(Auth::user()->role == 'administrator')
 
                                         <b-button pill variant="dark" class="mb-3" href="" v-b-modal.modal-1><i
                                                     class="fa fa-plus mr-1"></i>Tambah
                                         </b-button>
-
+                                        @endif
+                                        @if(Auth::user()->role == 'mahasiswa')
+                                               <h5 class="mb-3">Lihat Semua Akta</h5>
+                                            @endif
                                         <div>
                                             <b-form-group
                                                     class="ml-2 col-4 float-left mb-2">
@@ -145,6 +149,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             title="Rincian">
                                                         <span><i class="mdi mdi-eye"></i></span>
                                                     </button>
+                                                    @if(Auth::user()->role == 'administrator')
+
                                                     <button class="btn btn-success"
                                                             @click="edit(data.item.id)"
                                                             title="Ubah">
@@ -156,6 +162,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     >
                                                         <span><i class="mdi mdi-trash-can"></i></span>
                                                     </button>
+                                                        @endif
                                                 </b-button-group>
                                             </template>
 

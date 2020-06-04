@@ -72,10 +72,10 @@
             </li>
         @endif
         @if(Auth::user()->role == 'mahasiswa')
-            <li class="menu-title">Data Transaksional</li>
+            <li class="menu-title">Menu Lainnya</li>
 
             <li>
-                <a href="{{route('kelas.index')}}">
+                <a href="{{url('kelas/lihatkelas/'.Auth::user()->id_mahasiswa)}}">
                     <i class="mdi mdi-table-column"></i>
                     <span> Kelas </span>
                 </a>
@@ -83,7 +83,7 @@
                     <i class="mdi mdi-clipboard-account"></i>
                     <span>Akta Ajar</span>
                 </a>
-                <a href="{{url('nilai/nilaipribadi/'.Auth::user()->id_mahasiswa)}}">
+                <a href="{{url('nilai/lihatdaftarnilai/'.Auth::user()->id_mahasiswa)}}">
                     <i class="mdi mdi-file"></i>
                     <span>Lihat Nilai</span>
                 </a>

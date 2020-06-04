@@ -5,6 +5,7 @@ function initVue() {
     var vm = new Vue({
         el: '#app',
         data: {
+            search:'',
             sampai: 0,
             tampil: 0,
             filter: '',
@@ -631,7 +632,8 @@ function initVue() {
             },
             selected() {
                 return this.value
-            }
+            },
+
 
 
         },

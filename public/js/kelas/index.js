@@ -5,11 +5,15 @@ function initVue() {
     var vm = new Vue({
         el: '#app',
         data: {
+            saring: [],
+            search: 1,
+            idmahasiswa:window.idmahasiswa,
             modalShow: false,
             modalShow2: false,
             modalShow3: false,
             modalShow4: false,
             modalShow5: false,
+            modalShow6: false,
             tambahMahasiswa: false,
             sampai: 0,
             sampai2: 0,
@@ -132,6 +136,37 @@ function initVue() {
                 },
 
             ],
+            fieldsMahasiswa2: [
+                {
+                    key: 'no',
+                    sortable: false,
+                    // sortByFormatted : true
+                },
+                {
+                    key: "nama",
+                    label: "Nama Mahasiswa",
+                    sortable: true
+                },
+                {
+                    key: "nomor_induk",
+                    label: "Nomor Induk",
+                    sortable: true
+                },
+                {
+                    key: 'get_jurusan',
+                    label: 'Program Studi',
+                    sortable: true,
+                    // sortByFormatted : true
+
+                },
+                // {
+                //     key: 'aksi',
+                //     sortable: false,
+                //     // sortByFormatted : true
+                //
+                // },
+
+            ],
 
             datakelas: [],
             // datamahasiswa: [],
@@ -175,7 +210,13 @@ function initVue() {
                 pjax.refresh();
             }
             this.start();
-            this.all();
+            console.log(window.location.pathname == '/kelas/lihatkelas/1');
+            if (this.idmahasiswa ) {
+                this.kelaspribadi(this.idmahasiswa);
+            }else{
+                this.all();
+
+            }
             // this.modalLoad();
 
         },
@@ -425,6 +466,32 @@ function initVue() {
                     });
             },
 
+            kelaspribadi:function(id){
+                axios.get('/kelas/kelaspribadi/' + id)
+                    .then(function (response) {
+                        vm.datakelas = response.data;
+                        // vm.kelaspribadimahasiswa.nilai=[[ response.data[0].nilai]];
+                        vm.totalRows = vm.datakelas.length;
+                        // console.log(vm.nilaipribadimahasiswa[0].id_mengajar);
+                        //
+                        // vm.getMengajar();
+                        // vm.getMataKuliah();
+                        vm.allJurusan();
+                        vm.allTahunAjaran();
+                        vm.allMataKuliah();
+                        vm.allKurikulum();
+
+
+                    })
+                    .catch(function (error) {
+
+                    })
+                    .then(function () {
+                        vm.finish();
+                        vm.isBusy = false;
+                    })
+            },
+
             all: function (type, message) {
                 axios.get('/kelas/all/')
                     .then(function (response) {
@@ -504,6 +571,34 @@ function initVue() {
                         vm.allMahasiswa();
                         vm.finish()
                         vm.modalShow2 = true;
+                        // $("#modalRincian").modal('show');
+
+                    }).catch(function (error) {
+                    console.log('error di lihat rincian')
+                }).then(function () {
+
+                });
+
+            },
+            lihatRincian2: function (id) {
+                this.start();
+                // console.log('testing');
+                axios.get('/kelas/' + id)
+                    .then(function (response) {
+                        vm.idtambah = id;
+
+                        vm.rinciankelas = response.data;
+                        console.log(vm.rinciankelas);
+                        // console.log(vm.rinciankelas[0]['mahasiswa'].length);
+                        if (vm.rinciankelas[0]['mahasiswa'].length != 0) {
+
+                            vm.allRincianKelas(id);
+                        }
+                        console.log(vm.rinciankelas[0]['id_jurusan']);
+                        vm.idjurusantambah = vm.rinciankelas[0]['id_jurusan'];
+                        vm.allMahasiswa();
+                        vm.finish()
+                        vm.modalShow6 = true;
                         // $("#modalRincian").modal('show');
 
                     }).catch(function (error) {
@@ -868,7 +963,8 @@ function initVue() {
             onFiltered3: function (filteredItems) {
                 this.totalRows3 = filteredItems.length
                 this.currentPage3 = 1
-            }
+            },
+
         },
         computed: {
             showingData() {
@@ -909,6 +1005,13 @@ function initVue() {
                 }
                 this.showData3 = "Menampilkan " + (this.tampil3) + " sampai " + (this.sampai3) + " dari " + this.totalRows3 + " data";
                 return this.showData3;
+            },
+            filteredItems() {
+                this.saring = this.datakelas.filter(datakelas => {
+                    return (datakelas.semester.indexOf(this.search)) > -1
+                });
+                this.totalRows = this.saring.length;
+                return this.saring;
             },
         },
         components: {}

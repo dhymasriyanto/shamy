@@ -39,6 +39,8 @@ Route::post('/jurusan/update/{id}', 'JurusanController@update')->name('jurusan.u
 Route::get('/jurusan/get/{id}', 'JurusanController@edit')->name('jurusan.edit');
 
 //Route::put('/kelas/store', 'KelasController@store')->name('kelas.store');
+Route::get('/kelas/lihatkelas/{id}', 'KelasController@lihatkelas')->name('kelas.lihatkelas');
+Route::get('/kelas/kelaspribadi/{id}', 'KelasController@kelaspribadi')->name('kelas.kelaspribadi');
 Route::get('/kelas/all', 'KelasController@all')->name('kelas.all');
 Route::get('/kelas/allmahasiswa', 'KelasController@allmahasiswa')->name('kelas.allmahasiswa');
 Route::get('/kelas/allrinciankelas/{id}', 'KelasController@allrinciankelas')->name('kelas.allrinciankelas');
@@ -74,6 +76,7 @@ Route::get('/mengajar', 'MengajarController@index')->name('mengajar.index');
 
 
 Route::get('/nilai/nilaipribadi/{id}', 'NilaiController@nilaipribadi')->name('nilai.nilaipribadi');
+Route::get('/nilai/lihatdaftarnilai/{id}', 'NilaiController@lihatdaftarnilai')->name('nilai.lihatdaftarnilai');
 Route::get('/nilai/all/', 'NilaiController@all')->name('nilai.all');
 Route::get('/nilai/nilaimahasiswa/{id}', 'NilaiController@nilaimahasiswa')->name('nilai.nilaimahasiswa');
 Route::get('/nilai/nilaikelas/{id}', 'NilaiController@nilaikelas')->name('nilai.nilaikelas');

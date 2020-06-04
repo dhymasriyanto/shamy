@@ -5,7 +5,14 @@ function initVue() {
     var vm = new Vue({
         el: '#app',
         data: {
-            // coba:coba,
+            saring: [],
+            visibleRows: [],
+            idmahasiswa: window.idmahasiswa,
+            nilaipribadimahasiswa: [],
+            kelaspribadimahasiswa: [],
+            mengajar: [],
+            matakuliah:[],
+            getkelas: [],
             modalShow: false,
             modalShow2: false,
             modalShow3: false,
@@ -18,27 +25,34 @@ function initVue() {
             tampil: 0,
             tampil2: 0,
             tampil3: 0,
+            search :1,
             filter: '',
             filter2: '',
             filter3: '',
+            filter4: '',
             perPage: 10,
             perPage2: 10,
             perPage3: 10,
+            perPage4: 10,
             currentPage: 1,
             currentPage2: 1,
             currentPage3: 1,
+            currentPage4: 1,
             pageOptions: [10, 15, 20],
             pageOptions2: [10, 15, 20],
             pageOptions3: [10, 15, 20],
+            pageOptions4: [10, 15, 20],
             showData: '',
             showData2: '',
             showData3: '',
             totalRows: 0,
             totalRows2: 0,
             totalRows3: 0,
+            totalRows4: 0,
             isBusy: true,
             isLoading: true,
             isLoading2: true,
+            isLoading3: true,
             id_mata_kuliah: '',
             id_mengajar: '',
             nilaiMahasiswa: [],
@@ -52,7 +66,74 @@ function initVue() {
             nilai_angka: '',
             nilai_indeks: '',
             nilai_huruf: '',
+            fieldsNilai:[
+                {
+                    key: 'no',
+                    sortable: false,
+                    // sortByFormatted : true
+                },
+                {
+                    key: 'semester',
+                    label: 'Semester',
+                    sortable: false,
+                    // sortByFormatted : true
 
+                },
+                {
+                    key: 'kode_mata_kuliah',
+                    label: 'Kode Mata Kuliah',
+                    sortable: false,
+                    // sortByFormatted : true
+
+                },
+                {
+                    key: 'mata_kuliah',
+                    label: 'Nama Mata Kuliah',
+                    sortable: false,
+                    // sortByFormatted : true
+
+                },
+                {
+                    key: 'nilai_huruf',
+                    label: 'Nilai Huruf',
+                    sortable: false,
+                    // sortByFormatted : true
+
+                },
+                {
+                    key: 'nilai_indeks',
+                    label: 'Nilai Indeks',
+                    sortable: false,
+                    // sortByFormatted : true
+
+                },
+
+                {
+                    key: 'nilai_angka',
+                    label: 'Nilai Angka',
+                    sortable: false,
+                    // sortByFormatted : true
+
+                },
+
+
+                {
+                    key: 'bobot',
+                    label: 'Bobot Mata Kuliah',
+                    sortable: false,
+                    // sortByFormatted : true
+
+                },
+                {
+                    key: 'nm',
+                    label: 'Nilai Mata Kuliah (Nilai Indeks x Bobot)',
+                    sortable: false,
+                    // sortByFormatted : true
+
+                },
+
+
+            ],
             fieldsKelas: [
                 {
                     key: 'no',
@@ -249,15 +330,22 @@ function initVue() {
             ],
 
 
-
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
                 pjax.refresh();
             }
             this.start();
-            this.all();
-            // console.log(this.coba);
+            console.log(this.idmahasiswa);
+            if (this.idmahasiswa) {
+                // this.nilaipribadi(this.idmahasiswa);
+                this.kelaspribadi(this.idmahasiswa);
+            }else{
+                this.all();
+
+            }
+
+            // console.log(window.coba);
 
         },
         methods: {
@@ -354,6 +442,47 @@ function initVue() {
                     vm.nilai_indeks = 0.00;
                     vm.nilai_huruf = "E";
                 }
+            },
+            kelaspribadi:function(id){
+                axios.get('/kelas/kelaspribadi/' + id)
+                    .then(function (response) {
+                        vm.kelaspribadimahasiswa = response.data;
+                        // vm.kelaspribadimahasiswa.nilai=[[ response.data[0].nilai]];
+                        vm.totalRows4 = vm.kelaspribadimahasiswa.length;
+                        // console.log(vm.nilaipribadimahasiswa[0].id_mengajar);
+                        //
+                        // vm.getMengajar();
+                        // vm.getMataKuliah();
+                        vm.isLoading3 = false;
+
+
+                    })
+                    .catch(function (error) {
+
+                    })
+                    .then(function () {
+                        vm.finish();
+
+                    })
+            },
+            nilaipribadi: function (id) {
+                axios.get('/nilai/nilaipribadi/' + id)
+                    .then(function (response) {
+                        vm.nilaipribadimahasiswa = response.data;
+                        vm.nilaipribadimahasiswa.nilai=[[ response.data[0].nilai]];
+                        vm.totalRows4 = vm.nilaipribadimahasiswa.length;
+                        // console.log(vm.nilaipribadimahasiswa[0].id_mengajar);
+                        //
+                        vm.getMengajar();
+                        vm.getMataKuliah();
+
+                    })
+                    .catch(function (error) {
+
+                    })
+                    .then(function () {
+
+                    })
             },
             create: function () {
                 this.start();
@@ -469,6 +598,63 @@ function initVue() {
                 });
             },
 
+            getMengajar:function(){
+                axios.get("/mengajar/all")
+                    .then(function (response) {
+                        // handle success
+                        // this.editnama = response.data;
+                        vm.mengajar = response.data;
+                        // vm.getkelas = vm.mengajar[0].get_kelas;
+                        // console.log(vm.getkelas.id_mata_kuliah);
+                        // vm.getMataKuliah(vm.getkelas.id_mata_kuliah);
+
+                        // vm.editid = kelasid;
+                        // vm.mahasiswaid = mahasiswaid;
+                        // vm.modalShow4 = true;
+                        // vm.removeMahasiswa = true;
+                        // vm.finish();
+                        // console.log(response.data);
+
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                        // vm.modalShow = true;
+                        // vm.finish();
+
+                    });
+            },
+            getMataKuliah:function(){
+                axios.get("/mata-kuliah/all/")
+                    .then(function (response) {
+                        // handle success
+                        // this.editnama = response.data;
+                        vm.matakuliah = response.data;
+                        console.log(vm.matakuliah[0].kode);
+                        // vm.editid = kelasid;
+                        // vm.mahasiswaid = mahasiswaid;
+                        // vm.modalShow4 = true;
+                        // vm.removeMahasiswa = true;
+                        // vm.finish();
+                        // console.log(response.data);
+                        // vm.isLoading3 = false;
+
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                        // vm.modalShow = true;
+                        // vm.finish();
+
+
+                    });
+            },
             getMahasiswa: function (id) {
                 axios.get("/mahasiswa/get/" + id)
                     .then(function (response) {
@@ -575,6 +761,7 @@ function initVue() {
 
                 });
             },
+
             allDosen: function () {
                 axios.get('/dosen/all')
                     .then(function (response) {
@@ -613,7 +800,10 @@ function initVue() {
                 this.totalRows2 = filteredItems.length
                 this.currentPage2 = 1
             },
-
+            onFiltered3: function (filteredItems) {
+                this.totalRows4 = filteredItems.length
+                this.currentPage4 = 1
+            },
 
         },
         computed: {
@@ -643,11 +833,60 @@ function initVue() {
                 this.showData2 = "Menampilkan " + (this.tampil2) + " sampai " + (this.sampai2) + " dari " + this.totalRows2 + " data";
                 return this.showData2;
             },
+            showingData3() {
+                this.sampai4 = this.currentPage4 * this.perPage4;
+                if (this.totalRows4 != 0) {
+                    this.tampil4 = (this.currentPage4 * this.perPage4 + 1) - this.perPage4;
+                } else {
+                    this.tampil4 = 0;
+                }
+                if (this.totalRows4 < this.sampai4) {
+                    this.sampai4 = this.totalRows4;
+                }
+                this.showData4 = "Menampilkan " + (this.tampil4) + " sampai " + (this.sampai4) + " dari " + this.totalRows4 + " data";
+                return this.showData4;
+            },
             selected() {
                 return this.value
             },
 
-
+            filteredItems() {
+                this.saring = this.kelaspribadimahasiswa.filter(kelaspribadimahasiswa => {
+                    return (kelaspribadimahasiswa.semester.indexOf(this.search)) > -1
+                });
+                this.totalRows4 = this.saring.length;
+                return this.saring
+            },
+            nilaiAngka() {
+                return this.visibleRows.reduce((accum, item) => {
+                    // Assuming expenses is the field you want to total up
+                    return accum + parseFloat(item.nilai.nilai_angka)
+                }, 0.00)
+            },
+            nilaiIndeks() {
+                return this.visibleRows.reduce((accum, item) => {
+                    // Assuming expenses is the field you want to total up
+                    return accum + parseFloat(item.nilai.nilai_indeks)
+                }, 0.00)
+            },
+            totalSKS() {
+                return this.visibleRows.reduce((accum, item) => {
+                    // Assuming expenses is the field you want to total up
+                    return accum + parseFloat(item.get_mata_kuliah.bobot)
+                }, 0.00)
+            },
+            totalNM() {
+                return this.visibleRows.reduce((accum, item) => {
+                    // Assuming expenses is the field you want to total up
+                    return accum + parseFloat((item.nilai.nilai_indeks * item.get_mata_kuliah.bobot))
+                }, 0.00)
+            },
+            totalIPS(){
+                return this.visibleRows.reduce((accum, item) => {
+                    // Assuming expenses is the field you want to total up
+                    return accum + parseFloat(((item.nilai.nilai_indeks * item.get_mata_kuliah.bobot) / this.totalSKS.toFixed(0)))
+                }, 0.00)
+            }
         },
         components: {}
     });

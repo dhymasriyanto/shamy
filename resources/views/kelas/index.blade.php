@@ -163,6 +163,149 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </b-pagination>
                                         </div>
                                             @endif
+                                        @if(Auth::user()->role == 'mahasiswa')
+                                                <div class="col-md-3 mb-4">
+                                                    <h5>Semester</h5>
+                                                    <select class="form-control custom-select" v-model="search">
+                                                        <option value="">Semua</option>
+                                                        <option value="1">1</option>
+                                                        <option v-for="n in 14" >
+                                                            @{{ n+1 }}
+                                                        </option>
+
+                                                    </select>
+                                                </div>
+{{--                                                <b-form-group--}}
+{{--                                                        class="ml-2 col-4 float-left mb-2">--}}
+{{--                                                    Tampilkan--}}
+{{--                                                    <b-form-select--}}
+{{--                                                            class="col-3"--}}
+{{--                                                            v-model="perPage"--}}
+{{--                                                            size="sm"--}}
+{{--                                                            :options="pageOptions">--}}
+
+{{--                                                    </b-form-select>--}}
+{{--                                                    data--}}
+{{--                                                </b-form-group>--}}
+{{--                                                <b-input-group class="col-3 float-right mr-2 mb-2">--}}
+{{--                                                    <b-form-input--}}
+{{--                                                            v-model="filter"--}}
+{{--                                                            size="sm"--}}
+{{--                                                            placeholder="Cari"--}}
+{{--                                                            type="text"--}}
+{{--                                                    ></b-form-input>--}}
+{{--                                                    <b-input-group-append>--}}
+{{--                                                        <b-button--}}
+{{--                                                                :disabled="!filter"--}}
+{{--                                                                size="sm"--}}
+{{--                                                                variant="link"--}}
+{{--                                                                @click="filter = ''"--}}
+
+{{--                                                        >--}}
+{{--                                                            <i class="fa fa-times"></i></b-button>--}}
+{{--                                                    </b-input-group-append>--}}
+{{--                                                </b-input-group>--}}
+                                                <b-table
+                                                        responsive
+                                                        show-empty
+                                                        :filter="filter"
+                                                        head-variant="light"
+                                                        id="my-table"
+                                                        hover
+                                                        :busy="isBusy"
+                                                        :items="filteredItems"
+                                                        :fields="fields"
+                                                        :per-page="perPage"
+                                                        :current-page="currentPage"
+                                                        @filtered="onFiltered"
+                                                        small
+                                                >
+                                                    <template v-slot:empty>
+                                                        <div class="text-center text-danger my-2">
+                                                            <h4>Data tidak ditemukan!</h4>
+                                                        </div>
+                                                    </template>
+                                                    <template v-slot:table-busy>
+                                                        <div class="text-center text-danger my-2">
+                                                            <b-spinner class="align-middle"></b-spinner>
+                                                            <strong>Memuat...</strong>
+                                                        </div>
+                                                    </template>
+                                                    <template v-slot:cell(no)="data">
+                                                        @{{ data.index + 1 }}
+                                                    </template>
+                                                    <template v-slot:cell(get_tahun_ajaran)="data">
+                                                        @{{ data.item.get_tahun_ajaran.tahun_ajaran }}
+                                                    </template>
+                                                    <template v-slot:cell(semester)="data">
+                                                        @{{ data.item.semester }}
+                                                    </template>
+                                                    <template v-slot:cell(nama)="data">
+                                                        @{{ data.item.nama }}
+                                                    </template>
+                                                    <template v-slot:cell(get_kurikulum)="data">
+                                                        @{{ data.item.get_kurikulum.nama }}
+                                                    </template>
+                                                    <template v-slot:cell(get_mata_kuliah)="data">
+                                                        @{{ data.item.get_mata_kuliah.nama }}
+                                                    </template>
+                                                    <template v-slot:cell(get_jurusan)="data">
+                                                        @{{ data.item.get_jurusan.nama }}
+                                                    </template>
+                                                    <template v-slot:cell(semester)="data">
+                                                        @{{ data.item.semester }}
+                                                    </template>
+                                                    <template v-slot:cell(get_tahun_ajaran)="data">
+                                                        @{{ data.item.get_tahun_ajaran.tahun_ajaran }}
+                                                    </template>
+                                                    <template v-slot:cell(mahasiswa)="data">
+                                                        <b-badge variant="danger" v-if="!data.item.mahasiswa.length">
+                                                            Belum ada peserta didik
+                                                        </b-badge>
+                                                        <b-badge variant="info" v-else>
+                                                            @{{ data.item.mahasiswa.length }} orang
+                                                        </b-badge>
+                                                    </template>
+                                                    <template v-slot:cell(aksi)="data">
+                                                        <b-button-group>
+                                                            <b-button class="btn btn-info btn-rounded" title="Rincian"
+                                                                      @click="lihatRincian2(data.item.id)"
+                                                            >
+                                                                <span><i class="mdi mdi-eye"></i></span>
+                                                            </b-button>
+{{--                                                            <b-button--}}
+{{--                                                                    class="btn btn-success " title="Ubah"--}}
+{{--                                                                    @click="edit(data.item.id)"--}}
+{{--                                                            >--}}
+{{--                                                                <span><i class=" mdi mdi-square-edit-outline"></i></span>--}}
+{{--                                                            </b-button>--}}
+{{--                                                            <b-button--}}
+{{--                                                                    class="btn btn-danger btn-rounded" title="Hapus"--}}
+{{--                                                                    @click="hapusdata(data.item.id)"--}}
+{{--                                                            >--}}
+{{--                                                                <span><i class="mdi mdi-trash-can"></i></span>--}}
+{{--                                                            </b-button>--}}
+
+                                                        </b-button-group>
+                                                    </template>
+                                                </b-table>
+                                                <div class="float-left ml-2">
+                                                    <p> @{{ showingData }}</p>
+                                                </div>
+                                                <div class="mr-2">
+                                                    <b-pagination
+                                                            align="right"
+                                                            pills
+                                                            size="sm"
+                                                            v-model="currentPage"
+                                                            :total-rows="totalRows"
+                                                            :per-page="perPage"
+                                                            aria-controls="my-table"
+                                                    >
+                                                    </b-pagination>
+                                                </div>
+                                            @endif
+
                                     </div>
 
                                 </div>
@@ -343,6 +486,191 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 <i class="mdi mdi-close mr-1"></i>Keluarkan
                                                             </b-button>
                                                         </template>
+                                                    </b-table>
+                                                    <div class="float-left ml-2">
+                                                        <p> @{{ showingData2 }}</p>
+                                                    </div>
+                                                    <div class="mr-2">
+                                                        <b-pagination
+                                                                align="right"
+                                                                pills
+                                                                size="sm"
+                                                                v-model="currentPage2"
+                                                                :total-rows="totalRows2"
+                                                                :per-page="perPage2"
+                                                                aria-controls="my-table"
+                                                        >
+                                                        </b-pagination>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </b-modal>
+
+                                <b-modal
+                                        title="Rincian Kelas"
+                                        id="lihatRincian2"
+                                        v-model="modalShow6"
+                                        size="lg"
+                                        hide-footer
+                                        scrollable
+                                >
+                                    <div v-for="kelas in rinciankelas">
+                                        <!-- Name -->
+                                        <div class="form-group row ">
+                                            <label class="col-sm-3 col-form-label">Nama Kelas</label>
+                                            <div class="col-sm-9">
+                                                <label class="col-form-label">: @{{ kelas.nama }} </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Nama Mata Kuliah</label>
+                                            <div class="col-sm-9">
+                                                <label class="col-form-label">: @{{ kelas.get_mata_kuliah.nama
+                                                    }} </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Kode Mata Kuliah</label>
+                                            <div class="col-sm-9">
+                                                <label class="col-form-label">: @{{ kelas.get_mata_kuliah.kode
+                                                    }} </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Bobot Mata Kuliah</label>
+                                            <div class="col-sm-9">
+                                                <label class="col-form-label">: @{{ kelas.get_mata_kuliah.bobot
+                                                    }} SKS</label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Nama Kurikulum</label>
+                                            <div class="col-sm-9">
+                                                <label class="col-form-label">: @{{ kelas.get_kurikulum.nama
+                                                    }} </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Semester</label>
+                                            <div class="col-sm-9">
+                                                <label class=" col-form-label">: @{{ kelas.semester
+                                                    }} </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Program Studi</label>
+                                            <div class="col-sm-9">
+                                                <label class="col-form-label">: @{{
+                                                    kelas.get_jurusan.nama }} </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Tahun Ajaran</label>
+                                            <div class="col-sm-9">
+                                                <label class=" col-form-label">: @{{
+                                                    kelas.get_tahun_ajaran.tahun_ajaran }} </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 mb-2 col-form-label row">Peserta Didik</label>
+                                            <div>
+{{--                                                <b-button class="mb-2" pill variant="dark" href=""--}}
+{{--                                                          @click="tambahMahasiswa = !tambahMahasiswa"--}}
+{{--                                                          v-b-modal.modal-tambah-mahasiswa><i--}}
+{{--                                                            class="fa fa-plus mr-1"></i>Tambah Mahasiswa--}}
+{{--                                                </b-button>--}}
+                                                <div
+                                                        v-if="!kelas.mahasiswa.length"><i>Belum ada peserta
+                                                        didik</i>
+                                                </div>
+                                                <div v-else>
+{{--                                                    <b-form-group--}}
+{{--                                                            class="ml-2 col-4 float-left mb-2">--}}
+{{--                                                        Tampilkan--}}
+{{--                                                        <b-form-select--}}
+{{--                                                                class="col-3"--}}
+{{--                                                                v-model="perPage2"--}}
+{{--                                                                size="sm"--}}
+{{--                                                                :options="pageOptions2">--}}
+
+{{--                                                        </b-form-select>--}}
+{{--                                                        data--}}
+{{--                                                    </b-form-group>--}}
+{{--                                                    <b-input-group class="col-3 float-right mr-2 mb-2">--}}
+{{--                                                        <b-form-input--}}
+{{--                                                                v-model="filter2"--}}
+{{--                                                                size="sm"--}}
+{{--                                                                placeholder="Cari"--}}
+{{--                                                                type="text"--}}
+{{--                                                        ></b-form-input>--}}
+{{--                                                        <b-input-group-append>--}}
+{{--                                                            <b-button--}}
+{{--                                                                    :disabled="!filter2"--}}
+{{--                                                                    size="sm"--}}
+{{--                                                                    variant="link"--}}
+{{--                                                                    @click="filter2 = ''"--}}
+
+{{--                                                            >--}}
+{{--                                                                <i class="fa fa-times"></i></b-button>--}}
+{{--                                                        </b-input-group-append>--}}
+{{--                                                    </b-input-group>--}}
+
+
+                                                    <b-table
+                                                            responsive
+                                                            show-empty
+                                                            :filter="filter2"
+                                                            head-variant="light"
+                                                            hover
+                                                            :busy="isLoading"
+                                                            :items="allrinciankelas"
+                                                            :fields="fieldsMahasiswa2"
+                                                            :per-page="perPage2"
+                                                            :current-page="currentPage2"
+                                                            small
+                                                            @filtered="onFiltered2"
+                                                    >
+                                                        <template v-slot:empty>
+                                                            <div class="text-center text-danger my-2">
+                                                                <h4>Belum ada peserta didik</h4>
+                                                            </div>
+                                                        </template>
+                                                        <template v-slot:table-busy>
+                                                            <div class="text-center text-danger my-2">
+                                                                <b-spinner class="align-middle"></b-spinner>
+                                                                <strong>Memuat...</strong>
+                                                            </div>
+                                                        </template>
+                                                        <template v-slot:cell(no)="data">
+                                                            @{{ data.index + 1 }}
+                                                        </template>
+                                                        <template v-slot:cell(nama)="data">
+                                                            @{{ data.item.nama }}
+                                                        </template>
+                                                        <template v-slot:cell(nomor_induk)="data">
+                                                            @{{ data.item.nomor_induk }}
+                                                        </template>
+                                                        <template v-slot:cell(get_jurusan)="data">
+                                                            @{{ data.item.get_jurusan.nama }}
+                                                        </template>
+{{--                                                        <template v-slot:cell(aksi)="data">--}}
+{{--                                                            <b-button--}}
+{{--                                                                    variant="danger"--}}
+{{--                                                                    pill--}}
+{{--                                                                    @click="hapusmodal(kelas.id, data.item.id)">--}}
+{{--                                                                <i class="mdi mdi-close mr-1"></i>Keluarkan--}}
+{{--                                                            </b-button>--}}
+{{--                                                        </template>--}}
                                                     </b-table>
                                                     <div class="float-left ml-2">
                                                         <p> @{{ showingData2 }}</p>
@@ -894,6 +1222,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
         {{--Templates--}}
         {{--Define your javascript below--}}
         {{--        <script type="text/javascript" src="{{asset('js/home/index.js')}}"></script>--}}
+        @include ('footer')
+
         <script type="text/javascript" src="{{asset('js/kelas/index.js')}}"></script>
     </div>
 @endsection

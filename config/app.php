@@ -183,6 +183,9 @@ return [
         /*
          * Application Service Providers...
          */
+        'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider',
+
+        \Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,

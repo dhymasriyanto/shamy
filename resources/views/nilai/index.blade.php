@@ -341,9 +341,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                         </div>
                                                                         <div v-else>-</div>
                                                                     </template>
-                                                                    <template v-slot:thead-top>
 
-                                                                    </template>
 
                                                                     <template v-slot:cell(aksi)="data">
                                                                         <b-button
@@ -477,12 +475,117 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             </b-modal>
                                         @endif
                                         @if(Auth::user()->role == 'mahasiswa')
-{{--                                            @foreach($nilai as $n)--}}
-{{--                                               <p>{{$n->nilai}}</p>--}}
-{{--                                                @foreach($n->nilai as $nn)--}}
-{{--                                                    {{$nn->nilai_angka}}--}}
-{{--                                                    @endforeach--}}
-{{--                                                @endforeach--}}
+                                                <div class="col-md-3 mb-4">
+                                                    <h5>Semester</h5>
+                                                    <select class="form-control custom-select" v-model="search">
+{{--                                                        <option value="">Semua</option>--}}
+                                                        <option value="1">1</option>
+                                                        <option v-for="n in 14" >
+                                                            @{{ n+1 }}
+                                                        </option>
+
+                                                    </select>
+                                                </div>
+
+                                            <div v-if="search == ''">
+
+
+                                            </div>
+                                            <div v-else>
+                                                <b-table
+                                                        responsive
+                                                        show-empty
+                                                        :filter="filter4"
+                                                        head-variant="light"
+                                                        hover
+                                                        :busy="isLoading3"
+                                                        :items="filteredItems"
+                                                        :fields="fieldsNilai"
+                                                        :per-page="perPage4"
+                                                        :current-page="currentPage4"
+                                                        small
+                                                        v-model="visibleRows"
+                                                        @filtered="onFiltered3"
+                                                >
+                                                    <template v-slot:empty>
+                                                        <div class="text-center text-danger my-2">
+                                                            <h4>Belum ada nilai</h4>
+                                                        </div>
+                                                    </template>
+                                                    <template v-slot:table-busy>
+                                                        <div class="text-center text-danger my-2">
+                                                            <b-spinner class="align-middle"></b-spinner>
+                                                            <strong>Memuat...</strong>
+                                                        </div>
+                                                    </template>
+                                                    <template v-slot:cell(no)="data">
+                                                        @{{ data.index + 1 }}
+                                                    </template>
+                                                    <template v-slot:cell(kode_mata_kuliah)="data">
+                                                        @{{ data.item.get_mata_kuliah.kode }}
+
+                                                    </template>
+                                                    <template v-slot:cell(semester)="data">
+                                                        @{{ data.item.semester }}
+
+                                                    </template>
+                                                    <template v-slot:cell(mata_kuliah)="data">
+                                                        @{{ data.item.get_mata_kuliah.nama }}
+
+                                                    </template>
+                                                    <template v-slot:cell(bobot)="data">
+                                                        @{{ data.item.get_mata_kuliah.bobot }}
+
+                                                    </template>
+                                                    <template v-slot:cell(nm)="data">
+                                                        @{{ data.item.get_mata_kuliah.bobot * data.item.nilai.nilai_indeks
+                                                        }}
+
+                                                    </template>
+                                                    <template v-slot:cell(nilai_angka)="data">
+                                                        @{{ data.item.nilai.nilai_angka }}
+                                                    </template>
+                                                    <template v-slot:cell(nilai_indeks)="data">
+                                                        @{{ data.item.nilai.nilai_indeks }}
+                                                    </template>
+                                                    <template v-slot:cell(nilai_huruf)="data">
+                                                        @{{ data.item.nilai.nilai_huruf }}
+                                                    </template>
+                                                    <template slot="bottom-row"
+
+                                                    >
+                                                        <b-th>Total</b-th>
+                                                        <b-th></b-th>
+                                                        <b-th></b-th>
+                                                        <b-th></b-th>
+                                                        <b-th></b-th>
+                                                        <b-th ></b-th>
+                                                        <b-th >@{{ nilaiAngka.toFixed(0) }}</b-th>
+                                                        <b-th  >@{{ totalSKS.toFixed(0) }}</b-th>
+                                                        <b-th >@{{ totalNM.toFixed(0) }}</b-th>
+
+                                                    </template>
+                                                    <template slot="table-caption">
+                                                        Total IPS : @{{ totalIPS.toFixed(0) }}
+                                                    </template>
+                                                </b-table>
+                                                <div class="float-left ml-2">
+                                                    <p> @{{ showingData3 }}</p>
+                                                </div>
+                                                <div class="mr-2">
+                                                    <b-pagination
+                                                            align="right"
+                                                            pills
+                                                            size="sm"
+                                                            v-model="currentPage4"
+                                                            :total-rows="totalRows4"
+                                                            :per-page="perPage4"
+                                                            aria-controls="my-table"
+                                                    >
+                                                    </b-pagination>
+                                                </div>
+                                            </div>
+
                                         @endif
                                     </div>
                                 </div>
@@ -495,7 +598,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
             </div>
         </div>
         {{--Templates--}}
-{{--    @include ('footer')--}}
+        @include ('footer')
         {{--Define your javascript below--}}
         <script type="text/javascript" src="{{asset('js/nilai/index.js')}}"></script>
     </div>
