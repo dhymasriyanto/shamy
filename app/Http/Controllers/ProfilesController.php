@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mahasiswa;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+//use Laracasts\Utilities\JavaScript\JavaScriptFacade;
+
+//JavaScriptFacade::class;
+
+//use MongoDB\BSON\Javascript;
 
 class ProfilesController extends Controller
 {
@@ -16,9 +24,21 @@ class ProfilesController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(Request $request)
     {
-        //
+//        $this->show(Auth::user()->id_mahasiswa);
+
+//         JavaScriptFacade::put([
+//            'ids' => Auth::user()->id_mahasiswa
+//        ]);
+       ;
+        $profil = Mahasiswa::find(Auth::user()->id_mahasiswa);
+        $data = [
+            'p' =>  $profil,
+        ];
+
+//        dump($data);
+        return $this->renderPage($request, 'profiles.index', $data);
     }
 
     /**
@@ -29,6 +49,7 @@ class ProfilesController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -48,9 +69,11 @@ class ProfilesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         //
+        $profil = Mahasiswa::find($id);
+        return response($profil);
     }
 
     /**
@@ -59,9 +82,13 @@ class ProfilesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         //
+
+
+        return $this->renderPage($request, 'profiles.edit');
+
     }
 
     /**

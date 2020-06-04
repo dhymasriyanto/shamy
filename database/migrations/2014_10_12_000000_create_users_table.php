@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique()->comment('user id pada penyedia');
             $table->string('name')->comment('Nama user');
             $table->string('email')->unique()->nullable()->comment('Email');
-            $table->string('photo')->nullable()->comment('Photo profil');
+            $table->string('photo')->nullable()->comment('Photo profiles');
 //            $table->timestamp('email_verified_at')->nullable();
             $table->string('role')->nullable()->comment('Peran');
             $table->timestamp('created_at')->useCurrent();

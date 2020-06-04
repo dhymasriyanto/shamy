@@ -90,9 +90,13 @@ Route::post('/tahun-ajaran/update/{id}', 'TahunAjaranController@update')->name('
 Route::get('/tahun-ajaran/get/{id}', 'TahunAjaranController@edit')->name('tahun-ajaran.edit');
 
 
+//Route::get('/profiles/', 'ProfilesController@index')->name('profiles.index');
+//Route::get('/profiles/{id}', 'ProfilesController@show')->name('profiles.show');
+
+
 Route::resources([
     'dosen' => 'DosenController',
-    'mahasiswa'  => 'MahasiswaController',
+    'mahasiswa' => 'MahasiswaController',
     'fakultas' => 'FakultasController',
     'jurusan' => 'JurusanController',
     'kelas' => 'KelasController',
@@ -101,7 +105,8 @@ Route::resources([
     'mengajar' => 'MengajarController',
     'pegawai' => 'PegawaiController',
     'tahun-ajaran' => 'TahunAjaranController',
-    'nilai'=> 'NilaiController'
+    'nilai' => 'NilaiController',
+    'profiles' => 'ProfilesController'
 ]);
 
 // Authentication Routes...
@@ -127,8 +132,8 @@ Route::prefix('auth')->name('auth.')->group(function () {
 /**
  * Account
  */
-Route::prefix('account')->name('account.')->group(function (){
-    Route::get('/profil', 'AccountController@profil')->name('profil.show');
+Route::prefix('account')->name('account.')->group(function () {
+    Route::get('/profiles', 'AccountController@profiles')->name('profiles.show');
     Route::get('/oauth/personal-access-token', 'AccountController@oauthPersonalToken')->name('oauth.token');
 });
 

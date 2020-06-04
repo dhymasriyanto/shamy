@@ -545,7 +545,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <b-form-select
                                                             {{-- @change="onChange" --}}
                                                             id="example-input-4"
-                                                            name="tahun_ajaran"
+                                                            name="semester"
                                                             v-model="semester"
                                                             :state="getValidationState(validationContext)"
                                                             aria-describedby="input-4-live-feedback"
