@@ -32,16 +32,21 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 <img src="{{Auth::user()->getPhotoProfil()}}"
                                                      class="rounded-circle avatar-xl img-thumbnail float-left mr-3"
                                                      alt="profile-image">
-
                                                 <div class="profile-info-detail overflow-hidden">
-                                                    <h4 class="m-0">{{$p->nama}} </h4>
-                                                    <p class="text-muted"><i>{{$p->nomor_induk}} </i></p>
-{{--                                                    <h4 class="m-0">{{Auth::user()->name}} </h4>--}}
-{{--                                                    <p class="text-muted"><i>{{Auth::user()->role}} </i></p>--}}
+                                                    @if(Auth::user()->id_mahasiswa==0)
+                                                        <h4 class="m-0">{{Auth::user()->name}} </h4>
+                                                        <p class="text-muted"><i>{{Auth::user()->role}} </i></p>
+
+                                                    @elseif(Auth::user()->id_mahasiswa!=0)
+
+                                                        <h4 class="m-0">{{$p->nama}} </h4>
+                                                        <p class="text-muted"><i>{{$p->nomor_induk}} </i></p>
+                                                    @endif
 
                                                 </div>
 
                                                 <div class="clearfix"></div>
+                                                @if(Auth::user()->id_mahasiswa!=0)
 
                                                 <b-button
                                                         class="mt-3"
@@ -52,23 +57,11 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                 >
                                                     <i class="mdi mdi-square-edit-outline mr-1 mb-2"></i>Ubah Profil
                                                 </b-button>
+                                                @endif
                                             </div>
+                                            @if(Auth::user()->id_mahasiswa!=0)
 
                                             <div class="col-md-6">
-                                                <!-- Name -->
-{{--                                                <div class="form-group row ">--}}
-{{--                                                    <label class="col-sm-3 col-form-label">Nama</label>--}}
-{{--                                                    <div class="col-sm-9">--}}
-{{--                                                        <label class="col-form-label">: {{ $p->nama }} </label>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="form-group row">--}}
-{{--                                                    <label class="col-sm-3 col-form-label">Nomor Induk</label>--}}
-{{--                                                    <div class="col-sm-9">--}}
-{{--                                                        <label class="col-form-label">: {{ $p->nomor_induk }} </label>--}}
-
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Jenis Kelamin</label>
                                                     <div class="col-sm-9">
@@ -104,6 +97,14 @@ $appendTitle = AppHelpers::appendTitle($title, true);
 
                                                     </div>
                                                 </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Nomor Induk
+                                                        Kependudukan</label>
+                                                    <div class="col-sm-9">
+                                                        <label class="col-form-label">: {{ $p->nomor_induk_kependudukan }} </label>
+                                                    </div>
+                                                </div>
+
 
                                                 <b-modal
                                                         title="Ubah Profil"
@@ -199,7 +200,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             <validation-provider name="Jenis Kelamin"
                                                                                  :rules="{required: true}"
                                                                                  v-slot="validationContext">
-                                                                <b-form-group id="example-input-group-8" label="Jenis Kelamin  *"
+                                                                <b-form-group id="example-input-group-8"
+                                                                              label="Jenis Kelamin  *"
                                                                               label-for="example-input-8">
                                                                     <b-form-select
                                                                             {{-- @change="onChange" --}}
@@ -209,7 +211,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                             :state="getValidationState(validationContext)"
                                                                             aria-describedby="input-8-live-feedback"
                                                                     >
-                                                                        <option class="col-md-9" value="">Pilih Jenis Kelamin
+                                                                        <option class="col-md-9" value="">Pilih Jenis
+                                                                            Kelamin
                                                                         </option>
                                                                         <option value="Laki-laki"> Laki-laki</option>
                                                                         <option value="Perempuan"> Perempuan</option>
@@ -227,11 +230,12 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             <validation-provider name="Tempat Lahir"
                                                                                  :rules="{required: true}"
                                                                                  v-slot="validationContext">
-                                                                <b-form-group id="example-input-group-4" label="Tempat Lahir  *"
+                                                                <b-form-group id="example-input-group-4"
+                                                                              label="Tempat Lahir  *"
                                                                               label-for="example-input-4">
                                                                     <b-form-input
                                                                             placeholder="Masukkan Tempat Lahir"
-                                                                             id="example-input-4"
+                                                                            id="example-input-4"
                                                                             name="tempat_lahir"
                                                                             v-model="tempat_lahir"
                                                                             :state="getValidationState(validationContext)"
@@ -251,23 +255,24 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             <validation-provider name="Tanggal Lahir"
                                                                                  :rules="{required: true}"
                                                                                  v-slot="validationContext">
-                                                                <b-form-group id="example-input-group-5" label="Tanggal Lahir  *"
+                                                                <b-form-group id="example-input-group-5"
+                                                                              label="Tanggal Lahir  *"
                                                                               label-for="example-input-5">
 
-                                                                        <b-form-input
-                                                                                id="example-input-5"
-                                                                                name="tanggal_lahir"
-                                                                                :state="getValidationState(validationContext)"
-                                                                                type="date"
-                                                                                v-model="tanggal_lahir"
-                                                                                button-only
-                                                                                right
-                                                                                locale="id-ID"
-                                                                                aria-controls="input-5-live-feedback"
-                                                                                aria-describedby="input-5-live-feedback"
+                                                                    <b-form-input
+                                                                            id="example-input-5"
+                                                                            name="tanggal_lahir"
+                                                                            :state="getValidationState(validationContext)"
+                                                                            type="date"
+                                                                            v-model="tanggal_lahir"
+                                                                            button-only
+                                                                            right
+                                                                            locale="id-ID"
+                                                                            aria-controls="input-5-live-feedback"
+                                                                            aria-describedby="input-5-live-feedback"
 
-                                                                                @context="onContext"
-                                                                        ></b-form-input>
+                                                                            @context="onContext"
+                                                                    ></b-form-input>
 
                                                                     <b-form-invalid-feedback
                                                                             id="input-5-live-feedback">@{{
@@ -279,7 +284,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             <validation-provider name="Agama"
                                                                                  :rules="{required: true}"
                                                                                  v-slot="validationContext">
-                                                                <b-form-group id="example-input-group-6" label="Agama  *"
+                                                                <b-form-group id="example-input-group-6"
+                                                                              label="Agama  *"
                                                                               label-for="example-input-6">
                                                                     <b-form-select
                                                                             {{-- @change="onChange" --}}
@@ -292,7 +298,9 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                         <option class="col-md-9" value="">Pilih Agama
                                                                         </option>
                                                                         <option value="Islam"> Islam</option>
-                                                                        <option value="Kristen Protestan"> Kristen Protestan</option>
+                                                                        <option value="Kristen Protestan"> Kristen
+                                                                            Protestan
+                                                                        </option>
                                                                         <option value="Katolik"> Katolik</option>
                                                                         <option value="Hindu"> Hindu</option>
                                                                         <option value="Buddha"> Buddha</option>
@@ -308,7 +316,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 </b-form-group>
                                                             </validation-provider>
                                                             <validation-provider name="Alamat"
-{{--                                                                                 :rules="{required: true}"--}}
+                                                                                 {{--                                                                                 :rules="{required: true}"--}}
                                                                                  v-slot="validationContext">
                                                                 <b-form-group id="example-input-group-7" label="Alamat"
                                                                               label-for="example-input-7">
@@ -336,6 +344,8 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                     <h6><i>Tanda <b> * </b> berarti harus diisi</i></h6>
                                                 </b-modal>
                                             </div>
+                                            @endif
+
                                         </div>
 
                                     </div>

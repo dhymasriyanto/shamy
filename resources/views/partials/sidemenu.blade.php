@@ -55,7 +55,6 @@
                 <span> Data Mata Kuliah </span>
             </a>
         </li>
-        @endif
         <li class="menu-title">Data Transaksional</li>
         <li>
             <a href="{{route('kelas.index')}}">
@@ -71,6 +70,7 @@
                 <span>Nilai</span>
             </a>
         </li>
+        @endif
 
     </ul>
 </div>

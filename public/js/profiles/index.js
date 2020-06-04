@@ -19,7 +19,7 @@ function initVue() {
             alamat: '',
             id_jurusan:'',
             jenis_pendaftaran: '',
-            modalShow: false
+            modalShow: false,
             // ids:ids,
         },
         mounted: function () {
@@ -168,7 +168,8 @@ function initVue() {
                         // vm.editalamat = "";
                         // $('#modal-').modal('hide');
                         // window.location.href = 'profiles';
-                        window.location.href = 'profiles';
+                        // window.location.href = 'profiles';
+                        pjax.loadUrl("/profiles")
                         // window.location.replace('/profiles')
                         // router.push('/profiles')
                         vm.finish("success", response.data.pesan);

@@ -6,11 +6,6 @@ use App\Mahasiswa;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-//use Laracasts\Utilities\JavaScript\JavaScriptFacade;
-
-//JavaScriptFacade::class;
-
-//use MongoDB\BSON\Javascript;
 
 class ProfilesController extends Controller
 {
@@ -26,12 +21,6 @@ class ProfilesController extends Controller
     }
     public function index(Request $request)
     {
-//        $this->show(Auth::user()->id_mahasiswa);
-
-//         JavaScriptFacade::put([
-//            'ids' => Auth::user()->id_mahasiswa
-//        ]);
-       ;
         $profil = Mahasiswa::find(Auth::user()->id_mahasiswa);
         $data = [
             'p' =>  $profil,
@@ -61,6 +50,8 @@ class ProfilesController extends Controller
     public function store(Request $request)
     {
         //
+
+
     }
 
     /**
