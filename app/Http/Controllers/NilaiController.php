@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\MataKuliah;
 use App\Nilai;
 use Illuminate\Http\Request;
+use JavaScript;
 
 class NilaiController extends Controller
 {
@@ -66,6 +67,30 @@ class NilaiController extends Controller
         return response($nn);
     }
 
+    public function nilaipribadi($id, Request $request)
+    {
+        $nilai = Nilai::with(['getMahasiswa', 'getMengajar'])->get()->where('id_mahasiswa', $id);
+        $mahasiswa = [null];
+        $j = 0;
+//        foreach ($nilai as $n) {
+//            $nn[$j]['nilai'] = json_decode($n->nilai);
+//            $nn[$j]['id_mahasiswa'] = $n->id_mahasiswa;
+//            $j++;
+//
+//        }
+//        return response($nilai);
+        $data = [
+            'nilai' => $nilai
+        ];
+
+//        JavaScript::put([
+//            'coba'=>$id
+//        ]);
+
+        return $this->renderPage($request, 'nilai.index', $data);
+
+
+    }
     /**
      * Show the form for creating a new resource.
      *

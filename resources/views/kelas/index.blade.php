@@ -27,6 +27,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                             <div class="card-box">
                                 <div class="row">
                                     <div class="col-12">
+                                        @if(Auth::user()->role == 'administrator')
                                         <b-button pill variant="dark" href="" v-b-modal.modal-tambah><i
                                                     class="fa fa-plus mr-1"></i>Tambah
                                         </b-button>
@@ -161,6 +162,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                             >
                                             </b-pagination>
                                         </div>
+                                            @endif
                                     </div>
 
                                 </div>

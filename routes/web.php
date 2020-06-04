@@ -72,6 +72,8 @@ Route::get('/mata-kuliah/get/{id}', 'MataKuliahController@edit')->name('mata-kul
 Route::get('/mengajar/all', 'MengajarController@all')->name('mengajar.all');
 Route::get('/mengajar', 'MengajarController@index')->name('mengajar.index');
 
+
+Route::get('/nilai/nilaipribadi/{id}', 'NilaiController@nilaipribadi')->name('nilai.nilaipribadi');
 Route::get('/nilai/all/', 'NilaiController@all')->name('nilai.all');
 Route::get('/nilai/nilaimahasiswa/{id}', 'NilaiController@nilaimahasiswa')->name('nilai.nilaimahasiswa');
 Route::get('/nilai/nilaikelas/{id}', 'NilaiController@nilaikelas')->name('nilai.nilaikelas');

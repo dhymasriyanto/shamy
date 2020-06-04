@@ -5,7 +5,7 @@ function initVue() {
     var vm = new Vue({
         el: '#app',
         data: {
-
+            // coba:coba,
             modalShow: false,
             modalShow2: false,
             modalShow3: false,
@@ -249,6 +249,7 @@ function initVue() {
             ],
 
 
+
         },
         mounted: function () {
             if (typeof pjax !== 'undefined') {
@@ -256,6 +257,7 @@ function initVue() {
             }
             this.start();
             this.all();
+            // console.log(this.coba);
 
         },
         methods: {
@@ -406,6 +408,7 @@ function initVue() {
                 });
 
             },
+
             nilaiKelas: function (id) {
                 // vm.isLoading = true;
 
@@ -642,7 +645,7 @@ function initVue() {
             },
             selected() {
                 return this.value
-            }
+            },
 
 
         },
