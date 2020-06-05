@@ -303,7 +303,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             </option>
                                                             <option
                                                                     v-for="dosen in datadosen"
-                                                                    v-if="(dosen.id_jurusan == id_jurusan) "
+{{--                                                                    v-if="(dosen.id_jurusan == id_jurusan) "--}}
                                                                     v-bind:value="dosen.id"
                                                             >
                                                                 @{{ dosen.nama }}
@@ -449,7 +449,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                             </option>
                                                             <option
                                                                     v-for="dosen in datadosen"
-                                                                    v-if="(dosen.id_jurusan == editid_jurusan) "
+{{--                                                                    v-if="(dosen.id_jurusan == editid_jurusan) "--}}
                                                                     v-bind:value="dosen.id"
                                                             >
                                                                 @{{ dosen.nama }}
