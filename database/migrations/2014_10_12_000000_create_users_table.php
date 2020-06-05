@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('role')->nullable()->comment('Peran');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
+            $table->bigInteger('id_mahasiswa')->nullable()->comment('untuk get data mahasiswa');
+
         });
     }
 
