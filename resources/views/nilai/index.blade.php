@@ -131,7 +131,7 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                                                                 @click="lihatKelas(data.item.id_kelas, data.item.id)"
 
                                                                 title="Lihat">
-                                                            <span><i class="mdi mdi-eye mr-1"></i>Lihat Kelas</span>
+                                                            <span><i class="mdi mdi-eye"></i></span>
                                                         </button>
                                                     </b-button-group>
                                                 </template>

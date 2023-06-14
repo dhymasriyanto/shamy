@@ -1,5 +1,6 @@
 <?php
 use App\Libs\AppHelpers;
+
 $title = 'Akademik';
 $appendTitle = AppHelpers::appendTitle($title, true);
 ?>
@@ -22,28 +23,60 @@ $appendTitle = AppHelpers::appendTitle($title, true);
                         <div class="col-12">
                             <div class="card-box">
                                 <h4 class="m-t-0 header-title">Selamat Datang di Sistem Akademik</h4>
-                                <p class="text-muted mb-4 font-14">
-                                    STAI Auliaurrasyidin Tembilahan Riau
+                                <p class="text-muted font-14">
+                                    STAI Aulia
                                 </p>
 
-                                <div class="row">
-                                    <div class="col-12">
-{{--                                        TODO:<br>--}}
-{{--                                        Mengolah data JSON,<br>--}}
-{{--                                        Fitur lanjutan yang dibutuhkan,<br>--}}
-{{--                                        Isi dashboard,<br>--}}
-{{--                                        Foto,<br>--}}
-{{--                                        Status aktif,<br>--}}
-{{--                                        API,<br>--}}
-{{--                                        JQuery Validate--}}
-                                    </div>
-
-                                </div>
                                 <!-- end row -->
 
                             </div> <!-- end card-box -->
+
+
                         </div><!-- end col -->
                     </div>
+                    {{-- @if(Auth::user()->role == 'administrator') --}}
+                    <div class="row">
+                        <div class="col-4">
+                          <div class="card-box">
+                          <b>Jumlah Seluruh Kelas</b>
+                          <h1 class="mt-2">@{{ datakelas.length }}</h1>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="card-box ">
+                          <b>Jumlah Akta Ajar</b>
+                          <h1  class="mt-2">@{{ datamengajar.length }}</h1>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="card-box ">
+                        <b>Jumlah Kelas Kosong</b>
+                        <h1  class="mt-2">@{{kelaskosong.length}}</h1>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                    <div class="justify-content-center text-center ">
+                      <div class="card-box  ">
+                        <b>Jumlah Mahasiswa per Kelas</b>
+                        <chart-component class="mt-2"></chart-component>
+
+                      </div>
+                    </div>
+                  </div>
+                      <div class="col-12">
+                        <div class="justify-content-center text-center">
+                          <div class="card-box">
+                            <b >Jumlah Dosen per Jurusan</b>
+                            <chart-component2 class="mt-2"></chart-component2>
+                          </div>
+                        </div>
+                    </div>
+{{-- @endif --}}
+
+
+
                 </div>
             </div>
         </div>

@@ -33,6 +33,9 @@ localize("id", id);
 // Install VeeValidate components globally
 Vue.component("ValidationObserver", ValidationObserver);
 Vue.component("ValidationProvider", ValidationProvider);
+Vue.component('chart-component', require('./components/KelasChart.vue').default);
+Vue.component('chart-component2', require('./components/DosenChart.vue').default);
+
 
 Vue.use(VueProgressBar, {
     color: 'rgb(143, 255, 199)',

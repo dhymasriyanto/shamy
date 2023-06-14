@@ -39,6 +39,7 @@ Route::post('/jurusan/update/{id}', 'JurusanController@update')->name('jurusan.u
 Route::get('/jurusan/get/{id}', 'JurusanController@edit')->name('jurusan.edit');
 
 //Route::put('/kelas/store', 'KelasController@store')->name('kelas.store');
+Route::get('/kelas/getjumlahdosen/{id}', 'KelasController@getjumlahdosen')->name('kelas.getjumlahdosen');
 Route::get('/kelas/lihatkelas/{id}', 'KelasController@lihatkelas')->name('kelas.lihatkelas');
 Route::get('/kelas/kelaspribadi/{id}', 'KelasController@kelaspribadi')->name('kelas.kelaspribadi');
 Route::get('/kelas/all', 'KelasController@all')->name('kelas.all');

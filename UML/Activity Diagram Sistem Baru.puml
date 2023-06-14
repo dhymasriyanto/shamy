@@ -2,13 +2,21 @@
 skinparam defaultTextAlignment center
 
 start
+:Administrator telah login pada sistem;
+:Administrator menekan menu Kelas;
+:Administrator menekan menu tambah kelas;
 :Administrator membuat kelas
 sesuai jurusan dan kurikulum;
+:Administrator memilih kelas, dan melihat rincian kelas;
 :Administrator memasukkan mahasiswa
-ke dalam kelas tersebut;
+ke dalam kelas / Administrator mengeluarkan mahasiswa dari kelas tersebut;
+start
+:Administrator membuka menu Akta Ajar;
+:Administrator menekan menu tambah akta;
 :Administrator melakukan penugasan kepada
 dosen mata kuliah sesuai kelas;
 start
+:Administrator menekan menu nilai;
 :Administrator memilih kelas
 sesuai jurusan dan tahun ajaran yang berlaku;
 :Administrator memilih mahasiswa

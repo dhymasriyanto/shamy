@@ -114,8 +114,8 @@
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#"
                    role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="{{Auth::user()->getPhotoProfil()}} " alt="user-image" class="rounded-circle">
-                    <span class="pro-user-name ml-1">{{Auth::user()->role}} <i class="mdi mdi-chevron-down"></i></span>
+                    {{-- <img src="{{Auth::user()->getPhotoProfil()}} " alt="user-image" class="rounded-circle"> --}}
+                    {{-- <span class="pro-user-name ml-1">{{Auth::user()->role}} <i class="mdi mdi-chevron-down"></i></span> --}}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
 {{--                    <a href="{{url('profiles/'.Auth::user()->id_mahasiswa)}}" class="dropdown-item notify-item">--}}

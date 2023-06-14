@@ -19,7 +19,7 @@
                 <span> Beranda </span>
             </a>
         </li>
-        @if(\Illuminate\Support\Facades\Auth::user()->role == "administrator")
+        {{-- @if(\Illuminate\Support\Facades\Auth::user()->role == "administrator") --}}
             <li class="menu-title">Data Master</li>
             <li onclick="closemenu()">
                 <a href="{{route('dosen.index')}}">
@@ -70,25 +70,25 @@
                     <span>Nilai</span>
                 </a>
             </li>
-        @endif
-        @if(Auth::user()->role == 'mahasiswa')
+        {{-- @endif --}}
+        {{-- @if(Auth::user()->role == 'mahasiswa') --}}
             <li class="menu-title">Menu Lainnya</li>
 
             <li>
-                <a href="{{url('kelas/lihatkelas/'.Auth::user()->id_mahasiswa)}}">
+                {{-- <a href="{{url('kelas/lihatkelas/'.Auth::user()->id_mahasiswa)}}">
                     <i class="mdi mdi-table-column"></i>
                     <span> Kelas </span>
-                </a>
+                </a> --}}
                 <a href="{{route('mengajar.index')}}">
                     <i class="mdi mdi-clipboard-account"></i>
                     <span>Akta Ajar</span>
                 </a>
-                <a href="{{url('nilai/lihatdaftarnilai/'.Auth::user()->id_mahasiswa)}}">
+                {{-- <a href="{{url('nilai/lihatdaftarnilai/'.Auth::user()->id_mahasiswa)}}">
                     <i class="mdi mdi-file"></i>
                     <span>Lihat Nilai</span>
-                </a>
+                </a> --}}
             </li>
-        @endif
+        {{-- @endif --}}
 
     </ul>
 </div>

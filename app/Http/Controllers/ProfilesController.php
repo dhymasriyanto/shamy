@@ -15,10 +15,10 @@ class ProfilesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     public function index(Request $request)
     {
         $profil = Mahasiswa::find(Auth::user()->id_mahasiswa);

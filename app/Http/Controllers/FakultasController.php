@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class FakultasController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function index(Request $request)
     {

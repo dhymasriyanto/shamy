@@ -6,6 +6,7 @@ use App\Kelas;
 use App\Mahasiswa;
 use App\Mengajar;
 use App\Nilai;
+use App\Dosen;
 use Illuminate\Http\Request;
 use JavaScript;
 
@@ -16,10 +17,10 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function index(Request $request)
     {
@@ -29,6 +30,13 @@ class KelasController extends Controller
 //        ];
 
         return $this->renderPage($request, 'kelas.index');
+    }
+
+    public function getjumlahdosen($id)
+    {
+      $dosen = Dosen::where('id_jurusan',$id)->get();
+      $countDosen = $dosen->count();
+      return response($countDosen);
     }
 
     public function all()
